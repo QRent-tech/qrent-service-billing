@@ -32,14 +32,16 @@ public class InsuranceCaseServiceConfig {
       final GetTransactionQuery transactionQuery,
       final GetTransactionTypeQuery transactionTypeQuery,
       final InsuranceCaseBalanceDeriveService deriveService,
-      final TransactionAddUseCase transactionAddUseCase) {
+      final TransactionAddUseCase transactionAddUseCase,
+      final GetQWeekQuery getQWeekQuery) {
     return new InsuranceCaseBalanceCalculatorService(
         insuranceCaseBalanceLoadPort,
         carLinkQuery,
         transactionQuery,
         transactionTypeQuery,
         deriveService,
-        transactionAddUseCase);
+        transactionAddUseCase,
+        getQWeekQuery);
   }
 
   @Bean

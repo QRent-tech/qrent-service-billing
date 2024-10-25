@@ -1,6 +1,7 @@
 package ee.qrental.insurance.core.service.balance;
 
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;
 import ee.qrental.insurance.domain.InsuranceCase;
@@ -36,6 +37,7 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
   private final GetTransactionTypeQuery transactionTypeQuery;
   private final InsuranceCaseBalanceDeriveService deriveService;
   private final TransactionAddUseCase transactionAddUseCase;
+  private final GetQWeekQuery getQWeekQuery;
 
   @Override
   public InsuranceCaseBalance calculateBalance(
@@ -94,6 +96,14 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
     }
   }
 
+  private Long getPreviousWeekId(final Long qWeekId) {
+    final var previousWeek = getQWeekQuery.getOneBeforeById(qWeekId);
+    if (previousWeek == null) {
+      throw new RuntimeException("Previous week not found for qWeekId: " + qWeekId);
+    }
+    return previousWeek.getId();
+  }
+
   private InsuranceCaseBalance getInsuranceCaseBalance(
       final InsuranceCase insuranceCase, final Long qWeekId) {
     final var result =
@@ -102,17 +112,20 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
             .transactionIds(new ArrayList<>())
             .qWeekId(qWeekId)
             .build();
-    final var latestBalance =
-        insuranceCaseBalanceLoadPort.loadLatestByInsuranceCaseId(insuranceCase.getId());
 
-    if (latestBalance == null) {
+    final var previousWeekId = getPreviousWeekId(qWeekId);
+
+    final var previousWeekBalance =
+        insuranceCaseBalanceLoadPort.loadByInsuranceCaseIdAndQWeekId(insuranceCase.getId(), previousWeekId);
+
+    if (previousWeekBalance == null) {
       setFirstRemainingAndSelfResponsibility(insuranceCase, result);
 
       return result;
     }
 
-    result.setDamageRemaining(latestBalance.getDamageRemaining());
-    result.setSelfResponsibilityRemaining(latestBalance.getSelfResponsibilityRemaining());
+    result.setDamageRemaining(previousWeekBalance.getDamageRemaining());
+    result.setSelfResponsibilityRemaining(previousWeekBalance.getSelfResponsibilityRemaining());
 
     return result;
   }
@@ -196,7 +209,7 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
         .abs();
   }
 
-  final Long getTransactionTypeIdByName(final String transactionTypeName) {
+  private Long getTransactionTypeIdByName(final String transactionTypeName) {
     final var transactionType = transactionTypeQuery.getByName(transactionTypeName);
     if (transactionType == null) {
       throw new RuntimeException(
