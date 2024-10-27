@@ -13,7 +13,6 @@ import java.time.LocalDate;
 public class InsuranceCase {
   private Long id;
   private Long driverId;
-  private Boolean withQKasko;
   private Long carId;
   private LocalDate occurrenceDate;
   private Long startQWeekId;

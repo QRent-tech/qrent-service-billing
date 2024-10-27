@@ -3,6 +3,8 @@ package ee.qrental.contract.repository.impl;
 import ee.qrental.contract.adapter.repository.ContractRepository;
 import ee.qrental.contract.entity.jakarta.ContractJakartaEntity;
 import ee.qrental.contract.repository.spring.ContractSpringDataRepository;
+
+import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -39,5 +41,25 @@ public class ContractRepositoryImpl implements ContractRepository {
   @Override
   public ContractJakartaEntity findLatestByDriverId(final Long driverId) {
     return springDataRepository.findLatestByDriverId(driverId);
+  }
+
+  @Override
+  public List<ContractJakartaEntity> findActiveByDate(final LocalDate date) {
+    return springDataRepository.findActiveByDate(date);
+  }
+
+  @Override
+  public Long findCountActiveByDate(final LocalDate date) {
+    return springDataRepository.findCountActiveByDate(date);
+  }
+
+  @Override
+  public List<ContractJakartaEntity> findClosedByDate(final LocalDate date) {
+    return springDataRepository.findClosedByDate(date);
+  }
+
+  @Override
+  public Long findCountClosedByDate(final LocalDate date) {
+    return springDataRepository.findCountClosedByDate(date);
   }
 }

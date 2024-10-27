@@ -1,4 +1,4 @@
-package ee.qrental.ui.controller.firm;
+package ee.qrental.ui.controller.driver;
 
 import static ee.qrental.ui.controller.util.ControllerUtils.FIRM_ROOT_PATH;
 

@@ -1,6 +1,5 @@
 package ee.qrental.contract.adapter.mapper;
 
-import ee.qrental.contract.adapter.repository.ContractRepository;
 import ee.qrental.contract.domain.Contract;
 import ee.qrental.contract.domain.ContractDuration;
 import ee.qrental.contract.entity.jakarta.ContractJakartaEntity;
@@ -11,14 +10,11 @@ import static java.util.Arrays.asList;
 @AllArgsConstructor
 public class ContractAdapterMapper {
 
-  private ContractRepository repository;
-
   public Contract mapToDomain(final ContractJakartaEntity entity) {
     if (entity == null) {
 
       return null;
     }
-    final var active = getContractActiveState(entity);
 
     return Contract.builder()
         .id(entity.getId())
@@ -53,14 +49,9 @@ public class ContractAdapterMapper {
         .carManufacturer(entity.getCarManufacturer())
         .carModel(entity.getCarModel())
         .created(entity.getCreated())
-        .active(active)
+        .dateStart(entity.getDateStart())
+        .dateEnd(entity.getDateEnd())
         .build();
-  }
-
-  private boolean getContractActiveState(final ContractJakartaEntity entity) {
-    final var activeContract = repository.findLatestByDriverId(entity.getDriverId());
-
-    return activeContract.getNumber().equals(entity.getNumber());
   }
 
   public ContractJakartaEntity mapToEntity(final Contract domain) {
@@ -96,6 +87,8 @@ public class ContractAdapterMapper {
         .carManufacturer(domain.getCarManufacturer())
         .carModel(domain.getCarModel())
         .created(domain.getCreated())
+        .dateStart(domain.getDateStart())
+        .dateEnd(domain.getDateEnd())
         .build();
   }
 

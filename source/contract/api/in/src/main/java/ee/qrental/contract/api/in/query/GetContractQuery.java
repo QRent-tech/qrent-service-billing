@@ -7,7 +7,15 @@ import ee.qrental.contract.api.in.response.ContractResponse;
 import java.util.List;
 
 public interface GetContractQuery extends BaseGetQuery<ContractUpdateRequest, ContractResponse> {
-  ContractResponse getActiveContractByDriverId(final Long driverId);
+  ContractResponse getLatestContractByDriverId(final Long driverId);
 
   List<String> getAllDurations();
+
+  List<ContractResponse> getActive();
+
+  List<ContractResponse> getClosed();
+
+  Long getCountActive();
+
+  Long getCountClosed();
 }

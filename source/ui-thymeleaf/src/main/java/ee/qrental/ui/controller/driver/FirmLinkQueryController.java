@@ -1,8 +1,8 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.DRIVER_ROOT_PATH;
+import static ee.qrental.ui.controller.util.ControllerUtils.FIRM_LINK_ROOT_PATH;
 
-import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
 import ee.qrental.ui.service.DriverCounterService;
 
@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(DRIVER_ROOT_PATH)
-public class DriverQueryController extends AbstractDriverQueryController {
+@RequestMapping(FIRM_LINK_ROOT_PATH)
+public class FirmLinkQueryController extends AbstractDriverQueryController {
 
-  private final GetDriverQuery driverQuery;
+  private final GetFirmLinkQuery firmLinkQuery;
 
-  public DriverQueryController(
+  public FirmLinkQueryController(
       final DriverCounterService driverCounterService,
       final QDateFormatter qDateFormatter,
-      final GetDriverQuery driverQuery) {
+      final GetFirmLinkQuery firmLinkQuery) {
     super(driverCounterService, qDateFormatter);
-    this.driverQuery = driverQuery;
+    this.firmLinkQuery = firmLinkQuery;
   }
 
   @GetMapping
-  public String getDriverView(final Model model) {
-    model.addAttribute("drivers", driverQuery.getAll());
+  public String getFirmLinkView(final Model model) {
+    model.addAttribute("firmLinks", firmLinkQuery.getAll());
     addCounts(model);
     addDateFormatter(model);
 
-    return "drivers";
+    return "firmLinks";
   }
 }

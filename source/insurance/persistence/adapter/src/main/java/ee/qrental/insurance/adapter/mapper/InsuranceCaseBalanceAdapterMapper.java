@@ -19,6 +19,7 @@ public class InsuranceCaseBalanceAdapterMapper {
         .qWeekId(entity.getQWeekId())
         .selfResponsibilityRemaining(entity.getSelfResponsibilityRemaining())
         .damageRemaining(entity.getDamageRemaining())
+        .withQKasko(entity.getWithQKasko())
         .insuranceCase(insuranceCaseMapper.mapToDomain(entity.getInsuranceCase()))
         .build();
   }
@@ -32,6 +33,7 @@ public class InsuranceCaseBalanceAdapterMapper {
         .qWeekId(domain.getQWeekId())
         .damageRemaining(domain.getDamageRemaining())
         .selfResponsibilityRemaining(domain.getSelfResponsibilityRemaining())
+        .withQKasko(domain.getWithQKasko())
         .insuranceCase(
             InsuranceCaseJakartaEntity.builder().id(domain.getInsuranceCase().getId()).build())
         .build();

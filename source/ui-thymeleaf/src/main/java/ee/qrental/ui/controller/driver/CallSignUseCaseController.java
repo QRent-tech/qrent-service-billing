@@ -1,4 +1,4 @@
-package ee.qrental.ui.controller.callsign;
+package ee.qrental.ui.controller.driver;
 
 import static ee.qrental.ui.controller.util.ControllerUtils.CALL_SIGN_ROOT_PATH;
 

@@ -1,36 +1,33 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.DRIVER_ROOT_PATH;
+import static ee.qrental.ui.controller.util.ControllerUtils.CALL_SIGN_ROOT_PATH;
 
-import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrental.driver.api.in.query.GetCallSignQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
 import ee.qrental.ui.service.DriverCounterService;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(DRIVER_ROOT_PATH)
-public class DriverQueryController extends AbstractDriverQueryController {
+@RequestMapping(CALL_SIGN_ROOT_PATH)
+public class CallSignQueryController extends AbstractDriverQueryController {
+  private final GetCallSignQuery callSignQuery;
 
-  private final GetDriverQuery driverQuery;
-
-  public DriverQueryController(
+  public CallSignQueryController(
       final DriverCounterService driverCounterService,
       final QDateFormatter qDateFormatter,
-      final GetDriverQuery driverQuery) {
+      final GetCallSignQuery callSignQuery) {
     super(driverCounterService, qDateFormatter);
-    this.driverQuery = driverQuery;
+    this.callSignQuery = callSignQuery;
   }
 
   @GetMapping
-  public String getDriverView(final Model model) {
-    model.addAttribute("drivers", driverQuery.getAll());
+  public String getCallSignView(final Model model) {
+    model.addAttribute("callSigns", callSignQuery.getAll());
     addCounts(model);
-    addDateFormatter(model);
 
-    return "drivers";
+    return "callSigns";
   }
 }

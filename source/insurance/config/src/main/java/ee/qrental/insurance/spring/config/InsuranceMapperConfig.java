@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
 public class InsuranceMapperConfig {
   @Bean
   InsuranceCaseAddRequestMapper getInsuranceCaseAddRequestMapper(
-      final GetQWeekQuery getQWeekQuery, final GetDriverQuery driverQuery) {
-    return new InsuranceCaseAddRequestMapper(getQWeekQuery, driverQuery);
+      final GetQWeekQuery getQWeekQuery) {
+    return new InsuranceCaseAddRequestMapper(getQWeekQuery);
   }
 
   @Bean

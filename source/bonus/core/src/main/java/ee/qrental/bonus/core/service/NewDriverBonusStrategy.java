@@ -77,7 +77,7 @@ public class NewDriverBonusStrategy extends AbstractBonusStrategy {
   }
 
   final boolean hasActiveContractFor12Weeks(final Long driverId) {
-    final var contract = contractQuery.getActiveContractByDriverId(driverId);
+    final var contract = contractQuery.getLatestContractByDriverId(driverId);
     if (contract == null) {
       System.out.println("Driver with id: " + driverId + " has no active Contract");
 

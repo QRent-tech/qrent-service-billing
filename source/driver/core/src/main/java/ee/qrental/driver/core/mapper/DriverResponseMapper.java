@@ -3,17 +3,20 @@ package ee.qrental.driver.core.mapper;
 import static java.lang.String.format;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.response.DriverResponse;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.Driver;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
+import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class DriverResponseMapper implements ResponseMapper<DriverResponse, Driver> {
   private final GetFirmQuery firmQuery;
-  private final GetContractQuery contractQuery;
+  private final GetQKaskoQuery qKaskoQuery;
+  private final GetQWeekQuery qWeekQuery;
 
   @Override
   public DriverResponse toResponse(final Driver domain) {
@@ -61,11 +64,11 @@ public class DriverResponseMapper implements ResponseMapper<DriverResponse, Driv
   }
 
   private Boolean hasQKasko(final Long driverId) {
-    final var activeContract = contractQuery.getActiveContractByDriverId(driverId);
-    if (activeContract == null) {
-      return false;
+    final var currentQWeek = qWeekQuery.getCurrentWeek();
+    if (currentQWeek == null) {
+      throw new RuntimeException("Current week is null, please create a QWeek for today");
     }
-    return activeContract.getDuration() == 12;
+    return qKaskoQuery.hasQKasko(driverId, currentQWeek.getId());
   }
 
   private Integer getCallSign(final CallSign callSign) {

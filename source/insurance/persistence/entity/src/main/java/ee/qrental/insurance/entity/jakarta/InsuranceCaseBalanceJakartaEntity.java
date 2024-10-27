@@ -36,6 +36,9 @@ public class InsuranceCaseBalanceJakartaEntity {
   @JoinColumn(name = "insurance_case_id")
   private InsuranceCaseJakartaEntity insuranceCase;
 
+  @Column(name = "with_q_kasko")
+  private Boolean withQKasko;
+
   @ManyToOne
   @JoinColumn(name = "insurance_calculation_id")
   private InsuranceCalculationJakartaEntity insuranceCalculation;

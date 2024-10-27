@@ -1,12 +1,17 @@
 package ee.qrental.contract.core.mapper;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.contract.api.in.response.ContractResponse;
 import ee.qrental.contract.domain.Contract;
+import lombok.AllArgsConstructor;
 
 import static java.lang.String.format;
 
+@AllArgsConstructor
 public class ContractResponseMapper implements ResponseMapper<ContractResponse, Contract> {
+  private final QDateTime qDateTime;
+
   @Override
   public ContractResponse toResponse(final Contract domain) {
     if (domain == null) {
@@ -14,7 +19,6 @@ public class ContractResponseMapper implements ResponseMapper<ContractResponse, 
     }
     return ContractResponse.builder()
         .id(domain.getId())
-        .active(domain.isActive())
         .number(domain.getNumber())
         .duration(domain.getContractDuration().getWeeksCount())
         .renterName(domain.getRenterName())
@@ -41,7 +45,17 @@ public class ContractResponseMapper implements ResponseMapper<ContractResponse, 
         .carManufacturer(domain.getCarManufacturer())
         .carModel(domain.getCarModel())
         .created(domain.getCreated())
+        .dateStart(domain.getDateStart())
+        .dateEnd(domain.getDateEnd())
+        .active(isActive(domain))
         .build();
+  }
+
+  private boolean isActive(final Contract domain) {
+    if (domain.getDateEnd() == null) {
+      return true;
+    }
+    return domain.getDateEnd().isAfter(qDateTime.getToday());
   }
 
   @Override

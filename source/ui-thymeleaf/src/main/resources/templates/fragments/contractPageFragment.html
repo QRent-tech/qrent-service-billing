@@ -8,6 +8,8 @@
             <th>Active</th>
             <th>Number</th>
             <th>Duration, weeks</th>
+            <th>Start Date</th>
+            <th>End Date</th>
             <th>Renter Company</th>
             <th>Renter Company Reg. number</th>
             <th>Renter Company CEO</th>
@@ -15,6 +17,7 @@
             <th>Q-Firm name</th>
             <th>Q-Firm CEO</th>
             <th>Created</th>
+
         </tr>
         <tr th:if="${#lists.isEmpty(contracts)}">
             <td colspan="9">No contracts</td>
@@ -39,13 +42,16 @@
             </td>
             <td th:text="${contract.number}">???</td>
             <td th:text="${contract.duration}">???</td>
+            <td th:text="${qDateFormatter.format(contract.dateStart)}">???</td>
+            <td th:if="${contract.dateEnd == null}">No date</td>
+            <td th:if="${contract.dateEnd != null}" th:text="${qDateFormatter.format(contract.dateEnd)}">???</td>
             <td th:text="${contract.renterName}">???</td>
             <td th:text="${contract.renterRegistrationNumber}">???</td>
             <td th:text="${contract.renterCeoName}">???</td>
             <td th:text="${contract.driverIsikukood}">???</td>
             <td th:text="${contract.qFirmName}">???</td>
             <td th:text="${contract.qFirmCeo}">???</td>
-            <td th:text="${contract.created}">???</td>
+            <td th:text="${qDateFormatter.format(contract.created)}">???</td>
         </tr>
     </table>
 </div>

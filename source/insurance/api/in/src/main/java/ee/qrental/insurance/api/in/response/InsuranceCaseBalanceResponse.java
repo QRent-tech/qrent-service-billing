@@ -11,4 +11,5 @@ public class InsuranceCaseBalanceResponse {
   private String qWeekInfo;
   private BigDecimal damageRemaining;
   private BigDecimal selfResponsibilityRemaining;
+  private Boolean withQKasko;
 }

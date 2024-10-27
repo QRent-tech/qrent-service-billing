@@ -40,5 +40,6 @@ public class Contract {
   private String carManufacturer;
   private String carModel;
   private LocalDate created;
-  private boolean active;
+  private LocalDate dateStart;
+  private LocalDate dateEnd;
 }

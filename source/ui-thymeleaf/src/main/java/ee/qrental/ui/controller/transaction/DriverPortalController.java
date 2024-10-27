@@ -263,7 +263,7 @@ public class DriverPortalController {
   }
 
   private void addContractDataToModel(final Long driverId, final Model model) {
-    final var activeContract = contractQuery.getActiveContractByDriverId(driverId);
+    final var activeContract = contractQuery.getLatestContractByDriverId(driverId);
     if (activeContract == null) {
       model.addAttribute("activeContract", "absent");
       model.addAttribute("activeContractId", null);

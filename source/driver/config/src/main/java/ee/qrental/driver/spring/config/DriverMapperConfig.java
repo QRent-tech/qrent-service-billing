@@ -1,11 +1,13 @@
 package ee.qrental.driver.spring.config;
 
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.core.mapper.DriverAddRequestMapper;
 import ee.qrental.driver.core.mapper.DriverResponseMapper;
 import ee.qrental.driver.core.mapper.DriverUpdateRequestMapper;
 import ee.qrental.driver.core.mapper.FriendshipDomainMapper;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
+import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,8 +20,10 @@ public class DriverMapperConfig {
 
   @Bean
   DriverResponseMapper getDriverResponseMapper(
-      final GetFirmQuery firmQuery, final GetContractQuery contractQuery) {
-    return new DriverResponseMapper(firmQuery, contractQuery);
+      final GetFirmQuery firmQuery,
+      final GetQKaskoQuery qKaskoQuery,
+      final GetQWeekQuery qWeekQuery) {
+    return new DriverResponseMapper(firmQuery, qKaskoQuery, qWeekQuery);
   }
 
   @Bean

@@ -1,5 +1,6 @@
 package ee.qrental.contract.spring.config;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.contract.api.out.ContractLoadPort;
 import ee.qrental.contract.core.mapper.ContractAddRequestMapper;
 import ee.qrental.contract.core.mapper.ContractResponseMapper;
@@ -13,14 +14,13 @@ import org.springframework.context.annotation.Configuration;
 public class ContractMapperConfig {
   @Bean
   ContractAddRequestMapper getContractAddRequestMapper(
-          final GetDriverQuery driverQuery,
-          final GetFirmQuery firmQuery) {
+      final GetDriverQuery driverQuery, final GetFirmQuery firmQuery) {
     return new ContractAddRequestMapper(driverQuery, firmQuery);
   }
 
   @Bean
-  ContractResponseMapper getContractResponseMapper() {
-    return new ContractResponseMapper();
+  ContractResponseMapper getContractResponseMapper(final QDateTime qDateTime) {
+    return new ContractResponseMapper(qDateTime);
   }
 
   @Bean

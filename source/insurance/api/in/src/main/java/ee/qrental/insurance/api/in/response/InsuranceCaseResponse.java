@@ -17,6 +17,5 @@ public class InsuranceCaseResponse {
   private LocalDate occurrenceDate;
   private String occurrenceWeekInfo;
   private Boolean active;
-  private Boolean withQKasko;
   private String description;
 }

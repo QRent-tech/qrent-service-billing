@@ -1,6 +1,8 @@
 package ee.qrental.contract.adapter.repository;
 
 import ee.qrental.contract.entity.jakarta.ContractJakartaEntity;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ContractRepository {
@@ -15,4 +17,14 @@ public interface ContractRepository {
   ContractJakartaEntity getByNumber(final String number);
 
   ContractJakartaEntity findLatestByDriverId(final Long driverId);
+
+  List<ContractJakartaEntity> findActiveByDate(final LocalDate date);
+
+  Long findCountActiveByDate(final LocalDate date);
+
+  List<ContractJakartaEntity> findClosedByDate(final LocalDate date);
+
+  Long findCountClosedByDate(final LocalDate date);
+
+
 }

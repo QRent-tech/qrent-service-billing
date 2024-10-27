@@ -11,6 +11,7 @@ dependencies {
     implementation(project(":source:transaction:api:in"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:car:api:in"))
+    implementation(project(":source:contract:api:in"))
 
     implementation("org.springframework:spring-context-support")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

@@ -9,6 +9,7 @@ import ee.qrental.insurance.api.in.query.GetInsuranceCaseBalanceQuery;
 import ee.qrental.insurance.api.in.response.InsuranceBalanceTotalResponse;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;
 import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
+import ee.qrental.insurance.core.service.InsuranceCaseBalanceCalculator;
 import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.insurance.domain.InsuranceCaseBalance;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;

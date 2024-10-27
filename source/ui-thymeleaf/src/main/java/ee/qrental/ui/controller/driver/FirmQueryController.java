@@ -1,4 +1,4 @@
-package ee.qrental.ui.controller.firm;
+package ee.qrental.ui.controller.driver;
 
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;

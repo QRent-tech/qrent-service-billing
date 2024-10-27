@@ -1,5 +1,6 @@
 package ee.qrental.contract.spring.config;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrental.contract.api.in.usecase.ContractSendByEmailUseCase;
@@ -20,8 +21,9 @@ public class ContractServiceConfig {
   GetContractQuery getContractQueryService(
       final ContractLoadPort loadPort,
       final ContractResponseMapper mapper,
-      final ContractUpdateRequestMapper updateRequestMapper) {
-    return new ContractQueryService(loadPort, mapper, updateRequestMapper);
+      final ContractUpdateRequestMapper updateRequestMapper,
+      final QDateTime qDateTime) {
+    return new ContractQueryService(loadPort, mapper, updateRequestMapper, qDateTime);
   }
 
   @Bean

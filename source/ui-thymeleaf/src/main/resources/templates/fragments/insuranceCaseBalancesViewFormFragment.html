@@ -14,6 +14,7 @@
                             <th>Week</th>
                             <th>Damage remaining, EUR</th>
                             <th>Self Responsibility remaining, EUR</th>
+                            <th>With Q-Kasko</th>
                         </tr>
                         <tr th:if="${#lists.isEmpty(insuranceCaseBalances)}">
                             <td colspan="5">No Insurance Case Balances available</td>
@@ -22,6 +23,7 @@
                             <td th:text="${insuranceCaseBalance.qWeekInfo}">???</td>
                             <td th:text="${insuranceCaseBalance.damageRemaining}">???</td>
                             <td th:text="${insuranceCaseBalance.selfResponsibilityRemaining}">???</td>
+                            <td th:text="${insuranceCaseBalance.withQKasko}">???</td>
                         </tr>
                     </table>
                 </div>

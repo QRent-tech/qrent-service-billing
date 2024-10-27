@@ -39,6 +39,7 @@ public class ContractResponse {
   private String carManufacturer;
   private String carModel;
   private LocalDate created;
-
+  private LocalDate dateStart;
+  private LocalDate dateEnd;
 }
 

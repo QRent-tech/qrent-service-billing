@@ -1,14 +1,16 @@
 package ee.qrental.insurance.spring.config;
 
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseBalanceQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
+import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.out.*;
 import ee.qrental.insurance.core.mapper.*;
 import ee.qrental.insurance.core.service.*;
 import ee.qrental.insurance.core.service.balance.*;
+import ee.qrental.insurance.core.service.kasko.QKaskoQueryService;
 import ee.qrental.insurance.core.validator.InsuranceCalculationAddBusinessRuleValidator;
 import ee.qrental.insurance.core.validator.InsuranceCaseAddBusinessRuleValidator;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
@@ -27,16 +29,16 @@ public class InsuranceCaseServiceConfig {
 
   @Bean
   InsuranceCaseBalanceCalculator getInsuranceCaseBalanceCalculator(
+      final GetQKaskoQuery qKaskoQuery,
       final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
-      final GetCarLinkQuery carLinkQuery,
       final GetTransactionQuery transactionQuery,
       final GetTransactionTypeQuery transactionTypeQuery,
       final InsuranceCaseBalanceDeriveService deriveService,
       final TransactionAddUseCase transactionAddUseCase,
       final GetQWeekQuery getQWeekQuery) {
     return new InsuranceCaseBalanceCalculatorService(
+        qKaskoQuery,
         insuranceCaseBalanceLoadPort,
-        carLinkQuery,
         transactionQuery,
         transactionTypeQuery,
         deriveService,
@@ -133,5 +135,12 @@ public class InsuranceCaseServiceConfig {
   InsuranceCaseBalanceDeriveService getInsuranceCaseBalanceDeriveService() {
 
     return new InsuranceCaseBalanceDeriveService();
+  }
+
+  @Bean
+  GetQKaskoQuery getGetQKaskoQuery(
+      final GetContractQuery contractQuery, final GetQWeekQuery qWeekQuery) {
+
+    return new QKaskoQueryService(contractQuery, qWeekQuery);
   }
 }

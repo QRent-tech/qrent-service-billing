@@ -1,9 +1,10 @@
 package ee.qrental.insurance.core.service.balance;
 
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;
+import ee.qrental.insurance.core.service.InsuranceCaseBalanceCalculator;
 import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.insurance.domain.InsuranceCaseBalance;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
@@ -24,20 +25,17 @@ import static java.math.BigDecimal.ZERO;
 @AllArgsConstructor
 public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalanceCalculator {
 
-  private final String DAMAGE_COMPENSATION_TRANSACTION_TYPE_NAME = "damage payment";
-  private final String SELF_RESPONSIBILITY_COMPENSATION_TRANSACTION_TYPE_NAME =
-      "self responsibility payment";
   private static final BigDecimal DEFAULT_SELF_RESPONSIBILITY = BigDecimal.valueOf(500);
   private static final BigDecimal PERCENTAGE_FROM_RENT_AMOUNT = BigDecimal.valueOf(0.25d);
   private static final BigDecimal Q_KASKO_DISCOUNT_RATE = BigDecimal.valueOf(2);
 
+  private final GetQKaskoQuery qKaskoQuery;
   private final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort;
-  private final GetCarLinkQuery carLinkQuery;
   private final GetTransactionQuery transactionQuery;
   private final GetTransactionTypeQuery transactionTypeQuery;
   private final InsuranceCaseBalanceDeriveService deriveService;
   private final TransactionAddUseCase transactionAddUseCase;
-  private final GetQWeekQuery getQWeekQuery;
+  private final GetQWeekQuery qWeekQuery;
 
   @Override
   public InsuranceCaseBalance calculateBalance(
@@ -45,12 +43,11 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
     final var driverId = insuranceCase.getDriverId();
     final var requestedQWeekId = requestedQWeek.getId();
     final var requestedWeekBalance = getInsuranceCaseBalance(insuranceCase, requestedQWeekId);
-    final var hasActiveContract = hasActiveContract(driverId);
+    final var hasQKasko = qKaskoQuery.hasQKasko(driverId, requestedQWeekId);
     final var damageTransaction =
-        getDamageTransaction(driverId, requestedQWeek, requestedWeekBalance, hasActiveContract);
+        getDamageTransaction(driverId, requestedQWeek, requestedWeekBalance, hasQKasko);
     final var selfResponsibilityTransaction =
-        getSelfResponsibilityTransaction(
-            driverId, requestedQWeek, requestedWeekBalance, hasActiveContract);
+        getSelfResponsibilityTransaction(driverId, requestedQWeek, requestedWeekBalance, hasQKasko);
     deriveService.derive(requestedWeekBalance, damageTransaction, selfResponsibilityTransaction);
     saveDamageTransaction(damageTransaction, requestedWeekBalance);
     saveSelfResponsibilityTransaction(selfResponsibilityTransaction, requestedWeekBalance);
@@ -88,7 +85,10 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
       insuranceCaseBalance.setDamageRemaining(originalDamage);
     } else {
       var damageRemaining = originalDamage.subtract(DEFAULT_SELF_RESPONSIBILITY);
-      if (insuranceCase.getWithQKasko()) {
+      final var hasQKaskoOnRequestedWeek =
+          qKaskoQuery.hasQKasko(insuranceCase.getDriverId(), insuranceCaseBalance.getQWeekId());
+
+      if (hasQKaskoOnRequestedWeek) {
         damageRemaining = damageRemaining.divide(Q_KASKO_DISCOUNT_RATE);
       }
       insuranceCaseBalance.setSelfResponsibilityRemaining(DEFAULT_SELF_RESPONSIBILITY);
@@ -97,7 +97,7 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
   }
 
   private Long getPreviousWeekId(final Long qWeekId) {
-    final var previousWeek = getQWeekQuery.getOneBeforeById(qWeekId);
+    final var previousWeek = qWeekQuery.getOneBeforeById(qWeekId);
     if (previousWeek == null) {
       throw new RuntimeException("Previous week not found for qWeekId: " + qWeekId);
     }
@@ -116,7 +116,8 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
     final var previousWeekId = getPreviousWeekId(qWeekId);
 
     final var previousWeekBalance =
-        insuranceCaseBalanceLoadPort.loadByInsuranceCaseIdAndQWeekId(insuranceCase.getId(), previousWeekId);
+        insuranceCaseBalanceLoadPort.loadByInsuranceCaseIdAndQWeekId(
+            insuranceCase.getId(), previousWeekId);
 
     if (previousWeekBalance == null) {
       setFirstRemainingAndSelfResponsibility(insuranceCase, result);
@@ -128,12 +129,6 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
     result.setSelfResponsibilityRemaining(previousWeekBalance.getSelfResponsibilityRemaining());
 
     return result;
-  }
-
-  private boolean hasActiveContract(final Long driverId) {
-    final var activeCarLink = carLinkQuery.getActiveLinkByDriverId(driverId);
-
-    return activeCarLink != null;
   }
 
   private TransactionAddRequest getDamageTransaction(
@@ -158,8 +153,9 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
         "Automatically created transaction for the damage compensation.");
     damagePaymentTransaction.setDriverId(driverId);
     damagePaymentTransaction.setAmount(amountForDamageCompensation);
+    final var transactionTypeNameForDamage = "damage payment";
     damagePaymentTransaction.setTransactionTypeId(
-        getTransactionTypeIdByName(DAMAGE_COMPENSATION_TRANSACTION_TYPE_NAME));
+        getTransactionTypeIdByName(transactionTypeNameForDamage));
     damagePaymentTransaction.setDate(qWeek.getStart());
 
     return damagePaymentTransaction;
@@ -183,8 +179,9 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
         "Automatically created transaction for the Self Responsibility Payment Request compensation.");
     selfResponsibilityTransaction.setDriverId(driverId);
     selfResponsibilityTransaction.setAmount(selfResponsibilityAmount);
+    final var transactionTypeNameForSelfResponsibility = "self responsibility payment";
     selfResponsibilityTransaction.setTransactionTypeId(
-        getTransactionTypeIdByName(SELF_RESPONSIBILITY_COMPENSATION_TRANSACTION_TYPE_NAME));
+        getTransactionTypeIdByName(transactionTypeNameForSelfResponsibility));
     selfResponsibilityTransaction.setDate(qWeek.getStart());
 
     return selfResponsibilityTransaction;

@@ -110,4 +110,10 @@ public class ContractJakartaEntity {
 
   @Column(name = "car_model")
   private String carModel;
+
+  @Column(name = "date_start")
+  private LocalDate dateStart;
+
+  @Column(name = "date_end")
+  private LocalDate dateEnd;
 }

@@ -1,15 +1,13 @@
-package ee.qrental.ui.controller.contract;
+package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrental.ui.controller.util.ControllerUtils.AUTHORIZATION_ROOT_PATH;
 
 import ee.qrental.contract.api.in.query.GetAuthorizationQuery;
 import ee.qrental.contract.api.in.request.AuthorizationSendByEmailRequest;
 import ee.qrental.contract.api.in.usecase.AuthorizationPdfUseCase;
 import ee.qrental.contract.api.in.usecase.AuthorizationSendByEmailUseCase;
-import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import lombok.AllArgsConstructor;
+import ee.qrental.ui.service.DriverCounterService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +17,29 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(AUTHORIZATION_ROOT_PATH)
-@AllArgsConstructor
-public class AuthorizationQueryController {
-  private final QDateFormatter qDateFormatter;
+public class AuthorizationQueryController extends AbstractDriverQueryController {
+
   private final GetAuthorizationQuery authorizationBoltQuery;
   private final AuthorizationSendByEmailUseCase authorizationBoltSendByEmailUseCase;
   private final AuthorizationPdfUseCase pdfUseCase;
-  private final GetCallSignLinkQuery callSignLinkQuery;
+
+  public AuthorizationQueryController(
+      final DriverCounterService driverCounterService,
+      final QDateFormatter qDateFormatter,
+      final GetAuthorizationQuery authorizationBoltQuery,
+      final AuthorizationSendByEmailUseCase authorizationBoltSendByEmailUseCase,
+      final AuthorizationPdfUseCase pdfUseCase) {
+    super(driverCounterService, qDateFormatter);
+    this.authorizationBoltQuery = authorizationBoltQuery;
+    this.authorizationBoltSendByEmailUseCase = authorizationBoltSendByEmailUseCase;
+    this.pdfUseCase = pdfUseCase;
+  }
 
   @GetMapping
   public String getAuthorizationsView(final Model model) {
-    model.addAttribute(MODEL_ATTRIBUTE_DATE_FORMATTER, qDateFormatter);
-
     model.addAttribute("authorizations", authorizationBoltQuery.getAll());
-    populateLinksCounts(model);
+    addCounts(model);
+    addDateFormatter(model);
 
     return "authorizations";
   }
@@ -60,12 +67,5 @@ public class AuthorizationQueryController {
     authorizationBoltSendByEmailUseCase.sendByEmail(emailSendRequest);
 
     return "redirect:" + AUTHORIZATION_ROOT_PATH;
-  }
-
-  private void populateLinksCounts(final Model model) {
-    final var activeLinksCount = callSignLinkQuery.getCountActive();
-    model.addAttribute("activeLinksCount", activeLinksCount);
-    final var closedLinksCount = callSignLinkQuery.getCountClosed();
-    model.addAttribute("closedLinksCount", closedLinksCount);
   }
 }

@@ -16,5 +16,6 @@ public class InsuranceCaseBalance {
   private BigDecimal damageRemaining;
   private BigDecimal selfResponsibilityRemaining;
   private InsuranceCase insuranceCase;
+  private Boolean withQKasko;
   private List<Long> transactionIds;
 }

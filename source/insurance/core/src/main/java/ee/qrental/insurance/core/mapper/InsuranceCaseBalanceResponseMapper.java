@@ -20,6 +20,7 @@ public class InsuranceCaseBalanceResponseMapper {
         .qWeekInfo(format("%d - %d", qWeekResponse.getYear(), qWeekResponse.getNumber()))
         .damageRemaining(qRound(domain.getDamageRemaining()))
         .selfResponsibilityRemaining(qRound(domain.getSelfResponsibilityRemaining()))
+        .withQKasko(domain.getWithQKasko())
         .build();
   }
 }

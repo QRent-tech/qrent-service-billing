@@ -13,7 +13,6 @@ import static java.lang.Boolean.TRUE;
 public class InsuranceCaseAddRequestMapper
     implements AddRequestMapper<InsuranceCaseAddRequest, InsuranceCase> {
   private final GetQWeekQuery qWeekQuery;
-  private final GetDriverQuery driverQuery;
 
   @Override
   public InsuranceCase toDomain(InsuranceCaseAddRequest request) {
@@ -26,14 +25,7 @@ public class InsuranceCaseAddRequestMapper
         .occurrenceDate(request.getOccurrenceDate())
         .startQWeekId(qWeekId)
         .description(request.getDescription())
-        .withQKasko(withQKasko(request))
         .active(TRUE)
         .build();
-  }
-
-  private Boolean withQKasko(final InsuranceCaseAddRequest request) {
-    final var driver = driverQuery.getById(request.getDriverId());
-
-    return driver.getHasQKasko();
   }
 }

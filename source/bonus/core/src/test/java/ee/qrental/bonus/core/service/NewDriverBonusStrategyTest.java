@@ -164,7 +164,7 @@ class NewDriverBonusStrategyTest {
                 .dateStart(LocalDate.of(2023, Month.JANUARY, 11)) // Wednesday
                 .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2023, Month.FEBRUARY, 12)); // Monday
-    when(contractQuery.getActiveContractByDriverId(55L)).thenReturn(null);
+    when(contractQuery.getLatestContractByDriverId(55L)).thenReturn(null);
 
     // when
     final var bonusTransactionsAddRequests =
@@ -187,7 +187,7 @@ class NewDriverBonusStrategyTest {
                 .dateStart(LocalDate.of(2023, Month.JANUARY, 11)) // Wednesday
                 .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2023, Month.FEBRUARY, 12)); // Monday
-    when(contractQuery.getActiveContractByDriverId(55L))
+    when(contractQuery.getLatestContractByDriverId(55L))
         .thenReturn(ContractResponse.builder().active(true).duration(11).build());
 
     // when
@@ -211,7 +211,7 @@ class NewDriverBonusStrategyTest {
                 .dateStart(LocalDate.of(2023, Month.JANUARY, 11)) // Wednesday
                 .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2023, Month.FEBRUARY, 12)); // Monday
-    when(contractQuery.getActiveContractByDriverId(55L))
+    when(contractQuery.getLatestContractByDriverId(55L))
         .thenReturn(ContractResponse.builder().active(true).duration(12).build());
     final var rentTransaction =
         TransactionResponse.builder()

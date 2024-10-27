@@ -1,13 +1,15 @@
-package ee.qrental.ui.controller.contract;
+package ee.qrental.ui.controller.driver;
 
+import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrental.ui.controller.util.ControllerUtils.CONTRACT_ROOT_PATH;
+import static ee.qrental.ui.controller.util.ControllerUtils.COUNTERS_ATTRIBUTE;
 
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractSendByEmailRequest;
 import ee.qrental.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrental.contract.api.in.usecase.ContractSendByEmailUseCase;
-import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.service.DriverCounterService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
@@ -24,23 +26,25 @@ public class ContractQueryController {
   private final GetContractQuery contractQuery;
   private final ContractSendByEmailUseCase contractSendByEmailUseCase;
   private final ContractPdfUseCase pdfUseCase;
-  private final GetCallSignLinkQuery callSignLinkQuery;
   private final QDateFormatter qDateFormatter;
+  private final DriverCounterService driverCounterService;
 
   @GetMapping
-  public String getDriverView(final Model model) {
-    model.addAttribute("contracts", contractQuery.getAll());
+  public String getActiveContractView(final Model model) {
+    model.addAttribute(MODEL_ATTRIBUTE_DATE_FORMATTER, qDateFormatter);
+    model.addAttribute("contractsActive", contractQuery.getAll());
     populateLinksCounts(model);
 
     return "contracts";
   }
+
   @GetMapping("/pdf/{id}")
   @ResponseBody
   public ResponseEntity<InputStreamResource> getPdf(@PathVariable("id") long id) {
 
     return ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_PDF)
-            .body(new InputStreamResource(pdfUseCase.getPdfInputStreamById(id)));
+        .contentType(MediaType.APPLICATION_PDF)
+        .body(new InputStreamResource(pdfUseCase.getPdfInputStreamById(id)));
   }
 
   @GetMapping(value = "/email/send-form/{id}")
@@ -53,16 +57,13 @@ public class ContractQueryController {
   }
 
   @PostMapping("/email/send")
-  public String sendByEmail(final ContractSendByEmailRequest emailSendRequest){
+  public String sendByEmail(final ContractSendByEmailRequest emailSendRequest) {
     contractSendByEmailUseCase.sendByEmail(emailSendRequest);
 
     return "redirect:" + CONTRACT_ROOT_PATH;
   }
 
   private void populateLinksCounts(final Model model) {
-    final var activeLinksCount = callSignLinkQuery.getCountActive();
-    model.addAttribute("activeLinksCount", activeLinksCount);
-    final var closedLinksCount = callSignLinkQuery.getCountClosed();
-    model.addAttribute("closedLinksCount", closedLinksCount);
+    model.addAttribute(COUNTERS_ATTRIBUTE, driverCounterService.getDriverCounts());
   }
 }

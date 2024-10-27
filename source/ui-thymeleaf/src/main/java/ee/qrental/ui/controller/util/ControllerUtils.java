@@ -30,4 +30,5 @@ public class ControllerUtils {
   public static final String TRANSACTION_KIND_ROOT_PATH = "/transaction-kinds";
 
   public static final String ADD_REQUEST_ATTRIBUTE = "addRequest";
+  public static final String COUNTERS_ATTRIBUTE = "counters";
 }

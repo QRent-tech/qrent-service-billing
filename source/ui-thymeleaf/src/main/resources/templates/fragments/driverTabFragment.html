@@ -10,12 +10,12 @@
     <li class="nav-item">
         <a class="nav-link" th:classappend="${activeTab == 'callSignLinksActive'} ? active : ''"
            href="/call-sign-links/active">Active Call Sign Links
-            <span class="badge rounded-pill bg-success" th:text="${activeLinksCount}">???</span></a>
+            <span class="badge rounded-pill bg-success" th:text="${counters.activeCallSignLinkCount}">???</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" th:classappend="${activeTab == 'callSignLinksClosed'} ? active : ''"
            href="/call-sign-links/closed">Closed Call Sign Links
-            <span class="badge rounded-pill bg-dark" th:text="${closedLinksCount}">???</span>
+            <span class="badge rounded-pill bg-dark" th:text="${counters.closedCallSignLinkCount}">???</span>
         </a>
     </li>
     <li class="nav-item">
@@ -23,8 +23,16 @@
            href="/firm-links">Firm Links</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" th:classappend="${activeTab == 'contracts'} ? active : ''"
-           href="/contracts">Contracts</a>
+        <a class="nav-link" th:classappend="${activeTab == 'contractsActive'} ? active : ''"
+           href="/contracts/active">Active Contracts
+            <span class="badge rounded-pill bg-success" th:text="${counters.activeContractCount}">???</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:classappend="${activeTab == 'contractsClosed'} ? active : ''"
+           href="/contracts/closed">Closed Contracts
+            <span class="badge rounded-pill bg-dark" th:text="${counters.closedContractCount}">???</span>
+        </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" th:classappend="${activeTab == 'authorizations'} ? active : ''"
