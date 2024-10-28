@@ -4,7 +4,7 @@ import static ee.qrental.ui.controller.util.ControllerUtils.FIRM_LINK_ROOT_PATH;
 
 import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import ee.qrental.ui.service.DriverCounterService;
+import ee.qrental.ui.service.driver.DriverCounterService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ public class FirmLinkQueryController extends AbstractDriverQueryController {
   @GetMapping
   public String getFirmLinkView(final Model model) {
     model.addAttribute("firmLinks", firmLinkQuery.getAll());
-    addCounts(model);
+    addDriverCounts(model);
     addDateFormatter(model);
 
     return "firmLinks";

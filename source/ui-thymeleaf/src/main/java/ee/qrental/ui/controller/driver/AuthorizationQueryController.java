@@ -7,7 +7,7 @@ import ee.qrental.contract.api.in.request.AuthorizationSendByEmailRequest;
 import ee.qrental.contract.api.in.usecase.AuthorizationPdfUseCase;
 import ee.qrental.contract.api.in.usecase.AuthorizationSendByEmailUseCase;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import ee.qrental.ui.service.DriverCounterService;
+import ee.qrental.ui.service.driver.DriverCounterService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +38,7 @@ public class AuthorizationQueryController extends AbstractDriverQueryController 
   @GetMapping
   public String getAuthorizationsView(final Model model) {
     model.addAttribute("authorizations", authorizationBoltQuery.getAll());
-    addCounts(model);
+    addDriverCounts(model);
     addDateFormatter(model);
 
     return "authorizations";

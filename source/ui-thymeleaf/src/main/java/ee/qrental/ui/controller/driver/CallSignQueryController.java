@@ -4,7 +4,7 @@ import static ee.qrental.ui.controller.util.ControllerUtils.CALL_SIGN_ROOT_PATH;
 
 import ee.qrental.driver.api.in.query.GetCallSignQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import ee.qrental.ui.service.DriverCounterService;
+import ee.qrental.ui.service.driver.DriverCounterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class CallSignQueryController extends AbstractDriverQueryController {
   @GetMapping
   public String getCallSignView(final Model model) {
     model.addAttribute("callSigns", callSignQuery.getAll());
-    addCounts(model);
+    addDriverCounts(model);
 
     return "callSigns";
   }

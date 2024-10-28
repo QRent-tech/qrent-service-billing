@@ -1,4 +1,4 @@
-package ee.qrental.ui.service;
+package ee.qrental.ui.service.driver;
 
 import lombok.Builder;
 import lombok.Getter;

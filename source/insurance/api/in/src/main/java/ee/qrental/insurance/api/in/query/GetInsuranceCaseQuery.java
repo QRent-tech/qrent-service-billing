@@ -10,6 +10,14 @@ import java.util.List;
 public interface GetInsuranceCaseQuery
     extends BaseGetQuery<InsuranceCaseUpdateRequest, InsuranceCaseResponse> {
 
+  List<InsuranceCaseResponse> getActive();
+
+  List<InsuranceCaseResponse> getClosed();
+
+  Long getCountActive();
+
+  Long getCountClosed();
+
   List<InsuranceCaseBalanceResponse> getInsuranceCaseBalancesByInsuranceCase(
       final Long insuranceCaseId);
 }

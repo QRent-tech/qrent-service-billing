@@ -39,4 +39,24 @@ public class InsuranceCaseLoadAdapter implements InsuranceCaseLoadPort {
         .map(mapper::mapToDomain)
         .collect(toList());
   }
+
+  @Override
+  public List<InsuranceCase> loadAllActive() {
+    return repository.findActive().stream().map(mapper::mapToDomain).collect(toList());
+  }
+
+  @Override
+  public List<InsuranceCase> loadAlClosed() {
+    return repository.findClosed().stream().map(mapper::mapToDomain).collect(toList());
+  }
+
+  @Override
+  public Long loadCountActive() {
+    return repository.findCountActive();
+  }
+
+  @Override
+  public Long loadCountClosed() {
+    return repository.findCountClosed();
+  }
 }

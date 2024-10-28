@@ -4,11 +4,14 @@ import ee.qrental.bonus.api.in.query.GetObligationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
 import ee.qrental.ui.controller.transaction.assembler.DriverBalanceAssembler;
-import ee.qrental.ui.service.DriverCounterService;
-import ee.qrental.ui.service.impl.DriverCounterServiceImpl;
+import ee.qrental.ui.service.driver.DriverCounterService;
+import ee.qrental.ui.service.driver.impl.DriverCounterServiceImpl;
+import ee.qrental.ui.service.insurance.InsuranceCounterService;
+import ee.qrental.ui.service.insurance.impl.InsuranceCounterServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -37,5 +40,12 @@ public class ControllerConfig {
       final GetCallSignLinkQuery callSignLinkQuery, final GetContractQuery contractQuery) {
 
     return new DriverCounterServiceImpl(callSignLinkQuery, contractQuery);
+  }
+
+  @Bean
+  InsuranceCounterService getInsuranceCounterService(
+      final GetInsuranceCaseQuery insuranceCaseQuery) {
+
+    return new InsuranceCounterServiceImpl(insuranceCaseQuery);
   }
 }

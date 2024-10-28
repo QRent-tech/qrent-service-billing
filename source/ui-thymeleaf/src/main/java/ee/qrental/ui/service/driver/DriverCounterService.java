@@ -1,4 +1,4 @@
-package ee.qrental.ui.service;
+package ee.qrental.ui.service.driver;
 
 public interface DriverCounterService {
   DriverCountsResponse getDriverCounts();

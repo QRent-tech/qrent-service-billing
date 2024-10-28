@@ -4,7 +4,7 @@ import static ee.qrental.ui.controller.util.ControllerUtils.CALL_SIGN_LINK_ROOT_
 
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import ee.qrental.ui.service.DriverCounterService;
+import ee.qrental.ui.service.driver.DriverCounterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,17 +28,17 @@ public class CallSignLinkQueryController extends AbstractDriverQueryController {
   public String getActiveLinkView(final Model model) {
     final var callSignLinksActive = callSignLinkQuery.getActive();
     model.addAttribute("callSignLinksActive", callSignLinksActive);
-    addCounts(model);
+    addDriverCounts(model);
     addDateFormatter(model);
 
     return "callSignLinksActive";
   }
 
   @GetMapping(value = "/closed")
-  public String geHistoryLinkView(final Model model) {
+  public String geClosedLinkView(final Model model) {
     final var callSignLinksClosed = callSignLinkQuery.getClosed();
     model.addAttribute("callSignLinksClosed", callSignLinksClosed);
-    addCounts(model);
+    addDriverCounts(model);
     addDateFormatter(model);
 
     return "callSignLinksClosed";

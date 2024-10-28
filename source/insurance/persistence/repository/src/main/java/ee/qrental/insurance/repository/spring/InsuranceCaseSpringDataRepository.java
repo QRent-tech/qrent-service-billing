@@ -33,4 +33,20 @@ public interface InsuranceCaseSpringDataRepository
       nativeQuery = true)
   List<InsuranceCaseJakartaEntity> findAllByActiveIsTrueAndQweekId(
       final @Param("qWeekId") Long qWeekId);
+
+  @Query(value = "SELECT * FROM insurance_case ic where ic.active is true", nativeQuery = true)
+  List<InsuranceCaseJakartaEntity> findActive();
+
+  @Query(value = "SELECT * FROM insurance_case ic where ic.active is false", nativeQuery = true)
+  List<InsuranceCaseJakartaEntity> findClosed();
+
+  @Query(
+      value = "SELECT count(*) FROM insurance_case ic where ic.active is true",
+      nativeQuery = true)
+  Long findCountActive();
+
+  @Query(
+      value = "SELECT count(*) FROM insurance_case ic where ic.active is false",
+      nativeQuery = true)
+  Long findCountClosed();
 }

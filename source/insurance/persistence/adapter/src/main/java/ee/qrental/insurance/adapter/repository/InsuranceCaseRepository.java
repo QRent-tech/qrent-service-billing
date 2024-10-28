@@ -16,4 +16,12 @@ public interface InsuranceCaseRepository {
   InsuranceCaseJakartaEntity getReferenceById(final Long id);
 
   void deleteById(final Long id);
+
+  List<InsuranceCaseJakartaEntity> findActive();
+
+  List<InsuranceCaseJakartaEntity> findClosed();
+
+  Long findCountActive();
+
+  Long findCountClosed();
 }

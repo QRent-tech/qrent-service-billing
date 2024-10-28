@@ -9,4 +9,12 @@ public interface InsuranceCaseLoadPort extends LoadPort<InsuranceCase> {
   List<InsuranceCase> loadActiveByDriverIdAndQWeekId(final Long driverId, final Long qWeekId);
 
   List<InsuranceCase> loadActiveByQWeekId(final Long qWeekId);
+
+  List<InsuranceCase> loadAllActive();
+
+  List<InsuranceCase> loadAlClosed();
+
+  Long loadCountActive();
+
+  Long loadCountClosed();
 }

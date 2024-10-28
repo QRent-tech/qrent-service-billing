@@ -45,6 +45,26 @@ public class InsuranceCaseQueryService implements GetInsuranceCaseQuery {
   }
 
   @Override
+  public List<InsuranceCaseResponse> getActive() {
+    return loadPort.loadAllActive().stream().map(responseMapper::toResponse).collect(toList());
+  }
+
+  @Override
+  public List<InsuranceCaseResponse> getClosed() {
+    return loadPort.loadAlClosed().stream().map(responseMapper::toResponse).collect(toList());
+  }
+
+  @Override
+  public Long getCountActive() {
+    return loadPort.loadCountActive();
+  }
+
+  @Override
+  public Long getCountClosed() {
+    return loadPort.loadCountClosed();
+  }
+
+  @Override
   public List<InsuranceCaseBalanceResponse> getInsuranceCaseBalancesByInsuranceCase(
       final Long insuranceCaseId) {
     return insuranceCaseBalanceLoadPort.loadAllByInsuranceCseId(insuranceCaseId).stream()

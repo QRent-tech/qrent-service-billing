@@ -41,4 +41,24 @@ public class InsuranceCaseRepositoryImpl implements InsuranceCaseRepository {
   public void deleteById(final Long id) {
     springDataRepository.deleteById(id);
   }
+
+  @Override
+  public List<InsuranceCaseJakartaEntity> findActive() {
+    return springDataRepository.findActive();
+  }
+
+  @Override
+  public List<InsuranceCaseJakartaEntity> findClosed() {
+    return springDataRepository.findClosed();
+  }
+
+  @Override
+  public Long findCountActive() {
+    return springDataRepository.findCountActive();
+  }
+
+  @Override
+  public Long findCountClosed() {
+    return springDataRepository.findCountClosed();
+  }
 }

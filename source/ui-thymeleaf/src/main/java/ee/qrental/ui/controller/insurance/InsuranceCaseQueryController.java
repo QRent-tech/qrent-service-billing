@@ -1,7 +1,8 @@
 package ee.qrental.ui.controller.insurance;
 
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
-import lombok.AllArgsConstructor;
+import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.service.insurance.InsuranceCounterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,21 +12,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static ee.qrental.ui.controller.util.ControllerUtils.INSURANCE_ROOT_PATH;
 
 @Controller
-@RequestMapping(INSURANCE_ROOT_PATH)
-@AllArgsConstructor
-public class InsuranceCaseQueryController {
+@RequestMapping(INSURANCE_ROOT_PATH + "/cases")
+public class InsuranceCaseQueryController extends AbstractInsuranceQueryController {
 
   private final GetInsuranceCaseQuery insuranceCaseQuery;
 
-  @GetMapping("/cases")
-  public String getTableView(final Model model) {
-    model.addAttribute("insuranceCases", insuranceCaseQuery.getAll());
-    return "insuranceCases";
+  public InsuranceCaseQueryController(
+      final QDateFormatter qDateFormatter,
+      final InsuranceCounterService insuranceCounterService,
+      final GetInsuranceCaseQuery insuranceCaseQuery) {
+    super(qDateFormatter, insuranceCounterService);
+    this.insuranceCaseQuery = insuranceCaseQuery;
   }
 
-  @GetMapping("/cases/{id}/balances")
+  @GetMapping("/active")
+  public String getActiveCasesView(final Model model) {
+    model.addAttribute("insuranceCases", insuranceCaseQuery.getActive());
+    addInsuranceCounts(model);
+    addDateFormatter(model);
+
+    return "insuranceCasesActive";
+  }
+
+  @GetMapping("/closed")
+  public String geClosedCasesView(final Model model) {
+    model.addAttribute("insuranceCases", insuranceCaseQuery.getClosed());
+    addInsuranceCounts(model);
+    addDateFormatter(model);
+
+    return "insuranceCasesClosed";
+  }
+
+  @GetMapping("/{id}/balances")
   public String getInsuranceCaseBalancesTableView(@PathVariable("id") long id, final Model model) {
-    model.addAttribute("insuranceCaseBalances", insuranceCaseQuery.getInsuranceCaseBalancesByInsuranceCase(id));
+    model.addAttribute(
+        "insuranceCaseBalances", insuranceCaseQuery.getInsuranceCaseBalancesByInsuranceCase(id));
+    addDateFormatter(model);
+
     return "forms/viewInsuranceCaseBalances";
   }
 }

@@ -4,7 +4,7 @@ import static ee.qrental.ui.controller.util.ControllerUtils.DRIVER_ROOT_PATH;
 
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import ee.qrental.ui.service.DriverCounterService;
+import ee.qrental.ui.service.driver.DriverCounterService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ public class DriverQueryController extends AbstractDriverQueryController {
   @GetMapping
   public String getDriverView(final Model model) {
     model.addAttribute("drivers", driverQuery.getAll());
-    addCounts(model);
+    addDriverCounts(model);
     addDateFormatter(model);
 
     return "drivers";

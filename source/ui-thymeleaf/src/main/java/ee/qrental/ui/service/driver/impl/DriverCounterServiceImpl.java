@@ -1,9 +1,9 @@
-package ee.qrental.ui.service.impl;
+package ee.qrental.ui.service.driver.impl;
 
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
-import ee.qrental.ui.service.DriverCounterService;
-import ee.qrental.ui.service.DriverCountsResponse;
+import ee.qrental.ui.service.driver.DriverCounterService;
+import ee.qrental.ui.service.driver.DriverCountsResponse;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

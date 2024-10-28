@@ -9,7 +9,7 @@ import ee.qrental.contract.api.in.request.ContractSendByEmailRequest;
 import ee.qrental.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrental.contract.api.in.usecase.ContractSendByEmailUseCase;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import ee.qrental.ui.service.DriverCounterService;
+import ee.qrental.ui.service.driver.DriverCounterService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
