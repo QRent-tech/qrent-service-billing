@@ -31,18 +31,17 @@ public class QKaskoQueryService implements GetQKaskoQuery {
     final var qWeekEndDate = qWeek.getEnd();
 
     if (contractStartDate.isEqual(qWeekEndDate) || contractStartDate.isAfter(qWeekEndDate)) {
-      return false;
-    }
 
-    if (contractStartDate.isEqual(qWeekEndDate) || contractStartDate.isAfter(qWeekEndDate)) {
       return false;
     }
 
     if (contractEndDate != null && contractEndDate.isEqual(qWeekStartDate)) {
+
       return false;
     }
 
     if (contractEndDate != null && contractEndDate.isBefore(qWeekStartDate)) {
+
       return false;
     }
 

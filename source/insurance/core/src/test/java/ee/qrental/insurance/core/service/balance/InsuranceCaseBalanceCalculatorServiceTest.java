@@ -1,9 +1,9 @@
 package ee.qrental.insurance.core.service.balance;
 
-
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;
-import ee.qrental.insurance.core.service.kasko.QKaskoService;
+
 import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.insurance.domain.InsuranceCaseBalance;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
@@ -22,7 +22,7 @@ class InsuranceCaseBalanceCalculatorServiceTest {
   private InsuranceCaseBalanceCalculatorService instanceUnderTest;
 
   private InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort;
-  private QKaskoService qKaskoService;
+  private GetQKaskoQuery qKaskoQuery;
   private GetTransactionQuery transactionQuery;
   private GetTransactionTypeQuery transactionTypeQuery;
   private InsuranceCaseBalanceDeriveService deriveService;
@@ -32,7 +32,7 @@ class InsuranceCaseBalanceCalculatorServiceTest {
   @BeforeEach
   void setUp() {
     insuranceCaseBalanceLoadPort = mock(InsuranceCaseBalanceLoadPort.class);
-    qKaskoService = mock(QKaskoService.class);
+    qKaskoQuery = mock(GetQKaskoQuery.class);
     transactionQuery = mock(GetTransactionQuery.class);
     transactionTypeQuery = mock(GetTransactionTypeQuery.class);
     deriveService = mock(InsuranceCaseBalanceDeriveService.class);
@@ -41,7 +41,7 @@ class InsuranceCaseBalanceCalculatorServiceTest {
 
     instanceUnderTest =
         new InsuranceCaseBalanceCalculatorService(
-            qKaskoService,
+            qKaskoQuery,
             insuranceCaseBalanceLoadPort,
             transactionQuery,
             transactionTypeQuery,
