@@ -1,9 +1,10 @@
 <div th:fragment="contractPage">
     <nav th:replace="fragments/navigationFragment.html :: qrental-navigation"></nav>
-    <ul th:replace="fragments/driverTabFragment :: driverTabs('contracts')"></ul>
+    <ul th:replace="fragments/driverTabFragment :: driverTabs('contractsClosed')"></ul>
     <h2 class="py-3">Contracts</h2>
     <table class="table table-sm table-striped table-bordered align-middle">
         <tr>
+            <th style="width: 1% !important;">Delete</th>
             <th>Actions</th>
             <th>Active</th>
             <th>Number</th>
@@ -19,10 +20,15 @@
             <th>Created</th>
 
         </tr>
-        <tr th:if="${#lists.isEmpty(contracts)}">
-            <td colspan="9">No contracts</td>
+        <tr th:if="${#lists.isEmpty(contractsClosed)}">
+            <td colspan="9">No Closed Contracts</td>
         </tr>
-        <tr th:each="contract : ${contracts}">
+        <tr th:each="contract : ${contractsClosed}">
+            <td class="text-center">
+                <a class="btn btn-sm btn-danger"
+                   th:href="@{/contracts/delete-form/{id}(id=${contract.id})}">
+                    <span class="bi-trash"></span></a>
+            </td>
             <td>
                 <a class="btn btn-sm btn-info"
                    th:href="@{/contracts/pdf/{id}(id=${contract.id})}">

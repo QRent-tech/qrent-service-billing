@@ -29,13 +29,22 @@ public class ContractQueryController {
   private final QDateFormatter qDateFormatter;
   private final DriverCounterService driverCounterService;
 
-  @GetMapping
+  @GetMapping(value = "/active")
   public String getActiveContractView(final Model model) {
     model.addAttribute(MODEL_ATTRIBUTE_DATE_FORMATTER, qDateFormatter);
-    model.addAttribute("contractsActive", contractQuery.getAll());
+    model.addAttribute("contractsActive", contractQuery.getActive());
     populateLinksCounts(model);
 
-    return "contracts";
+    return "contractsActive";
+  }
+
+  @GetMapping(value = "/closed")
+  public String getClosedContractView(final Model model) {
+    model.addAttribute(MODEL_ATTRIBUTE_DATE_FORMATTER, qDateFormatter);
+    model.addAttribute("contractsClosed", contractQuery.getClosed());
+    populateLinksCounts(model);
+
+    return "contractsClosed";
   }
 
   @GetMapping("/pdf/{id}")
