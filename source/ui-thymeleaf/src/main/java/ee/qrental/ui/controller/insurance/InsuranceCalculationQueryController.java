@@ -1,6 +1,5 @@
 package ee.qrental.ui.controller.insurance;
 
-import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrental.ui.controller.util.ControllerUtils.INSURANCE_ROOT_PATH;
 
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
@@ -9,7 +8,7 @@ import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
-import lombok.AllArgsConstructor;
+import ee.qrental.ui.service.insurance.InsuranceCounterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,32 +17,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(INSURANCE_ROOT_PATH)
-@AllArgsConstructor
-public class InsuranceCalculationQueryController {
+public class InsuranceCalculationQueryController extends AbstractInsuranceQueryController {
 
   private final GetInsuranceCalculationQuery calculationQuery;
   private final GetTransactionQuery transactionQuery;
   private final GetQWeekQuery qWeekQuery;
   private final GetBalanceCalculationQuery balanceCalculationQuery;
   private final GetRentCalculationQuery rentCalculationQuery;
-  private final QDateFormatter qDateFormatter;
+
+  public InsuranceCalculationQueryController(
+      final QDateFormatter qDateFormatter,
+      final InsuranceCounterService insuranceCounterService,
+      final GetInsuranceCalculationQuery calculationQuery,
+      final GetTransactionQuery transactionQuery,
+      final GetQWeekQuery qWeekQuery,
+      final GetBalanceCalculationQuery balanceCalculationQuery,
+      final GetRentCalculationQuery rentCalculationQuery) {
+    super(qDateFormatter, insuranceCounterService);
+    this.calculationQuery = calculationQuery;
+    this.transactionQuery = transactionQuery;
+    this.qWeekQuery = qWeekQuery;
+    this.balanceCalculationQuery = balanceCalculationQuery;
+    this.rentCalculationQuery = rentCalculationQuery;
+  }
 
   @GetMapping("/calculations")
   public String getTableView(final Model model) {
-    model.addAttribute(MODEL_ATTRIBUTE_DATE_FORMATTER, qDateFormatter);
     addLatestDataToModel(model);
     model.addAttribute("calculations", calculationQuery.getAll());
+    addDateFormatter(model);
+    addInsuranceCounts(model);
+
     return "insuranceCalculations";
   }
 
   @GetMapping(value = "/calculations/{id}")
   public String getCalculationView(@PathVariable("id") long id, final Model model) {
-    model.addAttribute(MODEL_ATTRIBUTE_DATE_FORMATTER, qDateFormatter);
     final var calculation = calculationQuery.getById(id);
     final var transactions = transactionQuery.getAllByInsuranceCalculationId(id);
-
     model.addAttribute("calculation", calculation);
     model.addAttribute("transactions", transactions);
+    addDateFormatter(model);
 
     return "detailView/insuranceCalculation";
   }
