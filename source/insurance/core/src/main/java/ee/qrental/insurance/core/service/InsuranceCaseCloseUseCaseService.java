@@ -25,6 +25,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class InsuranceCaseCloseUseCaseService implements InsuranceCaseCloseUseCase {
 
+  private final BigDecimal SELF_RESPONSIBILITY = BigDecimal.valueOf(500L);
   private final InsuranceCaseUpdatePort updatePort;
   private final InsuranceCaseLoadPort loadPort;
   private final InsuranceCaseCloseBusinessRuleValidator closeRuleValidator;
@@ -101,7 +102,7 @@ public class InsuranceCaseCloseUseCaseService implements InsuranceCaseCloseUseCa
       final var damage =
           insuranceCase.getDamageAmount().divide(new BigDecimal(2), 2, BigDecimal.ROUND_HALF_UP);
 
-      return damage.add(BigDecimal.valueOf(500));
+      return damage.add(SELF_RESPONSIBILITY);
     }
 
     return insuranceCase.getDamageAmount();
