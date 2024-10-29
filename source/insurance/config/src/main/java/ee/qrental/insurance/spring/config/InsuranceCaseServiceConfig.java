@@ -15,7 +15,7 @@ import ee.qrental.insurance.core.service.*;
 import ee.qrental.insurance.core.service.balance.*;
 import ee.qrental.insurance.core.service.kasko.QKaskoQueryService;
 import ee.qrental.insurance.core.validator.InsuranceCalculationAddBusinessRuleValidator;
-import ee.qrental.insurance.core.validator.InsuranceCaseAddBusinessRuleValidator;
+import ee.qrental.insurance.core.validator.InsuranceCaseUpdateBusinessRuleValidator;
 import ee.qrental.insurance.core.validator.InsuranceCaseCloseBusinessRuleValidator;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
@@ -90,18 +90,12 @@ public class InsuranceCaseServiceConfig {
   InsuranceCaseUseCaseService getInsuranceCaseUseCaseService(
       final InsuranceCaseAddPort addPort,
       final InsuranceCaseUpdatePort updatePort,
-      final InsuranceCaseLoadPort loadPort,
       final InsuranceCaseAddRequestMapper addRequestMapper,
       final InsuranceCaseUpdateRequestMapper updateRequestMapper,
-      final InsuranceCaseAddBusinessRuleValidator businessRuleValidator) {
+      final InsuranceCaseUpdateBusinessRuleValidator updateBusinessRuleValidator) {
 
     return new InsuranceCaseUseCaseService(
-        addPort,
-        updatePort,
-        loadPort,
-        addRequestMapper,
-        updateRequestMapper,
-        businessRuleValidator);
+        addPort, updatePort, addRequestMapper, updateRequestMapper, updateBusinessRuleValidator);
   }
 
   @Bean

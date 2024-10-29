@@ -1,5 +1,9 @@
 <ul th:fragment="settingsTab(activeTab)" class="nav nav-tabs">
   <li class="nav-item">
+    <a class="nav-link" th:classappend="${activeTab == 'qWeeks'} ? active : ''"
+       href="/weeks">Weeks</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" th:classappend="${activeTab == 'firms'} ? active : ''"
        href="/firms">Firms</a>
   </li>
@@ -14,9 +18,5 @@
   <li class="nav-item">
     <a class="nav-link" th:classappend="${activeTab == 'constants'} ? active : ''"
        href="/constants">Constants</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" th:classappend="${activeTab == 'qWeeks'} ? active : ''"
-       href="/weeks">Weeks</a>
   </li>
 </ul>

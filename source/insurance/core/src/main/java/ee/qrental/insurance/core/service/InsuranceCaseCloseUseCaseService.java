@@ -80,7 +80,7 @@ public class InsuranceCaseCloseUseCaseService implements InsuranceCaseCloseUseCa
       final InsuranceCasePreCloseResponse preCloseResponse) {
     final var transaction = new TransactionAddRequest();
     transaction.setAmount(preCloseResponse.getPaymentAmount());
-    transaction.setDriverId(preCloseResponse.getInsuranceCaseId());
+    transaction.setDriverId(preCloseResponse.getDriverId());
     transaction.setDate(qDateTime.getToday());
     final var transactionTypeNameForDamage = "damage payment";
     transaction.setTransactionTypeId(getTransactionTypeIdByName(transactionTypeNameForDamage));
