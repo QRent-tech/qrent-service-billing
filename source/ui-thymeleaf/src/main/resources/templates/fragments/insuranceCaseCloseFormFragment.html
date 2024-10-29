@@ -1,0 +1,60 @@
+<div th:fragment="assembledForm">
+    <div th:replace="fragments/commonFormFragment.html :: commonForm(
+            title='Close an Insurance Case',
+            content=~{fragments/insuranceCaseCloseFormFragment.html :: closeForm},
+            request=${closeRequest}
+        )">
+    </div>
+</div>
+<div th:fragment="closeForm">
+    <form method="post"
+          th:action="@{/insurance/cases/close}"
+          th:object="${closeRequest}">
+        <input id="insuranceCaseId" required
+               th:field="*{id}"
+               type="text"
+               hidden/>
+        <div class="row mb-3">
+            <div class="col">Driver:</div>
+            <div class="col">
+                <span th:text=${preCloseResponse.driverInfo}>???</span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">Original damage, EUR:</div>
+            <div class="col">
+                <span th:text=${preCloseResponse.originalAmount}>???</span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">With Q-Kasko:</div>
+            <div class="col">
+                <span th:if="${preCloseResponse.withQKasko}">Yes</span>
+                <span th:unless="${preCloseResponse.withQKasko}">No</span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">Payment considering Q-Kasko, EUR:</div>
+            <div class="col">
+                <span th:text=${preCloseResponse.paymentAmount}>???</span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">Already paid damage, EUR:</div>
+            <div class="col">
+                <span th:text=${preCloseResponse.paidAmount}>???</span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">To be paid, EUR:</div>
+            <div class="col">
+                <span th:text=${preCloseResponse.paymentAmount}>???</span>
+            </div>
+        </div>
+
+        <div th:replace="fragments/addUpdateFormButtonsFragment.html :: addUpdateButtons(
+            submitValue='Close'
+        )">
+        </div>
+    </form>
+</div>

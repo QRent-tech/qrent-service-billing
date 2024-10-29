@@ -12,7 +12,6 @@ import ee.qrental.insurance.core.mapper.InsuranceCalculationResponseMapper;
 import java.util.List;
 
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
-import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -21,7 +20,6 @@ public class InsuranceCalculationQueryService implements GetInsuranceCalculation
   private final InsuranceCalculationLoadPort calculationLoadPort;
   private final InsuranceCalculationResponseMapper responseMapper;
   private final GetQWeekQuery qWeekQuery;
-  private final GetRentCalculationQuery rentCalculationQuery;
   private final GetBalanceQuery balanceQuery;
 
   @Override

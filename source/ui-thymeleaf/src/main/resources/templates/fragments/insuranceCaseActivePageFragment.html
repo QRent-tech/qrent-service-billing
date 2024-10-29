@@ -12,6 +12,7 @@
                     <span class="bi-plus-circle"></span>
                 </a>
             </th>
+            <th style="width: 1% !important;">Close</th>
             <th style="width: 1% !important;">Balance History</th>
             <th style="width: 1% !important;">Portal</th>
             <th>Driver</th>
@@ -26,8 +27,13 @@
         </tr>
         <tr th:each="insuranceCase : ${insuranceCases}">
             <td class="text-center">
+                <a class="btn btn-sm btn-warning"
+                   th:href="@{/insurance/cases/update-form/{id}(id=${insuranceCase.id})}">
+                    <span class="bi-pencil-square"></span></a>
+            </td>
+            <td class="text-center">
                 <a class="btn btn-sm btn-danger"
-                   th:href="@{/insurance/cases/close-form/{id}/driver/{driverId}(id=${insuranceCase.id})}">
+                   th:href="@{/insurance/cases/close-form/{id}(id=${insuranceCase.id})}">
                     <span class="bi bi-x-circle"></span>
                 </a>
             </td>

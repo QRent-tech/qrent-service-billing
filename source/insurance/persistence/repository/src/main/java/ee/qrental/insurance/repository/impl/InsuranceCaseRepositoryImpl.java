@@ -38,11 +38,6 @@ public class InsuranceCaseRepositoryImpl implements InsuranceCaseRepository {
   }
 
   @Override
-  public void deleteById(final Long id) {
-    springDataRepository.deleteById(id);
-  }
-
-  @Override
   public List<InsuranceCaseJakartaEntity> findActive() {
     return springDataRepository.findActive();
   }

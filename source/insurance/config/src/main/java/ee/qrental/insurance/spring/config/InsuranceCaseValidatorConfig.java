@@ -5,6 +5,7 @@ import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrental.insurance.core.validator.InsuranceCalculationAddBusinessRuleValidator;
 import ee.qrental.insurance.core.validator.InsuranceCaseAddBusinessRuleValidator;
+import ee.qrental.insurance.core.validator.InsuranceCaseCloseBusinessRuleValidator;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,12 @@ public class InsuranceCaseValidatorConfig {
   InsuranceCaseAddBusinessRuleValidator getInsuranceCaseBusinessRuleValidator(
       final InsuranceCaseLoadPort insuranceCaseLoadPort, final QDateTime qDateTime) {
     return new InsuranceCaseAddBusinessRuleValidator(insuranceCaseLoadPort, qDateTime);
+  }
+
+  @Bean
+  InsuranceCaseCloseBusinessRuleValidator getInsuranceCaseCloseBusinessRuleValidator(
+      final InsuranceCaseLoadPort loadPort) {
+    return new InsuranceCaseCloseBusinessRuleValidator(loadPort);
   }
 
   @Bean

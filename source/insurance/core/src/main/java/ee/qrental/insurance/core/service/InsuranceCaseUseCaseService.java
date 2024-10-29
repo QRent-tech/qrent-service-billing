@@ -3,15 +3,12 @@ package ee.qrental.insurance.core.service;
 import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 
 import ee.qrental.insurance.api.in.request.InsuranceCaseAddRequest;
-import ee.qrental.insurance.api.in.request.InsuranceCaseDeleteRequest;
+
 import ee.qrental.insurance.api.in.request.InsuranceCaseUpdateRequest;
 import ee.qrental.insurance.api.in.usecase.InsuranceCaseAddUseCase;
-import ee.qrental.insurance.api.in.usecase.InsuranceCaseDeleteUseCase;
+
 import ee.qrental.insurance.api.in.usecase.InsuranceCaseUpdateUseCase;
-import ee.qrental.insurance.api.out.InsuranceCaseAddPort;
-import ee.qrental.insurance.api.out.InsuranceCaseDeletePort;
-import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
-import ee.qrental.insurance.api.out.InsuranceCaseUpdatePort;
+import ee.qrental.insurance.api.out.*;
 import ee.qrental.insurance.core.mapper.InsuranceCaseAddRequestMapper;
 import ee.qrental.insurance.core.mapper.InsuranceCaseUpdateRequestMapper;
 import ee.qrental.insurance.core.validator.InsuranceCaseAddBusinessRuleValidator;
@@ -21,11 +18,10 @@ import lombok.AllArgsConstructor;
 @Transactional(SUPPORTS)
 @AllArgsConstructor
 public class InsuranceCaseUseCaseService
-    implements InsuranceCaseAddUseCase, InsuranceCaseUpdateUseCase, InsuranceCaseDeleteUseCase {
+    implements InsuranceCaseAddUseCase, InsuranceCaseUpdateUseCase {
 
   private final InsuranceCaseAddPort addPort;
   private final InsuranceCaseUpdatePort updatePort;
-  private final InsuranceCaseDeletePort deletePort;
   private final InsuranceCaseLoadPort loadPort;
   private final InsuranceCaseAddRequestMapper addRequestMapper;
   private final InsuranceCaseUpdateRequestMapper updateRequestMapper;
@@ -48,12 +44,6 @@ public class InsuranceCaseUseCaseService
   public void update(final InsuranceCaseUpdateRequest request) {
     checkExistence(request.getId());
     updatePort.update(updateRequestMapper.toDomain(request));
-  }
-
-  @Transactional
-  @Override
-  public void delete(final InsuranceCaseDeleteRequest request) {
-    deletePort.delete(request.getId());
   }
 
   private void checkExistence(final Long id) {
