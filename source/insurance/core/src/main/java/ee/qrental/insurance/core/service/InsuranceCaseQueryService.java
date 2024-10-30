@@ -35,18 +35,23 @@ public class InsuranceCaseQueryService implements GetInsuranceCaseQuery {
   }
 
   @Override
-  public String getObjectInfo(Long id) {
+  public String getObjectInfo(final Long id) {
     return responseMapper.toObjectInfo(loadPort.loadById(id));
   }
 
   @Override
-  public InsuranceCaseUpdateRequest getUpdateRequestById(Long id) {
+  public InsuranceCaseUpdateRequest getUpdateRequestById(final Long id) {
     return updateRequestMapper.toRequest(loadPort.loadById(id));
   }
 
   @Override
   public List<InsuranceCaseResponse> getActive() {
     return loadPort.loadAllActive().stream().map(responseMapper::toResponse).collect(toList());
+  }
+
+  @Override
+  public List<InsuranceCaseResponse> getActiveByDriverId(final Long driverId) {
+    return loadPort.loadAllActiveByDriverId(driverId).stream().map(responseMapper::toResponse).collect(toList());
   }
 
   @Override
@@ -69,6 +74,6 @@ public class InsuranceCaseQueryService implements GetInsuranceCaseQuery {
       final Long insuranceCaseId) {
     return insuranceCaseBalanceLoadPort.loadAllByInsuranceCseId(insuranceCaseId).stream()
         .map(domain -> insuranceCaseBalanceResponseMapper.toResponse(domain))
-        .collect(toList());
+        .toList();
   }
 }

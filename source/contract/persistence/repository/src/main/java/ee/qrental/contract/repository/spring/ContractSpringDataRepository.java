@@ -39,14 +39,14 @@ public interface ContractSpringDataRepository extends JpaRepository<ContractJaka
     @Query(
             value =
                     "SELECT ct.* FROM contract ct "
-                            + "where ct.date_end is not null and ct.date_end < :date",
+                            + "where ct.date_end is not null and ct.date_end <= :date",
             nativeQuery = true)
     List<ContractJakartaEntity> findClosedByDate(@Param("date") final LocalDate date);
 
     @Query(
             value =
                     "SELECT count(*) FROM contract ct "
-                            + "where ct.date_end is not null and ct.date_end < :date",
+                            + "where ct.date_end is not null and ct.date_end <= :date",
             nativeQuery = true)
     Long findCountClosedByDate(@Param("date") final LocalDate date);
 }

@@ -56,4 +56,9 @@ public class InsuranceCaseRepositoryImpl implements InsuranceCaseRepository {
   public Long findCountClosed() {
     return springDataRepository.findCountClosed();
   }
+
+  @Override
+  public List<InsuranceCaseJakartaEntity> findActiveByDriverId(final Long driverId) {
+    return springDataRepository.findActiveByDriverId(driverId);
+  }
 }

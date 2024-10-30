@@ -22,4 +22,6 @@ public interface InsuranceCaseRepository {
   Long findCountActive();
 
   Long findCountClosed();
+
+  List<InsuranceCaseJakartaEntity> findActiveByDriverId(final Long driverId);
 }

@@ -2,6 +2,7 @@ package ee.qrental.insurance.core.service;
 
 import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 import static java.lang.String.format;
+import static java.math.BigDecimal.ROUND_HALF_UP;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
@@ -19,6 +20,8 @@ import ee.qrental.transaction.api.in.response.TransactionResponse;
 import ee.qrental.transaction.api.in.usecase.TransactionAddUseCase;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 
 @Transactional(SUPPORTS)
@@ -60,6 +63,12 @@ public class InsuranceCaseCloseUseCaseService implements InsuranceCaseCloseUseCa
   }
 
   @Override
+  public List<InsuranceCasePreCloseResponse> getPreCloseResponses(
+      final List<Long> insuranceCaseIds) {
+    return insuranceCaseIds.stream().map(this::getPreCloseResponse).toList();
+  }
+
+  @Override
   public void close(final InsuranceCaseCloseRequest request) {
     final var violationsCollector = closeRuleValidator.validate(request);
     if (violationsCollector.hasViolations()) {
@@ -98,14 +107,17 @@ public class InsuranceCaseCloseUseCaseService implements InsuranceCaseCloseUseCa
 
   private BigDecimal getAmountToPayAdjustedByQKasko(
       final InsuranceCase insuranceCase, final boolean withQKasko) {
-    if (withQKasko) {
-      final var damage =
-          insuranceCase.getDamageAmount().divide(new BigDecimal(2), 2, BigDecimal.ROUND_HALF_UP);
-
-      return damage.add(SELF_RESPONSIBILITY);
+    final var damage = insuranceCase.getDamageAmount();
+    if (damage.compareTo(SELF_RESPONSIBILITY) <= 0) {
+      return damage;
     }
 
-    return insuranceCase.getDamageAmount();
+    if (!withQKasko) {
+      return damage;
+    }
+
+    final var damageWithoutSelfResponsibility = damage.subtract(SELF_RESPONSIBILITY);
+    return damageWithoutSelfResponsibility.divide(new BigDecimal(2), 2, ROUND_HALF_UP);
   }
 
   private Long getTransactionTypeIdByName(final String transactionTypeName) {

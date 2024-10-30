@@ -1,7 +1,5 @@
 package ee.qrental.insurance.adapter.adapter;
 
-import static java.util.stream.Collectors.toList;
-
 import ee.qrental.insurance.adapter.mapper.InsuranceCaseAdapterMapper;
 import ee.qrental.insurance.adapter.repository.InsuranceCaseRepository;
 import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
@@ -17,7 +15,7 @@ public class InsuranceCaseLoadAdapter implements InsuranceCaseLoadPort {
 
   @Override
   public List<InsuranceCase> loadAll() {
-    return repository.findAll().stream().map(mapper::mapToDomain).collect(toList());
+    return repository.findAll().stream().map(mapper::mapToDomain).toList();
   }
 
   @Override
@@ -30,24 +28,22 @@ public class InsuranceCaseLoadAdapter implements InsuranceCaseLoadPort {
       final Long driverId, final Long qWeekId) {
     return repository.findActiveByDriverIdAndQWeekId(driverId, qWeekId).stream()
         .map(mapper::mapToDomain)
-        .collect(toList());
+        .toList();
   }
 
   @Override
   public List<InsuranceCase> loadActiveByQWeekId(final Long qWeekId) {
-    return repository.findActiveByQWeekId(qWeekId).stream()
-        .map(mapper::mapToDomain)
-        .collect(toList());
+    return repository.findActiveByQWeekId(qWeekId).stream().map(mapper::mapToDomain).toList();
   }
 
   @Override
   public List<InsuranceCase> loadAllActive() {
-    return repository.findActive().stream().map(mapper::mapToDomain).collect(toList());
+    return repository.findActive().stream().map(mapper::mapToDomain).toList();
   }
 
   @Override
   public List<InsuranceCase> loadAlClosed() {
-    return repository.findClosed().stream().map(mapper::mapToDomain).collect(toList());
+    return repository.findClosed().stream().map(mapper::mapToDomain).toList();
   }
 
   @Override
@@ -58,5 +54,10 @@ public class InsuranceCaseLoadAdapter implements InsuranceCaseLoadPort {
   @Override
   public Long loadCountClosed() {
     return repository.findCountClosed();
+  }
+
+  @Override
+  public List<InsuranceCase> loadAllActiveByDriverId(final Long driverId) {
+    return repository.findActiveByDriverId(driverId).stream().map(mapper::mapToDomain).toList();
   }
 }

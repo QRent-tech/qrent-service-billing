@@ -12,6 +12,8 @@ public interface GetInsuranceCaseQuery
 
   List<InsuranceCaseResponse> getActive();
 
+  List<InsuranceCaseResponse> getActiveByDriverId(final Long driverId);
+
   List<InsuranceCaseResponse> getClosed();
 
   Long getCountActive();

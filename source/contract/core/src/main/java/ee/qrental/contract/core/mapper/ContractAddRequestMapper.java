@@ -1,6 +1,7 @@
 package ee.qrental.contract.core.mapper;
 
 import ee.qrent.common.in.mapper.AddRequestMapper;
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
 import ee.qrental.contract.domain.Contract;
 import ee.qrental.contract.domain.ContractDuration;
@@ -20,6 +21,7 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
 
   private final GetDriverQuery driverQuery;
   private final GetFirmQuery firmQuery;
+  private final QDateTime qDateTime;
 
   @Override
   public Contract toDomain(final ContractAddRequest request) {
@@ -56,7 +58,9 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
         .qFirmEmail(qFirm.getEmail())
         .qFirmCeo(qFirm.getCeoName())
         .qFirmCeoDeputies(qFirm.getDeputies())
-        .created(request.getDate())
+        .created(qDateTime.getToday())
+        .dateStart(request.getDateStart())
+        .dateEnd(null)
         .qFirmVatNumber(qFirm.getVatNumber())
         .qFirmIban(qFirm.getIban())
         .qFirmVatPhone(qFirm.getPhone())
@@ -85,24 +89,24 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
 
   private Long getCompanyCeoTaxNumber(final DriverResponse driver) {
     final var companyCeoTaxNumber = driver.getCompanyCeoTaxNumber();
-    if (companyCeoTaxNumber == null ) {
+    if (companyCeoTaxNumber == null) {
       final var esindajaIsikukood = driver.getIsikukood();
-      return  esindajaIsikukood;
+      return esindajaIsikukood;
     }
     return companyCeoTaxNumber;
   }
 
-
   private String getRenterCeoName(final DriverResponse driver) {
     final var driverCompanyCeoName = driver.getCompanyCeoName();
-    if (driverCompanyCeoName == null || driverCompanyCeoName.isEmpty() || driverCompanyCeoName.equals(" ") ) {
+    if (driverCompanyCeoName == null
+        || driverCompanyCeoName.isEmpty()
+        || driverCompanyCeoName.equals(" ")) {
       final var renterCeoFirstName = driver.getFirstName();
       final var renterCeoLastName = driver.getLastName();
       return format("%s %s", renterCeoFirstName, renterCeoLastName);
     }
     return driverCompanyCeoName;
   }
-
 
   private String getContractNumber(final LocalDate currentDate, final Long driverId) {
     final var dateString = currentDate.format(ofPattern("yyyyMMdd"));
@@ -126,10 +130,6 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
     }
     return renterAddress;
   }
-
-
-
-
 
   private String getDriverAddress(final DriverResponse driver) {
     final var driverAddress = driver.getAddress();

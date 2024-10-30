@@ -14,17 +14,20 @@ import org.springframework.context.annotation.Configuration;
 public class ContractMapperConfig {
   @Bean
   ContractAddRequestMapper getContractAddRequestMapper(
-      final GetDriverQuery driverQuery, final GetFirmQuery firmQuery) {
-    return new ContractAddRequestMapper(driverQuery, firmQuery);
+      final GetDriverQuery driverQuery, final GetFirmQuery firmQuery, final QDateTime qDateTime) {
+
+    return new ContractAddRequestMapper(driverQuery, firmQuery, qDateTime);
   }
 
   @Bean
   ContractResponseMapper getContractResponseMapper(final QDateTime qDateTime) {
+
     return new ContractResponseMapper(qDateTime);
   }
 
   @Bean
   ContractUpdateRequestMapper getContractUpdateRequestMapper(final ContractLoadPort loadPort) {
+
     return new ContractUpdateRequestMapper(loadPort);
   }
 }

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class ContractAddRequest extends AbstractAddRequest {
-  private LocalDate date = LocalDate.now();
+  private LocalDate dateStart;
   private Long driverId;
   private Long qFirmId;
   private String contractDuration;

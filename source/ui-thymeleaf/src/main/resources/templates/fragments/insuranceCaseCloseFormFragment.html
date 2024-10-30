@@ -14,44 +14,37 @@
                th:field="*{id}"
                type="text"
                hidden/>
-        <div class="row mb-3">
-            <div class="col">Driver:</div>
-            <div class="col">
-                <span th:text=${preCloseResponse.driverInfo}>???</span>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">Original damage, EUR:</div>
-            <div class="col">
-                <span th:text=${preCloseResponse.originalAmount}>???</span>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">With Q-Kasko:</div>
-            <div class="col">
-                <span th:if="${preCloseResponse.withQKasko}">Yes</span>
-                <span th:unless="${preCloseResponse.withQKasko}">No</span>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">Payment considering Q-Kasko, EUR:</div>
-            <div class="col">
-                <span th:text=${preCloseResponse.paymentAmount}>???</span>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">Already paid damage, EUR:</div>
-            <div class="col">
-                <span th:text=${preCloseResponse.paidAmount}>???</span>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">To be paid, EUR:</div>
-            <div class="col">
-                <span th:text=${preCloseResponse.paymentAmount}>???</span>
-            </div>
-        </div>
 
+        <p class="fs-5">Insurance Case detailed data:</p>
+        <table class="table table-sm">
+            <tbody>
+            <tr>
+                <td>Responsible Driver:</td>
+                <td th:text="${preCloseResponse.driverInfo}">???</td>
+            </tr>
+            <tr>
+                <td>Original damage, EUR:</td>
+                <td th:text="${preCloseResponse.originalAmount}">???</td>
+            </tr>
+            <tr>
+                <td>With Q-Kasko:</td>
+                <td th:if="${preCloseResponse.withQKasko}">Yes</td>
+                <td th:unless="${preCloseResponse.withQKasko}">No</td>
+            </tr>
+            <tr>
+                <td>Damage after Q-Kasko deduction:</td>
+                <td th:text="${preCloseResponse.paymentAmount}">???</td>
+            </tr>
+            <tr>
+                <td>Paid Damage, EUR:</td>
+                <td th:text="${preCloseResponse.paidAmount}">???</td>
+            </tr>
+            <tr>
+                <td>To be paid, EUR:</td>
+                <td th:text="${preCloseResponse.paymentAmount}">???</td>
+            </tr>
+            </tbody>
+        </table>
         <div th:replace="fragments/addUpdateFormButtonsFragment.html :: addUpdateButtons(
             submitValue='Close'
         )">

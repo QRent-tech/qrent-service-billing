@@ -3,13 +3,10 @@ package ee.qrental.contract.core.service;
 import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 
 import ee.qrental.contract.api.in.request.ContractAddRequest;
-import ee.qrental.contract.api.in.request.ContractDeleteRequest;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.usecase.ContractAddUseCase;
-import ee.qrental.contract.api.in.usecase.ContractDeleteUseCase;
 import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.contract.api.out.ContractAddPort;
-import ee.qrental.contract.api.out.ContractDeletePort;
 import ee.qrental.contract.api.out.ContractLoadPort;
 import ee.qrental.contract.api.out.ContractUpdatePort;
 import ee.qrental.contract.core.mapper.ContractAddRequestMapper;
@@ -20,12 +17,10 @@ import lombok.AllArgsConstructor;
 
 @Transactional(SUPPORTS)
 @AllArgsConstructor
-public class ContractUseCaseService
-    implements ContractAddUseCase, ContractUpdateUseCase, ContractDeleteUseCase {
+public class ContractUseCaseService implements ContractAddUseCase, ContractUpdateUseCase {
 
   private final ContractAddPort addPort;
   private final ContractUpdatePort updatePort;
-  private final ContractDeletePort deletePort;
   private final ContractLoadPort loadPort;
   private final ContractAddRequestMapper addRequestMapper;
   private final ContractUpdateRequestMapper updateRequestMapper;
@@ -45,17 +40,10 @@ public class ContractUseCaseService
     return savedContract.getId();
   }
 
-
   @Override
   public void update(final ContractUpdateRequest request) {
     checkExistence(request.getId());
     updatePort.update(updateRequestMapper.toDomain(request));
-  }
-
-  @Transactional
-  @Override
-  public void delete(final ContractDeleteRequest request) {
-    deletePort.delete(request.getId());
   }
 
   private void checkExistence(final Long id) {

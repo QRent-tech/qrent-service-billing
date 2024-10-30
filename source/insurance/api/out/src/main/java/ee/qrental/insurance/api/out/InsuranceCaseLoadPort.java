@@ -17,4 +17,6 @@ public interface InsuranceCaseLoadPort extends LoadPort<InsuranceCase> {
   Long loadCountActive();
 
   Long loadCountClosed();
+
+  List<InsuranceCase> loadAllActiveByDriverId(final Long driverId);
 }

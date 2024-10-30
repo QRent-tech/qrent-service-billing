@@ -1,16 +1,15 @@
 package ee.qrental.ui.controller.driver;
 
 import static ee.qrental.ui.controller.util.ControllerUtils.CONTRACT_ROOT_PATH;
-
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
-import ee.qrental.contract.api.in.request.ContractDeleteRequest;
+import ee.qrental.contract.api.in.request.ContractCloseRequest;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
+import ee.qrental.contract.api.in.response.ContractPreCloseResponse;
 import ee.qrental.contract.api.in.usecase.ContractAddUseCase;
-import ee.qrental.contract.api.in.usecase.ContractDeleteUseCase;
+import ee.qrental.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
-import ee.qrental.driver.api.in.request.DriverDeleteRequest;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,7 @@ public class ContractUseCaseController {
 
   private final ContractAddUseCase addUseCase;
   private final ContractUpdateUseCase updateUseCase;
-  private final ContractDeleteUseCase deleteUseCase;
+  private final ContractCloseUseCase closeUseCase;
   private final GetContractQuery contractQuery;
   private final GetDriverQuery driverQuery;
   private final GetFirmQuery firmQuery;
@@ -54,7 +53,7 @@ public class ContractUseCaseController {
       return "forms/addContract";
     }
 
-    return "redirect:" + CONTRACT_ROOT_PATH;
+    return "redirect:" + CONTRACT_ROOT_PATH + "/active";
   }
 
   @GetMapping(value = "/update-form/{id}")
@@ -70,22 +69,48 @@ public class ContractUseCaseController {
 
       return "forms/updateContract";
     }
-    return "redirect:" + CONTRACT_ROOT_PATH;
+    return "redirect:" + CONTRACT_ROOT_PATH + "/active";
   }
 
-  @GetMapping(value = "/delete-form/{id}")
-  public String deleteForm(@PathVariable("id") long id, final Model model) {
-    model.addAttribute("deleteRequest", new DriverDeleteRequest(id));
-    model.addAttribute("objectInfo", driverQuery.getObjectInfo(id));
+  @GetMapping(value = "/close-form/{id}")
+  public String closeForm(@PathVariable("id") long id, final Model model) {
+    final var preCloseResponse = closeUseCase.getPreCloseResponse(id);
+    addPreCloseResponseToModel(model, preCloseResponse);
+    final var closeRequest = getCloseRequest(id);
+    addCloseRequestToModel(model, closeRequest);
 
-    return "forms/deleteDriver";
+    return "forms/closeContract";
   }
 
-  @PostMapping("/delete")
-  public String deleteDriver(final ContractDeleteRequest deleteRequest) {
-    deleteUseCase.delete(deleteRequest);
+  @PostMapping("/close")
+  public String close(final ContractCloseRequest closeRequest, final Model model) {
+    closeUseCase.close(closeRequest);
+    if (closeRequest.hasViolations()) {
+      addCloseRequestToModel(model, closeRequest);
+      final var preCloseResponse = closeUseCase.getPreCloseResponse(closeRequest.getId());
+      addPreCloseResponseToModel(model, preCloseResponse);
 
-    return "redirect:" + CONTRACT_ROOT_PATH;
+      return "forms/closeContract";
+    }
+
+    return "redirect:" + CONTRACT_ROOT_PATH + "/closed";
+  }
+
+  private static void addCloseRequestToModel(
+      final Model model, final ContractCloseRequest closeRequest) {
+    model.addAttribute("closeRequest", closeRequest);
+  }
+
+  private static void addPreCloseResponseToModel(
+      final Model model, final ContractPreCloseResponse preCloseResponse) {
+    model.addAttribute("preCloseResponse", preCloseResponse);
+  }
+
+  private ContractCloseRequest getCloseRequest(final Long id) {
+    final var closeRequest = new ContractCloseRequest();
+    closeRequest.setId(id);
+
+    return closeRequest;
   }
 
   private void addAddRequestToModel(Model model, final Long driverId, final Long qFirmId) {

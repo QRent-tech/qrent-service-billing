@@ -49,4 +49,10 @@ public interface InsuranceCaseSpringDataRepository
       value = "SELECT count(*) FROM insurance_case ic where ic.active is false",
       nativeQuery = true)
   Long findCountClosed();
+
+  @Query(
+      value =
+          "SELECT * FROM insurance_case ic where ic.active is true and ic.driver_id = :driverId",
+      nativeQuery = true)
+  List<InsuranceCaseJakartaEntity> findActiveByDriverId(final @Param("driverId") Long driverId);
 }
