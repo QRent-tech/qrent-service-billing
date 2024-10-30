@@ -42,14 +42,6 @@ public class ContractUseCaseController {
     return "forms/addContract";
   }
 
-  private void addAddRequestToModel(Model model, final Long driverId, final Long qFirmId) {
-    final var addRequest = new ContractAddRequest();
-    addRequest.setDriverId(driverId);
-    addRequest.setQFirmId(qFirmId);
-
-    model.addAttribute("addRequest", addRequest);
-  }
-
   @PostMapping(value = "/add")
   public String addDriver(@ModelAttribute final ContractAddRequest addRequest, final Model model) {
     addUseCase.add(addRequest);
@@ -68,21 +60,6 @@ public class ContractUseCaseController {
   @GetMapping(value = "/update-form/{id}")
   public String updateForm(@PathVariable("id") long id, final Model model) {
     return "forms/updateDriver";
-  }
-
-  private void addQFirmInfoToModel(final Model model, final Long qFirmId) {
-    final var qFirm = firmQuery.getById(qFirmId);
-
-    model.addAttribute("qFirm", qFirm);
-  }
-
-  private void addDriverInfoToModel(final Model model, final Long driverId) {
-    final var driver = driverQuery.getById(driverId);
-    model.addAttribute("driver", driver);
-  }
-
-  private void addContractDurationsToModel(final Model model) {
-    model.addAttribute("contractDurations", contractQuery.getAllDurations());
   }
 
   @PostMapping("/update")
@@ -109,5 +86,28 @@ public class ContractUseCaseController {
     deleteUseCase.delete(deleteRequest);
 
     return "redirect:" + CONTRACT_ROOT_PATH;
+  }
+
+  private void addAddRequestToModel(Model model, final Long driverId, final Long qFirmId) {
+    final var addRequest = new ContractAddRequest();
+    addRequest.setDriverId(driverId);
+    addRequest.setQFirmId(qFirmId);
+
+    model.addAttribute("addRequest", addRequest);
+  }
+
+  private void addQFirmInfoToModel(final Model model, final Long qFirmId) {
+    final var qFirm = firmQuery.getById(qFirmId);
+
+    model.addAttribute("qFirm", qFirm);
+  }
+
+  private void addDriverInfoToModel(final Model model, final Long driverId) {
+    final var driver = driverQuery.getById(driverId);
+    model.addAttribute("driver", driver);
+  }
+
+  private void addContractDurationsToModel(final Model model) {
+    model.addAttribute("contractDurations", contractQuery.getAllDurations());
   }
 }
