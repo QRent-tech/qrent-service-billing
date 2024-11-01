@@ -42,8 +42,9 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
       final InsuranceCase insuranceCase, final QWeekResponse requestedQWeek) {
     final var driverId = insuranceCase.getDriverId();
     final var requestedQWeekId = requestedQWeek.getId();
-    final var requestedWeekBalance = getInsuranceCaseBalance(insuranceCase, requestedQWeekId);
     final var hasQKasko = qKaskoQuery.hasQKasko(driverId, requestedQWeekId);
+    final var requestedWeekBalance =
+        getInsuranceCaseBalance(insuranceCase, requestedQWeekId, hasQKasko);
     final var damageTransaction =
         getDamageTransaction(driverId, requestedQWeek, requestedWeekBalance, hasQKasko);
     final var selfResponsibilityTransaction =
@@ -105,12 +106,13 @@ public class InsuranceCaseBalanceCalculatorService implements InsuranceCaseBalan
   }
 
   private InsuranceCaseBalance getInsuranceCaseBalance(
-      final InsuranceCase insuranceCase, final Long qWeekId) {
+      final InsuranceCase insuranceCase, final Long qWeekId, final Boolean withQKasko) {
     final var result =
         InsuranceCaseBalance.builder()
             .insuranceCase(insuranceCase)
             .transactionIds(new ArrayList<>())
             .qWeekId(qWeekId)
+            .withQKasko(withQKasko)
             .build();
 
     final var previousWeekId = getPreviousWeekId(qWeekId);
