@@ -89,9 +89,9 @@
                             </a>
                         </td>
                         <td>
-                            <a th:if="${activeContractId != null}" class="btn btn-sm btn-outline-info disabled"
-                               th:href="@{/contracts/pdf/{id}(id=${activeContractId})}">
-                                <span class="bi-file-earmark-pdf"></span>
+                            <a th:if="${activeContractId != null}" class="btn btn-sm btn-danger"
+                               th:href="@{/contracts/close-form/{id}(id=${activeContractId})}">
+                                <span class="bi bi-x-circle"></span>
                             </a>
                         </td>
 

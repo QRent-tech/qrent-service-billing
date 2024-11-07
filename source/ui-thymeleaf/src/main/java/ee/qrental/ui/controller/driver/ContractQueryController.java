@@ -32,7 +32,7 @@ public class ContractQueryController {
   @GetMapping(value = "/active")
   public String getActiveContractView(final Model model) {
     model.addAttribute(MODEL_ATTRIBUTE_DATE_FORMATTER, qDateFormatter);
-    model.addAttribute("contractsActive", contractQuery.getActive());
+    model.addAttribute("contractsActive", contractQuery.getAllActive());
     populateLinksCounts(model);
 
     return "contractsActive";

@@ -63,11 +63,19 @@ public class ContractQueryService implements GetContractQuery {
   }
 
   @Override
-  public List<ContractResponse> getActive() {
+  public List<ContractResponse> getAllActive() {
     return loadPort.loadActiveByDate(qDateTime.getToday()).stream()
         .map(mapper::toResponse)
         .sorted(DEFAULT_COMPARATOR.reversed())
         .collect(toList());
+  }
+
+  @Override
+  public ContractResponse getCurrentActiveByDriverId(final Long driverId) {
+    final var today = qDateTime.getToday();
+    final var currentActiveContract = loadPort.loadActiveByDateAndDriverId(today, driverId);
+
+    return mapper.toResponse(currentActiveContract);
   }
 
   @Override

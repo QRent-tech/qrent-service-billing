@@ -47,6 +47,12 @@ public class ContractLoadAdapter implements ContractLoadPort {
   }
 
   @Override
+  public Contract loadActiveByDateAndDriverId(final LocalDate date, final Long driverId) {
+    final var activeContract = repository.findActiveByDateAndDriverId(date, driverId);
+    return mapper.mapToDomain(activeContract);
+  }
+
+  @Override
   public List<Contract> loadClosedByDate(final LocalDate date) {
     return repository.findClosedByDate(date).stream().map(mapper::mapToDomain).collect(toList());
   }

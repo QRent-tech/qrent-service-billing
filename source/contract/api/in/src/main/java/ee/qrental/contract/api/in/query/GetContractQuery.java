@@ -11,7 +11,9 @@ public interface GetContractQuery extends BaseGetQuery<ContractUpdateRequest, Co
 
   List<String> getAllDurations();
 
-  List<ContractResponse> getActive();
+  List<ContractResponse> getAllActive();
+
+  ContractResponse getCurrentActiveByDriverId(Long driverId);
 
   List<ContractResponse> getClosed();
 

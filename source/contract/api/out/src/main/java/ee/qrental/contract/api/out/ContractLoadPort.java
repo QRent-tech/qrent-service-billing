@@ -13,6 +13,8 @@ public interface ContractLoadPort extends LoadPort<Contract> {
 
   List<Contract> loadActiveByDate(final LocalDate date);
 
+  Contract loadActiveByDateAndDriverId(LocalDate date, Long driverId);
+
   List<Contract> loadClosedByDate(final LocalDate date);
 
   Long loadCountActiveByDate(final LocalDate date);

@@ -263,14 +263,13 @@ public class DriverPortalController {
   }
 
   private void addContractDataToModel(final Long driverId, final Model model) {
-    final var activeContract = contractQuery.getLatestContractByDriverId(driverId);
+    final var activeContract = contractQuery.getCurrentActiveByDriverId(driverId);
     if (activeContract == null) {
       model.addAttribute("activeContract", "absent");
       model.addAttribute("activeContractId", null);
 
       return;
     }
-    // count dates
 
     final var dateStart = activeContract.getCreated();
     LocalDate firstMonday = dateStart;

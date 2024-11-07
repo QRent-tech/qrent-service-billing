@@ -49,6 +49,12 @@ public class ContractRepositoryImpl implements ContractRepository {
   }
 
   @Override
+  public ContractJakartaEntity findActiveByDateAndDriverId(
+      final LocalDate date, final Long driverId) {
+    return springDataRepository.findActiveByDateAndDriverId(date, driverId);
+  }
+
+  @Override
   public Long findCountActiveByDate(final LocalDate date) {
     return springDataRepository.findCountActiveByDate(date);
   }
