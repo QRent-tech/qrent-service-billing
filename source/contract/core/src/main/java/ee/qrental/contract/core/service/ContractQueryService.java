@@ -10,11 +10,11 @@ import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.response.ContractResponse;
 import ee.qrental.contract.api.out.ContractLoadPort;
 import ee.qrental.contract.core.mapper.ContractResponseMapper;
-import ee.qrental.contract.core.mapper.ContractUpdateRequestMapper;
 
 import java.util.Comparator;
 import java.util.List;
 
+import ee.qrental.contract.core.mapper.ContractUpdateRequestMapper;
 import ee.qrental.contract.domain.ContractDuration;
 import lombok.AllArgsConstructor;
 
@@ -49,6 +49,7 @@ public class ContractQueryService implements GetContractQuery {
 
   @Override
   public ContractUpdateRequest getUpdateRequestById(final Long id) {
+
     return updateRequestMapper.toRequest(loadPort.loadById(id));
   }
 

@@ -1,5 +1,7 @@
 package ee.qrental.driver.spring.config;
 
+import ee.qrental.contract.api.in.query.GetContractQuery;
+import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.out.*;
 import ee.qrental.driver.core.mapper.DriverAddRequestMapper;
@@ -28,6 +30,8 @@ public class DriverServiceConfig {
 
   @Bean
   public DriverUseCaseService getDriverUseCaseService(
+      final GetContractQuery contractQuery,
+      final ContractUpdateUseCase updateUseCase,
       final DriverAddPort addPort,
       final DriverUpdatePort updatePort,
       final DriverDeletePort deletePort,
@@ -36,6 +40,8 @@ public class DriverServiceConfig {
       final DriverUpdateRequestMapper updateRequestMapper,
       final DriverUpdateBusinessRuleValidator updateBusinessRuleValidator) {
     return new DriverUseCaseService(
+        contractQuery,
+        updateUseCase,
         addPort,
         updatePort,
         deletePort,

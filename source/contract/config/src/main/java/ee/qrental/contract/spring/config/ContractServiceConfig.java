@@ -38,16 +38,11 @@ public class ContractServiceConfig {
       final ContractUpdatePort updatePort,
       final ContractLoadPort loadPort,
       final ContractAddRequestMapper addRequestMapper,
-      final ContractUpdateRequestMapper updateRequestMapper,
-      final ContractBusinessRuleValidator businessRuleValidator) {
+      final ContractBusinessRuleValidator businessRuleValidator,
+      final QDateTime qDateTime) {
 
     return new ContractUseCaseService(
-        addPort,
-        updatePort,
-        loadPort,
-        addRequestMapper,
-        updateRequestMapper,
-        businessRuleValidator);
+        addPort, updatePort, loadPort, addRequestMapper, businessRuleValidator, qDateTime);
   }
 
   @Bean

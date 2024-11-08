@@ -10,7 +10,7 @@ import ee.qrental.driver.api.in.response.DriverResponse;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static java.lang.String.format;
 import static java.time.format.DateTimeFormatter.ofPattern;
@@ -27,8 +27,7 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
   public Contract toDomain(final ContractAddRequest request) {
     final var driverId = request.getDriverId();
     final var driver = driverQuery.getById(driverId);
-    final var currentDate = LocalDate.now();
-    final var contractNumber = getContractNumber(currentDate, driverId);
+    final var contractNumber = generateContractNumber(driverId, qDateTime.getNow());
     final var renterName = getRenterName(driver);
     final var renterAddress = getRenterAddress(driver);
     final var companyCeoTaxNumber = getCompanyCeoTaxNumber(driver);
@@ -108,9 +107,10 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
     return driverCompanyCeoName;
   }
 
-  private String getContractNumber(final LocalDate currentDate, final Long driverId) {
-    final var dateString = currentDate.format(ofPattern("yyyyMMdd"));
-    return String.format("%s-%d", dateString, driverId);
+  private String generateContractNumber(final Long driverId, final LocalDateTime startTime) {
+    final var dateTimeString = startTime.format(ofPattern("yyyyMMdd-HHmm"));
+
+    return String.format("%s-%d", dateTimeString, driverId);
   }
 
   private String getRenterRegistrationNumber(final DriverResponse driver) {

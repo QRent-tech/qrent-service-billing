@@ -20,7 +20,21 @@
                 requiredObligation.value = 0
             }
         }
+
+        function onChangeContractData() {
+            const contractUpdateWarning = document.getElementById("contractUpdateWarningId");
+
+            contractUpdateWarning.hidden = false;
+        }
     </script>
+
+    <div id="contractUpdateWarningId"
+         hidden
+         class="mt-3 mb-3">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-danger fs-6">Dear User, please be aware that Driver's Contract will be updated!</li>
+        </ul>
+    </div>
     <form
             th:action="@{/drivers/update}"
             th:object="${updateRequest}"
@@ -108,6 +122,7 @@
                            for="qFirmId">Select Q-Firm</label>
                     <select id="qFirmId"
                             class="form-select"
+                            onchange="onChangeContractData()"
                             th:field="*{qFirmId}">
                         <option th:each="qFirm : ${qFirms}"
                                 th:value="${qFirm.id}"
@@ -132,6 +147,7 @@
                     <label class="form-check-label text-muted" for="firstName">First Name</label>
                     <input class="form-control" id="firstName" placeholder="Enter First Name" required
                            th:field="*{firstName}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -140,6 +156,7 @@
                     <label class="form-check-label text-muted" for="lastName">Last Name</label>
                     <input class="form-control" id="lastName" placeholder="Enter Last Name" required
                            th:field="*{lastName}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -148,6 +165,7 @@
                     <label class="form-check-label text-muted" for="taxNumber">Isikukood</label>
                     <input class="form-control" id="taxNumber" placeholder="Enter tax number" required
                            th:field="*{taxNumber}"
+                           onchange="onChangeContractData()"
                            type="number"/>
                 </div>
             </div>
@@ -157,6 +175,7 @@
             <input class="form-control" id="address" placeholder="Enter Address"
                    required
                    th:field="*{address}"
+                   onchange="onChangeContractData()"
                    type="text"/>
         </div>
         <div class="row">
@@ -167,6 +186,7 @@
                            placeholder="Enter License Number"
                            required
                            th:field="*{driverLicenseNumber}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -197,6 +217,7 @@
                     <label class="form-check-label text-muted" for="phone">Phone</label>
                     <input class="form-control" id="phone" placeholder="Enter Phone" required
                            th:field="*{phone}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -205,6 +226,7 @@
                     <label class="form-check-label text-muted" for="email">E-mail</label>
                     <input class="form-control" id="email" placeholder="Enter E-mail" required
                            th:field="*{email}"
+                           onchange="onChangeContractData()"
                            type="email"/>
                 </div>
             </div>
@@ -274,6 +296,7 @@
                     <label class="form-check-label text-muted" for="companyName">Company name</label>
                     <input class="form-control" id="companyName" placeholder="Enter Company name"
                            th:field="*{companyName}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -282,6 +305,7 @@
                     <label class="form-check-label text-muted" for="regNumber">Registration Number</label>
                     <input class="form-control" id="regNumber" placeholder="Enter Registration Number"
                            th:field="*{regNumber}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -290,6 +314,7 @@
                     <label class="form-check-label text-muted" for="companyVat">VAT</label>
                     <input class="form-control" id="companyVat" placeholder="Enter VAT"
                            th:field="*{companyVat}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -300,6 +325,7 @@
                     <label class="form-check-label text-muted" for="companyCeoFirstName">CEO first name</label>
                     <input class="form-control" id="companyCeoFirstName" placeholder="Enter first name"
                            th:field="*{companyCeoFirstName}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -308,6 +334,7 @@
                     <label class="form-check-label text-muted" for="companyCeoLastName">CEO last name</label>
                     <input class="form-control" id="companyCeoLastName" placeholder="Enter last name"
                            th:field="*{companyCeoLastName}"
+                           onchange="onChangeContractData()"
                            type="text"/>
                 </div>
             </div>
@@ -316,6 +343,7 @@
                     <label class="form-check-label text-muted" for="companyCeoTaxNumber">CEO isikukood</label>
                     <input class="form-control" id="companyCeoTaxNumber" placeholder="Enter tax number"
                            th:field="*{companyCeoTaxNumber}"
+                           onchange="onChangeContractData()"
                            type="number"/>
                 </div>
             </div>
@@ -324,6 +352,7 @@
             <label class="form-check-label text-muted" for="companyAddress">Address</label>
             <input class="form-control" id="companyAddress" placeholder="Enter Address"
                    th:field="*{companyAddress}"
+                   onchange="onChangeContractData()"
                    type="text"/>
         </div>
         <div class="form-group">

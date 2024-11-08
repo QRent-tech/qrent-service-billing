@@ -21,8 +21,6 @@ public class ContractUpdateRequestMapper
 
   @Override
   public ContractUpdateRequest toRequest(final Contract domain) {
-    return ContractUpdateRequest.builder()
-        .id(domain.getId())
-        .build();
+    return ContractUpdateRequest.builder().id(domain.getId()).qFirmId(domain.getQFirmId()).build();
   }
 }

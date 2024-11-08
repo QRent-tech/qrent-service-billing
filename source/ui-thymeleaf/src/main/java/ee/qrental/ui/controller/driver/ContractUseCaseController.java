@@ -1,6 +1,8 @@
 package ee.qrental.ui.controller.driver;
 
 import static ee.qrental.ui.controller.util.ControllerUtils.CONTRACT_ROOT_PATH;
+
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
 import ee.qrental.contract.api.in.request.ContractCloseRequest;
@@ -22,11 +24,11 @@ import org.springframework.web.bind.annotation.*;
 public class ContractUseCaseController {
 
   private final ContractAddUseCase addUseCase;
-  private final ContractUpdateUseCase updateUseCase;
   private final ContractCloseUseCase closeUseCase;
   private final GetContractQuery contractQuery;
   private final GetDriverQuery driverQuery;
   private final GetFirmQuery firmQuery;
+  private final QDateTime qDateTime;
 
   @GetMapping(value = "/add-form/{driverId}/{qFirmId}")
   public String addForm(
@@ -53,22 +55,6 @@ public class ContractUseCaseController {
       return "forms/addContract";
     }
 
-    return "redirect:" + CONTRACT_ROOT_PATH + "/active";
-  }
-
-  @GetMapping(value = "/update-form/{id}")
-  public String updateForm(@PathVariable("id") long id, final Model model) {
-    return "forms/updateDriver";
-  }
-
-  @PostMapping("/update")
-  public String updateDriver(final ContractUpdateRequest updateRequest, final Model model) {
-    updateUseCase.update(updateRequest);
-    if (updateRequest.hasViolations()) {
-      model.addAttribute("updateRequest", updateRequest);
-
-      return "forms/updateContract";
-    }
     return "redirect:" + CONTRACT_ROOT_PATH + "/active";
   }
 
@@ -117,6 +103,7 @@ public class ContractUseCaseController {
     final var addRequest = new ContractAddRequest();
     addRequest.setDriverId(driverId);
     addRequest.setQFirmId(qFirmId);
+    addRequest.setDateStart(qDateTime.getToday());
 
     model.addAttribute("addRequest", addRequest);
   }

@@ -270,7 +270,7 @@ public class DriverPortalController {
 
       return;
     }
-
+//TODO: move to Query Service
     final var dateStart = activeContract.getCreated();
     LocalDate firstMonday = dateStart;
     if (dateStart.getDayOfWeek() != DayOfWeek.MONDAY) {

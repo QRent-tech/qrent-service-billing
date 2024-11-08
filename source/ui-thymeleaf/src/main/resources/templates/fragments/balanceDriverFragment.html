@@ -72,7 +72,7 @@
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-success"
+                            <a th:if="${activeContractId == null}" class="btn btn-sm btn-success"
                                th:href="${'/contracts/add-form/'+ {driverId} + '/' + {qFirmId}}"
                                role="button"
                                aria-controls="offcanvasExample">
@@ -80,7 +80,6 @@
                         </td>
                         <td>
                             <span th:text="${activeContract}">???</span>
-                            <span th:text="${activeContractDuration}">???</span>
                         </td>
                         <td>
                             <a th:if="${activeContractId != null}" class="btn btn-sm btn-info"
@@ -94,7 +93,6 @@
                                 <span class="bi bi-x-circle"></span>
                             </a>
                         </td>
-
                         <td>
                             <a th:if="${authorizationId == null}" class="btn btn-sm btn-success"
                                th:href="${'/authorizations/add-form/'+ {driverId}}"
@@ -213,12 +211,6 @@
                                class="fs-5 d-inline-flex mb-3 px-2 py-1 fw-semibold border bg-opacity-10
                                border-opacity-10 rounded-2 "
                                th:classappend="'text-danger bg-danger border-danger'">???</small>
-                    </div>
-                    <div>
-                        <small th:if="${activeContractId != null}" class="btn btn-sm btn-outline-info disabled"
-                               th:href="@{/contracts/pdf/{id}(id=${activeContractId})}">
-                            <span class="bi-file-earmark-pdf"></span>
-                        </small>
                     </div>
                 </div>
                 <div th:replace="fragments/balanceDriverFragment.html :: detailView"></div>

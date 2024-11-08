@@ -12,4 +12,5 @@ import lombok.experimental.SuperBuilder;
 @Setter
 public class ContractUpdateRequest extends AbstractUpdateRequest {
   private Long id;
+  private Long qFirmId;
 }
