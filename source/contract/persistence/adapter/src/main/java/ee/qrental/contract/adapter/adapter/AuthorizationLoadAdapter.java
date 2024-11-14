@@ -32,4 +32,11 @@ public class AuthorizationLoadAdapter implements AuthorizationLoadPort {
   public Authorization loadByDriverId(Long driverId) {
     return null;
   }
+
+  @Override
+  public Authorization loadLatestByDriverId(final Long driverId) {
+    final var entity =  repository.getLatestByDriverId(driverId);
+
+    return mapper.mapToDomain(entity);
+  }
 }

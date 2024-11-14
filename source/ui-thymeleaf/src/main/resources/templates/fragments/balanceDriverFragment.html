@@ -11,11 +11,7 @@
                 </div>
                 <table class="table table-sm table-borderless align-middle mt-4 mb-4">
                     <tr>
-                        <th scope="col" colspan="2">Driver info:</th>
-                        <th scope="col" colspan="3">Call sign:</th>
-                        <th scope="col" colspan="3">Car:</th>
-                        <th scope="col" colspan="4">Contract:</th>
-                        <th scope="col" colspan="2">BOLT:</th>
+                        <th scope="col" colspan="12">Driver info:</th>
                     </tr>
                     <tr>
                         <td>
@@ -27,6 +23,15 @@
                             <span class="py-3"
                                   th:text="|${driverFirstName} ${driverLastName}, ${driverPhone}, deposit: ${driverDeposit} EURO|">???</span>
                         </td>
+                    </tr>
+                </table>
+                <table class="table table-sm table-borderless align-middle mt-4 mb-4">
+                    <tr>
+                        <th scope="col" colspan="4">Call sign:</th>
+                        <th scope="col" colspan="4">Car:</th>
+                        <th scope="col" colspan="4">BOLT:</th>
+                    </tr>
+                    <tr>
                         <td>
                             <a th:if="${callSignLinkId == null}" class="btn btn-sm btn-success"
                                data-toggle="tooltip"
@@ -42,13 +47,13 @@
                             </a>
                         </td>
                         <td>
-                            <span class="py-3" th:text="${callSign}">???</span>
-                        </td>
-                        <td>
                             <a th:if="${callSignLinkId != null}" class="btn btn-sm btn-danger"
                                th:href="@{/call-sign-links/close-form/{id}/driver/{driverId}(id=${callSignLinkId}, driverId=${driverId})}">
                                 <span class="bi bi-x-circle"></span>
                             </a>
+                        </td>
+                        <td>
+                            <span class="py-3" th:text="${callSign}">???</span>
                         </td>
                         <td>
                             <a th:if="${carLinkId != null}" class="btn btn-sm btn-warning "
@@ -72,50 +77,53 @@
                             </a>
                         </td>
                         <td>
-                            <a th:if="${activeContractId == null}" class="btn btn-sm btn-success"
-                               th:href="${'/contracts/add-form/'+ {driverId} + '/' + {qFirmId}}"
-                               role="button"
-                               aria-controls="offcanvasExample">
-                                <span class="bi-plus-circle"></span></a>
-                        </td>
-                        <td>
-                            <span th:text="${activeContract}">???</span>
-                        </td>
-                        <td>
-                            <a th:if="${activeContractId != null}" class="btn btn-sm btn-info"
-                               th:href="@{/contracts/pdf/{id}(id=${activeContractId})}">
-                                <span class="bi-file-earmark-pdf"></span>
-                            </a>
-                        </td>
-                        <td>
-                            <a th:if="${activeContractId != null}" class="btn btn-sm btn-danger"
-                               th:href="@{/contracts/close-form/{id}(id=${activeContractId})}">
-                                <span class="bi bi-x-circle"></span>
-                            </a>
-                        </td>
-                        <td>
-                            <a th:if="${authorizationId == null}" class="btn btn-sm btn-success"
+                            <a class="btn btn-sm btn-success"
                                th:href="${'/authorizations/add-form/'+ {driverId}}"
                                role="button"
                                aria-controls="offcanvasExample">
-                                <span class="bi-plus-circle"></span></a>
+                                <span th:if="${authorizationId == null}" class="bi-plus-circle"></span>
+                                <span th:if="${authorizationId != null}" class="bi-arrow-clockwise"></span>
+                            </a>
                         </td>
                         <td>
                             <a th:if="${authorizationId != null}" class="btn btn-sm btn-info"
-                               th:href="@{/authorizations/pdf/{id}(id=${authorisationId})}">
+                               th:href="@{/authorizations/pdf/{id}(id=${authorizationId})}">
                                 <span class="bi-file-earmark-pdf"></span>
                             </a>
+                        </td>
+                        <td>
+                            <span class="py-3"
+                                  th:text="|Created on: ${qDateFormatter.format(authorizationCreateDate)}|">???</span>
                         </td>
                     </tr>
                 </table>
                 <table class="table table-sm table-borderless align-middle mt-4 mb-4">
                     <tr>
+                        <th scope="col">Contract actions:</th>
+                        <th scope="col">Contract number:</th>
                         <th scope="col">Contract start date:</th>
                         <th scope="col">Contract end date:</th>
                         <th scope="col">Duration (weeks):</th>
                         <th scope="col">Weeks left:</th>
                     </tr>
                     <tr>
+                        <td>
+                            <a th:if="${activeContractId == null}" class="btn btn-sm btn-success"
+                               th:href="${'/contracts/add-form/'+ {driverId} + '/' + {qFirmId}}"
+                               role="button"
+                               aria-controls="offcanvasExample">
+                                <span class="bi-plus-circle"></span></a>
+                            <a th:if="${activeContractId != null}" class="btn btn-sm btn-danger"
+                               th:href="@{/contracts/close-form/{id}(id=${activeContractId})}">
+                                <span class="bi bi-x-circle"></span>
+                            </a>
+                            <a th:if="${activeContractId != null}" class="btn btn-sm btn-info"
+                               th:href="@{/contracts/pdf/{id}(id=${activeContractId})}">
+                                <span class="bi-file-earmark-pdf"></span>
+                            </a>
+                        <td>
+                            <span th:text="${activeContract}">???</span>
+                        </td>
                         <td>
                             <a>
                                 <span th:text="${activeContractStartDate}">???</span>

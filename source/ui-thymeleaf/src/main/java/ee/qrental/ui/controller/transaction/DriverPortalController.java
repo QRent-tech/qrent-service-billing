@@ -8,6 +8,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import ee.qrental.bonus.api.in.query.GetObligationQuery;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.contract.api.in.query.GetAuthorizationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
@@ -47,6 +48,7 @@ public class DriverPortalController {
   private final GetCarLinkQuery linkQuery;
   private final GetObligationQuery obligationQuery;
   private final DriverBalanceAssembler driverBalanceAssembler;
+  private final GetAuthorizationQuery authorizationQuery;
 
   @GetMapping
   public String getBalanceView(final Model model) {
@@ -72,6 +74,7 @@ public class DriverPortalController {
     addTotalFinancialDataToModel(driverId, model);
     addInsuranceDataToModel(driverId, model);
     addObligationDataToModel(driverId, model);
+    addAuthorisationDataToModel(driverId, model);
 
     return "detailView/balanceDriver";
   }
@@ -265,12 +268,12 @@ public class DriverPortalController {
   private void addContractDataToModel(final Long driverId, final Model model) {
     final var activeContract = contractQuery.getCurrentActiveByDriverId(driverId);
     if (activeContract == null) {
-      model.addAttribute("activeContract", "absent");
+      model.addAttribute("activeContract", "no active contract");
       model.addAttribute("activeContractId", null);
 
       return;
     }
-//TODO: move to Query Service
+    // TODO: move to Query Service
     final var dateStart = activeContract.getCreated();
     LocalDate firstMonday = dateStart;
     if (dateStart.getDayOfWeek() != DayOfWeek.MONDAY) {
@@ -283,11 +286,9 @@ public class DriverPortalController {
     }
     final var datesDuration = activeContract.getDuration() * 7;
     final var dateEnd = firstMonday.plusDays(datesDuration);
-
     final var today = qWeekQuery.getCurrentWeek().getStart();
     final var activeDays = DAYS.between(firstMonday, today);
     final var activeWeeks = activeDays / 7;
-    final var daysLeft = (dateEnd.minusDays(activeDays));
     var weeksToEndOfContract = activeContract.getDuration() - activeWeeks;
     if (activeWeeks >= activeContract.getDuration()) {
       weeksToEndOfContract = 0;
@@ -324,5 +325,16 @@ public class DriverPortalController {
     final var latestBalanceWeekLabel =
         String.format("%d (%s)", latestCalculatedWeek.getNumber(), latestCalculatedWeek.getEnd());
     model.addAttribute("latestBalanceWeek", latestBalanceWeekLabel);
+  }
+
+  private void addAuthorisationDataToModel(final Long driverId, final Model model) {
+    final var latestAuthorisation = authorizationQuery.getLatestByDriverId(driverId);
+    if (latestAuthorisation == null) {
+      model.addAttribute("authorizationId", null);
+      model.addAttribute("authorizationCreateDate", null);
+      return;
+    }
+    model.addAttribute("authorizationId", latestAuthorisation.getId());
+    model.addAttribute("authorizationCreateDate", latestAuthorisation.getCreated());
   }
 }

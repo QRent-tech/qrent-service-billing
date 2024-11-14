@@ -11,4 +11,6 @@ public interface AuthorizationRepository {
   AuthorizationJakartaEntity getReferenceById(final Long id);
 
   void deleteById(final Long id);
+
+  AuthorizationJakartaEntity getLatestByDriverId(final Long driverId);
 }

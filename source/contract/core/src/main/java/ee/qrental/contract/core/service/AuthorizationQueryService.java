@@ -37,4 +37,9 @@ public class AuthorizationQueryService implements GetAuthorizationQuery {
   public AuthorizationUpdateRequest getUpdateRequestById(Long id) {
     return updateRequestMapper.toRequest(loadPort.loadById(id));
   }
+
+  @Override
+  public AuthorizationResponse getLatestByDriverId(final Long driverId) {
+    return mapper.toResponse(loadPort.loadLatestByDriverId(driverId));
+  }
 }

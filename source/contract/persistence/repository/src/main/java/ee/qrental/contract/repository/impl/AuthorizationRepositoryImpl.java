@@ -30,4 +30,9 @@ public class AuthorizationRepositoryImpl implements AuthorizationRepository {
   public void deleteById(final Long id) {
     springDataRepository.deleteById(id);
   }
+
+  @Override
+  public AuthorizationJakartaEntity getLatestByDriverId(final Long driverId) {
+    return springDataRepository.getLastByDriverId(driverId);
+  }
 }
