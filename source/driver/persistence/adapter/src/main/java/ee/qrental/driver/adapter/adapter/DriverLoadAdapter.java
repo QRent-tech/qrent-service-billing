@@ -24,4 +24,11 @@ public class DriverLoadAdapter implements DriverLoadPort {
   public Driver loadById(final Long id) {
     return mapper.mapToDomain(repository.getReferenceById(id));
   }
+
+  @Override
+  public List<Driver> loadByMatchCountAndQWeekId(final Integer matchCount, final Long qWeekId) {
+    return repository.findAllByMatchCountAndQWeekId(matchCount, qWeekId).stream()
+        .map(mapper::mapToDomain)
+        .collect(toList());
+  }
 }

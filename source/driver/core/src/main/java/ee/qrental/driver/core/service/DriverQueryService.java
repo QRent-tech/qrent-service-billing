@@ -2,6 +2,7 @@ package ee.qrental.driver.core.service;
 
 import static java.util.stream.Collectors.toList;
 
+import ee.qrental.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.api.in.response.DriverResponse;
@@ -18,6 +19,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class DriverQueryService implements GetDriverQuery {
+
+  private final GetObligationCalculationQuery obligationCalculationQuery;
 
   private final DriverLoadPort loadPort;
   private final DriverUpdateRequestMapper updateRequestMapper;
@@ -69,5 +72,16 @@ public class DriverQueryService implements GetDriverQuery {
     return friendshipLoadPort.loadByDriverId(driverId).stream()
         .map(friendshipResponseMapper::toResponse)
         .collect(toList());
+  }
+
+  @Override
+  public List<DriverResponse> getDriversWithZeroMatchCountForLatestCalculation() {
+    final var matchCount = Integer.valueOf(0);
+    final var latestCalculatedQWeekId = obligationCalculationQuery.getLastCalculatedQWeekId();
+
+   return loadPort.loadByMatchCountAndQWeekId(matchCount, latestCalculatedQWeekId).stream()
+            .map(mapper::toResponse)
+            .sorted(getCallSignOrLastNameComparator())
+            .collect(toList());
   }
 }

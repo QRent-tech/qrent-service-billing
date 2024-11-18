@@ -1,5 +1,6 @@
 package ee.qrental.driver.spring.config;
 
+import ee.qrental.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
@@ -19,13 +20,19 @@ public class DriverServiceConfig {
 
   @Bean
   GetDriverQuery getDriverQueryService(
+      final GetObligationCalculationQuery obligationCalculationQuery,
       final DriverLoadPort loadPort,
       final DriverUpdateRequestMapper updateRequestMapper,
       final DriverResponseMapper mapper,
       final FriendshipLoadPort friendshipLoadPort,
       final FriendshipResponseMapper friendshipResponseMapper) {
     return new DriverQueryService(
-        loadPort, updateRequestMapper, mapper, friendshipLoadPort, friendshipResponseMapper);
+        obligationCalculationQuery,
+        loadPort,
+        updateRequestMapper,
+        mapper,
+        friendshipLoadPort,
+        friendshipResponseMapper);
   }
 
   @Bean

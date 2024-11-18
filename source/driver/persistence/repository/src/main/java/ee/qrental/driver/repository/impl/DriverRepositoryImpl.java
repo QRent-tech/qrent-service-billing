@@ -30,4 +30,10 @@ public class DriverRepositoryImpl implements DriverRepository {
   public void deleteById(final Long id) {
     springDataRepository.deleteById(id);
   }
+
+  @Override
+  public List<DriverJakartaEntity> findAllByMatchCountAndQWeekId(
+      final Integer matchCount, final Long qWeekId) {
+    return springDataRepository.findAllByMatchCountAndQWeekId(matchCount, qWeekId);
+  }
 }

@@ -1,6 +1,8 @@
 package ee.qrental.driver.adapter.repository;
 
 import ee.qrental.driver.entity.jakarta.DriverJakartaEntity;
+
+import java.util.Collection;
 import java.util.List;
 
 public interface DriverRepository {
@@ -11,4 +13,7 @@ public interface DriverRepository {
   DriverJakartaEntity getReferenceById(final Long id);
 
   void deleteById(final Long id);
+
+  List<DriverJakartaEntity> findAllByMatchCountAndQWeekId(
+      final Integer matchCount, final Long qWeekId);
 }
