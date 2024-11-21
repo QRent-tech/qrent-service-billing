@@ -8,9 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "transaction_kind")
+@Audited
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
