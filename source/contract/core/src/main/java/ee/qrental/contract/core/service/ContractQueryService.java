@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import ee.qrental.contract.core.mapper.ContractUpdateRequestMapper;
+import ee.qrental.contract.core.utils.ContractEndDateCalculator;
 import ee.qrental.contract.domain.ContractDuration;
 import lombok.AllArgsConstructor;
 
@@ -23,7 +24,7 @@ public class ContractQueryService implements GetContractQuery {
 
   private final Comparator<ContractResponse> DEFAULT_COMPARATOR =
       comparing(ContractResponse::getCreated);
-
+  private final ContractEndDateCalculator endDateCalculator;
   private final ContractLoadPort loadPort;
   private final ContractResponseMapper mapper;
   private final ContractUpdateRequestMapper updateRequestMapper;
@@ -32,6 +33,7 @@ public class ContractQueryService implements GetContractQuery {
   @Override
   public List<ContractResponse> getAll() {
     return loadPort.loadAll().stream()
+        .peek(endDateCalculator::setEndDate)
         .map(mapper::toResponse)
         .sorted(DEFAULT_COMPARATOR.reversed())
         .collect(toList());
@@ -39,23 +41,34 @@ public class ContractQueryService implements GetContractQuery {
 
   @Override
   public ContractResponse getById(final Long id) {
-    return mapper.toResponse(loadPort.loadById(id));
+    final var contract = loadPort.loadById(id);
+    endDateCalculator.setEndDate(contract);
+
+    return mapper.toResponse(contract);
   }
 
   @Override
   public String getObjectInfo(final Long id) {
-    return mapper.toObjectInfo(loadPort.loadById(id));
+    final var contract = loadPort.loadById(id);
+    endDateCalculator.setEndDate(contract);
+
+    return mapper.toObjectInfo(contract);
   }
 
   @Override
   public ContractUpdateRequest getUpdateRequestById(final Long id) {
+    final var contract = loadPort.loadById(id);
+    endDateCalculator.setEndDate(contract);
 
-    return updateRequestMapper.toRequest(loadPort.loadById(id));
+    return updateRequestMapper.toRequest(contract);
   }
 
   @Override
-  public ContractResponse getLatestContractByDriverId(Long driverId) {
-    return mapper.toResponse(loadPort.loadLatestByDriverId(driverId));
+  public ContractResponse getLatestContractByDriverId(final Long driverId) {
+    final var contract = loadPort.loadLatestByDriverId(driverId);
+    endDateCalculator.setEndDate(contract);
+
+    return mapper.toResponse(contract);
   }
 
   @Override
@@ -66,6 +79,7 @@ public class ContractQueryService implements GetContractQuery {
   @Override
   public List<ContractResponse> getAllActive() {
     return loadPort.loadActiveByDate(qDateTime.getToday()).stream()
+        .peek(endDateCalculator::setEndDate)
         .map(mapper::toResponse)
         .sorted(DEFAULT_COMPARATOR.reversed())
         .collect(toList());
@@ -75,6 +89,7 @@ public class ContractQueryService implements GetContractQuery {
   public ContractResponse getCurrentActiveByDriverId(final Long driverId) {
     final var today = qDateTime.getToday();
     final var currentActiveContract = loadPort.loadActiveByDateAndDriverId(today, driverId);
+    endDateCalculator.setEndDate(currentActiveContract);
 
     return mapper.toResponse(currentActiveContract);
   }
@@ -82,6 +97,7 @@ public class ContractQueryService implements GetContractQuery {
   @Override
   public List<ContractResponse> getClosed() {
     return loadPort.loadClosedByDate(qDateTime.getToday()).stream()
+        .peek(endDateCalculator::setEndDate)
         .map(mapper::toResponse)
         .sorted(DEFAULT_COMPARATOR.reversed())
         .collect(toList());

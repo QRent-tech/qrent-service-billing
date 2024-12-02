@@ -273,32 +273,12 @@ public class DriverPortalController {
 
       return;
     }
-    // TODO: move to Query Service
-    final var dateStart = activeContract.getCreated();
-    LocalDate firstMonday = dateStart;
-    if (dateStart.getDayOfWeek() != DayOfWeek.MONDAY) {
-      final var dateStartYear = dateStart.getYear();
-      final var dateStarWeekNumber = getWeekNumber(dateStart);
-      final var contractStartWeek =
-          qWeekQuery.getByYearAndNumber(dateStartYear, dateStarWeekNumber);
-      final var contractStartWeekNext = qWeekQuery.getOneAfterById(contractStartWeek.getId());
-      firstMonday = contractStartWeekNext.getStart();
-    }
-    final var datesDuration = activeContract.getDuration() * 7;
-    final var dateEnd = firstMonday.plusDays(datesDuration);
-    final var today = qWeekQuery.getCurrentWeek().getStart();
-    final var activeDays = DAYS.between(firstMonday, today);
-    final var activeWeeks = activeDays / 7;
-    var weeksToEndOfContract = activeContract.getDuration() - activeWeeks;
-    if (activeWeeks >= activeContract.getDuration()) {
-      weeksToEndOfContract = 0;
-    }
     model.addAttribute("activeContract", activeContract.getNumber());
     model.addAttribute("activeContractId", activeContract.getId());
     model.addAttribute("activeContractDuration", activeContract.getDuration());
-    model.addAttribute("activeContractStartDate", firstMonday);
-    model.addAttribute("activeContractEndDate", dateEnd);
-    model.addAttribute("activeContractWeeksToEnd", weeksToEndOfContract);
+    model.addAttribute("activeContractStartDate", activeContract.getDateStart());
+    model.addAttribute("activeContractEndDate", activeContract.getDateEnd());
+    model.addAttribute("activeContractWeeksToEnd", activeContract.getWeeksToEnd());
   }
 
   private void addCarDataToModel(final Long driverId, final Model model) {

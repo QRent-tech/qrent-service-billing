@@ -7,6 +7,7 @@ import ee.qrental.contract.domain.Contract;
 import lombok.AllArgsConstructor;
 
 import static java.lang.String.format;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @AllArgsConstructor
 public class ContractResponseMapper implements ResponseMapper<ContractResponse, Contract> {
@@ -47,6 +48,7 @@ public class ContractResponseMapper implements ResponseMapper<ContractResponse, 
         .created(domain.getCreated())
         .dateStart(domain.getDateStart())
         .dateEnd(domain.getDateEnd())
+        .weeksToEnd(getWeeksLeftCount(domain))
         .active(isActive(domain))
         .build();
   }
@@ -61,5 +63,13 @@ public class ContractResponseMapper implements ResponseMapper<ContractResponse, 
   @Override
   public String toObjectInfo(final Contract domain) {
     return format("Number: %s, Renter: %s", domain.getNumber(), domain.getRenterName());
+  }
+
+  private Long getWeeksLeftCount(final Contract domain) {
+    final var endDate = domain.getDateEnd();
+    final var activeDays = DAYS.between(qDateTime.getToday(), endDate);
+    final var activeWeeks = activeDays / 7;
+
+    return activeWeeks;
   }
 }

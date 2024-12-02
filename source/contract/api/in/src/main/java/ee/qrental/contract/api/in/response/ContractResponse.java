@@ -41,5 +41,5 @@ public class ContractResponse {
   private LocalDate created;
   private LocalDate dateStart;
   private LocalDate dateEnd;
+  private Long weeksToEnd;
 }
-

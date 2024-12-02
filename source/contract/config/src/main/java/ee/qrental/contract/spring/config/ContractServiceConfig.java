@@ -10,6 +10,7 @@ import ee.qrental.contract.core.mapper.*;
 import ee.qrental.contract.core.service.*;
 import ee.qrental.contract.core.service.pdf.ContractToPdfConverter;
 import ee.qrental.contract.core.service.pdf.ContractToPdfModelMapper;
+import ee.qrental.contract.core.utils.ContractEndDateCalculator;
 import ee.qrental.contract.core.validator.ContractBusinessRuleValidator;
 import ee.qrental.contract.core.validator.ContractCloseBusinessRuleValidator;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
@@ -24,12 +25,19 @@ public class ContractServiceConfig {
 
   @Bean
   GetContractQuery getContractQueryService(
+      final ContractEndDateCalculator endDateCalculator,
       final ContractLoadPort loadPort,
       final ContractResponseMapper mapper,
       final ContractUpdateRequestMapper updateRequestMapper,
       final QDateTime qDateTime) {
 
-    return new ContractQueryService(loadPort, mapper, updateRequestMapper, qDateTime);
+    return new ContractQueryService(
+        endDateCalculator, loadPort, mapper, updateRequestMapper, qDateTime);
+  }
+
+  @Bean
+  ContractEndDateCalculator getContractEndDateCalculator(final QDateTime qDateTime) {
+    return new ContractEndDateCalculator(qDateTime);
   }
 
   @Bean
