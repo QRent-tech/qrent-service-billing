@@ -1,4 +1,4 @@
-package ee.qrental.contract.core.utils;
+package ee.qrental.contract.core.service;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.contract.domain.Contract;

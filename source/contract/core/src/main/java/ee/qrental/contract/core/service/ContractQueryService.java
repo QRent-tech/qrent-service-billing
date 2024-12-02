@@ -15,7 +15,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import ee.qrental.contract.core.mapper.ContractUpdateRequestMapper;
-import ee.qrental.contract.core.utils.ContractEndDateCalculator;
 import ee.qrental.contract.domain.ContractDuration;
 import lombok.AllArgsConstructor;
 

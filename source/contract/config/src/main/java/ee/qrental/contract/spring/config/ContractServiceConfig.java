@@ -10,7 +10,7 @@ import ee.qrental.contract.core.mapper.*;
 import ee.qrental.contract.core.service.*;
 import ee.qrental.contract.core.service.pdf.ContractToPdfConverter;
 import ee.qrental.contract.core.service.pdf.ContractToPdfModelMapper;
-import ee.qrental.contract.core.utils.ContractEndDateCalculator;
+import ee.qrental.contract.core.service.ContractEndDateCalculator;
 import ee.qrental.contract.core.validator.ContractBusinessRuleValidator;
 import ee.qrental.contract.core.validator.ContractCloseBusinessRuleValidator;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
