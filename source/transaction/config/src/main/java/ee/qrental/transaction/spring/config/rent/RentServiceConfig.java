@@ -16,6 +16,7 @@ import ee.qrental.transaction.core.mapper.rent.RentCalculationResponseMapper;
 import ee.qrental.transaction.core.service.TransactionUseCaseService;
 import ee.qrental.transaction.core.service.rent.RentCalculationQueryService;
 import ee.qrental.transaction.core.service.rent.RentCalculationService;
+import ee.qrental.transaction.core.service.rent.RentTransactionGenerator;
 import ee.qrental.transaction.core.validator.RentCalculationAddBusinessRuleValidator;
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
 import org.springframework.context.annotation.Bean;
@@ -36,31 +37,37 @@ public class RentServiceConfig {
 
   @Bean
   RentCalculationService getRentCalculationService(
+      final RentTransactionGenerator rentTransactionGenerator,
       final GetCarLinkQuery carLinkQuery,
       final GetCarQuery carQuery,
       final GetTransactionQuery transactionQuery,
       final TransactionUseCaseService transactionUseCaseService,
       final RentCalculationAddPort rentCalculationAddPort,
       final RentCalculationAddRequestMapper addRequestMapper,
-      final TransactionTypeLoadPort transactionTypeLoadPort,
       final RentCalculationAddBusinessRuleValidator addBusinessRuleValidator,
       final EmailSendUseCase emailSendUseCase,
       final GetUserAccountQuery userAccountQuery,
-      final GetQWeekQuery weekQuery,
-      final QDateTime qDateTime) {
+      final GetQWeekQuery weekQuery) {
 
     return new RentCalculationService(
+        rentTransactionGenerator,
         carLinkQuery,
         carQuery,
         transactionQuery,
         transactionUseCaseService,
         rentCalculationAddPort,
         addRequestMapper,
-        transactionTypeLoadPort,
         addBusinessRuleValidator,
         emailSendUseCase,
         userAccountQuery,
-        weekQuery,
-        qDateTime);
+        weekQuery);
+  }
+
+  @Bean
+  RentTransactionGenerator getRentTransactionGenerator(
+      final TransactionTypeLoadPort transactionTypeLoadPort,
+      final GetCarQuery carQuery,
+      final QDateTime qDateTime) {
+    return new RentTransactionGenerator(transactionTypeLoadPort, carQuery, qDateTime);
   }
 }
