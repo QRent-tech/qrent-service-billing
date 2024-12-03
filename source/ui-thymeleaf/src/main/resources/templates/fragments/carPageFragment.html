@@ -27,7 +27,8 @@
             <th>Fuel Type</th>
             <th>Branding</th>
             <th>Age, years</th>
-            <th>Warranty</th>
+            <th>Warranty, months</th>
+            <th>Warranty end date</th>
             <th>Manufacturer</th>
             <th>Model</th>
             <th>Gear Type</th>
@@ -70,17 +71,34 @@
                 <td th:case="'RED'"
                     class="text-center bg-opacity-10 border border-opacity-10
                     text-danger bg-danger border-danger"
-                    th:text="${qDateFormatter.format(car.releaseDate)}">???
+                    th:text="${car.warrantyMonths}">???
                 </td>
                 <td th:case="'AMBER'"
                     class="text-center bg-opacity-10 border border-opacity-10
                     text-secondary bg-warning border-warning"
-                    th:text="${qDateFormatter.format(car.releaseDate)}">???
+                    th:text="${car.warrantyMonths}">???
                 </td>
                 <td th:case="'GREEN'"
                     class="text-center bg-opacity-10 border border-opacity-10
                     text-success bg-success border-success"
-                    th:text="${qDateFormatter.format(car.releaseDate)}">???
+                    th:text="${car.warrantyMonths}">???
+                </td>
+            </th:block>
+            <th:block th:switch="${car.warrantyRagStatus}">
+                <td th:case="'RED'"
+                    class="text-center bg-opacity-10 border border-opacity-10
+                    text-danger bg-danger border-danger"
+                    th:text="${qDateFormatter.format(car.warrantyEndDate)}">???
+                </td>
+                <td th:case="'AMBER'"
+                    class="text-center bg-opacity-10 border border-opacity-10
+                    text-secondary bg-warning border-warning"
+                    th:text="${qDateFormatter.format(car.warrantyEndDate)}">???
+                </td>
+                <td th:case="'GREEN'"
+                    class="text-center bg-opacity-10 border border-opacity-10
+                    text-success bg-success border-success"
+                    th:text="${qDateFormatter.format(car.warrantyEndDate)}">???
                 </td>
             </th:block>
 

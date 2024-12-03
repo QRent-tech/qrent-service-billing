@@ -57,10 +57,7 @@ public class Car {
     return getRagStatusByDuration(daysBetween);
   }
 
-  public RagStatus getWarrantyRagStatus() {
-    final var daysBetween = DAYS.between(releaseDate, LocalDate.now());
-    return getRagStatusByDurationForWarranty(daysBetween);
-  }
+
 
   public RagStatus getGasInspectionRagStatus() {
     if (gasInspectionEnd == null) {
@@ -79,20 +76,6 @@ public class Car {
     }
 
     if (durationInDays > 0 && durationInDays < 30) {
-
-      return RagStatus.AMBER;
-    }
-
-    return RagStatus.RED;
-  }
-
-  private RagStatus getRagStatusByDurationForWarranty(final Long durationInDays) {
-    if (durationInDays < 550) {
-
-      return RagStatus.GREEN;
-    }
-
-    if (durationInDays > 610 && durationInDays < 730) {
 
       return RagStatus.AMBER;
     }

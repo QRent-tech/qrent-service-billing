@@ -2,6 +2,7 @@ package ee.qrental.car.core.mapper;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.api.in.response.CarResponse;
+import ee.qrental.car.core.service.CarWarrantyService;
 import ee.qrental.car.domain.Car;
 import ee.qrent.common.in.mapper.ResponseMapper;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import static java.lang.String.format;
 public class CarResponseMapper implements ResponseMapper<CarResponse, Car> {
 
   private final QDateTime qDateTime;
+  private final CarWarrantyService warrantyService;
 
   @Override
   public CarResponse toResponse(final Car domain) {
@@ -43,7 +45,6 @@ public class CarResponseMapper implements ResponseMapper<CarResponse, Car> {
         .insuranceRagStatus(domain.getInsuranceRagStatus().name())
         .technicalInspectionRagStatus(domain.getTechnicalInspectionRagStatus().name())
         .gasInspectionRagStatus(domain.getGasInspectionRagStatus().name())
-        .warrantyRagStatus(domain.getWarrantyRagStatus().name())
         .comment(domain.getComment())
         .brandingQrent(domain.getBrandingQrent())
         .brandingBolt(domain.getBrandingBolt())
@@ -51,6 +52,9 @@ public class CarResponseMapper implements ResponseMapper<CarResponse, Car> {
         .brandingUber(domain.getBrandingUber())
         .brandingTallink(domain.getBrandingTallink())
         .age(getCarAge(domain))
+        .warrantyRagStatus(warrantyService.getWarrantyRagStatus(domain).name())
+        .warrantyEndDate(warrantyService.getWarrantyEndDate(domain))
+        .warrantyMonths(warrantyService.getWarrantyMonths(domain))
         .build();
   }
 

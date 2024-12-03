@@ -35,7 +35,6 @@ public class CarResponse {
   private String insuranceRagStatus;
   private String technicalInspectionRagStatus;
   private String gasInspectionRagStatus;
-  private String warrantyRagStatus;
   private String comment;
   private Boolean brandingQrent;
   private Boolean brandingBolt;
@@ -43,4 +42,7 @@ public class CarResponse {
   private Boolean brandingUber;
   private Boolean brandingTallink;
   private Integer age;
+  private String warrantyRagStatus;
+  private LocalDate warrantyEndDate;
+  private Long warrantyMonths;
 }

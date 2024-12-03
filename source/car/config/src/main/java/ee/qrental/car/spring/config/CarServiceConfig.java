@@ -1,5 +1,6 @@
 package ee.qrental.car.spring.config;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.api.in.query.GetCarQuery;
 import ee.qrental.car.api.out.*;
 import ee.qrental.car.core.mapper.CarAddRequestMapper;
@@ -7,6 +8,7 @@ import ee.qrental.car.core.mapper.CarResponseMapper;
 import ee.qrental.car.core.mapper.CarUpdateRequestMapper;
 import ee.qrental.car.core.service.CarQueryService;
 import ee.qrental.car.core.service.CarUseCaseService;
+import ee.qrental.car.core.service.CarWarrantyService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +21,7 @@ public class CarServiceConfig {
       final CarResponseMapper carMapper,
       final CarUpdateRequestMapper carUpdateRequestMapper,
       final CarLinkLoadPort carLinkLoadPort) {
+
     return new CarQueryService(carLoadPort, carMapper, carUpdateRequestMapper, carLinkLoadPort);
   }
 
@@ -30,7 +33,14 @@ public class CarServiceConfig {
       final CarLoadPort loadPort,
       final CarAddRequestMapper addRequestMapper,
       final CarUpdateRequestMapper updateRequestMapper) {
+
     return new CarUseCaseService(
         addPort, updatePort, deletePort, loadPort, addRequestMapper, updateRequestMapper);
+  }
+
+  @Bean
+  CarWarrantyService getCarWarrantyService(final QDateTime qDateTime) {
+
+    return new CarWarrantyService(qDateTime);
   }
 }

@@ -4,6 +4,7 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.core.mapper.CarAddRequestMapper;
 import ee.qrental.car.core.mapper.CarResponseMapper;
 import ee.qrental.car.core.mapper.CarUpdateRequestMapper;
+import ee.qrental.car.core.service.CarWarrantyService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,8 +16,9 @@ public class CarMapperConfig {
   }
 
   @Bean
-  CarResponseMapper getCarResponseMapper(final QDateTime qDateTime) {
-    return new CarResponseMapper(qDateTime);
+  CarResponseMapper getCarResponseMapper(
+      final QDateTime qDateTime, final CarWarrantyService warrantyService) {
+    return new CarResponseMapper(qDateTime, warrantyService);
   }
 
   @Bean
