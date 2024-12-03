@@ -42,4 +42,5 @@ public class CarResponse {
   private Boolean brandingForus;
   private Boolean brandingUber;
   private Boolean brandingTallink;
+  private Integer age;
 }

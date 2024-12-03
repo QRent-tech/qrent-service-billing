@@ -1,5 +1,6 @@
 package ee.qrental.car.spring.config;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.core.mapper.CarAddRequestMapper;
 import ee.qrental.car.core.mapper.CarResponseMapper;
 import ee.qrental.car.core.mapper.CarUpdateRequestMapper;
@@ -14,8 +15,8 @@ public class CarMapperConfig {
   }
 
   @Bean
-  CarResponseMapper getCarResponseMapper() {
-    return new CarResponseMapper();
+  CarResponseMapper getCarResponseMapper(final QDateTime qDateTime) {
+    return new CarResponseMapper(qDateTime);
   }
 
   @Bean

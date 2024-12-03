@@ -1,12 +1,18 @@
 package ee.qrental.car.core.mapper;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.api.in.response.CarResponse;
 import ee.qrental.car.domain.Car;
 import ee.qrent.common.in.mapper.ResponseMapper;
+import lombok.AllArgsConstructor;
 
 import static java.lang.String.format;
 
+@AllArgsConstructor
 public class CarResponseMapper implements ResponseMapper<CarResponse, Car> {
+
+  private final QDateTime qDateTime;
+
   @Override
   public CarResponse toResponse(final Car domain) {
     return CarResponse.builder()
@@ -44,7 +50,15 @@ public class CarResponseMapper implements ResponseMapper<CarResponse, Car> {
         .brandingForus(domain.getBrandingForus())
         .brandingUber(domain.getBrandingUber())
         .brandingTallink(domain.getBrandingTallink())
+        .age(getCarAge(domain))
         .build();
+  }
+
+  private Integer getCarAge(final Car domain) {
+    final var releaseYear = domain.getReleaseDate().getYear();
+    final var todayYear = qDateTime.getToday().getYear();
+
+    return todayYear - releaseYear;
   }
 
   @Override

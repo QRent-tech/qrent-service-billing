@@ -26,7 +26,7 @@
             <th>REG Number</th>
             <th>Fuel Type</th>
             <th>Branding</th>
-            <th>Age</th>
+            <th>Age, years</th>
             <th>Warranty</th>
             <th>Manufacturer</th>
             <th>Model</th>
@@ -65,7 +65,7 @@
                 <i th:if="${car.brandingUber}"> U </i>
                 <i th:if="${car.brandingTallink}"> T </i>
             </td>
-            <td th:text="${qDateFormatter.format(car.releaseDate)}"></td>
+            <td th:text="${car.age}"></td>
             <th:block th:switch="${car.warrantyRagStatus}">
                 <td th:case="'RED'"
                     class="text-center bg-opacity-10 border border-opacity-10
