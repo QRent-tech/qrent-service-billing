@@ -4,6 +4,11 @@ ee.qrental.contract.spring.config.ContractMapperConfig,\
 ee.qrental.contract.spring.config.ContractServiceConfig,\
 ee.qrental.contract.spring.config.ContractRepositoryConfig,\
 ee.qrental.contract.spring.config.ContractValidatorConfig,\
+ee.qrental.contract.spring.config.AbsenceAdapterConfig,\
+ee.qrental.contract.spring.config.AbsenceMapperConfig,\
+ee.qrental.contract.spring.config.AbsenceServiceConfig,\
+ee.qrental.contract.spring.config.AbsenceRepositoryConfig,\
+ee.qrental.contract.spring.config.AbsenceValidatorConfig,\
 ee.qrental.contract.spring.config.AuthorizationAdapterConfig,\
 ee.qrental.contract.spring.config.AuthorizationMapperConfig,\
 ee.qrental.contract.spring.config.AuthorizationBoltServiceConfig,\

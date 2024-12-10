@@ -18,7 +18,6 @@ import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
 import static java.lang.String.format;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toUnmodifiableList;
 
 @AllArgsConstructor
 public class QWeekQueryService implements GetQWeekQuery {
@@ -27,6 +26,8 @@ public class QWeekQueryService implements GetQWeekQuery {
       comparing(QWeekResponse::getYear).thenComparing(QWeekResponse::getNumber);
   private static final Comparator<QWeekResponse> REVERSED_COMPARATOR =
       comparing(QWeekResponse::getYear).thenComparing(QWeekResponse::getNumber).reversed();
+
+  private static final Integer DEFAULT_LAST_WEEK_NUMBER = 10;
 
   private final QWeekLoadPort loadPort;
   private final QWeekResponseMapper mapper;
@@ -63,6 +64,15 @@ public class QWeekQueryService implements GetQWeekQuery {
         .map(mapper::toResponse)
         .sorted(REVERSED_COMPARATOR)
         .collect(toList());
+  }
+
+  @Override
+  public List<QWeekResponse> getLastTenWeeksFromToday() {
+    final var nowDate = qDateTime.getToday();
+    final var dateDefaultWeeksAgo = nowDate.minusWeeks(DEFAULT_LAST_WEEK_NUMBER);
+    final var qWeek = getByDate(dateDefaultWeeksAgo);
+
+    return getAllAfterById(qWeek.getId());
   }
 
   @Override

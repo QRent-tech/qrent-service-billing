@@ -1,0 +1,55 @@
+<div th:fragment="assembledForm">
+    <div th:replace="fragments/commonFormFragment.html :: commonForm(
+            title='Update an Absence',
+            content=~{fragments/absenceUpdateFormFragment.html :: updateForm},
+            request=${updateRequest}
+        )">
+    </div>
+</div>
+
+<form th:fragment="updateForm"
+      th:action="@{/absences/update}"
+      th:object="${updateRequest}"
+      method="post">
+    <input id="absenceId" required
+           th:field="*{id}"
+           type="text"
+           hidden/>
+    <div class="row mb-4 mt-4">
+        <div class="col">
+            <span class="fs-5">Driver:</span>
+            <span class="fs-5" th:text="${driver.firstName}">???</span>
+            <span class="fs-5" th:text="${driver.lastName}">???</span>
+        </div>
+    </div>
+    <input id="driverId" required
+           th:field="*{driverId}"
+           type="number"
+           hidden/>
+
+    <div class="row">
+        <div class="mb-3">
+            <label class="form-label text-muted" for="weekId">Change a week:</label>
+            <select id="weekId" class="form-select"
+                    th:field="*{qWeekId}">
+                <option th:each="week: ${availableWeeks}"
+                        th:value="${week.id}"
+                        th:text="|Year: ${week.year}, number: ${week.number} - ${week.description}|"></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label text-muted" for="commentId">Change a comment:</label>
+        <textarea class="form-control"
+                  id="commentId"
+                  placeholder="Enter Comment"
+                  th:field="*{comment}"/>
+    </div>
+
+
+    <div th:replace="fragments/addUpdateFormButtonsFragment.html :: addUpdateButtons(
+            submitValue='Update'
+        )">
+    </div>
+</form>

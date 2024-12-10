@@ -22,7 +22,7 @@ public class DriverRepositoryImpl implements DriverRepository {
   }
 
   @Override
-  public DriverJakartaEntity getReferenceById(final Long id) {
+  public DriverJakartaEntity findById(final Long id) {
     return springDataRepository.getReferenceById(id);
   }
 

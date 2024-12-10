@@ -1,13 +1,12 @@
 package ee.qrental.ui.controller.transaction;
 
-import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
 import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrental.ui.controller.util.ControllerUtils.BALANCE_ROOT_PATH;
-import static java.time.temporal.ChronoUnit.DAYS;
 
 import ee.qrental.bonus.api.in.query.GetObligationQuery;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.contract.api.in.query.GetAuthorizationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
@@ -22,8 +21,6 @@ import ee.qrental.transaction.api.in.response.balance.BalanceRawContextResponse;
 import ee.qrental.ui.controller.formatter.QDateFormatter;
 import ee.qrental.ui.controller.transaction.assembler.DriverBalanceAssembler;
 import java.math.BigDecimal;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -49,6 +46,7 @@ public class DriverPortalController {
   private final GetObligationQuery obligationQuery;
   private final DriverBalanceAssembler driverBalanceAssembler;
   private final GetAuthorizationQuery authorizationQuery;
+  private final GetAbsenceQuery absenceQuery;
 
   @GetMapping
   public String getBalanceView(final Model model) {
@@ -75,6 +73,7 @@ public class DriverPortalController {
     addInsuranceDataToModel(driverId, model);
     addObligationDataToModel(driverId, model);
     addAuthorisationDataToModel(driverId, model);
+    addAbsencesDataToModel(driverId, model);
 
     return "detailView/balanceDriver";
   }
@@ -92,6 +91,8 @@ public class DriverPortalController {
     addTotalFinancialDataToModel(driverId, model);
     addInsuranceDataToModel(driverId, model);
     addObligationDataToModel(driverId, model);
+    addAuthorisationDataToModel(driverId, model);
+    addAbsencesDataToModel(driverId, model);
     model.addAttribute("transactionFilterRequest", transactionFilterRequest);
     List<TransactionResponse> transactions;
 
@@ -316,5 +317,10 @@ public class DriverPortalController {
     }
     model.addAttribute("authorizationId", latestAuthorisation.getId());
     model.addAttribute("authorizationCreateDate", latestAuthorisation.getCreated());
+  }
+
+  private void addAbsencesDataToModel(final Long driverId, final Model model) {
+    final var actualAbsences = absenceQuery.getActualAbsencesByDriverId(driverId);
+    model.addAttribute("actualAbsences", actualAbsences);
   }
 }

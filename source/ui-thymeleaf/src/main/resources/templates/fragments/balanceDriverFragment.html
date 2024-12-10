@@ -196,6 +196,73 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div id="absenceInfoCardId" class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Absence info</h5>
+                                        <div class="row">
+                                            <div class="col-1 mt-4">
+                                                <a class="btn btn-sm btn-success"
+                                                   th:href="${'/absences/add-form/'+ {driverId}}"
+                                                   role="button"
+                                                   aria-controls="offcanvasExample">
+                                                    <span class="bi-plus-circle"></span></a>
+                                            </div>
+
+                                            <div class="col-11">
+                                                <table class="table table-sm table-borderless align-middle">
+                                                    <tr>
+                                                        <th scope="col">Actions:</th>
+                                                        <th scope="col">Week:</th>
+                                                        <th scope="col">Start date:</th>
+                                                        <th scope="col">End date:</th>
+                                                        <th scope="col">Comment:</th>
+                                                    </tr>
+
+                                                    <tr th:if="${#lists.isEmpty(actualAbsences)}">
+                                                        <td colspan="9">No actual Absences</td>
+                                                    </tr>
+                                                    <tr th:each="absence : ${actualAbsences}">
+                                                        <td>
+                                                            <a class="btn btn-sm btn-warning "
+                                                               th:href="${'/absences/update-form/'+ {absence.id}}"
+                                                               role="button"
+                                                               aria-controls="offcanvasExample">
+                                                                <span class="bi-pencil-square"></span>
+                                                            </a>
+                                                            <a class="btn btn-sm btn-danger"
+                                                               th:href="${'/absences/delete-form/'+ {absence.id}}"
+                                                               role="button"
+                                                               aria-controls="offcanvasExample">
+                                                                <span class="bi bi-x-circle"></span>
+                                                            </a>
+                                                        <td>
+                                                            <span th:text="|${absence.qWeekYear} - ${absence.qWeekNumber}|">???</span>
+                                                        </td>
+                                                        <td>
+                                                            <a>
+                                                                <span th:text="${qDateFormatter.format(absence.startDate)}">???</span>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a>
+                                                                <a>
+                                                                    <span th:text="${qDateFormatter.format(absence.endDate)}">???</span>
+                                                                </a>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${absence.comment}">???</span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -419,7 +486,8 @@
                 th:text="${transaction.realAmount}">???
             </td>
             <td th:text="${transaction.kind}"
-                th:classappend="${transaction.weekNumber % 2 == 0} ? 'bg-secondary bg-opacity-10' : ''">???</td>
+                th:classappend="${transaction.weekNumber % 2 == 0} ? 'bg-secondary bg-opacity-10' : ''">???
+            </td>
             <td th:text="${transaction.weekNumber}"
                 th:classappend="${transaction.weekNumber % 2 == 0} ? 'bg-secondary bg-opacity-10' : ''">???
             </td>

@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class CallSignUseCaseController {
 
-  private final CallSignAddUseCase callSignAddUseCase;
-  private final CallSignUpdateUseCase callSignUpdateUseCase;
-  private final CallSignDeleteUseCase callSignDeleteUseCase;
+  private final CallSignAddUseCase addUseCase;
+  private final CallSignUpdateUseCase updateUseCase;
+  private final CallSignDeleteUseCase deleteUseCase;
   private final GetCallSignQuery callSignQuery;
 
   @GetMapping(value = "/add-form")
@@ -34,7 +34,7 @@ public class CallSignUseCaseController {
   @PostMapping(value = "/add")
   public String addCallSignLink(
       @ModelAttribute final CallSignAddRequest addRequest, final Model model) {
-    callSignAddUseCase.add(addRequest);
+    addUseCase.add(addRequest);
     if (addRequest.hasViolations()) {
       addAddRequestToModel(addRequest, model);
       return "forms/addCallSign";
@@ -57,7 +57,7 @@ public class CallSignUseCaseController {
   @PostMapping("/update")
   public String updateCallSignCallSignLink(
       final CallSignUpdateRequest updateRequest, final Model model) {
-    callSignUpdateUseCase.update(updateRequest);
+    updateUseCase.update(updateRequest);
     if (updateRequest.hasViolations()) {
       addUpdateRequestToModel(model, updateRequest);
 
@@ -83,7 +83,7 @@ public class CallSignUseCaseController {
   @PostMapping("/delete")
   public String deleteForm(final CallSignDeleteRequest deleteRequest,
                            final Model model) {
-    callSignDeleteUseCase.delete(deleteRequest);
+    deleteUseCase.delete(deleteRequest);
 
     if (deleteRequest.hasViolations()) {
       model.addAttribute("deleteRequest", deleteRequest);

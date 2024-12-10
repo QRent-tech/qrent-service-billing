@@ -8,6 +8,7 @@ dependencies {
 
     implementation(project(":source:common:api"))
     implementation(project(":source:transaction:api:in"))
+    implementation(project(":source:constant:api:in"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:insurance:api:in"))
     implementation(project(":source:firm:api:in"))

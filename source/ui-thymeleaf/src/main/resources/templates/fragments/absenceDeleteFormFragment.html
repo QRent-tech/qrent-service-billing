@@ -1,14 +1,14 @@
 <div th:fragment="assembledForm">
     <div th:replace="fragments/commonFormFragment.html :: commonForm(
-            title='Delete a Call Sign',
-            content=~{fragments/callSignDeleteFormFragment.html :: deleteForm},
+            title='Delete an Absence',
+            content=~{fragments/absenceDeleteFormFragment.html :: deleteForm},
             request=${deleteRequest}
         )">
     </div>
 </div>
 
 <form th:fragment="deleteForm"
-      th:action="@{/call-signs/delete}"
+      th:action="@{/absences/delete}"
       th:object="${deleteRequest}"
       method="post">
     <input id="id" required
