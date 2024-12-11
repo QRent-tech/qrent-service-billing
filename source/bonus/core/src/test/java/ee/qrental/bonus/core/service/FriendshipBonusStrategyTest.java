@@ -14,6 +14,7 @@ import ee.qrental.bonus.api.in.response.ObligationResponse;
 import ee.qrental.bonus.domain.BonusProgram;
 import ee.qrental.bonus.domain.Obligation;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.in.response.DriverResponse;
 import ee.qrental.driver.api.in.response.FriendshipResponse;
@@ -56,7 +57,7 @@ class FriendshipBonusStrategyTest {
     final var bonusCode = instanceUnderTest.getBonusCode();
 
     // then
-    assertEquals("FR", bonusCode);
+    assertEquals("BF", bonusCode);
   }
 
   @Test
@@ -86,7 +87,7 @@ class FriendshipBonusStrategyTest {
   @Test
   public void testCanApplyForActivatedFriendshipBonusProgram() {
     // given
-    final var bonusProgram = BonusProgram.builder().active(true).code("FR").build();
+    final var bonusProgram = BonusProgram.builder().active(true).code("BF").build();
 
     // when
     final var canApply = instanceUnderTest.canApply(bonusProgram);
@@ -157,6 +158,8 @@ class FriendshipBonusStrategyTest {
         .thenReturn(DriverResponse.builder().id(222L).createdDate(friendCreationDate).build());
     when(obligationQuery.getByQWeekIdAndDriverId(9L, 222L))
         .thenReturn(ObligationResponse.builder().matchCount(1).build());
+    when(qWeekQuery.getOneAfterById(9L))
+        .thenReturn(QWeekResponse.builder().start(friendCreationDate.plus(25, WEEKS)).build());
 
     // when
     final var addTransactionRequests =
@@ -190,6 +193,8 @@ class FriendshipBonusStrategyTest {
     when(transactionQuery.getAllByDriverIdAndQWeekId(222L, 9L)).thenReturn(rentTransactions);
     when(transactionTypeQuery.getByName("bonus"))
         .thenReturn(TransactionTypeResponse.builder().id(33L).build());
+    when(qWeekQuery.getOneAfterById(9L))
+        .thenReturn(QWeekResponse.builder().start(friendCreationDate.plus(23, WEEKS)).build());
 
     // when
     final var addTransactionRequests =
@@ -199,8 +204,47 @@ class FriendshipBonusStrategyTest {
     assertEquals(1, addTransactionRequests.size());
     final var addRequestTransaction = addTransactionRequests.get(0);
     assertEquals(0, BigDecimal.valueOf(5).compareTo(addRequestTransaction.getAmount()));
-    assertEquals("Bonus Transaction for FR Strategy", addRequestTransaction.getComment());
+    assertEquals("Bonus Transaction for BF Strategy", addRequestTransaction.getComment());
     assertEquals(2L, addRequestTransaction.getDriverId());
     assertEquals(33L, addRequestTransaction.getTransactionTypeId());
+    final var weeksBetween = WEEKS.between(friendCreationDate, LocalDate.now());
+    assertTrue(weeksBetween < 24);
+  }
+
+  @Test
+  public void testCalculateBonusIfWeeksBetweenGreaterThan24() {
+    // given
+    final var obligation = Obligation.builder().matchCount(1).driverId(2L).qWeekId(9L).build();
+    final var weekPositiveAmount = BigDecimal.valueOf(200d);
+
+    when(driverQuery.getFriendships(2L))
+        .thenReturn(singletonList(FriendshipResponse.builder().friendId(222L).build()));
+    when(obligationQuery.getByQWeekIdAndDriverId(9L, 222L))
+        .thenReturn(ObligationResponse.builder().matchCount(1).build());
+    final var friendCreationDate = LocalDate.now().minus(10, WEEKS);
+    when(driverQuery.getById(222L))
+        .thenReturn(DriverResponse.builder().id(222L).createdDate(friendCreationDate).build());
+
+    final var rentTransaction =
+        TransactionResponse.builder()
+            .type(TRANSACTION_TYPE_NAME_WEEKLY_RENT)
+            .realAmount(BigDecimal.valueOf(-100d))
+            .build();
+    final var rentTransactions = singletonList(rentTransaction);
+
+    when(transactionQuery.getAllByDriverIdAndQWeekId(222L, 9L)).thenReturn(rentTransactions);
+    when(transactionTypeQuery.getByName("bonus"))
+        .thenReturn(TransactionTypeResponse.builder().id(33L).build());
+    when(qWeekQuery.getOneAfterById(9L))
+        .thenReturn(QWeekResponse.builder().start(friendCreationDate.plus(25, WEEKS)).build());
+
+    // when
+    final var addTransactionRequests =
+        instanceUnderTest.calculateBonus(obligation, weekPositiveAmount);
+
+    // then
+    assertTrue(addTransactionRequests.isEmpty());
+    final var weeksBetween = WEEKS.between(friendCreationDate, LocalDate.now().plus(15, WEEKS));
+    assertTrue(weeksBetween > 24);
   }
 }

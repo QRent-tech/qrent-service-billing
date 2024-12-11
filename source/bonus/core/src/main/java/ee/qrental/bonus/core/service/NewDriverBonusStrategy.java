@@ -58,8 +58,8 @@ public class NewDriverBonusStrategy extends AbstractBonusStrategy {
     LocalDate firstMonday = dateStart;
     if (dateStart.getDayOfWeek() != DayOfWeek.MONDAY) {
       final var dateStartYear = dateStart.getYear();
-      final var dateStarWeekNumber = getWeekNumber(dateStart);
-      final var carLinkStartWeek = qWeekQuery.getByYearAndNumber(dateStartYear, dateStarWeekNumber);
+      final var dateStartWeekNumber = getWeekNumber(dateStart);
+      final var carLinkStartWeek = qWeekQuery.getByYearAndNumber(dateStartYear, dateStartWeekNumber);
       final var carLinkStartWeekNext = qWeekQuery.getOneAfterById(carLinkStartWeek.getId());
       firstMonday = carLinkStartWeekNext.getStart();
     }

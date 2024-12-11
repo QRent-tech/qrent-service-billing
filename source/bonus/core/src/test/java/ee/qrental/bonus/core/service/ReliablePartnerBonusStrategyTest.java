@@ -9,11 +9,14 @@ import static org.mockito.Mockito.when;
 import ee.qrental.bonus.domain.BonusProgram;
 import ee.qrental.bonus.domain.Obligation;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrental.transaction.api.in.response.TransactionResponse;
 import ee.qrental.transaction.api.in.response.type.TransactionTypeResponse;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -108,6 +111,8 @@ class ReliablePartnerBonusStrategyTest {
     when(transactionQuery.getAllByDriverIdAndQWeekId(2L, 9L)).thenReturn(rentTransactions);
     when(transactionTypeQuery.getByName("bonus"))
         .thenReturn(TransactionTypeResponse.builder().id(33L).build());
+    when(qWeekQuery.getOneAfterById(9L))
+        .thenReturn(QWeekResponse.builder().start(LocalDate.now()).build());
 
     // when
     final var addTransactionRequests =
@@ -137,6 +142,8 @@ class ReliablePartnerBonusStrategyTest {
     when(transactionQuery.getAllByDriverIdAndQWeekId(2L, 9L)).thenReturn(rentTransactions);
     when(transactionTypeQuery.getByName("bonus"))
         .thenReturn(TransactionTypeResponse.builder().id(33L).build());
+    when(qWeekQuery.getOneAfterById(9L))
+        .thenReturn(QWeekResponse.builder().start(LocalDate.now()).build());
 
     // when
     final var addTransactionRequests =
@@ -163,6 +170,8 @@ class ReliablePartnerBonusStrategyTest {
     when(transactionQuery.getAllByDriverIdAndQWeekId(2L, 9L)).thenReturn(rentTransactions);
     when(transactionTypeQuery.getByName("bonus"))
         .thenReturn(TransactionTypeResponse.builder().id(33L).build());
+    when(qWeekQuery.getOneAfterById(9L))
+        .thenReturn(QWeekResponse.builder().start(LocalDate.now()).build());
 
     // when
     final var addTransactionRequests =
@@ -189,6 +198,8 @@ class ReliablePartnerBonusStrategyTest {
     when(transactionQuery.getAllByDriverIdAndQWeekId(2L, 9L)).thenReturn(rentTransactions);
     when(transactionTypeQuery.getByName("bonus"))
         .thenReturn(TransactionTypeResponse.builder().id(33L).build());
+    when(qWeekQuery.getOneAfterById(9L))
+        .thenReturn(QWeekResponse.builder().start(LocalDate.now()).build());
 
     // when
     final var addTransactionRequests =
