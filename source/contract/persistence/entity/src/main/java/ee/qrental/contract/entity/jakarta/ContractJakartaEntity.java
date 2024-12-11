@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.envers.Audited;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "contract")
+@Audited
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

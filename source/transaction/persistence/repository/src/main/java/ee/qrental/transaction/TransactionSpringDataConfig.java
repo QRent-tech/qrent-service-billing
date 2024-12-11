@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories
-@EnableJpaAuditing
+
 @EntityScan("ee.qrental.transaction.entity.jakarta")
 public class TransactionSpringDataConfig {}

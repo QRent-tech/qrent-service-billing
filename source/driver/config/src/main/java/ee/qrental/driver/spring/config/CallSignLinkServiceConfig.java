@@ -1,5 +1,6 @@
 package ee.qrental.driver.spring.config;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrental.driver.api.out.*;
@@ -21,11 +22,12 @@ public class CallSignLinkServiceConfig {
       final CallSignLinkUpdateRequestMapper updateRequestMapper) {
     return new CallSignLinkQueryService(loadPort, mapper, updateRequestMapper);
   }
+
   @Bean
   GetFirmLinkQuery getFirmLinkQueryService(
-       final FirmLinkLoadPort loadPort,
-       final FirmLinkResponseMapper mapper,
-   final FirmLinkUpdateRequestMapper updateRequestMapper) {
+      final FirmLinkLoadPort loadPort,
+      final FirmLinkResponseMapper mapper,
+      final FirmLinkUpdateRequestMapper updateRequestMapper) {
     return new FirmLinkQueryService(loadPort, mapper, updateRequestMapper);
   }
 
@@ -37,7 +39,8 @@ public class CallSignLinkServiceConfig {
       final CallSignLinkLoadPort loadPort,
       final CallSignLinkAddRequestMapper addRequestMapper,
       final CallSignLinkUpdateRequestMapper updateRequestMapper,
-      final CallSignLinkBusinessRuleValidator businessRuleValidator) {
+      final CallSignLinkBusinessRuleValidator businessRuleValidator,
+      final QDateTime qDateTime) {
     return new CallSignLinkUseCaseService(
         addPort,
         updatePort,
@@ -45,6 +48,7 @@ public class CallSignLinkServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        businessRuleValidator);
+        businessRuleValidator,
+        qDateTime);
   }
 }

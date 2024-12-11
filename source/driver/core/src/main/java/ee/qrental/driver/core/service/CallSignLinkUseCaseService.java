@@ -1,5 +1,6 @@
 package ee.qrental.driver.core.service;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.driver.api.in.request.CallSignLinkAddRequest;
 import ee.qrental.driver.api.in.request.CallSignLinkCloseRequest;
 import ee.qrental.driver.api.in.request.CallSignLinkDeleteRequest;
@@ -17,7 +18,6 @@ import ee.qrental.driver.core.mapper.CallSignLinkUpdateRequestMapper;
 import ee.qrental.driver.core.validator.CallSignLinkBusinessRuleValidator;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.CallSignLink;
-import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -34,6 +34,7 @@ public class CallSignLinkUseCaseService
   private final CallSignLinkAddRequestMapper addRequestMapper;
   private final CallSignLinkUpdateRequestMapper updateRequestMapper;
   private final CallSignLinkBusinessRuleValidator businessRuleValidator;
+  private final QDateTime qDateTime;
 
   @Override
   public Long add(final CallSignLinkAddRequest request) {
@@ -57,13 +58,15 @@ public class CallSignLinkUseCaseService
       return;
     }
     final var linkToClose = loadPort.loadById(request.getId());
-    linkToClose.setDateEnd(LocalDate.now().minusDays(1L));
+    final var today = qDateTime.getToday();
+
+    linkToClose.setDateEnd(today.minusDays(1L));
     updatePort.update(linkToClose);
 
     final var linkToCreate =
         CallSignLink.builder()
             .callSign(CallSign.builder().id(request.getCallSignId()).build())
-            .dateStart(LocalDate.now())
+            .dateStart(today)
             .driverId(request.getDriverId())
             .build();
 
@@ -78,7 +81,8 @@ public class CallSignLinkUseCaseService
   @Override
   public void close(final CallSignLinkCloseRequest request) {
     final var linkToClose = loadPort.loadById(request.getId());
-    linkToClose.setDateEnd(LocalDate.now().minusDays(1L));
+    final var today = qDateTime.getToday();
+    linkToClose.setDateEnd(today.minusDays(1L));
     updatePort.update(linkToClose);
   }
 }

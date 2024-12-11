@@ -1,5 +1,6 @@
 package ee.qrental.car.spring.config;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.out.CarLinkAddPort;
 import ee.qrental.car.api.out.CarLinkDeletePort;
@@ -11,6 +12,7 @@ import ee.qrental.car.core.mapper.CarLinkUpdateRequestMapper;
 import ee.qrental.car.core.service.CarLinkQueryService;
 import ee.qrental.car.core.service.CarLinkUseCaseService;
 import ee.qrental.car.core.validator.CarLinkAddBusinessRuleValidator;
+import ee.qrental.car.core.validator.CarLinkUpdateBusinessRuleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,7 +35,9 @@ public class LinkServiceConfig {
       final CarLinkLoadPort loadPort,
       final CarLinkAddRequestMapper addRequestMapper,
       final CarLinkUpdateRequestMapper updateRequestMapper,
-      final CarLinkAddBusinessRuleValidator addBusinessRuleValidator) {
+      final CarLinkAddBusinessRuleValidator addValidator,
+      final CarLinkUpdateBusinessRuleValidator updateValidator,
+      final QDateTime qDateTime) {
     return new CarLinkUseCaseService(
         addPort,
         updatePort,
@@ -41,6 +45,8 @@ public class LinkServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        addBusinessRuleValidator);
+        addValidator,
+        updateValidator,
+        qDateTime);
   }
 }
