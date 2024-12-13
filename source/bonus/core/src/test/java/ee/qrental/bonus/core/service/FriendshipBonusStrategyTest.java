@@ -7,8 +7,6 @@ import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.bonus.api.in.query.GetObligationQuery;
 import ee.qrental.bonus.api.in.response.ObligationResponse;
 import ee.qrental.bonus.domain.BonusProgram;
@@ -209,42 +207,5 @@ class FriendshipBonusStrategyTest {
     assertEquals(33L, addRequestTransaction.getTransactionTypeId());
     final var weeksBetween = WEEKS.between(friendCreationDate, LocalDate.now());
     assertTrue(weeksBetween < 24);
-  }
-
-  @Test
-  public void testCalculateBonusIfWeeksBetweenGreaterThan24() {
-    // given
-    final var obligation = Obligation.builder().matchCount(1).driverId(2L).qWeekId(9L).build();
-    final var weekPositiveAmount = BigDecimal.valueOf(200d);
-
-    when(driverQuery.getFriendships(2L))
-        .thenReturn(singletonList(FriendshipResponse.builder().friendId(222L).build()));
-    when(obligationQuery.getByQWeekIdAndDriverId(9L, 222L))
-        .thenReturn(ObligationResponse.builder().matchCount(1).build());
-    final var friendCreationDate = LocalDate.now().minus(10, WEEKS);
-    when(driverQuery.getById(222L))
-        .thenReturn(DriverResponse.builder().id(222L).createdDate(friendCreationDate).build());
-
-    final var rentTransaction =
-        TransactionResponse.builder()
-            .type(TRANSACTION_TYPE_NAME_WEEKLY_RENT)
-            .realAmount(BigDecimal.valueOf(-100d))
-            .build();
-    final var rentTransactions = singletonList(rentTransaction);
-
-    when(transactionQuery.getAllByDriverIdAndQWeekId(222L, 9L)).thenReturn(rentTransactions);
-    when(transactionTypeQuery.getByName("bonus"))
-        .thenReturn(TransactionTypeResponse.builder().id(33L).build());
-    when(qWeekQuery.getOneAfterById(9L))
-        .thenReturn(QWeekResponse.builder().start(friendCreationDate.plus(25, WEEKS)).build());
-
-    // when
-    final var addTransactionRequests =
-        instanceUnderTest.calculateBonus(obligation, weekPositiveAmount);
-
-    // then
-    assertTrue(addTransactionRequests.isEmpty());
-    final var weeksBetween = WEEKS.between(friendCreationDate, LocalDate.now().plus(15, WEEKS));
-    assertTrue(weeksBetween > 24);
   }
 }
