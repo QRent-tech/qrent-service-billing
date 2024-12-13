@@ -6,7 +6,6 @@ import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.request.QWeekAddRequest;
 import ee.qrental.constant.api.in.request.QWeekUpdateRequest;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrental.constant.api.out.QWeekAddPort;
 import ee.qrental.constant.api.out.QWeekLoadPort;
 import ee.qrental.constant.core.mapper.QWeekResponseMapper;
 import ee.qrental.constant.core.mapper.QWeekUpdateRequestMapper;
@@ -94,8 +93,6 @@ public class QWeekQueryService implements GetQWeekQuery {
       final var qWeekAddRequest = new QWeekAddRequest();
       qWeekAddRequest.setWeekDate(date);
       qWeekUseCaseService.add(qWeekAddRequest);
-      throw new RuntimeException(
-          format("Q Week number: %d for the %d year is missing", number, year));
     }
 
     return mapper.toResponse(qWeek);
