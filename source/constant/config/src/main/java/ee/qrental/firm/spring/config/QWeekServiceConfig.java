@@ -21,8 +21,9 @@ public class QWeekServiceConfig {
       final QWeekLoadPort loadPort,
       final QWeekResponseMapper mapper,
       final QWeekUpdateRequestMapper updateRequestMapper,
-      final QDateTime qDateTime) {
-    return new QWeekQueryService(loadPort, mapper, updateRequestMapper, qDateTime);
+      final QDateTime qDateTime,
+      final QWeekUseCaseService qWeekUseCaseService) {
+    return new QWeekQueryService(loadPort, mapper, updateRequestMapper, qDateTime, qWeekUseCaseService);
   }
 
   @Bean
