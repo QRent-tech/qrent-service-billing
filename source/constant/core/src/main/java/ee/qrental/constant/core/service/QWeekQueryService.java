@@ -17,6 +17,7 @@ import java.util.List;
 
 import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
 import static java.lang.String.format;
+import static java.time.temporal.ChronoUnit.WEEKS;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
@@ -124,6 +125,11 @@ public class QWeekQueryService implements GetQWeekQuery {
     if (qWeekYear == 2023 && qWeekNumber == 1) {
       return null;
     }
+
+    final var date = qWeek.getStart().minus(1, WEEKS);
+    final var qWeekAddRequest = new QWeekAddRequest();
+    qWeekAddRequest.setWeekDate(date);
+    qWeekUseCaseService.add(qWeekAddRequest);
 
     if (previousWeekNumber == 0) {
       previousWeekYear = qWeekYear - 1;
