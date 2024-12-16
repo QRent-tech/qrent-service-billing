@@ -4,12 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
+
 @SuperBuilder
 @Getter
 @Setter
 public class Absence {
   private Long id;
   private Long driverId;
-  private Long qWeekId;
+  private LocalDate dateStart;
+  private LocalDate dateEnd;
+  private Boolean withCar;
+  private AbsenceReason reason;
   private String comment;
 }

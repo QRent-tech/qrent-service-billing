@@ -2,6 +2,7 @@ package ee.qrental.contract.adapter.repository;
 
 import ee.qrental.contract.entity.jakarta.AbsenceJakartaEntity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AbsenceRepository {
@@ -14,6 +15,9 @@ public interface AbsenceRepository {
 
   void deleteById(final Long id);
 
-  List<AbsenceJakartaEntity> findByDriverIdAndStartQWeekId(
-      final Long driverId, final Long startQWeekId);
+  List<AbsenceJakartaEntity> findByDriverIdAndDateStartAndDateEnd(
+      final Long driverId, final LocalDate dateStart, final LocalDate dateEnd);
+
+  List<AbsenceJakartaEntity> findByDriverIdAndDateStart(
+          final Long driverId, final LocalDate dateStart);
 }

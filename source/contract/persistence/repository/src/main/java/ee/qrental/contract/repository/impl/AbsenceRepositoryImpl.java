@@ -5,6 +5,7 @@ import ee.qrental.contract.entity.jakarta.AbsenceJakartaEntity;
 import ee.qrental.contract.repository.spring.AbsenceSpringDataRepository;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -32,8 +33,14 @@ public class AbsenceRepositoryImpl implements AbsenceRepository {
   }
 
   @Override
-  public List<AbsenceJakartaEntity> findByDriverIdAndStartQWeekId(
-      final Long driverId, final Long startQWeekId) {
-    return springDataRepository.findByDriverIdAndStartQWeekId(driverId, startQWeekId);
+  public List<AbsenceJakartaEntity> findByDriverIdAndDateStartAndDateEnd(
+      Long driverId, LocalDate dateStart, LocalDate dateEnd) {
+    return springDataRepository.findByDriverIdAndDateStartAndDateEnd(driverId, dateStart, dateEnd);
+  }
+
+  @Override
+  public List<AbsenceJakartaEntity> findByDriverIdAndDateStart(
+      final Long driverId, final LocalDate dateStart) {
+    return springDataRepository.findByDriverIdAndDateStart(driverId, dateStart);
   }
 }

@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class AbsenceResponseMapper implements ResponseMapper<AbsenceResponse, Absence> {
-  private final GetQWeekQuery qWeekQuery;
   private final GetDriverQuery driverQuery;
 
   @Override
@@ -19,30 +18,30 @@ public class AbsenceResponseMapper implements ResponseMapper<AbsenceResponse, Ab
     if (domain == null) {
       return null;
     }
-    final var qWeek = qWeekQuery.getById(domain.getQWeekId());
     final var driver = driverQuery.getById(domain.getDriverId());
     return AbsenceResponse.builder()
         .id(domain.getId())
-        .qWeekId(domain.getQWeekId())
-        .qWeekNumber(qWeek.getNumber())
-        .qWeekYear(qWeek.getYear())
-        .startDate(qWeek.getStart())
-        .endDate(qWeek.getEnd())
+        .dateStart(domain.getDateStart())
+        .dateEnd(domain.getDateEnd())
         .driverId(domain.getDriverId())
         .driverFirstName(driver.getFirstName())
         .driverLastName(driver.getLastName())
         .driverIsikukood(driver.getIsikukood())
+        .reason(domain.getReason().name())
+        .withCar(domain.getWithCar())
         .comment(domain.getComment())
         .build();
   }
 
   @Override
   public String toObjectInfo(final Absence domain) {
-
-    final var qWeek = qWeekQuery.getById(domain.getQWeekId());
     final var driver = driverQuery.getById(domain.getDriverId());
+    final var startDateString = domain.getDateStart().toString();
+    final var endDateString =
+        domain.getDateEnd() == null ? "empty" : domain.getDateEnd().toString();
+
     return format(
-        "Absence for Driver: %s %s and week: %d, %d",
-        driver.getFirstName(), driver.getLastName(), qWeek.getNumber(), qWeek.getYear());
+        "Absence for Driver: %s %s and period: [%s ... %s]",
+        driver.getFirstName(), driver.getLastName(), startDateString, endDateString);
   }
 }
