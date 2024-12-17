@@ -3,7 +3,7 @@ package ee.qrental.contract.core.mapper;
 import ee.qrent.common.in.mapper.AddRequestMapper;
 import ee.qrental.contract.api.in.request.AbsenceAddRequest;
 import ee.qrental.contract.domain.Absence;
-import ee.qrental.contract.domain.AbsenceReason;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -18,7 +18,7 @@ public class AbsenceAddRequestMapper implements AddRequestMapper<AbsenceAddReque
         .dateStart(request.getDateStart())
         .dateEnd(request.getDateEnd())
         .withCar(request.getWithCar())
-        .reason(AbsenceReason.valueOf(request.getReason()))
+        .reason(request.getReason())
         .comment(request.getComment())
         .build();
   }

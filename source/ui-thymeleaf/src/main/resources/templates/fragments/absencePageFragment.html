@@ -9,10 +9,10 @@
             <th>Driver's name</th>
             <th>Driver's last name</th>
             <th>Isikukood</th>
-            <th>Year</th>
-            <th>Week Nubmer</th>
             <th>Start date</th>
             <th>End date</th>
+            <th>With car</th>
+            <th>Reason</th>
             <th>Comment</th>
         </tr>
         <tr th:if="${#lists.isEmpty(absences)}">
@@ -33,10 +33,10 @@
             <td th:text="${absence.driverFirstName}">???</td>
             <td th:text="${absence.driverLastName}">???</td>
             <td th:text="${absence.driverIsikukood}">???</td>
-            <td th:text="${absence.qWeekYear}">???</td>
-            <td th:text="${absence.qWeekNumber}">???</td>
-            <td th:text="${qDateFormatter.format(absence.startDate)}">???</td>
-            <td th:text="${qDateFormatter.format(absence.endDate)}">???</td>
+            <td th:text="${qDateFormatter.format(absence.dateStart)}">???</td>
+            <td th:text="${qDateFormatter.format(absence.dateEnd)}">???</td>
+            <td th:text="${absence.withCar}">???</td>
+            <td th:text="${absence.reason}">???</td>
             <td th:text="${absence.comment}">???</td>
         </tr>
     </table>

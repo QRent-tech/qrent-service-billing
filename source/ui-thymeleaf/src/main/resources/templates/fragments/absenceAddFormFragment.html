@@ -22,19 +22,44 @@
                th:field="*{driverId}"
                type="number"
                hidden/>
-
-        <div class="row">
-            <div class="mb-3">
-                <label class="form-label text-muted" for="weekId">Select a week:</label>
-                <select id="weekId" class="form-select"
-                        th:field="*{qWeekId}">
-                    <option th:each="week: ${availableWeeks}"
-                            th:value="${week.id}"
-                            th:text="|Year: ${week.year}, number: ${week.number} - ${week.description}|"></option>
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label text-muted" for="reasonId">Select a Reason:</label>
+                <select id="reasonId" name="reason" class="form-select">
+                    <option
+                            th:each="reason : ${reasons}"
+                            th:text="${reason.displayValue}"
+                            th:value="${reason.name()}">
+                    </option>
                 </select>
+            </div>
+            <div class="col pt-4">
+                <input class="form-check-input" id="absenceCarWithDriverId"
+                       th:field="*{withCar}"
+                       type="checkbox"/>
+                <label class="form-check-label text-muted m-2" for="absenceCarWithDriverId">Does Car stay with
+                    Driver</label>
             </div>
         </div>
 
+        <div class="row mb-3">
+            <div class="col">
+
+                <label class="form-check-label text-muted" for="absenceDateStartId">Start date</label>
+                <input class="form-control" id="absenceDateStartId"
+                       placeholder="Enter Start Date"
+                       required
+                       th:field="*{dateStart}"
+                       type="date"/>
+            </div>
+            <div class="col">
+                <label class="form-check-label text-muted" for="absenceDateEndId">End date</label>
+                <input class="form-control" id="absenceDateEndId"
+                       placeholder="Enter End Date"
+                       th:field="*{dateEnd}"
+                       type="date"/>
+            </div>
+        </div>
         <div class="mb-3">
             <label class="form-label text-muted" for="commentId">Comment</label>
             <textarea class="form-control"

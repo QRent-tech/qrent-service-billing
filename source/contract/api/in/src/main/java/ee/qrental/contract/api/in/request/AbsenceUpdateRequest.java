@@ -1,6 +1,7 @@
 package ee.qrental.contract.api.in.request;
 
 import ee.qrent.common.in.request.AbstractUpdateRequest;
+import ee.qrental.common.core.enums.AbsenceReason;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class AbsenceUpdateRequest extends AbstractUpdateRequest {
   private LocalDate dateStart;
   private LocalDate dateEnd;
   private Boolean withCar;
-  private String reason;
+  private AbsenceReason reason;
   private Long driverId;
   private String comment;
 }

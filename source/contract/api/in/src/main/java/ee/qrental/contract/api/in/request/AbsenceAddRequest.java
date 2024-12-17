@@ -1,6 +1,7 @@
 package ee.qrental.contract.api.in.request;
 
 import ee.qrent.common.in.request.AbstractAddRequest;
+import ee.qrental.common.core.enums.AbsenceReason;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,6 @@ public class AbsenceAddRequest extends AbstractAddRequest {
   private LocalDate dateStart;
   private LocalDate dateEnd;
   private Boolean withCar;
-  private String reason;
+  private AbsenceReason reason;
   private String comment;
 }

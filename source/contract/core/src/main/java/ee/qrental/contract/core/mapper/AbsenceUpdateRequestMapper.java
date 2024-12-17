@@ -4,7 +4,6 @@ import ee.qrent.common.in.mapper.UpdateRequestMapper;
 import ee.qrental.contract.api.in.request.AbsenceUpdateRequest;
 import ee.qrental.contract.api.out.AbsenceLoadPort;
 import ee.qrental.contract.domain.Absence;
-import ee.qrental.contract.domain.AbsenceReason;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -20,7 +19,7 @@ public class AbsenceUpdateRequestMapper
     absenceFromDb.setDateStart(request.getDateStart());
     absenceFromDb.setDateEnd(request.getDateEnd());
     absenceFromDb.setWithCar(request.getWithCar());
-    absenceFromDb.setReason(AbsenceReason.valueOf(request.getReason()));
+    absenceFromDb.setReason(request.getReason());
     absenceFromDb.setComment(request.getComment());
 
     return absenceFromDb;
@@ -34,7 +33,7 @@ public class AbsenceUpdateRequestMapper
         .dateStart(domain.getDateStart())
         .dateEnd(domain.getDateEnd())
         .withCar(domain.getWithCar())
-        .reason(domain.getReason().name())
+        .reason(domain.getReason())
         .comment(domain.getComment())
         .build();
   }

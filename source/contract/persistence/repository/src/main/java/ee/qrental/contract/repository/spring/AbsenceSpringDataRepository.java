@@ -13,9 +13,9 @@ public interface AbsenceSpringDataRepository extends JpaRepository<AbsenceJakart
       value =
           "SELECT * FROM absence ab WHERE "
               + "ab.driver_id = :driverId "
-              + "AND (ab.date_end IS NULL and ab.date_start < :date_end) "
-              + "OR (ab.date_start => :dateStart and ab.date_start =< :dateEnd) "
-              + "OR (ab.date_end => :dateStart and ab.date_end =< :dateEnd);",
+              + "AND (ab.date_end IS NULL and ab.date_start < :dateEnd) "
+              + "OR (ab.date_start >= :dateStart and ab.date_start <= :dateEnd) "
+              + "OR (ab.date_end >= :dateStart and ab.date_end <= :dateEnd);",
       nativeQuery = true)
   List<AbsenceJakartaEntity> findByDriverIdAndDateStartAndDateEnd(
       @Param("driverId") final Long driverId,

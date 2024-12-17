@@ -1,7 +1,7 @@
 package ee.qrental.contract.adapter.mapper;
 
+import ee.qrental.common.core.enums.AbsenceReason;
 import ee.qrental.contract.domain.Absence;
-import ee.qrental.contract.domain.AbsenceReason;
 import ee.qrental.contract.entity.jakarta.AbsenceJakartaEntity;
 
 public class AbsenceAdapterMapper {

@@ -1,5 +1,6 @@
 package ee.qrental.contract.domain;
 
+import ee.qrental.common.core.enums.AbsenceReason;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;

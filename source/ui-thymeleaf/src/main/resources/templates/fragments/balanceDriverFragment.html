@@ -214,9 +214,10 @@
                                                 <table class="table table-sm table-borderless align-middle">
                                                     <tr>
                                                         <th scope="col">Actions:</th>
-                                                        <th scope="col">Week:</th>
                                                         <th scope="col">Start date:</th>
                                                         <th scope="col">End date:</th>
+                                                        <th scope="col">With car:</th>
+                                                        <th scope="col">Reason:</th>
                                                         <th scope="col">Comment:</th>
                                                     </tr>
 
@@ -237,20 +238,24 @@
                                                                aria-controls="offcanvasExample">
                                                                 <span class="bi bi-x-circle"></span>
                                                             </a>
-                                                        <td>
-                                                            <span th:text="|${absence.qWeekYear} - ${absence.qWeekNumber}|">???</span>
                                                         </td>
                                                         <td>
                                                             <a>
-                                                                <span th:text="${qDateFormatter.format(absence.startDate)}">???</span>
+                                                                <span th:text="${qDateFormatter.format(absence.dateStart)}">???</span>
                                                             </a>
                                                         </td>
                                                         <td>
                                                             <a>
                                                                 <a>
-                                                                    <span th:text="${qDateFormatter.format(absence.endDate)}">???</span>
+                                                                    <span th:text="${qDateFormatter.format(absence.dateEnd)}">???</span>
                                                                 </a>
                                                             </a>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${absence.withCar}">???</span>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${absence.reason}">???</span>
                                                         </td>
                                                         <td>
                                                             <span th:text="${absence.comment}">???</span>
