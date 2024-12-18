@@ -1,8 +1,9 @@
 package ee.qrental.ui.controller.driver;
 
 import static ee.qrental.ui.controller.util.ControllerUtils.*;
+import static java.util.Arrays.asList;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.common.core.enums.AbsenceReason;
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.contract.api.in.request.AbsenceAddRequest;
 import ee.qrental.contract.api.in.request.AbsenceDeleteRequest;
@@ -25,7 +26,6 @@ public class AbsenceUseCaseController {
   private final AbsenceUpdateUseCase updateUseCase;
   private final AbsenceDeleteUseCase deleteUseCase;
   private final GetAbsenceQuery absenceQuery;
-  private final GetQWeekQuery qWeekQuery;
   private final GetDriverQuery driverQuery;
 
   @GetMapping(value = "/add-form/{driverId}")
@@ -34,7 +34,7 @@ public class AbsenceUseCaseController {
     addRequest.setDriverId(driverId);
     addAddRequestToModel(addRequest, model);
     addDriverInfoToModel(driverId, model);
-    addLastTenQWeeksToModel(model);
+    addReasonsToModel(model);
 
     return "forms/addAbsence";
   }
@@ -45,6 +45,7 @@ public class AbsenceUseCaseController {
     if (addRequest.hasViolations()) {
       addAddRequestToModel(addRequest, model);
       addDriverInfoToModel(addRequest.getDriverId(), model);
+      addReasonsToModel(model);
 
       return "forms/addAbsence";
     }
@@ -56,18 +57,12 @@ public class AbsenceUseCaseController {
     model.addAttribute("addRequest", addRequest);
   }
 
-  private void addLastTenQWeeksToModel(final Model model) {
-    final var availableWeeks = qWeekQuery.getLastTenWeeksFromToday();
-
-    model.addAttribute("availableWeeks", availableWeeks);
-  }
-
   @GetMapping(value = "/update-form/{id}")
   public String updateForm(@PathVariable("id") long id, final Model model) {
     final var updateRequest = absenceQuery.getUpdateRequestById(id);
     addUpdateRequestToModel(model, updateRequest);
     addDriverInfoToModel(updateRequest.getDriverId(), model);
-    addLastTenQWeeksToModel(model);
+    addReasonsToModel(model);
 
     return "forms/updateAbsence";
   }
@@ -79,7 +74,7 @@ public class AbsenceUseCaseController {
     if (updateRequest.hasViolations()) {
       addUpdateRequestToModel(model, updateRequest);
       addDriverInfoToModel(driverId, model);
-      addLastTenQWeeksToModel(model);
+      addReasonsToModel(model);
 
       return "forms/updateAbsence";
     }
@@ -116,5 +111,9 @@ public class AbsenceUseCaseController {
   private void addDriverInfoToModel(final Long driverId, final Model model) {
     final var driver = driverQuery.getById(driverId);
     model.addAttribute("driver", driver);
+  }
+
+  private void addReasonsToModel(final Model model) {
+    model.addAttribute("reasons", asList(AbsenceReason.class.getEnumConstants()));
   }
 }

@@ -9,17 +9,13 @@ import java.time.LocalDate;
 @Getter
 public class AbsenceResponse {
   private Long id;
-
   private Long driverId;
   private String driverFirstName;
   private String driverLastName;
   private Long driverIsikukood;
-
-  private Long qWeekId;
-  private Integer qWeekNumber;
-  private Integer qWeekYear;
-  private LocalDate startDate;
-  private LocalDate endDate;
-
+  private String reason;
+  private Boolean withCar;
+  private LocalDate dateStart;
+  private LocalDate dateEnd;
   private String comment;
 }

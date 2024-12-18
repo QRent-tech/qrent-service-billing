@@ -24,9 +24,8 @@ public class AbsenceMapperConfig {
   }
 
   @Bean
-  AbsenceResponseMapper getAbsenceResponseMapper(
-      final GetQWeekQuery qWeekQuery, final GetDriverQuery driverQuery) {
+  AbsenceResponseMapper getAbsenceResponseMapper(final GetDriverQuery driverQuery) {
 
-    return new AbsenceResponseMapper(qWeekQuery, driverQuery);
+    return new AbsenceResponseMapper(driverQuery);
   }
 }

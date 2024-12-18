@@ -8,6 +8,7 @@ import ee.qrental.contract.api.out.AbsenceLoadPort;
 
 import ee.qrental.contract.domain.Absence;
 
+import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -18,18 +19,6 @@ public class AbsenceLoadAdapter implements AbsenceLoadPort {
   private final AbsenceAdapterMapper mapper;
 
   @Override
-  public Absence loadByDriverIdAndQWekId(Long driverId, Long qWeekId) {
-    return null;
-  }
-
-  @Override
-  public List<Absence> loadByDriverIdAndStartQWeekId(final Long driverId, final Long startQWeekId) {
-    return repository.findByDriverIdAndStartQWeekId(driverId, startQWeekId).stream()
-        .map(mapper::mapToDomain)
-        .collect(toList());
-  }
-
-  @Override
   public List<Absence> loadAll() {
     return repository.findAll().stream().map(mapper::mapToDomain).collect(toList());
   }
@@ -37,5 +26,20 @@ public class AbsenceLoadAdapter implements AbsenceLoadPort {
   @Override
   public Absence loadById(Long id) {
     return mapper.mapToDomain(repository.findById(id));
+  }
+
+  @Override
+  public List<Absence> loadByDriverIdAndDateStartAndDateEnd(
+      final Long driverId, final LocalDate dateStart, final LocalDate dateEnd) {
+    return repository.findByDriverIdAndDateStartAndDateEnd(driverId, dateStart, dateEnd).stream()
+        .map(mapper::mapToDomain)
+        .collect(toList());
+  }
+
+  @Override
+  public List<Absence> loadByDriverIdAndDateStart(final Long driverId, final LocalDate dateStart) {
+    return repository.findByDriverIdAndDateStart(driverId, dateStart).stream()
+        .map(mapper::mapToDomain)
+        .collect(toList());
   }
 }

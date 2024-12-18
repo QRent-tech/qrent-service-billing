@@ -7,7 +7,7 @@ import ee.qrental.contract.api.in.usecase.*;
 import ee.qrental.contract.api.out.*;
 import ee.qrental.contract.core.mapper.AbsenceAddRequestMapper;
 import ee.qrental.contract.core.mapper.AbsenceUpdateRequestMapper;
-import ee.qrental.contract.core.validator.AbsenceAddBusinessRuleValidator;
+import ee.qrental.contract.core.validator.AbsenceBusinessRuleValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
@@ -20,7 +20,7 @@ public class AbsenceUseCaseService
   private final AbsenceDeletePort deletePort;
   private final AbsenceAddRequestMapper addRequestMapper;
   private final AbsenceUpdateRequestMapper updateRequestMapper;
-  private final AbsenceAddBusinessRuleValidator businessRuleValidator;
+  private final AbsenceBusinessRuleValidator businessRuleValidator;
 
   @Override
   public Long add(final AbsenceAddRequest request) {
@@ -38,11 +38,24 @@ public class AbsenceUseCaseService
 
   @Override
   public void update(final AbsenceUpdateRequest request) {
-    updatePort.update(updateRequestMapper.toDomain(request));
+    final var violationsCollector = businessRuleValidator.validateUpdate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+
+      return;
+    }
+    final var absence = updateRequestMapper.toDomain(request);
+    updatePort.update(absence);
   }
 
   @Override
   public void delete(final AbsenceDeleteRequest request) {
+    final var violationsCollector = businessRuleValidator.validateDelete(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+
+      return;
+    }
     deletePort.delete(request.getId());
   }
 }

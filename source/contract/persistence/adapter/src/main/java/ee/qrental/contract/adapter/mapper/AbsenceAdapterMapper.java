@@ -1,5 +1,6 @@
 package ee.qrental.contract.adapter.mapper;
 
+import ee.qrental.common.core.enums.AbsenceReason;
 import ee.qrental.contract.domain.Absence;
 import ee.qrental.contract.entity.jakarta.AbsenceJakartaEntity;
 
@@ -14,7 +15,10 @@ public class AbsenceAdapterMapper {
     return Absence.builder()
         .id(entity.getId())
         .driverId(entity.getDriverId())
-        .qWeekId(entity.getQWeekId())
+        .dateStart(entity.getDateStart())
+        .dateEnd(entity.getDateEnd())
+        .reason(AbsenceReason.valueOf(entity.getReason()))
+        .withCar(entity.getWithCar())
         .comment(entity.getComment())
         .build();
   }
@@ -28,7 +32,10 @@ public class AbsenceAdapterMapper {
     return AbsenceJakartaEntity.builder()
         .id(domain.getId())
         .driverId(domain.getDriverId())
-        .qWeekId(domain.getQWeekId())
+        .dateStart(domain.getDateStart())
+        .dateEnd(domain.getDateEnd())
+        .reason(domain.getReason().name())
+        .withCar(domain.getWithCar())
         .comment(domain.getComment())
         .build();
   }

@@ -22,7 +22,6 @@ public class AbsenceQueryService implements GetAbsenceQuery {
   private static final Long DEFAULT_PERIOD_IN_WEEKS = 10L;
 
   private final GetContractQuery contractQuery;
-  private final GetQWeekQuery qWeekQuery;
   private final AbsenceLoadPort loadPort;
   private final AbsenceResponseMapper mapper;
   private final AbsenceUpdateRequestMapper updateRequestMapper;
@@ -53,10 +52,9 @@ public class AbsenceQueryService implements GetAbsenceQuery {
   public List<AbsenceResponse> getActualAbsencesByDriverId(final Long driverId) {
     final var activeContract = contractQuery.getCurrentActiveByDriverId(driverId);
     final var startDate = getContractLastProlongationStartDate(activeContract);
-    final var contractLastProlongationStartQWeek = qWeekQuery.getByDate(startDate);
 
     return loadPort
-        .loadByDriverIdAndStartQWeekId(driverId, contractLastProlongationStartQWeek.getId())
+        .loadByDriverIdAndDateStart(driverId, startDate)
         .stream()
         .map(mapper::toResponse)
         .collect(toList());

@@ -1,8 +1,11 @@
 package ee.qrental.contract.domain;
 
+import ee.qrental.common.core.enums.AbsenceReason;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDate;
 
 @SuperBuilder
 @Getter
@@ -10,6 +13,9 @@ import lombok.experimental.SuperBuilder;
 public class Absence {
   private Long id;
   private Long driverId;
-  private Long qWeekId;
+  private LocalDate dateStart;
+  private LocalDate dateEnd;
+  private Boolean withCar;
+  private AbsenceReason reason;
   private String comment;
 }
