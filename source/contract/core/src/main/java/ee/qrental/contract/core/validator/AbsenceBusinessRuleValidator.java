@@ -26,65 +26,64 @@ public class AbsenceBusinessRuleValidator {
     final var driverId = addRequest.getDriverId();
     final var dateStart = addRequest.getDateStart();
     final var dateEnd = addRequest.getDateEnd();
+    final var violationsCollector = new ViolationsCollector();
 
-    return collectViolationsForAddOrUpdate(driverId, dateStart, dateEnd);
+    final var overlappedAbsences = getOverlappedAbsences(driverId, dateStart, dateEnd);
+    if (!overlappedAbsences.isEmpty()) {
+      final var dateStartString = dateStart.toString();
+      final var dateEndString = dateEnd == null ? "empty" : dateEnd.toString();
+
+      violationsCollector.collect(
+          format(
+              "Absences can not be added for the driver id: %d and time interval: [%s ... %s ] already exists.",
+              driverId, dateStartString, dateEndString));
+    }
+
+    return collectViolationsForOverlappingWithBalanceCalculation(dateStart, violationsCollector);
   }
 
   public ViolationsCollector validateUpdate(final AbsenceUpdateRequest updateRequest) {
+    final var id = updateRequest.getId();
     final var driverId = updateRequest.getDriverId();
     final var dateStart = updateRequest.getDateStart();
     final var dateEnd = updateRequest.getDateEnd();
+    final var violationsCollector = new ViolationsCollector();
+    final var overlappedAbsences = getOverlappedAbsences(driverId, dateStart, dateEnd);
+    final var overlappedAbsencesExceptUpdatedCount =
+        overlappedAbsences.stream().filter(absence -> !absence.getId().equals(id)).count();
 
-    return collectViolationsForAddOrUpdate(driverId, dateStart, dateEnd);
+    if (overlappedAbsencesExceptUpdatedCount > 0L) {
+      violationsCollector.collect(
+          format(
+              "Absences can not be updated for the driver id: %d  and time interval: [%s ... %s ], because it overlaps with existing.",
+              driverId, dateStart.toString(), dateEnd == null ? "empty" : dateEnd.toString()));
+    }
+
+    return collectViolationsForOverlappingWithBalanceCalculation(dateStart, violationsCollector);
   }
 
   public ViolationsCollector validateDelete(final AbsenceDeleteRequest deleteRequest) {
     final var violationsCollector = new ViolationsCollector();
     final var absenceToDelete = loadPort.loadById(deleteRequest.getId());
     final var absenceToDeleteDateStart = absenceToDelete.getDateStart();
-    collectViolationsForOverlappingWithBalanceCalculation(
+
+    return collectViolationsForOverlappingWithBalanceCalculation(
         absenceToDeleteDateStart, violationsCollector);
-
-    return violationsCollector;
   }
 
-  private ViolationsCollector collectViolationsForAddOrUpdate(
+  private List<Absence> getOverlappedAbsences(
       final Long driverId, final LocalDate dateStart, final LocalDate dateEnd) {
-    final var violationsCollector = new ViolationsCollector();
-    collectViolationsForTimeOverlappingWithExistingAbsences(
-        driverId, dateStart, dateEnd, violationsCollector);
-    collectViolationsForOverlappingWithBalanceCalculation(dateStart, violationsCollector);
-
-    return violationsCollector;
-  }
-
-  private void collectViolationsForTimeOverlappingWithExistingAbsences(
-      final Long driverId,
-      final LocalDate dateStart,
-      final LocalDate dateEnd,
-      final ViolationsCollector violationCollector) {
-    List<Absence> overlappedAbsences;
     if (dateEnd == null) {
-      overlappedAbsences = loadPort.loadByDriverIdAndDateStart(driverId, dateStart);
-    } else {
-      overlappedAbsences =
-          loadPort.loadByDriverIdAndDateStartAndDateEnd(driverId, dateStart, dateEnd);
+      return loadPort.loadByDriverIdAndDateStart(driverId, dateStart);
     }
-    if (overlappedAbsences.isEmpty()) {
-
-      return;
-    }
-    violationCollector.collect(
-        format(
-            "Absences for the driver id: %d  and time interval: [%s ... %s ] already exists.",
-            driverId, dateStart.toString(), dateEnd == null ? "empty" : dateEnd.toString()));
+    return loadPort.loadByDriverIdAndDateStartAndDateEnd(driverId, dateStart, dateEnd);
   }
 
-  private void collectViolationsForOverlappingWithBalanceCalculation(
+  private ViolationsCollector collectViolationsForOverlappingWithBalanceCalculation(
       final LocalDate dateStart, final ViolationsCollector violationCollector) {
     final var latestBalance = balanceQuery.getLatest();
     if (latestBalance == null) {
-      return;
+      return violationCollector;
     }
 
     final var latestBalanceQWeekId = latestBalance.getQWeekId();
@@ -93,5 +92,6 @@ public class AbsenceBusinessRuleValidator {
       violationCollector.collect(
           "Absences can not be modified. Balance has been calculated for the related time period");
     }
+    return violationCollector;
   }
 }
