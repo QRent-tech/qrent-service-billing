@@ -8,23 +8,26 @@ import ee.qrent.common.in.request.ViolationsCollector;
 import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.request.TransactionAddRequest;
+import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.domain.balance.Balance;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-public class TransactionAddRequestValidator
+public class TransactionAddRequestValidator extends AbstractTransactionRequestValidator
     implements AddRequestValidator<TransactionAddRequest> {
 
-  private final GetQWeekQuery qWeekQuery;
-  private final BalanceLoadPort balanceLoadPort;
+  public TransactionAddRequestValidator(
+      final GetQWeekQuery qWeekQuery,
+      final TransactionLoadPort transactionLoadPort,
+      final BalanceLoadPort balanceLoadPort) {
+    super(qWeekQuery, transactionLoadPort, balanceLoadPort);
+  }
 
   public ViolationsCollector validate(final TransactionAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
     checkTransactionTypeForAdd(request, violationsCollector);
 
-    final var latestBalance = balanceLoadPort.loadLatestByDriverId(request.getDriverId());
+    final var latestBalance = getBalanceLoadPort().loadLatestByDriverId(request.getDriverId());
     if (latestBalance == null) {
       return violationsCollector;
     }
@@ -60,7 +63,7 @@ public class TransactionAddRequestValidator
   }
 
   private LocalDate getLatestBalanceDate(final Balance balance) {
-    final var latestBalanceQWeek = qWeekQuery.getById(balance.getQWeekId());
+    final var latestBalanceQWeek = getQWeekQuery().getById(balance.getQWeekId());
     return latestBalanceQWeek.getEnd();
   }
 }
