@@ -38,7 +38,7 @@ class InsuranceCalculationUseCaseServiceTest {
             calculationAddRequestMapper,
             qWeekQuery,
             insuranceCaseBalanceCalculator,
-                addRequestValidator);
+            addRequestValidator);
   }
 
   @Test

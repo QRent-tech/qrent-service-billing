@@ -1,6 +1,8 @@
 package ee.qrental.contract.spring.config;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.contract.api.in.query.GetAuthorizationQuery;
+import ee.qrental.contract.api.in.request.AuthorizationAddRequest;
 import ee.qrental.contract.api.in.usecase.AuthorizationPdfUseCase;
 import ee.qrental.contract.api.in.usecase.AuthorizationSendByEmailUseCase;
 import ee.qrental.contract.api.out.*;
@@ -32,7 +34,7 @@ public class AuthorizationServiceConfig {
       final AuthorizationLoadPort loadPort,
       final AuthorizationAddRequestMapper addRequestMapper,
       final AuthorizationUpdateRequestMapper updateRequestMapper,
-      final AuthorizationAddRequestValidator addRequestValidator) {
+      final AddRequestValidator<AuthorizationAddRequest> addRequestValidator) {
     return new AuthorizationUseCaseService(
         addPort,
         updatePort,

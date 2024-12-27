@@ -2,9 +2,11 @@ package ee.qrental.contract.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.CloseRequestValidator;
 import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
+import ee.qrental.contract.api.in.request.ContractCloseRequest;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrental.contract.api.in.usecase.ContractPdfUseCase;
@@ -70,7 +72,7 @@ public class ContractServiceConfig {
       final GetDriverQuery driverQuery,
       final GetInsuranceCaseQuery insuranceCaseQuery,
       final InsuranceCaseCloseUseCase insuranceCaseCloseUseCase,
-      final ContractCloseRequestValidator closeRuleValidator,
+      final CloseRequestValidator<ContractCloseRequest> closeRequestValidator,
       final QDateTime qDateTime) {
 
     return new ContractCloseUseCaseService(
@@ -79,7 +81,7 @@ public class ContractServiceConfig {
         driverQuery,
         insuranceCaseQuery,
         insuranceCaseCloseUseCase,
-        closeRuleValidator,
+        closeRequestValidator,
         qDateTime);
   }
 

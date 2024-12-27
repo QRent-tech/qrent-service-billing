@@ -14,7 +14,7 @@ import ee.qrental.driver.api.out.CallSignLoadPort;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CallSignLinkRequestValidator
+public class CallSignLinkAddUpdateDeleteRequestValidator
     implements AddRequestValidator<CallSignLinkAddRequest>,
         UpdateRequestValidator<CallSignLinkUpdateRequest>,
         DeleteRequestValidator<CallSignLinkDeleteRequest> {

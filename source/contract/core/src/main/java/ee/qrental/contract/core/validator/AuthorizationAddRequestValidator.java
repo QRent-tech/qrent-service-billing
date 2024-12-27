@@ -3,12 +3,13 @@ package ee.qrental.contract.core.validator;
 import static java.lang.String.format;
 
 import ee.qrent.common.in.request.ViolationsCollector;
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.contract.api.in.request.AuthorizationAddRequest;
 import ee.qrental.contract.api.out.AuthorizationLoadPort;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class AuthorizationAddRequestValidator {
+public class AuthorizationAddRequestValidator implements AddRequestValidator<AuthorizationAddRequest> {
 
   private final AuthorizationLoadPort loadPort;
 

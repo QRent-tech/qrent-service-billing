@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.in.query.GetCarQuery;
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.email.api.in.request.EmailSendRequest;
 import ee.qrental.email.api.in.request.EmailType;
@@ -36,7 +37,7 @@ public class RentCalculationService implements RentCalculationAddUseCase {
   private final TransactionUseCaseService transactionUseCaseService;
   private final RentCalculationAddPort rentCalculationAddPort;
   private final RentCalculationAddRequestMapper addRequestMapper;
-  private final RentCalculationAddRequestValidator addRequestValidator;
+  private final AddRequestValidator<RentCalculationAddRequest> addRequestValidator;
   private final EmailSendUseCase emailSendUseCase;
   private final GetUserAccountQuery userAccountQuery;
   private final GetQWeekQuery qWeekQuery;

@@ -41,10 +41,8 @@ public class LinkServiceConfig {
       final CarLinkLoadPort loadPort,
       final CarLinkAddRequestMapper addRequestMapper,
       final AddRequestValidator<CarLinkAddRequest> addRequestValidator,
-   final UpdateRequestValidator<CarLinkUpdateRequest> updateRequestValidator,
-   final DeleteRequestValidator<CarLinkDeleteRequest> deleteRequestValidator,
-
-
+      final UpdateRequestValidator<CarLinkUpdateRequest> updateRequestValidator,
+      final DeleteRequestValidator<CarLinkDeleteRequest> deleteRequestValidator,
       final QDateTime qDateTime) {
     return new CarLinkUseCaseService(
         addPort,
@@ -52,9 +50,9 @@ public class LinkServiceConfig {
         deletePort,
         loadPort,
         addRequestMapper,
-            addRequestValidator,
-            updateRequestValidator,
-            deleteRequestValidator,
+        addRequestValidator,
+        updateRequestValidator,
+        deleteRequestValidator,
         qDateTime);
   }
 }

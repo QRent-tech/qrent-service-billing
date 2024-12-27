@@ -2,6 +2,7 @@ package ee.qrental.contract.core.service;
 
 import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.contract.api.in.request.*;
 import ee.qrental.contract.api.in.usecase.*;
 import ee.qrental.contract.api.out.*;
@@ -14,9 +15,7 @@ import lombok.AllArgsConstructor;
 @Transactional(SUPPORTS)
 @AllArgsConstructor
 public class AuthorizationUseCaseService
-    implements AuthorizationAddUseCase,
-        AuthorizationUpdateUseCase,
-        AuthorizationDeleteUseCase {
+    implements AuthorizationAddUseCase, AuthorizationUpdateUseCase, AuthorizationDeleteUseCase {
 
   private final AuthorizationBoltAddPort addPort;
   private final AuthorizationBoltUpdatePort updatePort;
@@ -24,7 +23,7 @@ public class AuthorizationUseCaseService
   private final AuthorizationLoadPort loadPort;
   private final AuthorizationAddRequestMapper addRequestMapper;
   private final AuthorizationUpdateRequestMapper updateRequestMapper;
-  private final AuthorizationAddRequestValidator addRequestValidator;
+  private final AddRequestValidator<AuthorizationAddRequest> addRequestValidator;
 
   @Override
   public Long add(final AuthorizationAddRequest request) {

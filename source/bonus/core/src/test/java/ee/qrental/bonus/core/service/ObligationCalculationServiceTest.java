@@ -61,7 +61,7 @@ class ObligationCalculationServiceTest {
             obligationAddPort,
             loadPort,
             addRequestMapper,
-                addRequestValidator,
+            addRequestValidator,
             obligationCalculator);
   }
   // TODO ...
