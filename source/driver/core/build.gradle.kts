@@ -1,5 +1,6 @@
 dependencies {
     implementation(project(":source:common:api"))
+    implementation(project(":source:common:core"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:bonus:api:in"))
     implementation(project(":source:insurance:api:in"))

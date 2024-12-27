@@ -10,11 +10,10 @@ import ee.qrental.bonus.api.in.usecase.BonusCalculationAddUseCase;
 import ee.qrental.bonus.api.out.*;
 import ee.qrental.bonus.core.mapper.*;
 import ee.qrental.bonus.core.service.*;
-import ee.qrental.bonus.core.validator.BonusCalculationAddBusinessRuleValidator;
+import ee.qrental.bonus.core.validator.BonusCalculationAddRequestValidator;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
-import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
@@ -92,7 +91,7 @@ public class BonusServiceConfig {
       final BonusCalculationAddPort calculationAddPort,
       final ObligationLoadPort obligationLoadPort,
       final BonusCalculationAddRequestMapper addRequestMapper,
-      final BonusCalculationAddBusinessRuleValidator addBusinessRuleValidator,
+      final BonusCalculationAddRequestValidator addRequestValidator,
       final List<BonusStrategy> bonusStrategies) {
     return new BonusCalculationService(
         qWeekQuery,
@@ -105,7 +104,7 @@ public class BonusServiceConfig {
         calculationAddPort,
         obligationLoadPort,
         addRequestMapper,
-        addBusinessRuleValidator,
+        addRequestValidator,
         bonusStrategies);
   }
 }

@@ -1,12 +1,17 @@
 package ee.qrental.contract.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.DeleteRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
+import ee.qrental.contract.api.in.request.AbsenceAddRequest;
+import ee.qrental.contract.api.in.request.AbsenceDeleteRequest;
+import ee.qrental.contract.api.in.request.AbsenceUpdateRequest;
 import ee.qrental.contract.api.out.*;
 import ee.qrental.contract.core.mapper.*;
 import ee.qrental.contract.core.service.*;
-import ee.qrental.contract.core.validator.AbsenceBusinessRuleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,7 +35,9 @@ public class AbsenceServiceConfig {
       final AbsenceDeletePort deletePort,
       final AbsenceAddRequestMapper addRequestMapper,
       final AbsenceUpdateRequestMapper updateRequestMapper,
-      final AbsenceBusinessRuleValidator businessRuleValidator) {
+      final AddRequestValidator<AbsenceAddRequest> addRequestValidator,
+      final UpdateRequestValidator<AbsenceUpdateRequest> updateRequestValidator,
+      final DeleteRequestValidator<AbsenceDeleteRequest> deleteRequestValidator) {
 
     return new AbsenceUseCaseService(
         addPort,
@@ -38,6 +45,8 @@ public class AbsenceServiceConfig {
         deletePort,
         addRequestMapper,
         updateRequestMapper,
-        businessRuleValidator);
+        addRequestValidator,
+        updateRequestValidator,
+        deleteRequestValidator);
   }
 }

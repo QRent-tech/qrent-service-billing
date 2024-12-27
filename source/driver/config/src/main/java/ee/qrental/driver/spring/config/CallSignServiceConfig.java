@@ -1,6 +1,12 @@
 package ee.qrental.driver.spring.config;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.DeleteRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.driver.api.in.query.GetCallSignQuery;
+import ee.qrental.driver.api.in.request.CallSignAddRequest;
+import ee.qrental.driver.api.in.request.CallSignDeleteRequest;
+import ee.qrental.driver.api.in.request.CallSignUpdateRequest;
 import ee.qrental.driver.api.out.CallSignAddPort;
 import ee.qrental.driver.api.out.CallSignDeletePort;
 import ee.qrental.driver.api.out.CallSignLoadPort;
@@ -10,7 +16,6 @@ import ee.qrental.driver.core.mapper.CallSignResponseMapper;
 import ee.qrental.driver.core.mapper.CallSignUpdateRequestMapper;
 import ee.qrental.driver.core.service.CallSignQueryService;
 import ee.qrental.driver.core.service.CallSignUseCaseService;
-import ee.qrental.driver.core.validator.CallSignBusinessRuleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,17 +35,19 @@ public class CallSignServiceConfig {
       final CallSignAddPort addPort,
       final CallSignUpdatePort updatePort,
       final CallSignDeletePort deletePort,
-      final CallSignLoadPort loadPort,
       final CallSignAddRequestMapper addRequestMapper,
       final CallSignUpdateRequestMapper updateRequestMapper,
-      final CallSignBusinessRuleValidator businessRuleValidator) {
+      final AddRequestValidator<CallSignAddRequest> addRequestValidator,
+      final UpdateRequestValidator<CallSignUpdateRequest> updateRequestValidator,
+      final DeleteRequestValidator<CallSignDeleteRequest> deleteRequestValidator) {
     return new CallSignUseCaseService(
         addPort,
         updatePort,
         deletePort,
-        loadPort,
         addRequestMapper,
         updateRequestMapper,
-        businessRuleValidator);
+        addRequestValidator,
+        updateRequestValidator,
+        deleteRequestValidator);
   }
 }

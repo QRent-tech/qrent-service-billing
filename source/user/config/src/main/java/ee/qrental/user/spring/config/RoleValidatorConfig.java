@@ -2,7 +2,7 @@ package ee.qrental.user.spring.config;
 
 import ee.qrental.user.api.out.RoleLoadPort;
 import ee.qrental.user.api.out.UserAccountLoadPort;
-import ee.qrental.user.core.validator.RoleBusinessRuleValidator;
+import ee.qrental.user.core.validator.RoleAddUpdateDeleteValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,9 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class RoleValidatorConfig {
 
   @Bean
-  RoleBusinessRuleValidator getRoleBusinessRuleValidator(
-          final RoleLoadPort loadPort, 
-          final UserAccountLoadPort userAccountLoadPort) {
-    return new RoleBusinessRuleValidator(loadPort, userAccountLoadPort);
+  RoleAddUpdateDeleteValidator getRoleAddUpdateDeleteValidator(
+      final RoleLoadPort loadPort, final UserAccountLoadPort userAccountLoadPort) {
+    return new RoleAddUpdateDeleteValidator(loadPort, userAccountLoadPort);
   }
 }

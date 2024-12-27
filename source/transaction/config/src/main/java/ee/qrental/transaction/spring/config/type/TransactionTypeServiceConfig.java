@@ -1,6 +1,10 @@
 package ee.qrental.transaction.spring.config.type;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrental.transaction.api.in.request.type.TransactionTypeAddRequest;
+import ee.qrental.transaction.api.in.request.type.TransactionTypeUpdateRequest;
 import ee.qrental.transaction.api.out.type.TransactionTypeAddPort;
 import ee.qrental.transaction.api.out.type.TransactionTypeDeletePort;
 import ee.qrental.transaction.api.out.type.TransactionTypeLoadPort;
@@ -10,8 +14,8 @@ import ee.qrental.transaction.core.mapper.type.TransactionTypeResponseMapper;
 import ee.qrental.transaction.core.mapper.type.TransactionTypeUpdateRequestMapper;
 import ee.qrental.transaction.core.service.type.TransactionTypeQueryService;
 import ee.qrental.transaction.core.service.type.TransactionTypeUseCaseService;
-import ee.qrental.transaction.core.validator.TransactionTypeAddBusinessRuleValidator;
-import ee.qrental.transaction.core.validator.TransactionTypeUpdateBusinessRuleValidator;
+import ee.qrental.transaction.core.validator.TransactionTypeAddRequestValidator;
+import ee.qrental.transaction.core.validator.TransactionTypeUpdateRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,8 +38,8 @@ public class TransactionTypeServiceConfig {
       final TransactionTypeLoadPort loadPort,
       final TransactionTypeAddRequestMapper addRequestMapper,
       final TransactionTypeUpdateRequestMapper updateRequestMapper,
-      final TransactionTypeAddBusinessRuleValidator addBusinessRuleValidator,
-      final TransactionTypeUpdateBusinessRuleValidator updateBusinessRuleValidator) {
+      final AddRequestValidator<TransactionTypeAddRequest> addRequestValidator,
+      final UpdateRequestValidator<TransactionTypeUpdateRequest> updateRequestValidator) {
     return new TransactionTypeUseCaseService(
         addPort,
         updatePort,
@@ -43,7 +47,7 @@ public class TransactionTypeServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        addBusinessRuleValidator,
-        updateBusinessRuleValidator);
+        addRequestValidator,
+        updateRequestValidator);
   }
 }

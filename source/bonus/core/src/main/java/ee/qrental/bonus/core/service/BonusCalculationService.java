@@ -1,6 +1,5 @@
 package ee.qrental.bonus.core.service;
 
-import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.toList;
 
@@ -8,11 +7,11 @@ import ee.qrental.bonus.api.in.request.BonusCalculationAddRequest;
 import ee.qrental.bonus.api.in.usecase.BonusCalculationAddUseCase;
 import ee.qrental.bonus.api.out.*;
 import ee.qrental.bonus.core.mapper.BonusCalculationAddRequestMapper;
-import ee.qrental.bonus.core.validator.BonusCalculationAddBusinessRuleValidator;
 import ee.qrental.bonus.domain.BonusCalculationResult;
 import ee.qrental.bonus.domain.BonusProgram;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.in.response.CarLinkResponse;
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.email.api.in.request.EmailSendRequest;
 import ee.qrental.email.api.in.request.EmailType;
@@ -42,14 +41,14 @@ public class BonusCalculationService implements BonusCalculationAddUseCase {
   private final BonusCalculationAddPort calculationAddPort;
   private final ObligationLoadPort obligationLoadPort;
   private final BonusCalculationAddRequestMapper addRequestMapper;
-  private final BonusCalculationAddBusinessRuleValidator addBusinessRuleValidator;
+  private final AddRequestValidator<BonusCalculationAddRequest> addRequestValidator;
   private final List<BonusStrategy> bonusStrategies;
 
   @Transactional
   @Override
   public void add(final BonusCalculationAddRequest addRequest) {
     final var calculationStartTime = System.currentTimeMillis();
-    final var violationsCollector = addBusinessRuleValidator.validate(addRequest);
+    final var violationsCollector = addRequestValidator.validate(addRequest);
     if (violationsCollector.hasViolations()) {
       addRequest.setViolations(violationsCollector.getViolations());
       return;
@@ -65,11 +64,12 @@ public class BonusCalculationService implements BonusCalculationAddUseCase {
               final var obligation =
                   obligationLoadPort.loadByDriverIdAndByQWeekId(driverId, qWeekId);
               if (obligation == null) {
-         //       throw new RuntimeException(
-         //           format(
-         //               "Obligation was not calculated for %d - %d week, for driver.id = %d",
-         //               qWeek.getYear(), qWeek.getNumber(), driverId));
-         return;
+                //       throw new RuntimeException(
+                //           format(
+                //               "Obligation was not calculated for %d - %d week, for driver.id =
+                // %d",
+                //               qWeek.getYear(), qWeek.getNumber(), driverId));
+                return;
               }
 
               final var weekPositiveAmount =

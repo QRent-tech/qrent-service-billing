@@ -1,9 +1,11 @@
 package ee.qrental.driver.spring.config;
 
 import ee.qrental.bonus.api.in.query.GetObligationCalculationQuery;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.api.out.*;
 import ee.qrental.driver.core.mapper.DriverAddRequestMapper;
 import ee.qrental.driver.core.mapper.DriverResponseMapper;
@@ -11,7 +13,7 @@ import ee.qrental.driver.core.mapper.DriverUpdateRequestMapper;
 import ee.qrental.driver.core.mapper.FriendshipResponseMapper;
 import ee.qrental.driver.core.service.DriverQueryService;
 import ee.qrental.driver.core.service.DriverUseCaseService;
-import ee.qrental.driver.core.validator.DriverUpdateBusinessRuleValidator;
+import ee.qrental.driver.core.validator.DriverUpdateRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,7 +47,7 @@ public class DriverServiceConfig {
       final DriverLoadPort loadPort,
       final DriverAddRequestMapper addRequestMapper,
       final DriverUpdateRequestMapper updateRequestMapper,
-      final DriverUpdateBusinessRuleValidator updateBusinessRuleValidator) {
+      final UpdateRequestValidator<DriverUpdateRequest> updateRequestValidator) {
     return new DriverUseCaseService(
         contractQuery,
         updateUseCase,
@@ -55,6 +57,6 @@ public class DriverServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        updateBusinessRuleValidator);
+        updateRequestValidator);
   }
 }

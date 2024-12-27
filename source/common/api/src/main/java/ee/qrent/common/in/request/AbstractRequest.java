@@ -1,6 +1,5 @@
 package ee.qrent.common.in.request;
 
-import ee.qrent.common.in.validation.WithViolations;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;

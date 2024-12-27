@@ -7,6 +7,7 @@ import static java.util.Collections.singletonList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
@@ -24,7 +25,7 @@ import ee.qrental.invoice.api.out.InvoiceCalculationLoadPort;
 import ee.qrental.invoice.core.mapper.InvoiceCalculationAddRequestMapper;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfConverter;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfModelMapper;
-import ee.qrental.invoice.core.validator.InvoiceCalculationBusinessRuleValidator;
+import ee.qrental.invoice.core.validator.InvoiceCalculationAddRequestValidator;
 import ee.qrental.invoice.domain.Invoice;
 import ee.qrental.invoice.domain.InvoiceCalculation;
 import ee.qrental.invoice.domain.InvoiceCalculationResult;
@@ -50,7 +51,6 @@ import lombok.AllArgsConstructor;
 public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
 
   private static final BigDecimal VAT_RATE = BigDecimal.valueOf(0.819672d);
-  private static final LocalDate DEFAULT_START_DATE = LocalDate.of(2023, Month.JANUARY, 2);
 
   private final GetQWeekQuery qWeekQuery;
   private final GetDriverQuery driverQuery;
@@ -62,7 +62,7 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
   private final EmailSendUseCase emailSendUseCase;
   private final InvoiceCalculationLoadPort loadPort;
   private final InvoiceCalculationAddRequestMapper addRequestMapper;
-  private final InvoiceCalculationBusinessRuleValidator invoiceCalculationBusinessRuleValidator;
+  private final AddRequestValidator<InvoiceCalculationAddRequest> addRequestValidator;
   private final InvoiceCalculationAddPort invoiceCalculationAddPort;
   private final InvoiceToPdfConverter invoiceToPdfConverter;
   private final InvoiceToPdfModelMapper invoiceToPdfModelMapper;
@@ -84,7 +84,7 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
             requestedQWeek.getId(),
             GetQWeekQuery.DEFAULT_COMPARATOR);
     getQWeeksForCalculationOrdered(latestCalculatedWeek, requestedQWeek);
-    final var violationsCollector = invoiceCalculationBusinessRuleValidator.validateAdd(domain);
+    final var violationsCollector = addRequestValidator.validate(addRequest);
     if (violationsCollector.hasViolations()) {
       addRequest.setViolations(violationsCollector.getViolations());
       return;
@@ -305,8 +305,7 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
             invoice -> {
               final var invoiceSum = invoice.getSum();
               if (invoiceSum.compareTo(ZERO) == 0) {
-                System.out.println(
-                    "Invoice Sum is 0 EUR, no need to send invoice to Driver");
+                System.out.println("Invoice Sum is 0 EUR, no need to send invoice to Driver");
                 progressTracking(handledInvoices, invoicesCount);
 
                 return;

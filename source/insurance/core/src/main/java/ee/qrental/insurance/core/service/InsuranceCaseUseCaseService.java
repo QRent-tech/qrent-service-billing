@@ -2,6 +2,7 @@ package ee.qrental.insurance.core.service;
 
 import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.insurance.api.in.request.InsuranceCaseAddRequest;
 
 import ee.qrental.insurance.api.in.request.InsuranceCaseUpdateRequest;
@@ -11,7 +12,6 @@ import ee.qrental.insurance.api.in.usecase.InsuranceCaseUpdateUseCase;
 import ee.qrental.insurance.api.out.*;
 import ee.qrental.insurance.core.mapper.InsuranceCaseAddRequestMapper;
 import ee.qrental.insurance.core.mapper.InsuranceCaseUpdateRequestMapper;
-import ee.qrental.insurance.core.validator.InsuranceCaseUpdateBusinessRuleValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
@@ -24,7 +24,7 @@ public class InsuranceCaseUseCaseService
   private final InsuranceCaseUpdatePort updatePort;
   private final InsuranceCaseAddRequestMapper addRequestMapper;
   private final InsuranceCaseUpdateRequestMapper updateRequestMapper;
-  private final InsuranceCaseUpdateBusinessRuleValidator updateBusinessRuleValidator;
+  private final UpdateRequestValidator<InsuranceCaseUpdateRequest> updateRequestValidator;
 
   @Override
   public Long add(final InsuranceCaseAddRequest request) {
@@ -36,7 +36,7 @@ public class InsuranceCaseUseCaseService
 
   @Override
   public void update(final InsuranceCaseUpdateRequest request) {
-    final var violationsCollector = updateBusinessRuleValidator.validate(request);
+    final var violationsCollector = updateRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 

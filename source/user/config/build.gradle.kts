@@ -7,6 +7,8 @@ dependencies {
     implementation(project(":source:user:persistence:repository"))
     implementation(project(":source:firm:api:in"))
     implementation(project(":source:email:api:in"))
+    implementation(project(":source:common:api"))
+    implementation(project(":source:common:core"))
     implementation("org.springframework:spring-context-support")
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

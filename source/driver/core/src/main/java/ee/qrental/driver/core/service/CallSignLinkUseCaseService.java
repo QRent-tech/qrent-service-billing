@@ -1,6 +1,9 @@
 package ee.qrental.driver.core.service;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.DeleteRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.driver.api.in.request.CallSignLinkAddRequest;
 import ee.qrental.driver.api.in.request.CallSignLinkCloseRequest;
 import ee.qrental.driver.api.in.request.CallSignLinkDeleteRequest;
@@ -14,8 +17,6 @@ import ee.qrental.driver.api.out.CallSignLinkDeletePort;
 import ee.qrental.driver.api.out.CallSignLinkLoadPort;
 import ee.qrental.driver.api.out.CallSignLinkUpdatePort;
 import ee.qrental.driver.core.mapper.CallSignLinkAddRequestMapper;
-import ee.qrental.driver.core.mapper.CallSignLinkUpdateRequestMapper;
-import ee.qrental.driver.core.validator.CallSignLinkBusinessRuleValidator;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.CallSignLink;
 import lombok.AllArgsConstructor;
@@ -32,14 +33,14 @@ public class CallSignLinkUseCaseService
   private final CallSignLinkDeletePort deletePort;
   private final CallSignLinkLoadPort loadPort;
   private final CallSignLinkAddRequestMapper addRequestMapper;
-  private final CallSignLinkUpdateRequestMapper updateRequestMapper;
-  private final CallSignLinkBusinessRuleValidator businessRuleValidator;
+  private final AddRequestValidator<CallSignLinkAddRequest> addRequestValidator;
+  private final UpdateRequestValidator<CallSignLinkUpdateRequest> updateRequestValidator;
+  private final DeleteRequestValidator<CallSignLinkDeleteRequest> deleteRequestValidator;
   private final QDateTime qDateTime;
 
   @Override
   public Long add(final CallSignLinkAddRequest request) {
-    final var domain = addRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateAdd(domain);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
       return null;
@@ -50,8 +51,7 @@ public class CallSignLinkUseCaseService
 
   @Override
   public void update(final CallSignLinkUpdateRequest request) {
-    final var domain = updateRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateUpdate(domain);
+    final var violationsCollector = updateRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
@@ -75,6 +75,12 @@ public class CallSignLinkUseCaseService
 
   @Override
   public void delete(final CallSignLinkDeleteRequest request) {
+    final var violationsCollector = deleteRequestValidator.validate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+
+      return;
+    }
     deletePort.delete(request.getId());
   }
 

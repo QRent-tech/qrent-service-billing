@@ -8,7 +8,7 @@ import ee.qrental.contract.core.mapper.*;
 import ee.qrental.contract.core.service.*;
 import ee.qrental.contract.core.service.pdf.AuthorizationToPdfConverter;
 import ee.qrental.contract.core.service.pdf.AuthorizationToPdfModelMapper;
-import ee.qrental.contract.core.validator.AuthorizationAddBusinessRuleValidator;
+import ee.qrental.contract.core.validator.AuthorizationAddRequestValidator;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class AuthorizationServiceConfig {
       final AuthorizationLoadPort loadPort,
       final AuthorizationAddRequestMapper addRequestMapper,
       final AuthorizationUpdateRequestMapper updateRequestMapper,
-      final AuthorizationAddBusinessRuleValidator addBusinessRuleValidator) {
+      final AuthorizationAddRequestValidator addRequestValidator) {
     return new AuthorizationUseCaseService(
         addPort,
         updatePort,
@@ -40,7 +40,7 @@ public class AuthorizationServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        addBusinessRuleValidator);
+        addRequestValidator);
   }
 
   @Bean

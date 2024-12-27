@@ -14,10 +14,10 @@ import ee.qrental.car.api.out.CarLinkDeletePort;
 import ee.qrental.car.api.out.CarLinkLoadPort;
 import ee.qrental.car.api.out.CarLinkUpdatePort;
 import ee.qrental.car.core.mapper.CarLinkAddRequestMapper;
-import ee.qrental.car.core.mapper.CarLinkUpdateRequestMapper;
-import ee.qrental.car.core.validator.CarLinkAddBusinessRuleValidator;
-import ee.qrental.car.core.validator.CarLinkUpdateBusinessRuleValidator;
 import ee.qrental.car.domain.CarLink;
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.DeleteRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
@@ -31,14 +31,14 @@ public class CarLinkUseCaseService
   private final CarLinkDeletePort deletePort;
   private final CarLinkLoadPort loadPort;
   private final CarLinkAddRequestMapper addRequestMapper;
-  private final CarLinkUpdateRequestMapper updateRequestMapper;
-  private final CarLinkAddBusinessRuleValidator addValidator;
-  private final CarLinkUpdateBusinessRuleValidator updateValidator;
+  private final AddRequestValidator<CarLinkAddRequest> addRequestValidator;
+  private final UpdateRequestValidator<CarLinkUpdateRequest> updateRequestValidator;
+  private final DeleteRequestValidator<CarLinkDeleteRequest> deleteRequestValidator;
   private final QDateTime qDateTime;
 
   @Override
   public Long add(final CarLinkAddRequest request) {
-    final var violationsCollector = addValidator.validate(request);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
@@ -50,7 +50,7 @@ public class CarLinkUseCaseService
 
   @Override
   public void update(final CarLinkUpdateRequest request) {
-    final var violationsCollector = updateValidator.validate(request);
+    final var violationsCollector = updateRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
@@ -73,6 +73,12 @@ public class CarLinkUseCaseService
 
   @Override
   public void delete(final CarLinkDeleteRequest request) {
+    final var violationsCollector = deleteRequestValidator.validate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+
+      return;
+    }
     deletePort.delete(request.getId());
   }
 

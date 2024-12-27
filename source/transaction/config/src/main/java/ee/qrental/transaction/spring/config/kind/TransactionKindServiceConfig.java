@@ -1,7 +1,12 @@
 package ee.qrental.transaction.spring.config.kind;
 
-
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.DeleteRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.transaction.api.in.query.kind.GetTransactionKindQuery;
+import ee.qrental.transaction.api.in.request.kind.TransactionKindAddRequest;
+import ee.qrental.transaction.api.in.request.kind.TransactionKindDeleteRequest;
+import ee.qrental.transaction.api.in.request.kind.TransactionKindUpdateRequest;
 import ee.qrental.transaction.api.out.kind.TransactionKindAddPort;
 import ee.qrental.transaction.api.out.kind.TransactionKindDeletePort;
 import ee.qrental.transaction.api.out.kind.TransactionKindLoadPort;
@@ -11,8 +16,6 @@ import ee.qrental.transaction.core.mapper.kind.TransactionKindResponseMapper;
 import ee.qrental.transaction.core.mapper.kind.TransactionKindUpdateRequestMapper;
 import ee.qrental.transaction.core.service.kind.TransactionKindQueryService;
 import ee.qrental.transaction.core.service.kind.TransactionKindUseCaseService;
-import ee.qrental.transaction.core.validator.TransactionKindAddBusinessRuleValidator;
-import ee.qrental.transaction.core.validator.TransactionKindUpdateBusinessRuleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,8 +38,9 @@ public class TransactionKindServiceConfig {
       final TransactionKindLoadPort loadPort,
       final TransactionKindAddRequestMapper addRequestMapper,
       final TransactionKindUpdateRequestMapper updateRequestMapper,
-      final TransactionKindAddBusinessRuleValidator addBusinessRuleValidator,
-      final TransactionKindUpdateBusinessRuleValidator updateBusinessRuleValidator) {
+      final AddRequestValidator<TransactionKindAddRequest> addRequestValidator,
+      final UpdateRequestValidator<TransactionKindUpdateRequest> updateRequestValidator,
+      final DeleteRequestValidator<TransactionKindDeleteRequest> deleteRequestValidator) {
     return new TransactionKindUseCaseService(
         addPort,
         updatePort,
@@ -44,7 +48,8 @@ public class TransactionKindServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        addBusinessRuleValidator,
-        updateBusinessRuleValidator);
+        addRequestValidator,
+        updateRequestValidator,
+        deleteRequestValidator);
   }
 }

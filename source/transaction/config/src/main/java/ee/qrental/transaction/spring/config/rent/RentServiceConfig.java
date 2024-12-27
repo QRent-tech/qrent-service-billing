@@ -17,7 +17,7 @@ import ee.qrental.transaction.core.service.TransactionUseCaseService;
 import ee.qrental.transaction.core.service.rent.RentCalculationQueryService;
 import ee.qrental.transaction.core.service.rent.RentCalculationService;
 import ee.qrental.transaction.core.service.rent.RentTransactionGenerator;
-import ee.qrental.transaction.core.validator.RentCalculationAddBusinessRuleValidator;
+import ee.qrental.transaction.core.validator.RentCalculationAddRequestValidator;
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +44,7 @@ public class RentServiceConfig {
       final TransactionUseCaseService transactionUseCaseService,
       final RentCalculationAddPort rentCalculationAddPort,
       final RentCalculationAddRequestMapper addRequestMapper,
-      final RentCalculationAddBusinessRuleValidator addBusinessRuleValidator,
+      final RentCalculationAddRequestValidator addRequestValidator,
       final EmailSendUseCase emailSendUseCase,
       final GetUserAccountQuery userAccountQuery,
       final GetQWeekQuery weekQuery) {
@@ -57,7 +57,7 @@ public class RentServiceConfig {
         transactionUseCaseService,
         rentCalculationAddPort,
         addRequestMapper,
-        addBusinessRuleValidator,
+        addRequestValidator,
         emailSendUseCase,
         userAccountQuery,
         weekQuery);

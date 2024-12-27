@@ -5,13 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
 @Setter
 public class ContractAddRequest extends AbstractAddRequest {
-  private LocalDate dateStart;
+  private LocalDateTime dateStart;
   private Long driverId;
   private Long qFirmId;
   private String contractDuration;

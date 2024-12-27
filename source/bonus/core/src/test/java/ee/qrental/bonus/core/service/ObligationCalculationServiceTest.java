@@ -6,7 +6,7 @@ import ee.qrental.bonus.api.out.ObligationAddPort;
 import ee.qrental.bonus.api.out.ObligationCalculationAddPort;
 import ee.qrental.bonus.api.out.ObligationLoadPort;
 import ee.qrental.bonus.core.mapper.ObligationCalculationAddRequestMapper;
-import ee.qrental.bonus.core.validator.ObligationCalculationAddBusinessRuleValidator;
+import ee.qrental.bonus.core.validator.ObligationCalculationAddRequestValidator;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
@@ -31,7 +31,7 @@ class ObligationCalculationServiceTest {
   private ObligationAddPort obligationAddPort;
   private ObligationLoadPort loadPort;
   private ObligationCalculationAddRequestMapper addRequestMapper;
-  private ObligationCalculationAddBusinessRuleValidator addBusinessRuleValidator;
+  private ObligationCalculationAddRequestValidator addRequestValidator;
   private ObligationCalculator obligationCalculator;
 
   @BeforeEach
@@ -47,7 +47,7 @@ class ObligationCalculationServiceTest {
     obligationAddPort = mock(ObligationAddPort.class);
     loadPort = mock(ObligationLoadPort.class);
     addRequestMapper = mock(ObligationCalculationAddRequestMapper.class);
-    addBusinessRuleValidator = mock(ObligationCalculationAddBusinessRuleValidator.class);
+    addRequestValidator = mock(ObligationCalculationAddRequestValidator.class);
     obligationCalculator = mock(ObligationCalculator.class);
 
     instanceUnderTest =
@@ -61,7 +61,7 @@ class ObligationCalculationServiceTest {
             obligationAddPort,
             loadPort,
             addRequestMapper,
-            addBusinessRuleValidator,
+                addRequestValidator,
             obligationCalculator);
   }
   // TODO ...

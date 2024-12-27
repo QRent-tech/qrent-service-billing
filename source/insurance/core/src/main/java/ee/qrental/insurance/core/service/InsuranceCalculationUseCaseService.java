@@ -3,12 +3,12 @@ package ee.qrental.insurance.core.service;
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.groupingBy;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
 import ee.qrental.insurance.api.out.*;
 import ee.qrental.insurance.core.mapper.InsuranceCalculationAddRequestMapper;
-import ee.qrental.insurance.core.validator.InsuranceCalculationAddBusinessRuleValidator;
 import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.insurance.domain.InsuranceCaseBalance;
 import jakarta.transaction.Transactional;
@@ -23,14 +23,14 @@ public class InsuranceCalculationUseCaseService implements InsuranceCalculationA
   private final InsuranceCalculationAddRequestMapper calculationAddRequestMapper;
   private final GetQWeekQuery qWeekQuery;
   private final InsuranceCaseBalanceCalculator insuranceCaseBalanceCalculator;
-  private final InsuranceCalculationAddBusinessRuleValidator addBusinessRuleValidator;
+  private final AddRequestValidator<InsuranceCalculationAddRequest> addRequestValidator;
 
   @Transactional
   @Override
   public Long add(final InsuranceCalculationAddRequest request) {
     System.out.println("----> Insurance Cases Balance Calculation started ...");
     final var calculationStartTime = System.currentTimeMillis();
-    final var violationsCollector = addBusinessRuleValidator.validateAdd(request);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 

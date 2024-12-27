@@ -5,7 +5,7 @@ import static org.mockito.Mockito.mock;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.out.*;
 import ee.qrental.insurance.core.mapper.InsuranceCalculationAddRequestMapper;
-import ee.qrental.insurance.core.validator.InsuranceCalculationAddBusinessRuleValidator;
+import ee.qrental.insurance.core.validator.InsuranceCalculationAddRequestValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ class InsuranceCalculationUseCaseServiceTest {
   private InsuranceCalculationAddRequestMapper calculationAddRequestMapper;
   private GetQWeekQuery qWeekQuery;
   private InsuranceCaseBalanceCalculator insuranceCaseBalanceCalculator;
-  private InsuranceCalculationAddBusinessRuleValidator addBusinessRuleValidator;
+  private InsuranceCalculationAddRequestValidator addRequestValidator;
 
   @BeforeEach
   void setUp() {
@@ -28,7 +28,7 @@ class InsuranceCalculationUseCaseServiceTest {
     calculationAddRequestMapper = mock(InsuranceCalculationAddRequestMapper.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     insuranceCaseBalanceCalculator = mock(InsuranceCaseBalanceCalculator.class);
-    addBusinessRuleValidator = mock(InsuranceCalculationAddBusinessRuleValidator.class);
+    addRequestValidator = mock(InsuranceCalculationAddRequestValidator.class);
 
     instanceUnderTest =
         new InsuranceCalculationUseCaseService(
@@ -38,7 +38,7 @@ class InsuranceCalculationUseCaseServiceTest {
             calculationAddRequestMapper,
             qWeekQuery,
             insuranceCaseBalanceCalculator,
-            addBusinessRuleValidator);
+                addRequestValidator);
   }
 
   @Test

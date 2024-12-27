@@ -1,18 +1,20 @@
 package ee.qrental.transaction.spring.config.balance;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetConstantQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.query.kind.GetTransactionKindQuery;
+import ee.qrental.transaction.api.in.request.balance.BalanceCalculationAddRequest;
 import ee.qrental.transaction.api.in.usecase.TransactionAddUseCase;
+import ee.qrental.transaction.api.in.usecase.balance.BalanceCalculationAddUseCase;
 import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceAddPort;
 import ee.qrental.transaction.api.out.balance.BalanceCalculationAddPort;
 import ee.qrental.transaction.api.out.balance.BalanceCalculationLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
-import ee.qrental.transaction.api.out.kind.TransactionKindLoadPort;
 import ee.qrental.transaction.api.out.type.TransactionTypeLoadPort;
 import ee.qrental.transaction.core.mapper.balance.BalanceCalculationAddRequestMapper;
 import ee.qrental.transaction.core.mapper.balance.BalanceCalculationResponseMapper;
@@ -88,7 +90,7 @@ public class BalanceServiceConfig {
   }
 
   @Bean
-  BalanceCalculationService getBalanceCalculationService(
+  BalanceCalculationAddUseCase getBalanceCalculationUseCaseService(
       final GetTransactionQuery transactionQuery,
       final GetQWeekQuery qWeekQuery,
       final GetDriverQuery driverQuery,
@@ -97,8 +99,9 @@ public class BalanceServiceConfig {
       final BalanceCalculationAddPort balanceCalculationAddPort,
       final BalanceLoadPort balanceLoadPort,
       final BalanceCalculationAddRequestMapper addRequestMapper,
-      final List<BalanceCalculatorStrategy> calculatorStrategies) {
-    return new BalanceCalculationService(
+      final List<BalanceCalculatorStrategy> calculatorStrategies,
+      final AddRequestValidator<BalanceCalculationAddRequest> addRequestValidator) {
+    return new BalanceCalculationUseCaseService(
         transactionQuery,
         qWeekQuery,
         driverQuery,
@@ -107,6 +110,7 @@ public class BalanceServiceConfig {
         balanceCalculationAddPort,
         balanceLoadPort,
         addRequestMapper,
-        calculatorStrategies);
+        calculatorStrategies,
+        addRequestValidator);
   }
 }

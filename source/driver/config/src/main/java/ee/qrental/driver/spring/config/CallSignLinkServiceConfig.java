@@ -1,14 +1,19 @@
 package ee.qrental.driver.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.DeleteRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
+import ee.qrental.driver.api.in.request.CallSignLinkAddRequest;
+import ee.qrental.driver.api.in.request.CallSignLinkDeleteRequest;
+import ee.qrental.driver.api.in.request.CallSignLinkUpdateRequest;
 import ee.qrental.driver.api.out.*;
 import ee.qrental.driver.core.mapper.*;
 import ee.qrental.driver.core.service.CallSignLinkQueryService;
 import ee.qrental.driver.core.service.CallSignLinkUseCaseService;
 import ee.qrental.driver.core.service.FirmLinkQueryService;
-import ee.qrental.driver.core.validator.CallSignLinkBusinessRuleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -38,8 +43,9 @@ public class CallSignLinkServiceConfig {
       final CallSignLinkDeletePort deletePort,
       final CallSignLinkLoadPort loadPort,
       final CallSignLinkAddRequestMapper addRequestMapper,
-      final CallSignLinkUpdateRequestMapper updateRequestMapper,
-      final CallSignLinkBusinessRuleValidator businessRuleValidator,
+      final AddRequestValidator<CallSignLinkAddRequest> addRequestValidator,
+      final UpdateRequestValidator<CallSignLinkUpdateRequest> updateRequestValidator,
+      final DeleteRequestValidator<CallSignLinkDeleteRequest> deleteRequestValidator,
       final QDateTime qDateTime) {
     return new CallSignLinkUseCaseService(
         addPort,
@@ -47,8 +53,9 @@ public class CallSignLinkServiceConfig {
         deletePort,
         loadPort,
         addRequestMapper,
-        updateRequestMapper,
-        businessRuleValidator,
+        addRequestValidator,
+        updateRequestValidator,
+        deleteRequestValidator,
         qDateTime);
   }
 }

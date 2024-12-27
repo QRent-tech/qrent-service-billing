@@ -103,7 +103,7 @@ public class ContractUseCaseController {
     final var addRequest = new ContractAddRequest();
     addRequest.setDriverId(driverId);
     addRequest.setQFirmId(qFirmId);
-    addRequest.setDateStart(qDateTime.getToday());
+    addRequest.setDateStart(qDateTime.getNow());
 
     model.addAttribute("addRequest", addRequest);
   }

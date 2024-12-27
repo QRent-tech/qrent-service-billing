@@ -1,10 +1,11 @@
 package ee.qrental.invoice.spring.config;
 
+import ee.qrental.common.core.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.invoice.api.out.InvoiceCalculationLoadPort;
+import ee.qrental.invoice.api.in.request.InvoiceCalculationAddRequest;
 import ee.qrental.invoice.api.out.InvoiceLoadPort;
-import ee.qrental.invoice.core.validator.InvoiceBusinessRuleValidator;
-import ee.qrental.invoice.core.validator.InvoiceCalculationBusinessRuleValidator;
+import ee.qrental.invoice.core.validator.InvoiceRequestAddUpdateDeleteValidator;
+import ee.qrental.invoice.core.validator.InvoiceCalculationAddRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 public class InvoiceValidatorConfig {
 
   @Bean
-  InvoiceBusinessRuleValidator getInvoiceBusinessRuleValidator(
-      final InvoiceLoadPort invoiceLoadPort) {
-    return new InvoiceBusinessRuleValidator(invoiceLoadPort);
+  InvoiceRequestAddUpdateDeleteValidator getInvoiceRequestAddUpdateDeleteValidator(
+      final InvoiceLoadPort invoiceLoadPort, final GetQWeekQuery qWeekQuery) {
+    return new InvoiceRequestAddUpdateDeleteValidator(invoiceLoadPort, qWeekQuery);
   }
 
   @Bean
-  InvoiceCalculationBusinessRuleValidator getInvoiceCalculationBusinessRuleValidator(
-      final GetQWeekQuery qWeekQuery, final InvoiceCalculationLoadPort loadPort) {
-    return new InvoiceCalculationBusinessRuleValidator(qWeekQuery, loadPort);
+  AddRequestValidator<InvoiceCalculationAddRequest> getInvoiceCalculationAddRequestValidator(
+      final GetQWeekQuery qWeekQuery) {
+    return new InvoiceCalculationAddRequestValidator(qWeekQuery);
   }
 }

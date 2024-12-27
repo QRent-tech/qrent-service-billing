@@ -5,13 +5,14 @@ import static java.lang.String.format;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrental.common.core.validation.CloseRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.in.request.*;
 import ee.qrental.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
 import ee.qrental.insurance.api.out.*;
-import ee.qrental.insurance.core.validator.InsuranceCaseCloseBusinessRuleValidator;
+import ee.qrental.insurance.core.validator.InsuranceCaseCloseRequestValidator;
 import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
@@ -31,7 +32,7 @@ public class InsuranceCaseCloseUseCaseService implements InsuranceCaseCloseUseCa
   private final BigDecimal SELF_RESPONSIBILITY = BigDecimal.valueOf(500L);
   private final InsuranceCaseUpdatePort updatePort;
   private final InsuranceCaseLoadPort loadPort;
-  private final InsuranceCaseCloseBusinessRuleValidator closeRuleValidator;
+  private final CloseRequestValidator<InsuranceCaseCloseRequest> closeRequestValidator;
   private final GetQKaskoQuery getQKaskoQuery;
   private final GetQWeekQuery qWeekQuery;
   private final GetDriverQuery driverQuery;
@@ -70,7 +71,7 @@ public class InsuranceCaseCloseUseCaseService implements InsuranceCaseCloseUseCa
 
   @Override
   public void close(final InsuranceCaseCloseRequest request) {
-    final var violationsCollector = closeRuleValidator.validate(request);
+    final var violationsCollector = closeRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 

@@ -2,6 +2,9 @@ package ee.qrental.car.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
+import ee.qrental.car.api.in.request.CarLinkAddRequest;
+import ee.qrental.car.api.in.request.CarLinkDeleteRequest;
+import ee.qrental.car.api.in.request.CarLinkUpdateRequest;
 import ee.qrental.car.api.out.CarLinkAddPort;
 import ee.qrental.car.api.out.CarLinkDeletePort;
 import ee.qrental.car.api.out.CarLinkLoadPort;
@@ -11,8 +14,11 @@ import ee.qrental.car.core.mapper.CarLinkResponseMapper;
 import ee.qrental.car.core.mapper.CarLinkUpdateRequestMapper;
 import ee.qrental.car.core.service.CarLinkQueryService;
 import ee.qrental.car.core.service.CarLinkUseCaseService;
-import ee.qrental.car.core.validator.CarLinkAddBusinessRuleValidator;
-import ee.qrental.car.core.validator.CarLinkUpdateBusinessRuleValidator;
+import ee.qrental.car.core.validator.CarLinkAddRequestValidator;
+import ee.qrental.car.core.validator.CarLinkUpdateRequestValidator;
+import ee.qrental.common.core.validation.AddRequestValidator;
+import ee.qrental.common.core.validation.DeleteRequestValidator;
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,9 +40,11 @@ public class LinkServiceConfig {
       final CarLinkDeletePort deletePort,
       final CarLinkLoadPort loadPort,
       final CarLinkAddRequestMapper addRequestMapper,
-      final CarLinkUpdateRequestMapper updateRequestMapper,
-      final CarLinkAddBusinessRuleValidator addValidator,
-      final CarLinkUpdateBusinessRuleValidator updateValidator,
+      final AddRequestValidator<CarLinkAddRequest> addRequestValidator,
+   final UpdateRequestValidator<CarLinkUpdateRequest> updateRequestValidator,
+   final DeleteRequestValidator<CarLinkDeleteRequest> deleteRequestValidator,
+
+
       final QDateTime qDateTime) {
     return new CarLinkUseCaseService(
         addPort,
@@ -44,9 +52,9 @@ public class LinkServiceConfig {
         deletePort,
         loadPort,
         addRequestMapper,
-        updateRequestMapper,
-        addValidator,
-        updateValidator,
+            addRequestValidator,
+            updateRequestValidator,
+            deleteRequestValidator,
         qDateTime);
   }
 }

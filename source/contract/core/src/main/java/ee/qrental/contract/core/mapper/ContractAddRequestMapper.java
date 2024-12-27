@@ -10,10 +10,8 @@ import ee.qrental.driver.api.in.response.DriverResponse;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDateTime;
-
+import static ee.qrental.contract.core.ContractUtils.generateContractNumber;
 import static java.lang.String.format;
-import static java.time.format.DateTimeFormatter.ofPattern;
 import static java.util.Arrays.stream;
 
 @AllArgsConstructor
@@ -27,7 +25,7 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
   public Contract toDomain(final ContractAddRequest request) {
     final var driverId = request.getDriverId();
     final var driver = driverQuery.getById(driverId);
-    final var contractNumber = generateContractNumber(driverId, qDateTime.getNow());
+    final var contractNumber = generateContractNumber(driverId, request.getDateStart());
     final var renterName = getRenterName(driver);
     final var renterAddress = getRenterAddress(driver);
     final var companyCeoTaxNumber = getCompanyCeoTaxNumber(driver);
@@ -58,7 +56,7 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
         .qFirmCeo(qFirm.getCeoName())
         .qFirmCeoDeputies(qFirm.getDeputies())
         .created(qDateTime.getToday())
-        .dateStart(request.getDateStart())
+        .dateStart(request.getDateStart().toLocalDate())
         .dateEnd(null)
         .qFirmVatNumber(qFirm.getVatNumber())
         .qFirmIban(qFirm.getIban())
@@ -105,12 +103,6 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
       return format("%s %s", renterCeoFirstName, renterCeoLastName);
     }
     return driverCompanyCeoName;
-  }
-
-  private String generateContractNumber(final Long driverId, final LocalDateTime startTime) {
-    final var dateTimeString = startTime.format(ofPattern("yyyyMMdd-HHmm"));
-
-    return String.format("%s-%d", dateTimeString, driverId);
   }
 
   private String getRenterRegistrationNumber(final DriverResponse driver) {

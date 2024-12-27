@@ -1,5 +1,6 @@
 package ee.qrental.driver.core.service;
 
+import ee.qrental.common.core.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
@@ -12,7 +13,6 @@ import ee.qrental.driver.api.in.usecase.DriverUpdateUseCase;
 import ee.qrental.driver.api.out.*;
 import ee.qrental.driver.core.mapper.DriverAddRequestMapper;
 import ee.qrental.driver.core.mapper.DriverUpdateRequestMapper;
-import ee.qrental.driver.core.validator.DriverUpdateBusinessRuleValidator;
 import ee.qrental.driver.domain.Driver;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class DriverUseCaseService
   private final DriverLoadPort loadPort;
   private final DriverAddRequestMapper addRequestMapper;
   private final DriverUpdateRequestMapper updateRequestMapper;
-  private final DriverUpdateBusinessRuleValidator updateBusinessRuleValidator;
+  private final UpdateRequestValidator<DriverUpdateRequest> updateRequestValidator;
 
   @Transactional
   @Override
@@ -45,7 +45,7 @@ public class DriverUseCaseService
     final var driverId = request.getId();
     checkExistence(driverId);
 
-    final var violationsCollector = updateBusinessRuleValidator.validate(request);
+    final var violationsCollector = updateRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
