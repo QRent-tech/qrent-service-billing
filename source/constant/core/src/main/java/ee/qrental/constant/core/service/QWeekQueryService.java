@@ -10,13 +10,12 @@ import ee.qrental.constant.api.out.QWeekLoadPort;
 import ee.qrental.constant.core.mapper.QWeekResponseMapper;
 import ee.qrental.constant.core.mapper.QWeekUpdateRequestMapper;
 import lombok.AllArgsConstructor;
+import org.threeten.extra.YearWeek;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
-import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
-import static java.lang.String.format;
 import static java.time.temporal.ChronoUnit.WEEKS;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -87,8 +86,10 @@ public class QWeekQueryService implements GetQWeekQuery {
 
   @Override
   public QWeekResponse getByDate(final LocalDate date) {
-    final var year = date.getYear();
-    final var number = getWeekNumber(date);
+    final var yearWeek =  YearWeek.from( date );
+
+    final var year = yearWeek.getYear();
+    final var number = yearWeek.getWeek();
     final var qWeek = loadPort.loadByYearAndNumber(year, number);
     if (qWeek == null) {
       final var qWeekAddRequest = new QWeekAddRequest();
