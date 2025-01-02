@@ -19,8 +19,6 @@ import ee.qrental.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
 import ee.qrental.transaction.api.out.rent.RentCalculationAddPort;
 import ee.qrental.transaction.core.mapper.rent.RentCalculationAddRequestMapper;
 import ee.qrental.transaction.core.service.TransactionUseCaseService;
-import ee.qrental.transaction.core.validator.RentCalculationAddRequestValidator;
-import ee.qrental.transaction.core.validator.RentCalculationAddBusinessRuleValidator;
 import ee.qrental.transaction.domain.rent.RentCalculation;
 import ee.qrental.transaction.domain.rent.RentCalculationResult;
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
