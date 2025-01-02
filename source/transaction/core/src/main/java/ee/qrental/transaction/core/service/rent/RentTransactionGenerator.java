@@ -11,18 +11,19 @@ import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NO_LABEL_FINE;
+import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.*;
 import static java.lang.String.format;
+import static java.math.BigDecimal.valueOf;
 
 @AllArgsConstructor
 public class RentTransactionGenerator {
 
   private static final Integer NEW_CAR_AGE = 3;
-  private static final BigDecimal OLD_CAR_RATE = BigDecimal.valueOf(150L);
-  private static final BigDecimal NEW_CAR_RATE = BigDecimal.valueOf(240L);
-  private static final BigDecimal RATE_DECREASE_STEP = BigDecimal.valueOf(10L);
-  private static final BigDecimal NO_LABEL_RATE = BigDecimal.valueOf(20L);
+  private static final BigDecimal OLD_CAR_RATE = valueOf(150L);
+  private static final BigDecimal NEW_CAR_RATE = valueOf(240L);
+  private static final BigDecimal RATE_DECREASE_STEP = valueOf(10L);
+  private static final BigDecimal NO_LABEL_RATE = valueOf(20L);
+  private static final BigDecimal DEFAULT_WEEKLY_WORKING_DAYS_COUNT = valueOf(6L);
 
   private final TransactionTypeLoadPort transactionTypeLoadPort;
   private final GetCarQuery carQuery;
@@ -74,6 +75,38 @@ public class RentTransactionGenerator {
     return addRequest;
   }
 
+  public TransactionAddRequest getAbsenceAdjustmentTransactionAddRequest(
+      final CarLinkResponse activeCarLink, final QWeekResponse week, final Long absenceDaysCount) {
+    final var addRequest = new TransactionAddRequest();
+    addRequest.setDate(week.getStart());
+    final var transactionTpe =
+        transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_ABSENCE_ADJUSTMENT);
+    if (transactionTpe == null) {
+      throw new RuntimeException(
+          "Transaction type for Absence Adjustment is missing. Create a Transaction Type with name: "
+              + TRANSACTION_TYPE_ABSENCE_ADJUSTMENT);
+    }
+    final var absenceAdjustmentAmount =
+        calculateAbsenceAdjustmentTransactionAmount(activeCarLink, absenceDaysCount);
+    addRequest.setTransactionTypeId(transactionTpe.getId());
+    addRequest.setWeekNumber(week.getNumber());
+    addRequest.setDriverId(activeCarLink.getDriverId());
+    addRequest.setAmount(absenceAdjustmentAmount);
+    addRequest.setComment(
+        format(
+            "Automatically crated 'Absence Rent Adjustment' Transaction for Absence days count: %d, active Car Link %d, Week %d ",
+            absenceDaysCount, activeCarLink.getId(), week.getNumber()));
+
+    return addRequest;
+  }
+
+  private BigDecimal calculateAbsenceAdjustmentTransactionAmount(
+      final CarLinkResponse carLink, final Long absenceDaysCount) {
+    final var rentAmount = calculateRentTransactionAmount(carLink);
+
+    return rentAmount.divide(DEFAULT_WEEKLY_WORKING_DAYS_COUNT).multiply(valueOf(absenceDaysCount));
+  }
+
   private BigDecimal calculateRentTransactionAmount(final CarLinkResponse carLink) {
     final var carId = carLink.getCarId();
     final var car = carQuery.getById(carId);
@@ -117,6 +150,6 @@ public class RentTransactionGenerator {
     final var carReleaseYear = car.getReleaseDate().getYear();
     final var currentYear = qDateTime.getToday().getYear();
 
-      return currentYear - carReleaseYear;
+    return currentYear - carReleaseYear;
   }
 }

@@ -4,6 +4,7 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.in.query.GetCarQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
@@ -47,7 +48,8 @@ public class RentServiceConfig {
       final RentCalculationAddBusinessRuleValidator addBusinessRuleValidator,
       final EmailSendUseCase emailSendUseCase,
       final GetUserAccountQuery userAccountQuery,
-      final GetQWeekQuery weekQuery) {
+      final GetQWeekQuery weekQuery,
+      final GetAbsenceQuery absenceQuery) {
 
     return new RentCalculationService(
         rentTransactionGenerator,
@@ -60,7 +62,8 @@ public class RentServiceConfig {
         addBusinessRuleValidator,
         emailSendUseCase,
         userAccountQuery,
-        weekQuery);
+        weekQuery,
+        absenceQuery);
   }
 
   @Bean

@@ -1,6 +1,7 @@
 package ee.qrental.contract.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.out.*;
@@ -16,11 +17,13 @@ public class AbsenceServiceConfig {
   @Bean
   GetAbsenceQuery getAbsenceQueryService(
       final GetContractQuery contractQuery,
+      final GetQWeekQuery qWeekQuery,
       final AbsenceLoadPort loadPort,
       final AbsenceResponseMapper mapper,
       final AbsenceUpdateRequestMapper updateRequestMapper,
       final QDateTime qDateTime) {
-    return new AbsenceQueryService(contractQuery, loadPort, mapper, updateRequestMapper, qDateTime);
+    return new AbsenceQueryService(
+        contractQuery, qWeekQuery, loadPort, mapper, updateRequestMapper, qDateTime);
   }
 
   @Bean
