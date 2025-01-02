@@ -1,5 +1,6 @@
 package ee.qrental.transaction.core.service.rent;
 
+import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_ABSENCE_ADJUSTMENT;
 import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -35,7 +36,7 @@ class RentTransactionGeneratorTest {
   }
 
   @Test
-  public void testIfCarAgeLessThanOneYear() {
+  public void testRentTransactionIfCarAgeLessThanOneYear() {
     // given
     final var qWeek =
         QWeekResponse.builder()
@@ -68,31 +69,32 @@ class RentTransactionGeneratorTest {
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
     assertEquals(BigDecimal.valueOf(240), transactionAddRequest.getAmount());
   }
+
   @Test
-  public void testIfCarAgeIsTwoYears() {
+  public void testRentTransactionIfCarAgeIsTwoYears() {
     // given
     final var qWeek =
-            QWeekResponse.builder()
-                    .id(10L)
-                    .start(LocalDate.of(2024, Month.JANUARY, 2))
-                    .number(1)
-                    .build();
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 2))
+            .number(1)
+            .build();
 
     final var carId = 20L;
     final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
     when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_NAME_WEEKLY_RENT))
-            .thenReturn(TransactionType.builder().id(30L).build());
+        .thenReturn(TransactionType.builder().id(30L).build());
     when(carQuery.getById(carId))
-            .thenReturn(
-                    CarResponse.builder()
-                            .releaseDate(LocalDate.of(2022, Month.JANUARY, 1))
-                            .elegance(Boolean.TRUE)
-                            .build());
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2022, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =
-            instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
+        instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
 
     // then
     assertNotNull(transactionAddRequest);
@@ -104,30 +106,30 @@ class RentTransactionGeneratorTest {
   }
 
   @Test
-  public void testIfCarAgeIsThreeYears() {
+  public void testRentTransactionIfCarAgeIsThreeYears() {
     // given
     final var qWeek =
-            QWeekResponse.builder()
-                    .id(10L)
-                    .start(LocalDate.of(2024, Month.JANUARY, 2))
-                    .number(1)
-                    .build();
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 2))
+            .number(1)
+            .build();
 
     final var carId = 20L;
     final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
     when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_NAME_WEEKLY_RENT))
-            .thenReturn(TransactionType.builder().id(30L).build());
+        .thenReturn(TransactionType.builder().id(30L).build());
     when(carQuery.getById(carId))
-            .thenReturn(
-                    CarResponse.builder()
-                            .releaseDate(LocalDate.of(2021, Month.JANUARY, 1))
-                            .elegance(Boolean.TRUE)
-                            .build());
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2021, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =
-            instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
+        instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
 
     // then
     assertNotNull(transactionAddRequest);
@@ -137,31 +139,32 @@ class RentTransactionGeneratorTest {
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
     assertEquals(BigDecimal.valueOf(230), transactionAddRequest.getAmount());
   }
+
   @Test
-  public void testIfCarAgeIsFourYears() {
+  public void testRentTransactionIfCarAgeIsFourYears() {
     // given
     final var qWeek =
-            QWeekResponse.builder()
-                    .id(10L)
-                    .start(LocalDate.of(2024, Month.JANUARY, 2))
-                    .number(1)
-                    .build();
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 2))
+            .number(1)
+            .build();
 
     final var carId = 20L;
     final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
     when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_NAME_WEEKLY_RENT))
-            .thenReturn(TransactionType.builder().id(30L).build());
+        .thenReturn(TransactionType.builder().id(30L).build());
     when(carQuery.getById(carId))
-            .thenReturn(
-                    CarResponse.builder()
-                            .releaseDate(LocalDate.of(2020, Month.JANUARY, 1))
-                            .elegance(Boolean.TRUE)
-                            .build());
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2020, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =
-            instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
+        instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
 
     // then
     assertNotNull(transactionAddRequest);
@@ -171,31 +174,32 @@ class RentTransactionGeneratorTest {
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
     assertEquals(BigDecimal.valueOf(220), transactionAddRequest.getAmount());
   }
+
   @Test
-  public void testIfCarAgeIsFiveYears() {
+  public void testRentTransactionIfCarAgeIsFiveYears() {
     // given
     final var qWeek =
-            QWeekResponse.builder()
-                    .id(10L)
-                    .start(LocalDate.of(2024, Month.JANUARY, 2))
-                    .number(1)
-                    .build();
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 2))
+            .number(1)
+            .build();
 
     final var carId = 20L;
     final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
     when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_NAME_WEEKLY_RENT))
-            .thenReturn(TransactionType.builder().id(30L).build());
+        .thenReturn(TransactionType.builder().id(30L).build());
     when(carQuery.getById(carId))
-            .thenReturn(
-                    CarResponse.builder()
-                            .releaseDate(LocalDate.of(2019, Month.JANUARY, 1))
-                            .elegance(Boolean.TRUE)
-                            .build());
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2019, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =
-            instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
+        instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
 
     // then
     assertNotNull(transactionAddRequest);
@@ -205,31 +209,32 @@ class RentTransactionGeneratorTest {
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
     assertEquals(BigDecimal.valueOf(210), transactionAddRequest.getAmount());
   }
+
   @Test
-  public void testIfCarAgeIsSixYears() {
+  public void testRentTransactionIfCarAgeIsSixYears() {
     // given
     final var qWeek =
-            QWeekResponse.builder()
-                    .id(10L)
-                    .start(LocalDate.of(2024, Month.JANUARY, 2))
-                    .number(1)
-                    .build();
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 2))
+            .number(1)
+            .build();
 
     final var carId = 20L;
     final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
     when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_NAME_WEEKLY_RENT))
-            .thenReturn(TransactionType.builder().id(30L).build());
+        .thenReturn(TransactionType.builder().id(30L).build());
     when(carQuery.getById(carId))
-            .thenReturn(
-                    CarResponse.builder()
-                            .releaseDate(LocalDate.of(2018, Month.JANUARY, 1))
-                            .elegance(Boolean.TRUE)
-                            .build());
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2018, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =
-            instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
+        instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
 
     // then
     assertNotNull(transactionAddRequest);
@@ -241,30 +246,30 @@ class RentTransactionGeneratorTest {
   }
 
   @Test
-  public void testIfCarAgeIsSevenYears() {
+  public void testRentTransactionIfCarAgeIsSevenYears() {
     // given
     final var qWeek =
-            QWeekResponse.builder()
-                    .id(10L)
-                    .start(LocalDate.of(2024, Month.JANUARY, 2))
-                    .number(1)
-                    .build();
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 2))
+            .number(1)
+            .build();
 
     final var carId = 20L;
     final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
     when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_NAME_WEEKLY_RENT))
-            .thenReturn(TransactionType.builder().id(30L).build());
+        .thenReturn(TransactionType.builder().id(30L).build());
     when(carQuery.getById(carId))
-            .thenReturn(
-                    CarResponse.builder()
-                            .releaseDate(LocalDate.of(2017, Month.JANUARY, 1))
-                            .elegance(Boolean.TRUE)
-                            .build());
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2017, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =
-            instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
+        instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
 
     // then
     assertNotNull(transactionAddRequest);
@@ -274,31 +279,32 @@ class RentTransactionGeneratorTest {
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
     assertEquals(BigDecimal.valueOf(150), transactionAddRequest.getAmount());
   }
+
   @Test
-  public void testIfCarAgeIsEightYears() {
+  public void testRentTransactionIfCarAgeIsEightYears() {
     // given
     final var qWeek =
-            QWeekResponse.builder()
-                    .id(10L)
-                    .start(LocalDate.of(2024, Month.JANUARY, 2))
-                    .number(1)
-                    .build();
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 2))
+            .number(1)
+            .build();
 
     final var carId = 20L;
     final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
     when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_NAME_WEEKLY_RENT))
-            .thenReturn(TransactionType.builder().id(30L).build());
+        .thenReturn(TransactionType.builder().id(30L).build());
     when(carQuery.getById(carId))
-            .thenReturn(
-                    CarResponse.builder()
-                            .releaseDate(LocalDate.of(2016, Month.JANUARY, 1))
-                            .elegance(Boolean.TRUE)
-                            .build());
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2016, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =
-            instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
+        instanceUnderTest.getRentTransactionAddRequest(qWeek, activeCarLink);
 
     // then
     assertNotNull(transactionAddRequest);
@@ -307,5 +313,119 @@ class RentTransactionGeneratorTest {
     assertEquals(21L, transactionAddRequest.getDriverId());
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
     assertEquals(BigDecimal.valueOf(150), transactionAddRequest.getAmount());
+  }
+
+  @Test
+  public void testAbsenceAdjustTransactionIfWas1DayOfAbsence() {
+    // given
+    final var qWeek =
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 1))
+            .end(LocalDate.of(2024, Month.JANUARY, 7))
+            .number(1)
+            .year(2024)
+            .build();
+    final var absenceDaysCount = 1L;
+
+    final var carId = 20L;
+    final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
+    when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_ABSENCE_ADJUSTMENT))
+        .thenReturn(TransactionType.builder().id(30L).build());
+    when(carQuery.getById(carId))
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2016, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
+    when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
+
+    // when
+    final var transactionAddRequestOpt =
+        instanceUnderTest.getAbsenceAdjustmentTransactionAddRequest(
+            activeCarLink, qWeek, absenceDaysCount);
+
+    // then
+    assertTrue(transactionAddRequestOpt.isEmpty());
+  }
+
+  @Test
+  public void testAbsenceAdjustTransactionIfWere2DaysOfAbsence() {
+    // given
+    final var qWeek =
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 1))
+            .end(LocalDate.of(2024, Month.JANUARY, 7))
+            .number(1)
+            .year(2024)
+            .build();
+    final var absenceDaysCount = 2L;
+
+    final var carId = 20L;
+    final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
+    when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_ABSENCE_ADJUSTMENT))
+        .thenReturn(TransactionType.builder().id(30L).build());
+    when(carQuery.getById(carId))
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2016, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
+    when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
+
+    // when
+    final var transactionAddRequestOpt =
+        instanceUnderTest.getAbsenceAdjustmentTransactionAddRequest(
+            activeCarLink, qWeek, absenceDaysCount);
+
+    // then
+    assertTrue(transactionAddRequestOpt.isPresent());
+    final var transactionAddRequest = transactionAddRequestOpt.get();
+    assertEquals(1, transactionAddRequest.getWeekNumber());
+    assertEquals(30L, transactionAddRequest.getTransactionTypeId());
+    assertEquals(21L, transactionAddRequest.getDriverId());
+    assertEquals(LocalDate.of(2024, Month.JANUARY, 1), transactionAddRequest.getDate());
+    assertEquals(BigDecimal.valueOf(50), transactionAddRequest.getAmount());
+  }
+
+  @Test
+  public void testAbsenceAdjustTransactionIfWere3DaysOfAbsence() {
+    // given
+    final var qWeek =
+        QWeekResponse.builder()
+            .id(10L)
+            .start(LocalDate.of(2024, Month.JANUARY, 1))
+            .end(LocalDate.of(2024, Month.JANUARY, 7))
+            .number(1)
+            .year(2024)
+            .build();
+    final var absenceDaysCount = 3L;
+
+    final var carId = 20L;
+    final var activeCarLink = CarLinkResponse.builder().carId(carId).driverId(21L).build();
+    when(transactionTypeLoadPort.loadByName(TRANSACTION_TYPE_ABSENCE_ADJUSTMENT))
+        .thenReturn(TransactionType.builder().id(30L).build());
+    when(carQuery.getById(carId))
+        .thenReturn(
+            CarResponse.builder()
+                .releaseDate(LocalDate.of(2016, Month.JANUARY, 1))
+                .elegance(Boolean.TRUE)
+                .build());
+    when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
+
+    // when
+    final var transactionAddRequestOpt =
+        instanceUnderTest.getAbsenceAdjustmentTransactionAddRequest(
+            activeCarLink, qWeek, absenceDaysCount);
+
+    // then
+    assertTrue(transactionAddRequestOpt.isPresent());
+    final var transactionAddRequest = transactionAddRequestOpt.get();
+    assertEquals(1, transactionAddRequest.getWeekNumber());
+    assertEquals(30L, transactionAddRequest.getTransactionTypeId());
+    assertEquals(21L, transactionAddRequest.getDriverId());
+    assertEquals(LocalDate.of(2024, Month.JANUARY, 1), transactionAddRequest.getDate());
+    assertEquals(BigDecimal.valueOf(75), transactionAddRequest.getAmount());
   }
 }

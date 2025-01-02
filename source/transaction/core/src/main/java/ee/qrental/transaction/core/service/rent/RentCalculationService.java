@@ -3,7 +3,6 @@ package ee.qrental.transaction.core.service.rent;
 import static java.util.stream.Collectors.toList;
 
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.car.api.in.query.GetCarQuery;
 import ee.qrental.car.api.in.response.CarLinkResponse;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
@@ -12,6 +11,7 @@ import ee.qrental.email.api.in.request.EmailSendRequest;
 import ee.qrental.email.api.in.request.EmailType;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
+import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 import ee.qrental.transaction.api.in.request.rent.RentCalculationAddRequest;
 import ee.qrental.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
 import ee.qrental.transaction.api.out.rent.RentCalculationAddPort;
@@ -32,11 +32,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RentCalculationService implements RentCalculationAddUseCase {
 
-  private static final Integer ABSENCE_DAYS_COUNT_THRESHOLD_PER_WEEK = 2;
-
   private final RentTransactionGenerator rentTransactionGenerator;
   private final GetCarLinkQuery carLinkQuery;
-  private final GetCarQuery carQuery;
   private final GetTransactionQuery transactionQuery;
   private final TransactionUseCaseService transactionUseCaseService;
   private final RentCalculationAddPort rentCalculationAddPort;
@@ -75,55 +72,47 @@ public class RentCalculationService implements RentCalculationAddUseCase {
   }
 
   private void processRent(
-      final RentCalculation domain, final CarLinkResponse activeCarLink, QWeekResponse qWeek) {
+      final RentCalculation domain,
+      final CarLinkResponse activeCarLink,
+      final QWeekResponse qWeek) {
     final var rentTransactionAddRequest =
         rentTransactionGenerator.getRentTransactionAddRequest(qWeek, activeCarLink);
-    final var carLinkId = activeCarLink.getId();
-    final var rentTransactionId = transactionUseCaseService.add(rentTransactionAddRequest);
-    final var calculationResultForRent = getResult(carLinkId, rentTransactionId);
-    domain.getResults().add(calculationResultForRent);
+    saveTransaction(rentTransactionAddRequest, activeCarLink.getId(), domain);
   }
 
   private void processAbsenceAdjustment(
-      final RentCalculation domain, final CarLinkResponse activeCarLink, QWeekResponse qWeek) {
+      final RentCalculation domain,
+      final CarLinkResponse activeCarLink,
+      final QWeekResponse qWeek) {
     final var driverId = activeCarLink.getDriverId();
     final var carLinkId = activeCarLink.getId();
     final var absencesDaysCount =
         absenceQuery.getAbsencesDayCountsByDriverIdAndQWeekId(driverId, qWeek.getId());
-    if (absencesDaysCount < ABSENCE_DAYS_COUNT_THRESHOLD_PER_WEEK) {
-      return;
-    }
-    final var absenceAdjustmentTransactionAddRequest =
+    final var absenceAdjustmentTransactionAddRequestOpt =
         rentTransactionGenerator.getAbsenceAdjustmentTransactionAddRequest(
             activeCarLink, qWeek, absencesDaysCount);
-    final var absenceAdjustmentTransactionId =
-        transactionUseCaseService.add(absenceAdjustmentTransactionAddRequest);
-    final var calculationResultForAbsenceAdjustment =
-        getResult(carLinkId, absenceAdjustmentTransactionId);
-    domain.getResults().add(calculationResultForAbsenceAdjustment);
+    absenceAdjustmentTransactionAddRequestOpt.ifPresent(
+        request -> saveTransaction(request, carLinkId, domain));
   }
 
   private void processNoLabelFine(
       final RentCalculation domain,
       final CarLinkResponse activeCarLink,
       final QWeekResponse qWeek) {
-    final var isNoLabelFineRequired = isNoLabelFineRequired(activeCarLink.getCarId());
-    if (isNoLabelFineRequired) {
-      final var noLabelFineTransactionAddRequest =
-          rentTransactionGenerator.getNoLabelFineTransactionAddRequest(qWeek, activeCarLink);
-      final var noLabelFineTransactionId =
-          transactionUseCaseService.add(noLabelFineTransactionAddRequest);
-      final var calculationResultForNoLabelFine =
-          getResult(activeCarLink.getId(), noLabelFineTransactionId);
-      domain.getResults().add(calculationResultForNoLabelFine);
-    }
+    final var noLabelFineTransactionAddRequestOpt =
+        rentTransactionGenerator.getNoLabelFineTransactionAddRequest(qWeek, activeCarLink);
+    noLabelFineTransactionAddRequestOpt.ifPresent(
+        request -> saveTransaction(request, activeCarLink.getId(), domain));
   }
 
-  private boolean isNoLabelFineRequired(final Long carId) {
-    final var car = carQuery.getById(carId);
-    final var hasQLabel = car.getBrandingQrent();
-
-    return !hasQLabel;
+  private void saveTransaction(
+      final TransactionAddRequest transactionAddRequest,
+      final Long carLinkId,
+      final RentCalculation domain) {
+    final var absenceAdjustmentTransactionId = transactionUseCaseService.add(transactionAddRequest);
+    final var calculationResultForAbsenceAdjustment =
+        getResult(carLinkId, absenceAdjustmentTransactionId);
+    domain.getResults().add(calculationResultForAbsenceAdjustment);
   }
 
   private RentCalculationResult getResult(final Long carLinkId, final Long transactionId) {

@@ -40,7 +40,6 @@ public class RentServiceConfig {
   RentCalculationService getRentCalculationService(
       final RentTransactionGenerator rentTransactionGenerator,
       final GetCarLinkQuery carLinkQuery,
-      final GetCarQuery carQuery,
       final GetTransactionQuery transactionQuery,
       final TransactionUseCaseService transactionUseCaseService,
       final RentCalculationAddPort rentCalculationAddPort,
@@ -54,7 +53,6 @@ public class RentServiceConfig {
     return new RentCalculationService(
         rentTransactionGenerator,
         carLinkQuery,
-        carQuery,
         transactionQuery,
         transactionUseCaseService,
         rentCalculationAddPort,
