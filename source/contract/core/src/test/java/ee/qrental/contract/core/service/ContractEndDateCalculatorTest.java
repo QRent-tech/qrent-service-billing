@@ -19,7 +19,6 @@ class ContractEndDateCalculatorTest {
 
   @BeforeEach
   void init() {
-
     qDateTime = mock(QDateTime.class);
     instanceUnderTest = new ContractEndDateCalculator(qDateTime);
   }
