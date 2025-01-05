@@ -1,6 +1,5 @@
 package ee.qrental.user.core.service;
 
-
 import static ee.qrental.email.api.in.request.EmailType.USER_REGISTRATION;
 import static java.util.Collections.singletonList;
 
@@ -24,6 +23,7 @@ import jakarta.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Random;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @AllArgsConstructor
 public class UserAccountUseCaseService
@@ -36,41 +36,44 @@ public class UserAccountUseCaseService
   private final UserAccountAddRequestMapper addRequestMapper;
   private final UserAccountUpdateRequestMapper updateRequestMapper;
   private final UserAccountBusinessRuleValidator businessRuleValidator;
-
   private final EmailSendUseCase emailSendUseCase;
+  private final PasswordEncoder passwordEncoder;
 
   @Transactional
   @Override
   public Long add(final UserAccountAddRequest request) {
-   final var domain= addRequestMapper.toDomain(request);
-   final var violationsCollector = businessRuleValidator.validateAdd(domain);
-   if (violationsCollector.hasViolations()) {
-       request.setViolations(violationsCollector.getViolations());
-       return null;
-   }
-   domain.setPassword(getRandomString());
-   sendEmailToUser(domain);
-   final var savedDomain = addPort.add(domain);
-   
-   return savedDomain.getId();
+    final var domain = addRequestMapper.toDomain(request);
+    final var violationsCollector = businessRuleValidator.validateAdd(domain);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+      return null;
+    }
+    final var password = generatePassword();
+    final var encodedPassword = passwordEncoder.encode(password);
+    domain.setPassword(encodedPassword);
+    sendEmailToUser(domain, password);
+    final var savedDomain = addPort.add(domain);
+
+    return savedDomain.getId();
   }
 
-  private void sendEmailToUser(final UserAccount domain) {
-      final var properties = new HashMap<String, Object>();
-      properties.put("password", domain.getPassword());
-      properties.put("username", domain.getUsername());
-      properties.put("firstName", domain.getFirstName());
-      properties.put("lastName", domain.getLastName());
+  private void sendEmailToUser(final UserAccount domain, final String password) {
+    final var properties = new HashMap<String, Object>();
+    properties.put("password", password);
+    properties.put("username", domain.getUsername());
+    properties.put("firstName", domain.getFirstName());
+    properties.put("lastName", domain.getLastName());
 
-      final var registrationNewUserEmailRequest = EmailSendRequest.builder()
-                .type(USER_REGISTRATION)
-                .recipients(singletonList(domain.getEmail()))
-                .properties(properties)
-                .build();
-      emailSendUseCase.sendEmail(registrationNewUserEmailRequest);
-    }
+    final var registrationNewUserEmailRequest =
+        EmailSendRequest.builder()
+            .type(USER_REGISTRATION)
+            .recipients(singletonList(domain.getEmail()))
+            .properties(properties)
+            .build();
+    emailSendUseCase.sendEmail(registrationNewUserEmailRequest);
+  }
 
-    @Override
+  @Override
   public void update(final UserAccountUpdateRequest request) {
     checkExistence(request.getId());
     updatePort.update(updateRequestMapper.toDomain(request));
@@ -87,7 +90,7 @@ public class UserAccountUseCaseService
     }
   }
 
-  private String getRandomString(){
+  private String generatePassword() {
     int leftLimit = 48; // numeral '0'
     int rightLimit = 122; // letter 'z'
     final var random = new Random();

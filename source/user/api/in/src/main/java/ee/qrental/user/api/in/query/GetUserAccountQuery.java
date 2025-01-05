@@ -9,4 +9,6 @@ import java.util.List;
 public interface GetUserAccountQuery
     extends BaseGetQuery<UserAccountUpdateRequest, UserAccountResponse> {
   List<UserAccountResponse> getAllOperators();
+
+  UserAccountResponse getUserAccountByUsername(final String emailOrUsername);
 }

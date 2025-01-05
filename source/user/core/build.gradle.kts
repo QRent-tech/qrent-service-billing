@@ -9,6 +9,7 @@ dependencies {
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)
     implementation(libs.q.jakarta.transaction)
+    implementation("org.springframework.security:spring-security-crypto:6.4.2")
 }
 
 tasks.jar {

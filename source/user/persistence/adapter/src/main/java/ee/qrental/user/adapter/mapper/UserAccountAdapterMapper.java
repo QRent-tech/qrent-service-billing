@@ -12,12 +12,12 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class UserAccountAdapterMapper {
-  
+
   public UserAccount mapToDomain(final UserAccountJakartaEntity entity) {
-    if(entity == null) {
+    if (entity == null) {
       return null;
     }
-   final var roles =  mapToDomain(entity.getRoles());
+    final var roles = mapToDomain(entity.getRoles());
 
     return UserAccount.builder()
         .id(entity.getId())
@@ -25,20 +25,18 @@ public class UserAccountAdapterMapper {
         .lastName(entity.getLastName())
         .email(entity.getEmail())
         .username(entity.getUsername())
+        .password(entity.getPassword())
         .roles(roles)
         .build();
   }
 
-  private List<Role> mapToDomain(final List<RoleJakartaEntity> roles){
-    if(roles == null) {
+  private List<Role> mapToDomain(final List<RoleJakartaEntity> roles) {
+    if (roles == null) {
       return emptyList();
     }
     return roles.stream()
-            .map(entity-> Role.builder()
-                    .id(entity.getId())
-                    .name(entity.getName())
-                    .build())
-            .collect(toList());
+        .map(entity -> Role.builder().id(entity.getId()).name(entity.getName()).build())
+        .collect(toList());
   }
 
   public UserAccountJakartaEntity mapToEntity(final UserAccount domain) {

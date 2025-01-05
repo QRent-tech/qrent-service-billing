@@ -10,13 +10,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserAccountResponseMapper implements ResponseMapper<UserAccountResponse, UserAccount> {
 
-
   @Override
   public UserAccountResponse toResponse(final UserAccount domain) {
 
     return UserAccountResponse.builder()
         .id(domain.getId())
         .username(domain.getUsername())
+        .password(domain.getPassword())
         .firstName(domain.getFirstName())
         .lastName(domain.getLastName())
         .email(domain.getEmail())

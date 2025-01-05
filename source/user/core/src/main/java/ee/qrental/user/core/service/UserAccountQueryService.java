@@ -58,4 +58,9 @@ public class UserAccountQueryService implements GetUserAccountQuery {
         .sorted(getLastNameComparator())
         .collect(toList());
   }
+
+  @Override
+  public UserAccountResponse getUserAccountByUsername(final String username) {
+    return mapper.toResponse(loadPort.loadByUsername(username));
+  }
 }

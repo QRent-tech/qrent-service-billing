@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":source:firm:api:in"))
     implementation(project(":source:email:api:in"))
     implementation("org.springframework:spring-context-support")
+    implementation("org.springframework.security:spring-security-crypto:6.4.2")
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)
 }

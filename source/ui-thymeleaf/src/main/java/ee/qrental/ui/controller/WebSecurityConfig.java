@@ -1,0 +1,36 @@
+package ee.qrental.ui.controller;
+
+import ee.qrental.user.api.in.query.GetUserAccountQuery;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig {
+
+  @Bean
+  public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
+    http.authorizeHttpRequests(
+            (requests) ->
+                requests
+                    .requestMatchers("/webjars/**", "/bootstrap-dual-listbox/**", "/img/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+        .formLogin((form) -> form.loginPage("/login").permitAll())
+        .logout((logout) -> logout.permitAll());
+
+    return http.build();
+  }
+
+  @Bean
+  public UserDetailsService userQUserDetailService(final GetUserAccountQuery userAccountQuery) {
+
+    return new QUserDetailService(userAccountQuery);
+  }
+}
