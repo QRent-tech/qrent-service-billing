@@ -1,13 +1,13 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
 
-    implementation(project(":source:bonus:core"))
-    implementation(project(":source:bonus:api:in"))
+    implementation(project(":source:domain:bonus:core"))
+    implementation(project(":source:domain:bonus:api:in"))
 
-    implementation(project(":source:bonus:api:out"))
-    implementation(project(":source:bonus:persistence:flyway"))
-    implementation(project(":source:bonus:persistence:adapter"))
-    implementation(project(":source:bonus:persistence:repository"))
+    implementation(project(":source:domain:bonus:api:out"))
+    implementation(project(":source:domain:bonus:persistence:flyway"))
+    implementation(project(":source:domain:bonus:persistence:adapter"))
+    implementation(project(":source:domain:bonus:persistence:repository"))
 
 
     implementation(project(":source:constant:api:in"))

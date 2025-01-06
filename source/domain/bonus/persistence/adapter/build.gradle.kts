@@ -1,8 +1,8 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
-    implementation(project(":source:bonus:api:out"))
-    implementation(project(":source:bonus:domain"))
-    implementation(project(":source:bonus:persistence:entity"))
+    implementation(project(":source:domain:bonus:api:out"))
+    implementation(project(":source:domain:bonus:domain"))
+    implementation(project(":source:domain:bonus:persistence:entity"))
 
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

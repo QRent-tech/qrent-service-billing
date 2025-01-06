@@ -1,6 +1,6 @@
 dependencies {
     implementation(project(":source:transaction:api:in"))
-    implementation(project(":source:bonus:api:in"))
+    implementation(project(":source:domain:bonus:api:in"))
     implementation(project(":source:insurance:api:in"))
     implementation(project(":source:constant:api:in"))
     implementation(project(":source:domain:common:api"))

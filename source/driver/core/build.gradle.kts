@@ -1,7 +1,7 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
     implementation(project(":source:driver:api:in"))
-    implementation(project(":source:bonus:api:in"))
+    implementation(project(":source:domain:bonus:api:in"))
     implementation(project(":source:insurance:api:in"))
     implementation(project(":source:driver:api:out"))
     implementation(project(":source:driver:domain"))

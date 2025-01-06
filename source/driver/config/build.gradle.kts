@@ -10,7 +10,7 @@ dependencies {
     implementation(project(":source:firm:api:in"))
     implementation(project(":source:contract:api:in"))
     implementation(project(":source:constant:api:in"))
-    implementation(project(":source:bonus:api:in"))
+    implementation(project(":source:domain:bonus:api:in"))
     implementation("org.springframework:spring-context-support")
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

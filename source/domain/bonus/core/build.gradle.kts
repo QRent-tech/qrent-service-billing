@@ -2,9 +2,9 @@ dependencies {
     implementation(project(":source:domain:common:api"))
     implementation(project(":source:domain:common:utils"))
 
-    implementation(project(":source:bonus:api:in"))
-    implementation(project(":source:bonus:api:out"))
-    implementation(project(":source:bonus:domain"))
+    implementation(project(":source:domain:bonus:api:in"))
+    implementation(project(":source:domain:bonus:api:out"))
+    implementation(project(":source:domain:bonus:domain"))
 
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:contract:api:in"))
