@@ -7,8 +7,8 @@ dependencies {
 
     implementation(project(":source:transaction:api:in"))
     implementation(project(":source:domain:driver:api:in"))
-    implementation(project(":source:constant:api:in"))
-    implementation(project(":source:contract:api:in"))
+    implementation(project(":source:domain:constant:api:in"))
+    implementation(project(":source:domain:contract:api:in"))
     implementation(project(":source:domain:car:api:in"))
 
     implementation("jakarta.transaction:jakarta.transaction-api:2.0.1")

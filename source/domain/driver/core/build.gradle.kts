@@ -6,8 +6,8 @@ dependencies {
     implementation(project(":source:domain:driver:api:out"))
     implementation(project(":source:domain:driver:domain"))
     implementation(project(":source:domain:firm:api:in"))
-    implementation(project(":source:constant:api:in"))
-    implementation(project(":source:contract:api:in"))
+    implementation(project(":source:domain:constant:api:in"))
+    implementation(project(":source:domain:contract:api:in"))
     implementation(project(":source:domain:common:utils"))
 
     compileOnly(libs.q.lombok)

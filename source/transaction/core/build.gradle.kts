@@ -6,9 +6,9 @@ dependencies {
     implementation(project(":source:transaction:domain"))
 
     implementation(project(":source:domain:driver:api:in"))
-    implementation(project(":source:contract:api:in"))
+    implementation(project(":source:domain:contract:api:in"))
     implementation(project(":source:domain:car:api:in"))
-    implementation(project(":source:constant:api:in"))
+    implementation(project(":source:domain:constant:api:in"))
     implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:user:api:in"))
     compileOnly(libs.q.lombok)
