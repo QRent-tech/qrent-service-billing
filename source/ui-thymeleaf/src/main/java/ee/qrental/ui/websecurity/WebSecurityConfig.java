@@ -1,11 +1,9 @@
-package ee.qrental.ui.controller;
+package ee.qrental.ui.websecurity;
 
-import ee.qrental.user.api.in.query.GetUserAccountQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -26,11 +24,5 @@ public class WebSecurityConfig {
         .logout((logout) -> logout.permitAll());
 
     return http.build();
-  }
-
-  @Bean
-  public UserDetailsService userQUserDetailService(final GetUserAccountQuery userAccountQuery) {
-
-    return new QUserDetailService(userAccountQuery);
   }
 }

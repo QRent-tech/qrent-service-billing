@@ -1,5 +1,6 @@
-package ee.qrental.ui.controller;
+package ee.qrental.security.core.service;
 
+import ee.qrental.security.core.QUserPrincipal;
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

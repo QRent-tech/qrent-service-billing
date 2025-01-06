@@ -13,7 +13,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class UserAccountUpdateRequest extends AbstractUpdateRequest {
-
   private String username;
   private String email;
   private String firstName;

@@ -1,4 +1,4 @@
-package ee.qrental.ui.controller;
+package ee.qrental.security.core;
 
 import ee.qrental.user.api.in.response.UserAccountResponse;
 import lombok.AllArgsConstructor;

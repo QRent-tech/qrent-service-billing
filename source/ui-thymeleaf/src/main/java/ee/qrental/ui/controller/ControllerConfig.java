@@ -15,16 +15,10 @@ import ee.qrental.ui.service.insurance.impl.InsuranceCounterServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @ComponentScan(basePackages = "ee.qrental.ui.controller")
-public class ControllerConfig implements WebMvcConfigurer {
-
-  public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/login").setViewName("login");
-  }
+public class ControllerConfig {
 
   @Bean
   QDateFormatter getQDateFormatter() {

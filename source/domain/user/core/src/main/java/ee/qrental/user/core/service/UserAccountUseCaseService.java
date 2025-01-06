@@ -6,6 +6,7 @@ import static java.util.Collections.singletonList;
 import ee.qrental.driver.domain.UserAccount;
 import ee.qrental.email.api.in.request.EmailSendRequest;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
+import ee.qrental.security.api.in.usecase.PasswordUseCase;
 import ee.qrental.user.api.in.request.UserAccountAddRequest;
 import ee.qrental.user.api.in.request.UserAccountDeleteRequest;
 import ee.qrental.user.api.in.request.UserAccountUpdateRequest;
@@ -23,7 +24,6 @@ import jakarta.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Random;
 import lombok.AllArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @AllArgsConstructor
 public class UserAccountUseCaseService
@@ -37,7 +37,7 @@ public class UserAccountUseCaseService
   private final UserAccountUpdateRequestMapper updateRequestMapper;
   private final UserAccountBusinessRuleValidator businessRuleValidator;
   private final EmailSendUseCase emailSendUseCase;
-  private final PasswordEncoder passwordEncoder;
+  private final PasswordUseCase passwordUseCase;
 
   @Transactional
   @Override
@@ -49,7 +49,7 @@ public class UserAccountUseCaseService
       return null;
     }
     final var password = generatePassword();
-    final var encodedPassword = passwordEncoder.encode(password);
+    final var encodedPassword = passwordUseCase.encode(password);
     domain.setPassword(encodedPassword);
     sendEmailToUser(domain, password);
     final var savedDomain = addPort.add(domain);

@@ -1,6 +1,7 @@
 package ee.qrental.user.spring.config;
 
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
+import ee.qrental.security.api.in.usecase.PasswordUseCase;
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
 import ee.qrental.user.api.out.UserAccountAddPort;
 import ee.qrental.user.api.out.UserAccountDeletePort;
@@ -14,8 +15,6 @@ import ee.qrental.user.core.service.UserAccountUseCaseService;
 import ee.qrental.user.core.validator.UserAccountBusinessRuleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class UserAccountServiceConfig {
@@ -37,7 +36,7 @@ public class UserAccountServiceConfig {
       final UserAccountAddRequestMapper addRequestMapper,
       final UserAccountUpdateRequestMapper updateRequestMapper,
       final UserAccountBusinessRuleValidator businessRuleValidator,
-      final EmailSendUseCase emailSendUseCase, final PasswordEncoder passwordEncoder) {
+      final EmailSendUseCase emailSendUseCase, final PasswordUseCase passwordUseCase) {
     return new UserAccountUseCaseService(
         addPort, 
             updatePort, 
@@ -46,11 +45,6 @@ public class UserAccountServiceConfig {
             addRequestMapper, 
             updateRequestMapper,
             businessRuleValidator,
-            emailSendUseCase, passwordEncoder);
-  }
-
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
+            emailSendUseCase, passwordUseCase);
   }
 }

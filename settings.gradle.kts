@@ -127,10 +127,15 @@ include("source:domain:bonus:persistence:repository")
 include("source:domain:bonus:persistence:flyway")
 include("source:domain:bonus:config")
 
-//Email domain:
+//Email:
 include("source:cross:email:api:in")
 include("source:cross:email:core")
 include("source:cross:email:config")
+
+//Security:
+include("source:cross:security:api:in")
+include("source:cross:security:core")
+include("source:cross:security:config")
 
 //User domain:
 include("source:domain:user:api:in")
