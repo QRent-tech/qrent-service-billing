@@ -1,9 +1,9 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
     implementation(project(":source:domain:common:utils"))
-    implementation(project(":source:transaction:api:in"))
-    implementation(project(":source:transaction:api:out"))
-    implementation(project(":source:transaction:domain"))
+    implementation(project(":source:domain:transaction:api:in"))
+    implementation(project(":source:domain:transaction:api:out"))
+    implementation(project(":source:domain:transaction:domain"))
 
     implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:domain:contract:api:in"))

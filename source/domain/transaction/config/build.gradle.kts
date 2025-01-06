@@ -1,14 +1,14 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
 
-    implementation(project(":source:transaction:core"))
-    implementation(project(":source:transaction:api:in"))
-    implementation(project(":source:transaction:api:out"))
+    implementation(project(":source:domain:transaction:core"))
+    implementation(project(":source:domain:transaction:api:in"))
+    implementation(project(":source:domain:transaction:api:out"))
     implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:user:api:in"))
-    implementation(project(":source:transaction:persistence:flyway"))
-    implementation(project(":source:transaction:persistence:adapter"))
-    implementation(project(":source:transaction:persistence:repository"))
+    implementation(project(":source:domain:transaction:persistence:flyway"))
+    implementation(project(":source:domain:transaction:persistence:adapter"))
+    implementation(project(":source:domain:transaction:persistence:repository"))
 
     implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:domain:car:api:in"))

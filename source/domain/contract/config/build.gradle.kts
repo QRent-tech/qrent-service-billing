@@ -7,7 +7,7 @@ dependencies {
     implementation(project(":source:domain:contract:persistence:repository"))
 
     implementation(project(":source:domain:common:api"))
-    implementation(project(":source:transaction:api:in"))
+    implementation(project(":source:domain:transaction:api:in"))
     implementation(project(":source:domain:constant:api:in"))
     implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:insurance:api:in"))

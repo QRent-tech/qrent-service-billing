@@ -6,7 +6,7 @@ dependencies {
     implementation(project(":source:invoice:persistence:adapter"))
     implementation(project(":source:invoice:persistence:repository"))
 
-    implementation(project(":source:transaction:api:in"))
+    implementation(project(":source:domain:transaction:api:in"))
     implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:domain:firm:api:in"))
     implementation(project(":source:domain:constant:api:in"))

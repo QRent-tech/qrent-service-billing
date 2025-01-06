@@ -1,6 +1,6 @@
 dependencies {
-    implementation(project(":source:transaction:persistence:adapter"))
-    implementation(project(":source:transaction:persistence:entity"))
+    implementation(project(":source:domain:transaction:persistence:adapter"))
+    implementation(project(":source:domain:transaction:persistence:entity"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 

@@ -11,7 +11,7 @@ dependencies {
 
 
     implementation(project(":source:domain:constant:api:in"))
-    implementation(project(":source:transaction:api:in"))
+    implementation(project(":source:domain:transaction:api:in"))
     implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:domain:driver:api:in"))

@@ -1,8 +1,8 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
-    implementation(project(":source:transaction:api:out"))
-    implementation(project(":source:transaction:domain"))
-    implementation(project(":source:transaction:persistence:entity"))
+    implementation(project(":source:domain:transaction:api:out"))
+    implementation(project(":source:domain:transaction:domain"))
+    implementation(project(":source:domain:transaction:persistence:entity"))
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.mockito:mockito-core")

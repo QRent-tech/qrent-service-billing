@@ -3,7 +3,7 @@ dependencies {
     implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:user:api:in"))
-    implementation(project(":source:transaction:api:in"))
+    implementation(project(":source:domain:transaction:api:in"))
     implementation(project(":source:invoice:api:in"))
     implementation(project(":source:domain:contract:api:in"))
     implementation(project(":source:domain:firm:api:in"))
