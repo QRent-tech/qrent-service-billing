@@ -12,10 +12,10 @@ include("source:app")
 include("source:cross:task")
 
 //Common:
-include("source:common:api")
-include("source:common:core")
-include("source:common:utils")
-include("source:common:config")
+include("source:domain:common:api")
+include("source:domain:common:core")
+include("source:domain:common:utils")
+include("source:domain:common:config")
 
 //Driver domain:
 include("source:driver:api:in")
@@ -29,15 +29,15 @@ include("source:driver:persistence:flyway")
 include("source:driver:config")
 
 //Car domain:
-include("source:car:api:in")
-include("source:car:api:out")
-include("source:car:domain")
-include("source:car:core")
-include("source:car:persistence:adapter")
-include("source:car:persistence:entity")
-include("source:car:persistence:repository")
-include("source:car:persistence:flyway")
-include("source:car:config")
+include("source:domain:car:api:in")
+include("source:domain:car:api:out")
+include("source:domain:car:domain")
+include("source:domain:car:core")
+include("source:domain:car:persistence:adapter")
+include("source:domain:car:persistence:entity")
+include("source:domain:car:persistence:repository")
+include("source:domain:car:persistence:flyway")
+include("source:domain:car:config")
 
 //Firm domain:
 include("source:firm:api:in")

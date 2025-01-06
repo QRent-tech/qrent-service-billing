@@ -1,8 +1,8 @@
 dependencies {
-    implementation(project(":source:common:api"))
-    implementation(project(":source:car:api:in"))
-    implementation(project(":source:car:api:out"))
-    implementation(project(":source:car:domain"))
+    implementation(project(":source:domain:common:api"))
+    implementation(project(":source:domain:car:api:in"))
+    implementation(project(":source:domain:car:api:out"))
+    implementation(project(":source:domain:car:domain"))
     implementation(project(":source:driver:api:in"))
 
     compileOnly(libs.q.lombok)

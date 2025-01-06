@@ -1,6 +1,6 @@
 dependencies {
-    implementation(project(":source:car:persistence:adapter"))
-    implementation(project(":source:car:persistence:entity"))
+    implementation(project(":source:domain:car:persistence:adapter"))
+    implementation(project(":source:domain:car:persistence:entity"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("org.postgresql:postgresql")

@@ -1,6 +1,6 @@
 dependencies {
-    implementation(project(":source:common:api"))
-    implementation(project(":source:common:utils"))
+    implementation(project(":source:domain:common:api"))
+    implementation(project(":source:domain:common:utils"))
     implementation(project(":source:insurance:api:in"))
     implementation(project(":source:insurance:api:out"))
     implementation(project(":source:insurance:domain"))
@@ -9,7 +9,7 @@ dependencies {
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:constant:api:in"))
     implementation(project(":source:contract:api:in"))
-    implementation(project(":source:car:api:in"))
+    implementation(project(":source:domain:car:api:in"))
 
     implementation("jakarta.transaction:jakarta.transaction-api:2.0.1")
 

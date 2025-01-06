@@ -1,5 +1,5 @@
 dependencies {
-    implementation(project(":source:common:api"))
+    implementation(project(":source:domain:common:api"))
 
     implementation(project(":source:bonus:core"))
     implementation(project(":source:bonus:api:in"))
@@ -13,7 +13,7 @@ dependencies {
     implementation(project(":source:constant:api:in"))
     implementation(project(":source:transaction:api:in"))
     implementation(project(":source:cross:email:api:in"))
-    implementation(project(":source:car:api:in"))
+    implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:user:api:in"))
     implementation(project(":source:contract:api:in"))

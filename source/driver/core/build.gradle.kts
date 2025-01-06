@@ -1,5 +1,5 @@
 dependencies {
-    implementation(project(":source:common:api"))
+    implementation(project(":source:domain:common:api"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:bonus:api:in"))
     implementation(project(":source:insurance:api:in"))
@@ -8,7 +8,7 @@ dependencies {
     implementation(project(":source:firm:api:in"))
     implementation(project(":source:constant:api:in"))
     implementation(project(":source:contract:api:in"))
-    implementation(project(":source:common:utils"))
+    implementation(project(":source:domain:common:utils"))
 
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

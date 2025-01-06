@@ -1,7 +1,7 @@
 dependencies {
     dependencies {
-        implementation(project(":source:common:api"))
-        implementation(project(":source:common:core"))
+        implementation(project(":source:domain:common:api"))
+        implementation(project(":source:domain:common:core"))
         implementation("org.springframework:spring-context-support")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
         compileOnly(libs.q.lombok)

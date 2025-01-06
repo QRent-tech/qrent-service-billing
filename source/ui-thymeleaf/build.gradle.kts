@@ -1,5 +1,5 @@
 dependencies {
-    implementation(project(":source:car:api:in"))
+    implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:user:api:in"))
@@ -10,9 +10,9 @@ dependencies {
     implementation(project(":source:constant:api:in"))
     implementation(project(":source:bonus:api:in"))
     implementation(project(":source:insurance:api:in"))
-    implementation(project(":source:common:api"))
-    implementation(project(":source:common:core"))
-    implementation(project(":source:common:utils"))
+    implementation(project(":source:domain:common:api"))
+    implementation(project(":source:domain:common:core"))
+    implementation(project(":source:domain:common:utils"))
 
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
