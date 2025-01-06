@@ -10,7 +10,7 @@ dependencies {
     implementation(project(":source:contract:api:in"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:user:api:in"))
-    implementation(project(":source:email:api:in"))
+    implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:constant:api:in"))
     implementation(project(":source:transaction:api:in"))
 

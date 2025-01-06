@@ -10,7 +10,7 @@ dependencies{
     implementation(project(":source:insurance:api:in"))
     implementation(project(":source:driver:api:in"))
     implementation(project(":source:firm:api:in"))
-    implementation(project(":source:email:api:in"))
+    implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:constant:api:in"))
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine")

@@ -4,7 +4,7 @@ dependencies {
     implementation(project(":source:user:api:out"))
     implementation(project(":source:user:domain"))
 
-    implementation(project(":source:email:api:in"))
+    implementation(project(":source:cross:email:api:in"))
 
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

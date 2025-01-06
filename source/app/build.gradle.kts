@@ -24,8 +24,8 @@ dependencies {
     implementation(project(":source:insurance:persistence:flyway"))
     implementation(project(":source:user:config"))
     implementation(project(":source:user:persistence:flyway"))
-    implementation(project(":source:email:config"))
-    implementation(project(":source:task"))
+    implementation(project(":source:cross:email:config"))
+    implementation(project(":source:cross:task"))
 
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-actuator")

@@ -9,7 +9,7 @@ dependencyResolutionManagement {
 }
 
 include("source:app")
-include("source:task")
+include("source:cross:task")
 
 //Common:
 include("source:common:api")
@@ -128,9 +128,9 @@ include("source:bonus:persistence:flyway")
 include("source:bonus:config")
 
 //Email domain:
-include("source:email:api:in")
-include("source:email:core")
-include("source:email:config")
+include("source:cross:email:api:in")
+include("source:cross:email:core")
+include("source:cross:email:config")
 
 //User domain:
 include("source:user:api:in")
