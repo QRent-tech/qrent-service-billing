@@ -102,7 +102,7 @@ public class ContractBaseToPdfConverter {
         header1.addCell(cell2);
 
         final var cell3 =
-                new Cell(new Paragraph(format("Koostöölepingu pooled on RENDILEANDJA ja RENTNIK."), new Font(Font.TIMES_ROMAN, 10, Font.BOLD)));
+                new Cell(new Paragraph("Koostöölepingu pooled on RENDILEANDJA ja RENTNIK.", new Font(Font.TIMES_ROMAN, 10, Font.BOLD)));
         cell3.setBorder(NO_BORDER);
         cell3.setHorizontalAlignment(CENTER);
         header1.addCell(cell3);

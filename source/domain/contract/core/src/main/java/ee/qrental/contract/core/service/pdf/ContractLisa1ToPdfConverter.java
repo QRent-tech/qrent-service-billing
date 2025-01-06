@@ -67,7 +67,7 @@ public class ContractLisa1ToPdfConverter {
 
 
         final var cell3 =
-                new Cell(new Paragraph(format("Pooled : "), new Font(Font.TIMES_ROMAN, 10, Font.BOLD)));
+                new Cell(new Paragraph("Pooled : ", new Font(Font.TIMES_ROMAN, 10, Font.BOLD)));
         cell3.setBorder(NO_BORDER);
         cell3.setHorizontalAlignment(LEFT);
         header1.addCell(cell3);
