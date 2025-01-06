@@ -3,7 +3,7 @@ dependencies {
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:domain:car:api:out"))
     implementation(project(":source:domain:car:domain"))
-    implementation(project(":source:driver:api:in"))
+    implementation(project(":source:domain:driver:api:in"))
 
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

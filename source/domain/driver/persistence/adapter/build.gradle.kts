@@ -1,8 +1,8 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
-    implementation(project(":source:driver:api:out"))
-    implementation(project(":source:driver:domain"))
-    implementation(project(":source:driver:persistence:entity"))
+    implementation(project(":source:domain:driver:api:out"))
+    implementation(project(":source:domain:driver:domain"))
+    implementation(project(":source:domain:driver:persistence:entity"))
 
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

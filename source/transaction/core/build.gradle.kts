@@ -5,7 +5,7 @@ dependencies {
     implementation(project(":source:transaction:api:out"))
     implementation(project(":source:transaction:domain"))
 
-    implementation(project(":source:driver:api:in"))
+    implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:contract:api:in"))
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:constant:api:in"))

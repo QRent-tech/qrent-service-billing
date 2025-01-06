@@ -10,7 +10,7 @@ dependencies {
     implementation(project(":source:transaction:persistence:adapter"))
     implementation(project(":source:transaction:persistence:repository"))
 
-    implementation(project(":source:driver:api:in"))
+    implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:constant:api:in"))
     implementation(project(":source:contract:api:in"))

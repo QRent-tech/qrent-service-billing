@@ -7,7 +7,7 @@ dependencies {
     implementation(project(":source:domain:car:persistence:repository"))
 
     implementation(project(":source:domain:common:api"))
-    implementation(project(":source:driver:api:in"))
+    implementation(project(":source:domain:driver:api:in"))
 
     implementation("org.springframework:spring-context-support")
     compileOnly(libs.q.lombok)

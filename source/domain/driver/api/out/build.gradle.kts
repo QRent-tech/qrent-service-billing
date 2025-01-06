@@ -1,6 +1,6 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
-    implementation(project(":source:driver:domain"))
+    implementation(project(":source:domain:driver:domain"))
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)
 }

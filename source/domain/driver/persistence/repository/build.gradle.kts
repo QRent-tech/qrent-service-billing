@@ -1,6 +1,6 @@
 dependencies {
-    implementation(project(":source:firm:persistence:adapter"))
-    implementation(project(":source:firm:persistence:entity"))
+    implementation(project(":source:domain:driver:persistence:adapter"))
+    implementation(project(":source:domain:driver:persistence:entity"))
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("org.postgresql:postgresql")
@@ -9,5 +9,5 @@ dependencies {
 }
 
 tasks.jar {
-    archiveFileName.set("firm-persistence-rpository.jar")
+    archiveFileName.set("driver-persistence-repository.jar")
 }
