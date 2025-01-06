@@ -1,19 +1,22 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
-    implementation(project(":source:domain:driver:api:in"))
-    implementation(project(":source:domain:bonus:api:in"))
+    implementation(project(":source:domain:common:utils"))
     implementation(project(":source:domain:insurance:api:in"))
-    implementation(project(":source:domain:driver:api:out"))
-    implementation(project(":source:domain:driver:domain"))
-    implementation(project(":source:domain:firm:api:in"))
+    implementation(project(":source:domain:insurance:api:out"))
+    implementation(project(":source:domain:insurance:domain"))
+
+    implementation(project(":source:domain:transaction:api:in"))
+    implementation(project(":source:domain:driver:api:in"))
     implementation(project(":source:domain:constant:api:in"))
     implementation(project(":source:domain:contract:api:in"))
-    implementation(project(":source:domain:common:utils"))
+    implementation(project(":source:domain:car:api:in"))
+
+    implementation("jakarta.transaction:jakarta.transaction-api:2.0.1")
 
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)
-
-    implementation("jakarta.transaction:jakarta.transaction-api:2.0.1")
+    implementation(libs.q.jakarta.transaction)
+    implementation(libs.q.librepdf.openpdf)
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.mockito:mockito-core")
@@ -32,5 +35,5 @@ tasks.test {
 }
 
 tasks.jar {
-    archiveFileName.set("driver-core.jar")
+    archiveFileName.set("insurance-core.jar")
 }

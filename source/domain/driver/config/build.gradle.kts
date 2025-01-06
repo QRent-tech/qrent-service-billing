@@ -2,7 +2,7 @@ dependencies {
     implementation(project(":source:domain:driver:core"))
     implementation(project(":source:domain:common:api"))
     implementation(project(":source:domain:driver:api:in"))
-    implementation(project(":source:insurance:api:in"))
+    implementation(project(":source:domain:insurance:api:in"))
     implementation(project(":source:domain:driver:api:out"))
     implementation(project(":source:domain:driver:persistence:flyway"))
     implementation(project(":source:domain:driver:persistence:adapter"))

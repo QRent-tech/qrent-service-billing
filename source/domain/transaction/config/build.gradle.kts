@@ -5,7 +5,7 @@ dependencies {
     implementation(project(":source:domain:transaction:api:in"))
     implementation(project(":source:domain:transaction:api:out"))
     implementation(project(":source:cross:email:api:in"))
-    implementation(project(":source:user:api:in"))
+    implementation(project(":source:domain:user:api:in"))
     implementation(project(":source:domain:transaction:persistence:flyway"))
     implementation(project(":source:domain:transaction:persistence:adapter"))
     implementation(project(":source:domain:transaction:persistence:repository"))
