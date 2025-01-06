@@ -157,10 +157,10 @@ class RentTransactionGeneratorTest {
     when(carQuery.getById(carId))
         .thenReturn(
             CarResponse.builder()
-                .releaseDate(LocalDate.of(2020, Month.JANUARY, 1))
+                .releaseDate(LocalDate.of(2020, Month.OCTOBER, 30))
                 .elegance(Boolean.TRUE)
                 .build());
-    when(qDateTime.getToday()).thenReturn(LocalDate.of(2024, Month.JANUARY, 1));
+    when(qDateTime.getToday()).thenReturn(LocalDate.of(2025, Month.JANUARY, 1));
 
     // when
     final var transactionAddRequest =

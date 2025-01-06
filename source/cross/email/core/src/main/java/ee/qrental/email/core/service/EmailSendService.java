@@ -29,7 +29,7 @@ public class EmailSendService implements EmailSendUseCase {
                           "No Email Letter build Strategy were found for " + request.getType()))
               .process(request, mailSender.createMimeMessage());
       mailSender.send(message);
-    } catch (MessagingException | IOException e) {
+    } catch (final Exception e) {
       System.out.println("Email sending failed! Check the reason below: ");
       System.out.println(e.getMessage());
     }

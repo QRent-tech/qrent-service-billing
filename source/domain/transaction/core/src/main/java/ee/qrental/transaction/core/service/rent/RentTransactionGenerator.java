@@ -10,6 +10,7 @@ import ee.qrental.transaction.api.out.type.TransactionTypeLoadPort;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.*;
@@ -20,7 +21,7 @@ import static java.math.BigDecimal.valueOf;
 public class RentTransactionGenerator {
 
   private static final Integer ABSENCE_DAYS_COUNT_THRESHOLD_PER_WEEK = 2;
-  private static final Integer NEW_CAR_AGE = 3;
+  private static final Long NEW_CAR_AGE = 3L;
   private static final BigDecimal OLD_CAR_RATE = valueOf(150L);
   private static final BigDecimal NEW_CAR_RATE = valueOf(240L);
   private static final BigDecimal RATE_DECREASE_STEP = valueOf(10L);
@@ -79,7 +80,7 @@ public class RentTransactionGenerator {
     return Optional.empty();
   }
 
- private boolean isAbsenceAdjustmentRequired(final Long absenceDaysCount) {
+  private boolean isAbsenceAdjustmentRequired(final Long absenceDaysCount) {
 
     return absenceDaysCount >= ABSENCE_DAYS_COUNT_THRESHOLD_PER_WEEK;
   }
@@ -131,7 +132,7 @@ public class RentTransactionGenerator {
   private BigDecimal calculateRentTransactionAmount(final CarLinkResponse carLink) {
     final var carId = carLink.getCarId();
     final var car = carQuery.getById(carId);
-    final int carAge = getCarAge(car);
+    final var carAge = getCarAge(car);
     if (carAge < NEW_CAR_AGE) {
 
       return NEW_CAR_RATE;
@@ -167,10 +168,10 @@ public class RentTransactionGenerator {
     return OLD_CAR_RATE;
   }
 
-  private Integer getCarAge(final CarResponse car) {
-    final var carReleaseYear = car.getReleaseDate().getYear();
-    final var currentYear = qDateTime.getToday().getYear();
+  private Long getCarAge(final CarResponse car) {
+    final var carReleaseYear = car.getReleaseDate();
+    final var today = qDateTime.getToday();
 
-    return currentYear - carReleaseYear;
+    return ChronoUnit.YEARS.between(carReleaseYear, today);
   }
 }
