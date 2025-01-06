@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.carlink;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.*;
+import static ee.qrental.ui.controller.ControllerUtils.*;
 
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.in.query.GetCarQuery;

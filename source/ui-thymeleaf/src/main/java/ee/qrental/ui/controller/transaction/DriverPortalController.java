@@ -1,7 +1,7 @@
 package ee.qrental.ui.controller.transaction;
 
-import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
-import static ee.qrental.ui.controller.util.ControllerUtils.BALANCE_ROOT_PATH;
+import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
+import static ee.qrental.ui.controller.ControllerUtils.BALANCE_ROOT_PATH;
 
 import ee.qrental.bonus.api.in.query.GetObligationQuery;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
@@ -18,7 +18,7 @@ import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.query.filter.QWeekAndDriverFilter;
 import ee.qrental.transaction.api.in.response.TransactionResponse;
 import ee.qrental.transaction.api.in.response.balance.BalanceRawContextResponse;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.controller.transaction.assembler.DriverBalanceAssembler;
 import java.math.BigDecimal;
 import java.util.Collection;

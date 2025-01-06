@@ -1,4 +1,4 @@
-package ee.qrental.ui.controller.util;
+package ee.qrental.ui.controller;
 
 import lombok.experimental.UtilityClass;
 

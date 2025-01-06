@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.transaction.calculation.balance;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.BALANCE_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.BALANCE_ROOT_PATH;
 
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;

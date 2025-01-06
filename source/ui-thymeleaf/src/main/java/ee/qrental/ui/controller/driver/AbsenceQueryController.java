@@ -1,10 +1,10 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.*;
+import static ee.qrental.ui.controller.ControllerUtils.*;
 
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.service.driver.DriverCounterService;
 
 import org.springframework.stereotype.Controller;

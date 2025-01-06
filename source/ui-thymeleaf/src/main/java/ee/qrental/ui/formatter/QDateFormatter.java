@@ -1,4 +1,4 @@
-package ee.qrental.ui.controller.formatter;
+package ee.qrental.ui.formatter;
 
 
 import static ee.qrental.common.utils.QTimeUtils.Q_DATE_FORMATTER;

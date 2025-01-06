@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.user;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.*;
+import static ee.qrental.ui.controller.ControllerUtils.*;
 
 import ee.qrental.user.api.in.query.GetRoleQuery;
 import ee.qrental.user.api.in.request.*;

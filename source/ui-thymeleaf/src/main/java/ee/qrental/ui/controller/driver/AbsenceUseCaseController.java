@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.*;
+import static ee.qrental.ui.controller.ControllerUtils.*;
 import static java.util.Arrays.asList;
 
 import ee.qrental.common.core.enums.AbsenceReason;

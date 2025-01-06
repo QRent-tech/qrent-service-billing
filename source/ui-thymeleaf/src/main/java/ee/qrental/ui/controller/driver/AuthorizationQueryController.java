@@ -1,12 +1,12 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.AUTHORIZATION_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.AUTHORIZATION_ROOT_PATH;
 
 import ee.qrental.contract.api.in.query.GetAuthorizationQuery;
 import ee.qrental.contract.api.in.request.AuthorizationSendByEmailRequest;
 import ee.qrental.contract.api.in.usecase.AuthorizationPdfUseCase;
 import ee.qrental.contract.api.in.usecase.AuthorizationSendByEmailUseCase;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.service.driver.DriverCounterService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;

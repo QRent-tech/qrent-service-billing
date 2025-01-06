@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.user;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.ROLE_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.ROLE_ROOT_PATH;
 
 import ee.qrental.user.api.in.query.GetRoleQuery;
 import lombok.AllArgsConstructor;

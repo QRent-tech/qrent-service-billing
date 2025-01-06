@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.BONUS_PROGRAM_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.BONUS_PROGRAM_PATH;
 
 
 @Controller

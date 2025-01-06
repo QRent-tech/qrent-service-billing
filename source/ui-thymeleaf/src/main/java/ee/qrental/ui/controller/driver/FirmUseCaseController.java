@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.FIRM_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.FIRM_ROOT_PATH;
 
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import ee.qrental.firm.api.in.request.WeekObligationAddRequest;

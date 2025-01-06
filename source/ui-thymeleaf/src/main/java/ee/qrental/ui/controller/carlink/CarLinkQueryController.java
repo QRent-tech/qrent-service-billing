@@ -1,11 +1,11 @@
 package ee.qrental.ui.controller.carlink;
 
-import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
-import static ee.qrental.ui.controller.util.ControllerUtils.CAR_LINK_ROOT_PATH;
+import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
+import static ee.qrental.ui.controller.ControllerUtils.CAR_LINK_ROOT_PATH;
 import static java.time.LocalDate.now;
 
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

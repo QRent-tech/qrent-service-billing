@@ -1,7 +1,7 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.ADD_REQUEST_ATTRIBUTE;
-import static ee.qrental.ui.controller.util.ControllerUtils.DRIVER_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.ADD_REQUEST_ATTRIBUTE;
+import static ee.qrental.ui.controller.ControllerUtils.DRIVER_ROOT_PATH;
 
 import ee.qrental.driver.api.in.query.GetCallSignQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;

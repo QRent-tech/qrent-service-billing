@@ -1,12 +1,12 @@
 package ee.qrental.ui.controller.insurance;
 
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.service.insurance.InsuranceCounterService;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 
-import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
-import static ee.qrental.ui.controller.util.ControllerUtils.COUNTERS_ATTRIBUTE;
+import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
+import static ee.qrental.ui.controller.ControllerUtils.COUNTERS_ATTRIBUTE;
 
 @AllArgsConstructor
 public class AbstractInsuranceQueryController {

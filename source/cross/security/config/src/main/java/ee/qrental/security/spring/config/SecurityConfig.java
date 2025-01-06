@@ -26,7 +26,7 @@ public class SecurityConfig {
   }
 
   @Bean
-  public PasswordUseCase getPasswordUseCaseService(PasswordEncoder encoder) {
+  public PasswordUseCase getPasswordUseCaseService(final PasswordEncoder encoder) {
 
     return new PasswordUseCaseService(encoder);
   }

@@ -1,9 +1,9 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.CALL_SIGN_LINK_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.CALL_SIGN_LINK_ROOT_PATH;
 
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.service.driver.DriverCounterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
