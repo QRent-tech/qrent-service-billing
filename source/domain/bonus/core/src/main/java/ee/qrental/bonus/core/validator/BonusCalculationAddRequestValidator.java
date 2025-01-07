@@ -2,6 +2,7 @@ package ee.qrental.bonus.core.validator;
 
 import static java.lang.String.format;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.bonus.api.in.request.BonusCalculationAddRequest;
 import ee.qrental.bonus.api.out.BonusCalculationLoadPort;
 import ee.qrent.common.in.validation.ViolationsCollector;
@@ -10,7 +11,7 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class BonusCalculationAddBusinessRuleValidator {
+public class BonusCalculationAddRequestValidator implements AddRequestValidator<BonusCalculationAddRequest> {
 
   private final GetQWeekQuery qWeekQuery;
   private final BonusCalculationLoadPort loadPort;

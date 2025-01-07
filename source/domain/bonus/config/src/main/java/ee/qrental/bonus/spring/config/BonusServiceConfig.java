@@ -3,18 +3,18 @@ package ee.qrental.bonus.spring.config;
 import static java.util.Arrays.asList;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.bonus.api.in.query.GetBonusCalculationQuery;
 import ee.qrental.bonus.api.in.query.GetBonusProgramQuery;
 import ee.qrental.bonus.api.in.query.GetObligationQuery;
+import ee.qrental.bonus.api.in.request.BonusCalculationAddRequest;
 import ee.qrental.bonus.api.in.usecase.BonusCalculationAddUseCase;
 import ee.qrental.bonus.api.out.*;
 import ee.qrental.bonus.core.mapper.*;
 import ee.qrental.bonus.core.service.*;
-import ee.qrental.bonus.core.validator.BonusCalculationAddBusinessRuleValidator;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
-import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
@@ -92,7 +92,7 @@ public class BonusServiceConfig {
       final BonusCalculationAddPort calculationAddPort,
       final ObligationLoadPort obligationLoadPort,
       final BonusCalculationAddRequestMapper addRequestMapper,
-      final BonusCalculationAddBusinessRuleValidator addBusinessRuleValidator,
+      final AddRequestValidator<BonusCalculationAddRequest> addRequestValidator,
       final List<BonusStrategy> bonusStrategies) {
     return new BonusCalculationService(
         qWeekQuery,
@@ -105,7 +105,7 @@ public class BonusServiceConfig {
         calculationAddPort,
         obligationLoadPort,
         addRequestMapper,
-        addBusinessRuleValidator,
+        addRequestValidator,
         bonusStrategies);
   }
 }

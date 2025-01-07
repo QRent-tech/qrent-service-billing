@@ -12,9 +12,9 @@ import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ObligationCalculationAddBusinessRuleValidatorTest {
+class ObligationCalculationAddRequestValidatorTest {
 
-  private ObligationCalculationAddBusinessRuleValidator instanceUnderTest;
+  private ObligationCalculationAddRequestValidator instanceUnderTest;
 
   private GetQWeekQuery qWeekQuery;
   private ObligationCalculationLoadPort loadPort;
@@ -24,7 +24,7 @@ class ObligationCalculationAddBusinessRuleValidatorTest {
     qWeekQuery = mock(GetQWeekQuery.class);
     loadPort = mock(ObligationCalculationLoadPort.class);
     qWeekQuery = mock(GetQWeekQuery.class);
-    instanceUnderTest = new ObligationCalculationAddBusinessRuleValidator(qWeekQuery, loadPort);
+    instanceUnderTest = new ObligationCalculationAddRequestValidator(qWeekQuery, loadPort);
   }
 
   @Test

@@ -14,7 +14,7 @@ import ee.qrental.invoice.api.out.InvoiceLoadPort;
 import ee.qrental.invoice.api.out.InvoiceUpdatePort;
 import ee.qrental.invoice.core.mapper.InvoiceAddRequestMapper;
 import ee.qrental.invoice.core.mapper.InvoiceUpdateRequestMapper;
-import ee.qrental.invoice.core.validator.InvoiceBusinessRuleValidator;
+import ee.qrental.invoice.core.validator.InvoiceAddRequestValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
@@ -29,17 +29,17 @@ public class InvoiceUseCaseService
   private final InvoiceLoadPort loadPort;
   private final InvoiceAddRequestMapper addRequestMapper;
   private final InvoiceUpdateRequestMapper updateRequestMapper;
-  private final InvoiceBusinessRuleValidator businessRuleValidator;
+  private final InvoiceAddRequestValidator addRequestValidator;
 
   @Override
   public Long add(final InvoiceAddRequest request) {
-    final var invoice = addRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateAdd(invoice);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
       return null;
     }
-    final var savedInvoice = addPort.add(invoice);
+    final var domain = addRequestMapper.toDomain(request);
+    final var savedInvoice = addPort.add(domain);
 
     return savedInvoice.getId();
   }

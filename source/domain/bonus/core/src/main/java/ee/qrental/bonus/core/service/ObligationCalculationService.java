@@ -5,13 +5,13 @@ import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSA
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.toList;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrental.bonus.api.in.usecase.ObligationCalculationAddUseCase;
 import ee.qrental.bonus.api.out.ObligationAddPort;
 import ee.qrental.bonus.api.out.ObligationCalculationAddPort;
 import ee.qrental.bonus.api.out.ObligationLoadPort;
 import ee.qrental.bonus.core.mapper.ObligationCalculationAddRequestMapper;
-import ee.qrental.bonus.core.validator.ObligationCalculationAddBusinessRuleValidator;
 import ee.qrental.bonus.domain.Obligation;
 import ee.qrental.bonus.domain.ObligationCalculationResult;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
@@ -43,14 +43,14 @@ public class ObligationCalculationService implements ObligationCalculationAddUse
   private final ObligationAddPort obligationAddPort;
   private final ObligationLoadPort loadPort;
   private final ObligationCalculationAddRequestMapper addRequestMapper;
-  private final ObligationCalculationAddBusinessRuleValidator addBusinessRuleValidator;
+  private final AddRequestValidator<ObligationCalculationAddRequest> addRequestValidator;
   private final ObligationCalculator obligationCalculator;
 
   @Transactional
   @Override
   public Long add(final ObligationCalculationAddRequest addRequest) {
     final var calculationStartTime = System.currentTimeMillis();
-    final var violationsCollector = addBusinessRuleValidator.validate(addRequest);
+    final var violationsCollector = addRequestValidator.validate(addRequest);
     if (violationsCollector.hasViolations()) {
       addRequest.setViolations(violationsCollector.getViolations());
 

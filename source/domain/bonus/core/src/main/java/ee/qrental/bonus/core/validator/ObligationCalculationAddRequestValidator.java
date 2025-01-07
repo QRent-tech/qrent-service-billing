@@ -2,6 +2,7 @@ package ee.qrental.bonus.core.validator;
 
 import static java.lang.String.format;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrental.bonus.api.out.ObligationCalculationLoadPort;
 import ee.qrent.common.in.validation.ViolationsCollector;
@@ -10,11 +11,13 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ObligationCalculationAddBusinessRuleValidator {
+public class ObligationCalculationAddRequestValidator
+    implements AddRequestValidator<ObligationCalculationAddRequest> {
 
   private final GetQWeekQuery qWeekQuery;
   private final ObligationCalculationLoadPort loadPort;
 
+  @Override
   public ViolationsCollector validate(final ObligationCalculationAddRequest addRequest) {
     final var violationsCollector = new ViolationsCollector();
     checkIfPreviousWeekHasCalculatedObligation(addRequest, violationsCollector);

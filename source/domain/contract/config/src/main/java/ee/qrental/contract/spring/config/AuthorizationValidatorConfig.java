@@ -1,7 +1,7 @@
 package ee.qrental.contract.spring.config;
 
 import ee.qrental.contract.api.out.AuthorizationLoadPort;
-import ee.qrental.contract.core.validator.AuthorizationAddBusinessRuleValidator;
+import ee.qrental.contract.core.validator.AuthorizationAddRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
 public class AuthorizationValidatorConfig {
 
   @Bean
-  AuthorizationAddBusinessRuleValidator getAuthorizationAddBusinessRuleValidator(
+  AuthorizationAddRequestValidator getAuthorizationAddBusinessRuleValidator(
       final AuthorizationLoadPort loadPort) {
-    return new AuthorizationAddBusinessRuleValidator(loadPort);
+    return new AuthorizationAddRequestValidator(loadPort);
   }
 
 }

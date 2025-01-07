@@ -2,48 +2,56 @@ package ee.qrental.driver.core.validator;
 
 import static java.lang.String.format;
 
-import ee.qrent.common.in.validation.QValidator;
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.DeleteRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
+import ee.qrental.driver.api.in.request.CallSignAddRequest;
+import ee.qrental.driver.api.in.request.CallSignDeleteRequest;
+import ee.qrental.driver.api.in.request.CallSignUpdateRequest;
 import ee.qrental.driver.api.out.CallSignLinkLoadPort;
 import ee.qrental.driver.api.out.CallSignLoadPort;
-import ee.qrental.driver.domain.CallSign;
+
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CallSignBusinessRuleValidator implements QValidator<CallSign> {
+public class CallSignRequestValidator
+    implements AddRequestValidator<CallSignAddRequest>,
+        UpdateRequestValidator<CallSignUpdateRequest>,
+        DeleteRequestValidator<CallSignDeleteRequest> {
 
   private final CallSignLoadPort loadPort;
   private final CallSignLinkLoadPort callSignLinkLoadPort;
 
   @Override
-  public ViolationsCollector validateAdd(final CallSign domain) {
+  public ViolationsCollector validate(final CallSignAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
-    checkUniquenessForAdd(domain, violationsCollector);
+    checkUniquenessForAdd(request, violationsCollector);
 
     return violationsCollector;
   }
 
   @Override
-  public ViolationsCollector validateUpdate(final CallSign domain) {
+  public ViolationsCollector validate(final CallSignUpdateRequest request) {
     final var violationsCollector = new ViolationsCollector();
-    checkExistence(domain.getId(), violationsCollector);
-    checkUniquenessForUpdate(domain, violationsCollector);
+    checkExistence(request.getId(), violationsCollector);
+    checkUniquenessForUpdate(request, violationsCollector);
 
     return violationsCollector;
   }
 
   @Override
-  public ViolationsCollector validateDelete(final Long id) {
+  public ViolationsCollector validate(final CallSignDeleteRequest request) {
     final var violationsCollector = new ViolationsCollector();
-    checkReferences(id, violationsCollector);
+    checkReferences(request.getId(), violationsCollector);
 
     return violationsCollector;
   }
 
   private void checkUniquenessForAdd(
-      final CallSign domain, final ViolationsCollector violationCollector) {
-    final var callSign = domain.getCallSign();
+      final CallSignAddRequest request, final ViolationsCollector violationCollector) {
+    final var callSign = request.getCallSign();
     final var domainFromDb = loadPort.loadByCallSign(callSign);
     if (domainFromDb == null) {
       return;
@@ -53,21 +61,20 @@ public class CallSignBusinessRuleValidator implements QValidator<CallSign> {
   }
 
   private void checkUniquenessForUpdate(
-      final CallSign domain, final ViolationsCollector violationCollector) {
-    final var callSign = domain.getCallSign();
+      final CallSignUpdateRequest request, final ViolationsCollector violationCollector) {
+    final var callSign = request.getCallSign();
     final var domainFromDb = loadPort.loadByCallSign(callSign);
     if (domainFromDb == null) {
       return;
     }
-    if (Objects.equals(domainFromDb.getId(), domain.getId())) {
+    if (Objects.equals(domainFromDb.getId(), request.getId())) {
       return;
     }
     violationCollector.collect(
         format("Call Sign %d can not be updated, because such Number already in use", callSign));
   }
 
-  private void checkReferences(
-      final Long id, final ViolationsCollector violationCollector) {
+  private void checkReferences(final Long id, final ViolationsCollector violationCollector) {
 
     final var callSignLinks = callSignLinkLoadPort.loadByCallSignId(id);
     if (callSignLinks.isEmpty()) {

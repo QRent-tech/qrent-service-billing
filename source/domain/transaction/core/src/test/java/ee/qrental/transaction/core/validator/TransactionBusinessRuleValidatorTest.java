@@ -1,6 +1,5 @@
 package ee.qrental.transaction.core.validator;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionBusinessRuleValidatorTest {
-  private TransactionUpdateDeleteBusinessRuleValidator instanceUnderTest;
+  private TransactionRequestValidator instanceUnderTest;
   private TransactionLoadPort transactionLoadPort;
   private BalanceLoadPort balanceLoadPort;
   private GetQWeekQuery qWeekQuery;
@@ -27,7 +26,7 @@ class TransactionBusinessRuleValidatorTest {
     balanceLoadPort = mock(BalanceLoadPort.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     instanceUnderTest =
-        new TransactionUpdateDeleteBusinessRuleValidator(
+        new TransactionRequestValidator(
             qWeekQuery, transactionLoadPort, balanceLoadPort);
 
     when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().build());

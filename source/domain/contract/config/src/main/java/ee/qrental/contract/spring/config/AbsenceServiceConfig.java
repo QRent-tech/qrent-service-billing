@@ -7,7 +7,7 @@ import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.out.*;
 import ee.qrental.contract.core.mapper.*;
 import ee.qrental.contract.core.service.*;
-import ee.qrental.contract.core.validator.AbsenceBusinessRuleValidator;
+import ee.qrental.contract.core.validator.AbsenceUpdateRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,7 +33,7 @@ public class AbsenceServiceConfig {
       final AbsenceDeletePort deletePort,
       final AbsenceAddRequestMapper addRequestMapper,
       final AbsenceUpdateRequestMapper updateRequestMapper,
-      final AbsenceBusinessRuleValidator businessRuleValidator) {
+      final AbsenceUpdateRequestValidator businessRuleValidator) {
 
     return new AbsenceUseCaseService(
         addPort,

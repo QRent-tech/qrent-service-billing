@@ -1,10 +1,11 @@
 package ee.qrental.invoice.core.validator;
 
-import ee.qrent.common.in.validation.QValidator;
+import ee.qrent.common.in.validation.AddRequestValidator;
+
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.invoice.api.in.request.InvoiceCalculationAddRequest;
 import ee.qrental.invoice.api.out.InvoiceCalculationLoadPort;
-import ee.qrental.invoice.domain.InvoiceCalculation;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -12,13 +13,14 @@ import lombok.AllArgsConstructor;
 import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
 
 @AllArgsConstructor
-public class InvoiceCalculationBusinessRuleValidator implements QValidator<InvoiceCalculation> {
+public class InvoiceCalculationAddRequestValidator
+    implements AddRequestValidator<InvoiceCalculationAddRequest> {
 
   private final GetQWeekQuery qWeekQuery;
   private final InvoiceCalculationLoadPort loadPort;
 
   @Override
-  public ViolationsCollector validateAdd(final InvoiceCalculation domain) {
+  public ViolationsCollector validate(final InvoiceCalculationAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
 
     // TODO: make like ObligationCalculationAddBusinessRuleValidator
@@ -28,19 +30,6 @@ public class InvoiceCalculationBusinessRuleValidator implements QValidator<Invoi
     // violationsCollector.collect("No Data for Invoice Calculation.");
 
     return violationsCollector;
-  }
-
-  @Override
-  public ViolationsCollector validateUpdate(final InvoiceCalculation domain) {
-    final var violationsCollector = new ViolationsCollector();
-    checkExistence(domain.getId(), violationsCollector);
-
-    return violationsCollector;
-  }
-
-  @Override
-  public ViolationsCollector validateDelete(final Long id) {
-    return new ViolationsCollector();
   }
 
   private void checkExistence(final Long id, final ViolationsCollector violationsCollector) {

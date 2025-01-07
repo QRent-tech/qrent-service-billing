@@ -3,6 +3,9 @@ package ee.qrental.contract.core.service;
 import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.DeleteRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.usecase.ContractAddUseCase;
@@ -11,7 +14,8 @@ import ee.qrental.contract.api.out.ContractAddPort;
 import ee.qrental.contract.api.out.ContractLoadPort;
 import ee.qrental.contract.api.out.ContractUpdatePort;
 import ee.qrental.contract.core.mapper.ContractAddRequestMapper;
-import ee.qrental.contract.core.validator.ContractBusinessRuleValidator;
+import ee.qrental.contract.core.mapper.ContractUpdateRequestMapper;
+import ee.qrental.contract.core.validator.ContractDeleteRequestValidator;
 import ee.qrental.contract.domain.Contract;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -25,18 +29,19 @@ public class ContractUseCaseService implements ContractAddUseCase, ContractUpdat
   private final ContractUpdatePort updatePort;
   private final ContractLoadPort loadPort;
   private final ContractAddRequestMapper addRequestMapper;
-  private final ContractBusinessRuleValidator businessRuleValidator;
+  private final AddRequestValidator<ContractAddRequest> addRequestValidator;
+  private final UpdateRequestValidator<ContractUpdateRequest> updateRequestValidator;
   private final QDateTime qDateTime;
 
   @Override
   public Long add(final ContractAddRequest request) {
-    final var contract = addRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateAdd(contract);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
       return null;
     }
+    final var contract = addRequestMapper.toDomain(request);
     final var savedContract = addPort.add(contract);
 
     return savedContract.getId();
@@ -44,6 +49,12 @@ public class ContractUseCaseService implements ContractAddUseCase, ContractUpdat
 
   @Override
   public void update(final ContractUpdateRequest request) {
+    final var violationsCollector = updateRequestValidator.validate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+
+      return;
+    }
     final var toStopContract = loadPort.loadById(request.getId());
     final var today = qDateTime.getToday();
     stop(toStopContract, today);

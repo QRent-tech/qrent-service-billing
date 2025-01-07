@@ -8,7 +8,7 @@ import ee.qrental.driver.core.mapper.*;
 import ee.qrental.driver.core.service.CallSignLinkQueryService;
 import ee.qrental.driver.core.service.CallSignLinkUseCaseService;
 import ee.qrental.driver.core.service.FirmLinkQueryService;
-import ee.qrental.driver.core.validator.CallSignLinkBusinessRuleValidator;
+import ee.qrental.driver.core.validator.CallSignLinkRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -39,7 +39,7 @@ public class CallSignLinkServiceConfig {
       final CallSignLinkLoadPort loadPort,
       final CallSignLinkAddRequestMapper addRequestMapper,
       final CallSignLinkUpdateRequestMapper updateRequestMapper,
-      final CallSignLinkBusinessRuleValidator businessRuleValidator,
+      final CallSignLinkRequestValidator businessRuleValidator,
       final QDateTime qDateTime) {
     return new CallSignLinkUseCaseService(
         addPort,

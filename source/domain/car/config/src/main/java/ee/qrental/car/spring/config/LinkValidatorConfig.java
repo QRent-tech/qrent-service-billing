@@ -1,8 +1,15 @@
 package ee.qrental.car.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.DeleteRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
+import ee.qrental.car.api.in.request.CarLinkAddRequest;
+import ee.qrental.car.api.in.request.CarLinkDeleteRequest;
+import ee.qrental.car.api.in.request.CarLinkUpdateRequest;
 import ee.qrental.car.api.out.CarLinkLoadPort;
-import ee.qrental.car.core.validator.CarLinkAddBusinessRuleValidator;
-import ee.qrental.car.core.validator.CarLinkUpdateBusinessRuleValidator;
+import ee.qrental.car.core.validator.CarLinkDeleteRequestValidator;
+import ee.qrental.car.core.validator.CarLinkUpdateRequestValidator;
+import ee.qrental.car.core.validator.CarLinkXAddRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,14 +17,21 @@ import org.springframework.context.annotation.Configuration;
 public class LinkValidatorConfig {
 
   @Bean
-  CarLinkAddBusinessRuleValidator getCarLinkAddBusinessRuleValidator(
+  AddRequestValidator<CarLinkAddRequest> getCarLinkAddRequestValidator(
       final CarLinkLoadPort loadPort) {
-    return new CarLinkAddBusinessRuleValidator(loadPort);
+    return new CarLinkXAddRequestValidator(loadPort);
   }
 
   @Bean
-  CarLinkUpdateBusinessRuleValidator getCarLinkUpdateBusinessRuleValidator(
+  UpdateRequestValidator<CarLinkUpdateRequest> getCarLinkUpdateRequestValidator(
       final CarLinkLoadPort loadPort) {
-    return new CarLinkUpdateBusinessRuleValidator(loadPort);
+
+    return new CarLinkUpdateRequestValidator(loadPort);
+  }
+
+  @Bean
+  DeleteRequestValidator<CarLinkDeleteRequest> getCarLinkDeleteRequestValidator(
+      final CarLinkLoadPort loadPort) {
+    return new CarLinkDeleteRequestValidator(loadPort);
   }
 }

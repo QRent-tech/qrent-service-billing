@@ -10,7 +10,7 @@ import ee.qrental.driver.core.mapper.CallSignResponseMapper;
 import ee.qrental.driver.core.mapper.CallSignUpdateRequestMapper;
 import ee.qrental.driver.core.service.CallSignQueryService;
 import ee.qrental.driver.core.service.CallSignUseCaseService;
-import ee.qrental.driver.core.validator.CallSignBusinessRuleValidator;
+import ee.qrental.driver.core.validator.CallSignRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,17 +30,10 @@ public class CallSignServiceConfig {
       final CallSignAddPort addPort,
       final CallSignUpdatePort updatePort,
       final CallSignDeletePort deletePort,
-      final CallSignLoadPort loadPort,
       final CallSignAddRequestMapper addRequestMapper,
       final CallSignUpdateRequestMapper updateRequestMapper,
-      final CallSignBusinessRuleValidator businessRuleValidator) {
+      final CallSignRequestValidator requestValidator) {
     return new CallSignUseCaseService(
-        addPort,
-        updatePort,
-        deletePort,
-        loadPort,
-        addRequestMapper,
-        updateRequestMapper,
-        businessRuleValidator);
+        addPort, updatePort, deletePort, addRequestMapper, updateRequestMapper, requestValidator);
   }
 }

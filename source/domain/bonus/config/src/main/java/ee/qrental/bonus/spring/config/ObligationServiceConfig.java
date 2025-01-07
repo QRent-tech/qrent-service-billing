@@ -1,7 +1,9 @@
 package ee.qrental.bonus.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrental.bonus.api.in.query.GetObligationQuery;
+import ee.qrental.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrental.bonus.api.in.usecase.ObligationCalculationAddUseCase;
 import ee.qrental.bonus.api.out.ObligationAddPort;
 import ee.qrental.bonus.api.out.ObligationCalculationAddPort;
@@ -14,7 +16,6 @@ import ee.qrental.bonus.core.service.ObligationCalculationQueryService;
 import ee.qrental.bonus.core.service.ObligationCalculationService;
 import ee.qrental.bonus.core.service.ObligationCalculator;
 import ee.qrental.bonus.core.service.ObligationQueryService;
-import ee.qrental.bonus.core.validator.ObligationCalculationAddBusinessRuleValidator;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
@@ -65,7 +66,7 @@ public class ObligationServiceConfig {
       final ObligationAddPort obligationAddPort,
       final ObligationLoadPort loadPort,
       final ObligationCalculationAddRequestMapper addRequestMapper,
-      final ObligationCalculationAddBusinessRuleValidator addBusinessRuleValidator,
+      final AddRequestValidator<ObligationCalculationAddRequest> addRequestValidator,
       final ObligationCalculator obligationCalculator) {
     return new ObligationCalculationService(
         qWeekQuery,
@@ -77,7 +78,7 @@ public class ObligationServiceConfig {
         obligationAddPort,
         loadPort,
         addRequestMapper,
-        addBusinessRuleValidator,
+        addRequestValidator,
         obligationCalculator);
   }
 }

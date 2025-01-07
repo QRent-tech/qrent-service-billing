@@ -2,13 +2,16 @@ package ee.qrental.car.core.validator;
 
 import static java.lang.String.format;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.car.api.in.request.CarLinkAddRequest;
 import ee.qrental.car.api.out.CarLinkLoadPort;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import lombok.AllArgsConstructor;
 
+//TODO: rename file
+
 @AllArgsConstructor
-public class CarLinkAddBusinessRuleValidator {
+public class CarLinkXAddRequestValidator implements AddRequestValidator<CarLinkAddRequest> {
 
   private final CarLinkLoadPort loadPort;
 

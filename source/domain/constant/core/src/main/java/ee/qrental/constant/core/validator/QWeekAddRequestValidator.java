@@ -1,5 +1,6 @@
 package ee.qrental.constant.core.validator;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.common.utils.QTimeUtils;
 import ee.qrental.constant.api.in.request.QWeekAddRequest;
@@ -9,7 +10,7 @@ import lombok.AllArgsConstructor;
 import static java.lang.String.format;
 
 @AllArgsConstructor
-public class QWeekAddBusinessRuleValidator {
+public class QWeekAddRequestValidator implements AddRequestValidator<QWeekAddRequest> {
   private final QWeekLoadPort loadPort;
 
   public ViolationsCollector validate(final QWeekAddRequest addRequest) {

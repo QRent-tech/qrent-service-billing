@@ -7,7 +7,7 @@ import ee.qrental.contract.api.in.usecase.*;
 import ee.qrental.contract.api.out.*;
 import ee.qrental.contract.core.mapper.AbsenceAddRequestMapper;
 import ee.qrental.contract.core.mapper.AbsenceUpdateRequestMapper;
-import ee.qrental.contract.core.validator.AbsenceBusinessRuleValidator;
+import ee.qrental.contract.core.validator.AbsenceUpdateRequestValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
@@ -20,7 +20,7 @@ public class AbsenceUseCaseService
   private final AbsenceDeletePort deletePort;
   private final AbsenceAddRequestMapper addRequestMapper;
   private final AbsenceUpdateRequestMapper updateRequestMapper;
-  private final AbsenceBusinessRuleValidator businessRuleValidator;
+  private final AbsenceUpdateRequestValidator businessRuleValidator;
 
   @Override
   public Long add(final AbsenceAddRequest request) {

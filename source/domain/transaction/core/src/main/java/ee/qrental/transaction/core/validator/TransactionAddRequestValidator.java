@@ -4,6 +4,7 @@ import static java.lang.String.format;
 import static java.time.format.DateTimeFormatter.ofLocalizedDate;
 import static java.time.format.FormatStyle.MEDIUM;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.request.TransactionAddRequest;
@@ -13,12 +14,12 @@ import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class TransactionAddBusinessRuleValidator {
+public class TransactionAddRequestValidator implements AddRequestValidator<TransactionAddRequest> {
 
   private final GetQWeekQuery qWeekQuery;
   private final BalanceLoadPort balanceLoadPort;
 
-  public ViolationsCollector validateAdd(final TransactionAddRequest request) {
+  public ViolationsCollector validate(final TransactionAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
     checkDTransactionTypeForAdd(request, violationsCollector);
 

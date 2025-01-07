@@ -11,8 +11,8 @@ import ee.qrental.transaction.api.out.TransactionDeletePort;
 import ee.qrental.transaction.api.out.TransactionUpdatePort;
 import ee.qrental.transaction.core.mapper.TransactionAddRequestMapper;
 import ee.qrental.transaction.core.mapper.TransactionUpdateRequestMapper;
-import ee.qrental.transaction.core.validator.TransactionAddBusinessRuleValidator;
-import ee.qrental.transaction.core.validator.TransactionUpdateDeleteBusinessRuleValidator;
+import ee.qrental.transaction.core.validator.TransactionAddRequestValidator;
+import ee.qrental.transaction.core.validator.TransactionRequestValidator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -24,12 +24,12 @@ public class TransactionUseCaseService
   private final TransactionDeletePort deletePort;
   private final TransactionAddRequestMapper addRequestMapper;
   private final TransactionUpdateRequestMapper updateRequestMapper;
-  private final TransactionUpdateDeleteBusinessRuleValidator businessRuleValidator;
-  private final TransactionAddBusinessRuleValidator addBusinessRuleValidator;
+  private final TransactionRequestValidator requestValidator;
+  private final TransactionAddRequestValidator addRequestValidator;
 
   @Override
   public Long add(final TransactionAddRequest request) {
-    final var violationsCollector = addBusinessRuleValidator.validateAdd(request);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
@@ -40,20 +40,21 @@ public class TransactionUseCaseService
 
   @Override
   public void update(final TransactionUpdateRequest request) {
-    final var domain = updateRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateUpdate(domain);
+
+    final var violationsCollector = requestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
       return;
     }
-    updatePort.update(updateRequestMapper.toDomain(request));
+    final var domain = updateRequestMapper.toDomain(request);
+    updatePort.update(domain);
   }
 
   @Override
   public void delete(final TransactionDeleteRequest request) {
     final var transactionId = request.getId();
-    final var violationsCollector = businessRuleValidator.validateDelete(transactionId);
+    final var violationsCollector = requestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 

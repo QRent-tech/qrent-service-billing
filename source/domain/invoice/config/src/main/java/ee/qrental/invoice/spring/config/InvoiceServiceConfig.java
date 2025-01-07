@@ -13,8 +13,8 @@ import ee.qrental.invoice.core.mapper.*;
 import ee.qrental.invoice.core.service.*;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfConverter;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfModelMapper;
-import ee.qrental.invoice.core.validator.InvoiceBusinessRuleValidator;
-import ee.qrental.invoice.core.validator.InvoiceCalculationBusinessRuleValidator;
+import ee.qrental.invoice.core.validator.InvoiceAddRequestValidator;
+import ee.qrental.invoice.core.validator.InvoiceCalculationAddRequestValidator;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
@@ -42,7 +42,7 @@ public class InvoiceServiceConfig {
       final InvoiceLoadPort loadPort,
       final InvoiceAddRequestMapper addRequestMapper,
       final InvoiceUpdateRequestMapper updateRequestMapper,
-      final InvoiceBusinessRuleValidator businessRuleValidator) {
+      final InvoiceAddRequestValidator businessRuleValidator) {
     return new InvoiceUseCaseService(
         addPort,
         updatePort,
@@ -84,7 +84,7 @@ public class InvoiceServiceConfig {
       final EmailSendUseCase emailSendUseCase,
       final InvoiceCalculationLoadPort loadPort,
       final InvoiceCalculationAddRequestMapper addRequestMapper,
-      final InvoiceCalculationBusinessRuleValidator invoiceCalculationBusinessRuleValidator,
+      final InvoiceCalculationAddRequestValidator invoiceCalculationBusinessRuleValidator,
       final InvoiceCalculationAddPort invoiceCalculationAddPort,
       final InvoiceToPdfConverter invoiceToPdfConverter,
       final InvoiceToPdfModelMapper invoiceToPdfModelMapper) {

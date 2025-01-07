@@ -1,5 +1,6 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
+    implementation(project(":source:domain:common:core"))
     implementation(project(":source:domain:common:utils"))
 
     implementation(project(":source:domain:bonus:api:in"))
