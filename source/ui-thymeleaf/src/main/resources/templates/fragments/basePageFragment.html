@@ -1,11 +1,12 @@
 <!doctype html>
 <html th:fragment="qrentalPage(bodyContent)"
-      lang="en" xmlns:th="https://www.thymeleaf.org">
+      lang="en"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/headFragment.html :: qrental-head"></head>
 
 <body class="container">
 <div th:insert="${bodyContent}"></div>
-
 </body>
 </html>

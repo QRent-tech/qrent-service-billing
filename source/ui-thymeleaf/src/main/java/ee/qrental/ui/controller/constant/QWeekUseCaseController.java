@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.constant;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.WEEK_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.WEEK_ROOT_PATH;
 
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.request.QWeekAddRequest;

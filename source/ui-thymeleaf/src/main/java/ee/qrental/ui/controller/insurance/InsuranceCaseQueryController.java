@@ -1,7 +1,7 @@
 package ee.qrental.ui.controller.insurance;
 
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.service.insurance.InsuranceCounterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.INSURANCE_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.INSURANCE_ROOT_PATH;
 
 @Controller
 @RequestMapping(INSURANCE_ROOT_PATH + "/cases")

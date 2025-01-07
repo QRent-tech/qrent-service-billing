@@ -1,13 +1,13 @@
 package ee.qrental.ui.controller.insurance;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.INSURANCE_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.INSURANCE_ROOT_PATH;
 
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.service.insurance.InsuranceCounterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

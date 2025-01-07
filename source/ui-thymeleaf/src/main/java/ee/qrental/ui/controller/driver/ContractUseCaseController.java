@@ -1,16 +1,14 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.CONTRACT_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.CONTRACT_ROOT_PATH;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
 import ee.qrental.contract.api.in.request.ContractCloseRequest;
-import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.response.ContractPreCloseResponse;
 import ee.qrental.contract.api.in.usecase.ContractAddUseCase;
 import ee.qrental.contract.api.in.usecase.ContractCloseUseCase;
-import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;

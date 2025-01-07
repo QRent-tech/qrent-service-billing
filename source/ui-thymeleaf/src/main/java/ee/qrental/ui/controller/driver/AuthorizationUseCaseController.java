@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.AUTHORIZATION_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.AUTHORIZATION_ROOT_PATH;
 
 import ee.qrental.contract.api.in.query.GetAuthorizationQuery;
 import ee.qrental.contract.api.in.request.*;

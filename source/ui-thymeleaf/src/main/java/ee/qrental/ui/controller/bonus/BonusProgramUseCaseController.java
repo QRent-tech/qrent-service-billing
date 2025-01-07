@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.bonus;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.BONUS_PROGRAM_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.BONUS_PROGRAM_PATH;
 
 import ee.qrental.bonus.api.in.query.GetBonusProgramQuery;
 import ee.qrental.bonus.api.in.request.BonusProgramAddRequest;

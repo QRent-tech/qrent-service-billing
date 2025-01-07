@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.transaction.transaction;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.TRANSACTION_KIND_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.TRANSACTION_KIND_ROOT_PATH;
 
 import ee.qrental.transaction.api.in.query.kind.GetTransactionKindQuery;
 import lombok.AllArgsConstructor;

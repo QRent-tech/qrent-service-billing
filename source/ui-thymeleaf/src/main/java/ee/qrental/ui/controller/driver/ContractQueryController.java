@@ -1,12 +1,12 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.CONTRACT_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.CONTRACT_ROOT_PATH;
 
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractSendByEmailRequest;
 import ee.qrental.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrental.contract.api.in.usecase.ContractSendByEmailUseCase;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import ee.qrental.ui.service.driver.DriverCounterService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;

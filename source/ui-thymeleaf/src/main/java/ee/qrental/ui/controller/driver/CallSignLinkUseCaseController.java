@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.driver;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.*;
+import static ee.qrental.ui.controller.ControllerUtils.*;
 
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetCallSignQuery;

@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.user;
 
-import static ee.qrental.ui.controller.util.ControllerUtils.USER_ROOT_PATH;
+import static ee.qrental.ui.controller.ControllerUtils.USER_ROOT_PATH;
 
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
 import lombok.AllArgsConstructor;

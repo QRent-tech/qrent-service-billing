@@ -1,15 +1,14 @@
 package ee.qrental.ui.controller.bonus;
 
-import static ee.qrental.ui.controller.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
-import static ee.qrental.ui.controller.util.ControllerUtils.BONUS_ROOT_PATH;
-import static ee.qrental.ui.controller.util.ControllerUtils.OBLIGATIONS_ROOT_PATH;
+import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
+import static ee.qrental.ui.controller.ControllerUtils.BONUS_ROOT_PATH;
 
 import ee.qrental.bonus.api.in.query.GetBonusCalculationQuery;
 import ee.qrental.bonus.api.in.request.BonusCalculationAddRequest;
 import ee.qrental.bonus.api.in.usecase.BonusCalculationAddUseCase;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrental.ui.controller.formatter.QDateFormatter;
+import ee.qrental.ui.formatter.QDateFormatter;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
