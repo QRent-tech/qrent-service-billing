@@ -1,15 +1,18 @@
 package ee.qrental.transaction.core.validator;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.transaction.api.in.request.kind.TransactionKindAddRequest;
 import ee.qrental.transaction.api.out.kind.TransactionKindLoadPort;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class TransactionKindAddBusinessRuleValidator {
+public class TransactionKindAddRequestValidator
+    implements AddRequestValidator<TransactionKindAddRequest> {
 
   private final TransactionKindLoadPort loadPort;
 
+  @Override
   public ViolationsCollector validate(final TransactionKindAddRequest addRequest) {
     final var violationsCollector = new ViolationsCollector();
     checkIfCodeIsUnique(addRequest, violationsCollector);
