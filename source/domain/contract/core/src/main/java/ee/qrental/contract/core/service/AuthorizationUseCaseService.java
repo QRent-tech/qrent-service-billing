@@ -24,11 +24,11 @@ public class AuthorizationUseCaseService
   private final AuthorizationLoadPort loadPort;
   private final AuthorizationAddRequestMapper addRequestMapper;
   private final AuthorizationUpdateRequestMapper updateRequestMapper;
-  private final AuthorizationAddRequestValidator addBusinessRuleValidator;
+  private final AuthorizationAddRequestValidator addRequestValidator;
 
   @Override
   public Long add(final AuthorizationAddRequest request) {
-    final var violationsCollector = addBusinessRuleValidator.validate(request);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class AuthorizationValidatorConfig {
 
   @Bean
-  AuthorizationAddRequestValidator getAuthorizationAddBusinessRuleValidator(
+  AuthorizationAddRequestValidator getAuthorizationAddRequestValidator(
       final AuthorizationLoadPort loadPort) {
     return new AuthorizationAddRequestValidator(loadPort);
   }

@@ -31,7 +31,7 @@ class ObligationCalculationServiceTest {
   private ObligationAddPort obligationAddPort;
   private ObligationLoadPort loadPort;
   private ObligationCalculationAddRequestMapper addRequestMapper;
-  private ObligationCalculationAddRequestValidator addBusinessRuleValidator;
+  private ObligationCalculationAddRequestValidator addRequestValidator;
   private ObligationCalculator obligationCalculator;
 
   @BeforeEach
@@ -47,7 +47,7 @@ class ObligationCalculationServiceTest {
     obligationAddPort = mock(ObligationAddPort.class);
     loadPort = mock(ObligationLoadPort.class);
     addRequestMapper = mock(ObligationCalculationAddRequestMapper.class);
-    addBusinessRuleValidator = mock(ObligationCalculationAddRequestValidator.class);
+    addRequestValidator = mock(ObligationCalculationAddRequestValidator.class);
     obligationCalculator = mock(ObligationCalculator.class);
 
     instanceUnderTest =
@@ -61,7 +61,7 @@ class ObligationCalculationServiceTest {
             obligationAddPort,
             loadPort,
             addRequestMapper,
-            addBusinessRuleValidator,
+                addRequestValidator,
             obligationCalculator);
   }
   // TODO ...

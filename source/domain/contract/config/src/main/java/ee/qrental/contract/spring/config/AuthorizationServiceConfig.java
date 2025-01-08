@@ -32,7 +32,7 @@ public class AuthorizationServiceConfig {
       final AuthorizationLoadPort loadPort,
       final AuthorizationAddRequestMapper addRequestMapper,
       final AuthorizationUpdateRequestMapper updateRequestMapper,
-      final AuthorizationAddRequestValidator addBusinessRuleValidator) {
+      final AuthorizationAddRequestValidator addRequestValidator) {
     return new AuthorizationUseCaseService(
         addPort,
         updatePort,
@@ -40,7 +40,7 @@ public class AuthorizationServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        addBusinessRuleValidator);
+        addRequestValidator);
   }
 
   @Bean

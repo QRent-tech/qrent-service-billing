@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class RoleValidatorConfig {
 
   @Bean
-  RoleRequestValidator getRoleBusinessRuleValidator(
+  RoleRequestValidator getRoleRequestValidator(
           final RoleLoadPort loadPort, 
           final UserAccountLoadPort userAccountLoadPort) {
     return new RoleRequestValidator(loadPort, userAccountLoadPort);

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class AbsenceValidatorConfig {
 
   @Bean
-  AbsenceUpdateRequestValidator getAbsenceAddBusinessRuleValidator(
+  AbsenceUpdateRequestValidator getAbsenceUpdateRequestValidator(
       final GetBalanceQuery balanceQuery,
       final GetQWeekQuery qWeekQuery,
       final AbsenceLoadPort loadPort) {

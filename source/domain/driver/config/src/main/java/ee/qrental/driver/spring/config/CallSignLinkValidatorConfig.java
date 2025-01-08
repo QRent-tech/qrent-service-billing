@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class CallSignLinkValidatorConfig {
 
   @Bean
-  CallSignLinkRequestValidator getCallSignLinkBusinessRuleValidator(
+  CallSignLinkRequestValidator getCallSignLinkRequestValidator(
       final CallSignLinkLoadPort loadPort) {
     return new CallSignLinkRequestValidator(loadPort);
   }
