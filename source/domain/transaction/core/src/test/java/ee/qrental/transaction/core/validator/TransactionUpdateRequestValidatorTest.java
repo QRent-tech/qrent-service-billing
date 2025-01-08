@@ -1,10 +1,13 @@
 package ee.qrental.transaction.core.validator;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrental.transaction.api.in.request.TransactionAddRequest;
+import ee.qrental.transaction.api.in.request.TransactionUpdateRequest;
 import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.domain.Transaction;
@@ -26,96 +29,24 @@ class TransactionUpdateRequestValidatorTest {
     balanceLoadPort = mock(BalanceLoadPort.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     instanceUnderTest =
-        new TransactionUpdateRequestValidator(
-            qWeekQuery, transactionLoadPort, balanceLoadPort);
+        new TransactionUpdateRequestValidator(qWeekQuery, balanceLoadPort, transactionLoadPort);
 
     when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().build());
-  }
-
-  @Test
-  public void testAddIfBalanceWasNotCalculated() {
-    // given
-    final var transaction =
-        Transaction.builder().date(LocalDate.of(2023, Month.JANUARY, 25)).driverId(2L).build();
-    when(balanceLoadPort.loadLatestByDriverId(2L)).thenReturn(null);
-
-    // when
-    final var violationsCollector = instanceUnderTest.validateAdd(transaction);
-
-    // then
-    assertFalse(violationsCollector.hasViolations());
-  }
-
-  @Test
-  public void testAddIfTransactionDateBeforeCalculationDate() {
-    // given
-    final var transaction =
-        Transaction.builder().date(LocalDate.of(2023, Month.JANUARY, 25)).driverId(2L).build();
-    when(balanceLoadPort.loadLatestByDriverId(2L))
-        .thenReturn(Balance.builder().qWeekId(99L).build());
-    when(qWeekQuery.getById(99L))
-        .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
-
-    // when
-    final var violationsCollector = instanceUnderTest.validateAdd(transaction);
-
-    // then
-    assertTrue(violationsCollector.hasViolations());
-    assertEquals(1, violationsCollector.getViolations().size());
-    assertTrue(
-        violationsCollector
-            .getViolations()
-            .get(0)
-            .contains("must be after the latest calculated Balance date"));
-  }
-
-  @Test
-  public void testAddIfTransactionDateEqualToCalculationDate() {
-    // given
-    final var transaction =
-        Transaction.builder().date(LocalDate.of(2023, Month.JANUARY, 26)).driverId(2L).build();
-    when(balanceLoadPort.loadLatestByDriverId(2L))
-        .thenReturn(Balance.builder().qWeekId(99L).build());
-    when(qWeekQuery.getById(99L))
-        .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
-    // when
-    final var violationsCollector = instanceUnderTest.validateAdd(transaction);
-
-    // then
-    assertTrue(violationsCollector.hasViolations());
-    assertEquals(1, violationsCollector.getViolations().size());
-    assertTrue(
-        violationsCollector
-            .getViolations()
-            .get(0)
-            .contains("must be after the latest calculated Balance date"));
-  }
-
-  @Test
-  public void testAddIfTransactionDateAfterCalculationDate() {
-    // given
-    final var transaction =
-        Transaction.builder().date(LocalDate.of(2023, Month.JANUARY, 27)).build();
-
-    // when
-    final var violationsCollector = instanceUnderTest.validateAdd(transaction);
-
-    // then
-    assertFalse(violationsCollector.hasViolations());
   }
 
   @Test
   public void testUpdateIfBalanceWasNotCalculated() {
     // given
     when(balanceLoadPort.loadLatest()).thenReturn(null);
-    final var transactionNew =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 28)).build();
+    final var updateRequest = new TransactionUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
 
     // when
-    final var violationsCollector = instanceUnderTest.validateUpdate(transactionNew);
+    final var violationsCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertFalse(violationsCollector.hasViolations());
@@ -124,8 +55,9 @@ class TransactionUpdateRequestValidatorTest {
   @Test
   public void testUpdateIfTransactionDateBeforeCalculationDate() {
     // given
-    final var transactionNew =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 28)).build();
+    final var updateRequest = new TransactionUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -134,7 +66,7 @@ class TransactionUpdateRequestValidatorTest {
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
     // when
-    final var violationsCollector = instanceUnderTest.validateUpdate(transactionNew);
+    final var violationsCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertTrue(violationsCollector.hasViolations());
@@ -150,8 +82,9 @@ class TransactionUpdateRequestValidatorTest {
   @Test
   public void testUpdateIfTransactionDateEqualToCalculationDate() {
     // given
-    final var transactionNew =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 28)).build();
+    final var updateRequest = new TransactionUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 26)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -160,7 +93,7 @@ class TransactionUpdateRequestValidatorTest {
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
     // when
-    final var violationsCollector = instanceUnderTest.validateUpdate(transactionNew);
+    final var violationsCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertTrue(violationsCollector.hasViolations());
@@ -176,12 +109,10 @@ class TransactionUpdateRequestValidatorTest {
   @Test
   public void testUpdateIfTransactionDateAfterCalculationDate() {
     // given
-    final var transactionNew =
-        Transaction.builder()
-            .id(1L)
-            .driverId(2L)
-            .date(LocalDate.of(2023, Month.JANUARY, 28))
-            .build();
+    final var updateRequest = new TransactionUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
+    updateRequest.setDriverId(2L);
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -190,7 +121,7 @@ class TransactionUpdateRequestValidatorTest {
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
     // when
-    final var violationsCollector = instanceUnderTest.validateUpdate(transactionNew);
+    final var violationsCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertFalse(violationsCollector.hasViolations());
@@ -199,8 +130,9 @@ class TransactionUpdateRequestValidatorTest {
   @Test
   public void testUpdateIfTransactionNewDateBeforeCalculationDate() {
     // given
-    final var transactionNew =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
+    final var updateRequest = new TransactionUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 25));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -209,7 +141,7 @@ class TransactionUpdateRequestValidatorTest {
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
     // when
-    final var violationsCollector = instanceUnderTest.validateUpdate(transactionNew);
+    final var violationsCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertTrue(violationsCollector.hasViolations());
@@ -222,8 +154,9 @@ class TransactionUpdateRequestValidatorTest {
   @Test
   public void testUpdateIfTransactionNewDateEqualToCalculationDate() {
     // given
-    final var transactionNew =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 26)).build();
+    final var updateRequest = new TransactionUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 26));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -232,7 +165,7 @@ class TransactionUpdateRequestValidatorTest {
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
     // when
-    final var violationsCollector = instanceUnderTest.validateUpdate(transactionNew);
+    final var violationsCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertTrue(violationsCollector.hasViolations());
@@ -245,8 +178,9 @@ class TransactionUpdateRequestValidatorTest {
   @Test
   public void testUpdateIfTransactionNewDateAfterCalculationDate() {
     // given
-    final var transactionNew =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 28)).build();
+    final var updateRequest = new TransactionUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -255,87 +189,7 @@ class TransactionUpdateRequestValidatorTest {
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
     // when
-    final var violationsCollector = instanceUnderTest.validateUpdate(transactionNew);
-
-    // then
-    assertFalse(violationsCollector.hasViolations());
-  }
-
-  @Test
-  public void testDeleteIfBalanceWasNotCalculated() {
-    // given
-    when(balanceLoadPort.loadLatest()).thenReturn(null);
-    final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
-    when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-
-    // when
-    final var violationsCollector = instanceUnderTest.validateDelete(1L);
-
-    // then
-    assertFalse(violationsCollector.hasViolations());
-  }
-
-  @Test
-  public void testDeleteIfTransactionDateBeforeCalculationDate() {
-    // given
-    final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
-    when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
-    when(qWeekQuery.getById(99L))
-        .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
-
-    // when
-    final var violationsCollector = instanceUnderTest.validateDelete(1L);
-
-    // then
-    assertTrue(violationsCollector.hasViolations());
-    assertEquals(1, violationsCollector.getViolations().size());
-    assertTrue(
-        violationsCollector
-            .getViolations()
-            .get(0)
-            .equals(
-                "Delete for the Transaction with id=1 is prohibited. Transaction is already calculated in Balance"));
-  }
-
-  @Test
-  public void testDeleteIfTransactionDateEqualToCalculationDate() {
-    // given
-    final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 26)).build();
-    when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
-    when(qWeekQuery.getById(99L))
-        .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
-
-    // when
-    final var violationsCollector = instanceUnderTest.validateDelete(1L);
-
-    // then
-    assertTrue(violationsCollector.hasViolations());
-    assertEquals(1, violationsCollector.getViolations().size());
-    assertTrue(
-        violationsCollector
-            .getViolations()
-            .get(0)
-            .equals(
-                "Delete for the Transaction with id=1 is prohibited. Transaction is already calculated in Balance"));
-  }
-
-  @Test
-  public void testDeleteIfTransactionDateAfterCalculationDate() {
-    // given
-    final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
-    when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
-    when(qWeekQuery.getById(99L))
-        .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
-
-    // when
-    final var violationsCollector = instanceUnderTest.validateDelete(1L);
+    final var violationsCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertFalse(violationsCollector.hasViolations());
