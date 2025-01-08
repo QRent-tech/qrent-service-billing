@@ -15,7 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionBusinessRuleValidatorTest {
-  private TransactionRequestValidator instanceUnderTest;
+  private TransactionUpdateRequestValidator instanceUnderTest;
   private TransactionLoadPort transactionLoadPort;
   private BalanceLoadPort balanceLoadPort;
   private GetQWeekQuery qWeekQuery;
@@ -26,7 +26,7 @@ class TransactionBusinessRuleValidatorTest {
     balanceLoadPort = mock(BalanceLoadPort.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     instanceUnderTest =
-        new TransactionRequestValidator(
+        new TransactionUpdateRequestValidator(
             qWeekQuery, transactionLoadPort, balanceLoadPort);
 
     when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().build());

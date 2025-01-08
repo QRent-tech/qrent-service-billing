@@ -8,6 +8,7 @@ import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import ee.qrental.invoice.api.in.query.GetInvoiceQuery;
 import ee.qrental.invoice.api.in.request.InvoiceAddRequest;
+import ee.qrental.invoice.api.in.request.InvoiceCalculationAddRequest;
 import ee.qrental.invoice.api.in.usecase.InvoicePdfUseCase;
 import ee.qrental.invoice.api.in.usecase.InvoiceSendByEmailUseCase;
 import ee.qrental.invoice.api.out.*;
@@ -15,8 +16,6 @@ import ee.qrental.invoice.core.mapper.*;
 import ee.qrental.invoice.core.service.*;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfConverter;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfModelMapper;
-import ee.qrental.invoice.core.validator.InvoiceAddRequestValidator;
-import ee.qrental.invoice.core.validator.InvoiceCalculationAddRequestValidator;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
@@ -52,7 +51,7 @@ public class InvoiceServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-            addRequestValidator);
+        addRequestValidator);
   }
 
   @Bean
@@ -86,7 +85,7 @@ public class InvoiceServiceConfig {
       final EmailSendUseCase emailSendUseCase,
       final InvoiceCalculationLoadPort loadPort,
       final InvoiceCalculationAddRequestMapper addRequestMapper,
-      final InvoiceCalculationAddRequestValidator invoiceCalculationBusinessRuleValidator,
+      final AddRequestValidator<InvoiceCalculationAddRequest> addRequestValidator,
       final InvoiceCalculationAddPort invoiceCalculationAddPort,
       final InvoiceToPdfConverter invoiceToPdfConverter,
       final InvoiceToPdfModelMapper invoiceToPdfModelMapper) {
@@ -101,7 +100,7 @@ public class InvoiceServiceConfig {
         emailSendUseCase,
         loadPort,
         addRequestMapper,
-        invoiceCalculationBusinessRuleValidator,
+        addRequestValidator,
         invoiceCalculationAddPort,
         invoiceToPdfConverter,
         invoiceToPdfModelMapper);

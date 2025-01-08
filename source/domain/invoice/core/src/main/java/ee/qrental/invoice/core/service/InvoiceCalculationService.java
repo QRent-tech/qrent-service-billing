@@ -7,6 +7,7 @@ import static java.util.Collections.singletonList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
@@ -62,7 +63,7 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
   private final EmailSendUseCase emailSendUseCase;
   private final InvoiceCalculationLoadPort loadPort;
   private final InvoiceCalculationAddRequestMapper addRequestMapper;
-  private final InvoiceCalculationAddRequestValidator addRequestValidator;
+  private final AddRequestValidator<InvoiceCalculationAddRequest> addRequestValidator;
   private final InvoiceCalculationAddPort invoiceCalculationAddPort;
   private final InvoiceToPdfConverter invoiceToPdfConverter;
   private final InvoiceToPdfModelMapper invoiceToPdfModelMapper;

@@ -2,6 +2,7 @@ package ee.qrental.invoice.core.service;
 
 import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.invoice.api.in.request.InvoiceAddRequest;
 import ee.qrental.invoice.api.in.request.InvoiceDeleteRequest;
 import ee.qrental.invoice.api.in.request.InvoiceUpdateRequest;
@@ -29,7 +30,7 @@ public class InvoiceUseCaseService
   private final InvoiceLoadPort loadPort;
   private final InvoiceAddRequestMapper addRequestMapper;
   private final InvoiceUpdateRequestMapper updateRequestMapper;
-  private final InvoiceAddRequestValidator addRequestValidator;
+  private final AddRequestValidator<InvoiceAddRequest> addRequestValidator;
 
   @Override
   public Long add(final InvoiceAddRequest request) {
