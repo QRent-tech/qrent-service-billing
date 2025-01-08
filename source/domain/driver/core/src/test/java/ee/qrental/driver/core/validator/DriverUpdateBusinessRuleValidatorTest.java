@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 class DriverUpdateBusinessRuleValidatorTest {
 
-  private DriverUpdateBusinessRuleValidator instanceUnderTest;
+  private DriverUpdateRequestValidator instanceUnderTest;
   private DriverLoadPort loadPort;
   private GetQWeekQuery qWeekQuery;
   private QDateTime qDateTime;
@@ -29,7 +29,7 @@ class DriverUpdateBusinessRuleValidatorTest {
     loadPort = mock(DriverLoadPort.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     qDateTime = mock(QDateTime.class);
-    instanceUnderTest = new DriverUpdateBusinessRuleValidator(loadPort, qWeekQuery, qDateTime);
+    instanceUnderTest = new DriverUpdateRequestValidator(loadPort, qWeekQuery, qDateTime);
   }
 
   @Test

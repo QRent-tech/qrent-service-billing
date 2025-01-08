@@ -3,7 +3,7 @@ package ee.qrental.driver.spring.config;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.out.*;
-import ee.qrental.driver.core.validator.DriverUpdateBusinessRuleValidator;
+import ee.qrental.driver.core.validator.DriverUpdateRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class DriverValidatorConfig {
 
   @Bean
-  DriverUpdateBusinessRuleValidator getDriverBusinessRuleValidator(
+  DriverUpdateRequestValidator getDriverUpdateRequestValidator(
       final DriverLoadPort loadPort, final GetQWeekQuery qWeekQuery, final QDateTime qDateTime) {
-    return new DriverUpdateBusinessRuleValidator(loadPort, qWeekQuery, qDateTime);
+    return new DriverUpdateRequestValidator(loadPort, qWeekQuery, qDateTime);
   }
 }

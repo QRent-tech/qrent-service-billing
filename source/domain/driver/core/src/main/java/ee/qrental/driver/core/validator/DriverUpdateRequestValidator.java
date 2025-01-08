@@ -4,6 +4,7 @@ import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
 import static java.lang.String.format;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
@@ -15,12 +16,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @AllArgsConstructor
-public class DriverUpdateBusinessRuleValidator {
+public class DriverUpdateRequestValidator implements UpdateRequestValidator<DriverUpdateRequest> {
 
   private final DriverLoadPort loadPort;
   private final GetQWeekQuery qWeekQuery;
   private final QDateTime qDateTime;
 
+  @Override
   public ViolationsCollector validate(final DriverUpdateRequest request) {
     final var violationsCollector = new ViolationsCollector();
     final var driverFromDb = loadPort.loadById(request.getId());
