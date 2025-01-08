@@ -39,7 +39,7 @@ public class CallSignLinkServiceConfig {
       final CallSignLinkLoadPort loadPort,
       final CallSignLinkAddRequestMapper addRequestMapper,
       final CallSignLinkUpdateRequestMapper updateRequestMapper,
-      final CallSignLinkRequestValidator businessRuleValidator,
+      final CallSignLinkRequestValidator requestValidator,
       final QDateTime qDateTime) {
     return new CallSignLinkUseCaseService(
         addPort,
@@ -48,7 +48,7 @@ public class CallSignLinkServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        businessRuleValidator,
+            requestValidator,
         qDateTime);
   }
 }

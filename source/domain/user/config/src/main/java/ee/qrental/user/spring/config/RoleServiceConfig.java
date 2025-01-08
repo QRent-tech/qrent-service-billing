@@ -28,7 +28,7 @@ public class RoleServiceConfig {
       final RoleLoadPort loadPort,
       final RoleAddRequestMapper addRequestMapper,
       final RoleUpdateRequestMapper updateRequestMapper,
-      final RoleRequestValidator businessRuleValidator) {
+      final RoleRequestValidator requestValidator) {
 
     return new RoleUseCaseService(
      addPort,
@@ -37,6 +37,6 @@ public class RoleServiceConfig {
      loadPort,
      addRequestMapper,
      updateRequestMapper,
-     businessRuleValidator);
+            requestValidator);
   }
 }

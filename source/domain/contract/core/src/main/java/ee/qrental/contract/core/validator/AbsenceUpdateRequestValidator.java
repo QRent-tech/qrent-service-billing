@@ -2,6 +2,9 @@ package ee.qrental.contract.core.validator;
 
 import static java.lang.String.format;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.DeleteRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.request.AbsenceAddRequest;
@@ -16,13 +19,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
-public class AbsenceUpdateRequestValidator {
+public class AbsenceUpdateRequestValidator
+    implements AddRequestValidator<AbsenceAddRequest>,
+        UpdateRequestValidator<AbsenceUpdateRequest>,
+        DeleteRequestValidator<AbsenceDeleteRequest> {
 
   private final GetBalanceQuery balanceQuery;
   private final GetQWeekQuery qWeekQuery;
   private final AbsenceLoadPort loadPort;
 
-  public ViolationsCollector validateAdd(final AbsenceAddRequest addRequest) {
+  @Override
+  public ViolationsCollector validate(final AbsenceAddRequest addRequest) {
     final var driverId = addRequest.getDriverId();
     final var dateStart = addRequest.getDateStart();
     final var dateEnd = addRequest.getDateEnd();
@@ -42,7 +49,8 @@ public class AbsenceUpdateRequestValidator {
     return collectViolationsForOverlappingWithBalanceCalculation(dateStart, violationsCollector);
   }
 
-  public ViolationsCollector validateUpdate(final AbsenceUpdateRequest updateRequest) {
+  @Override
+  public ViolationsCollector validate(final AbsenceUpdateRequest updateRequest) {
     final var id = updateRequest.getId();
     final var driverId = updateRequest.getDriverId();
     final var dateStart = updateRequest.getDateStart();
@@ -62,7 +70,8 @@ public class AbsenceUpdateRequestValidator {
     return collectViolationsForOverlappingWithBalanceCalculation(dateStart, violationsCollector);
   }
 
-  public ViolationsCollector validateDelete(final AbsenceDeleteRequest deleteRequest) {
+  @Override
+  public ViolationsCollector validate(final AbsenceDeleteRequest deleteRequest) {
     final var violationsCollector = new ViolationsCollector();
     final var absenceToDelete = loadPort.loadById(deleteRequest.getId());
     final var absenceToDeleteDateStart = absenceToDelete.getDateStart();

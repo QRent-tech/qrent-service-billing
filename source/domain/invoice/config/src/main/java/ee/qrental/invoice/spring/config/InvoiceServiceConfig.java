@@ -1,11 +1,13 @@
 package ee.qrental.invoice.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import ee.qrental.invoice.api.in.query.GetInvoiceQuery;
+import ee.qrental.invoice.api.in.request.InvoiceAddRequest;
 import ee.qrental.invoice.api.in.usecase.InvoicePdfUseCase;
 import ee.qrental.invoice.api.in.usecase.InvoiceSendByEmailUseCase;
 import ee.qrental.invoice.api.out.*;
@@ -42,7 +44,7 @@ public class InvoiceServiceConfig {
       final InvoiceLoadPort loadPort,
       final InvoiceAddRequestMapper addRequestMapper,
       final InvoiceUpdateRequestMapper updateRequestMapper,
-      final InvoiceAddRequestValidator businessRuleValidator) {
+      final AddRequestValidator<InvoiceAddRequest> addRequestValidator) {
     return new InvoiceUseCaseService(
         addPort,
         updatePort,
@@ -50,7 +52,7 @@ public class InvoiceServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        businessRuleValidator);
+            addRequestValidator);
   }
 
   @Bean
