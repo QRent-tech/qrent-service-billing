@@ -14,7 +14,7 @@ import java.time.Month;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TransactionBusinessRuleValidatorTest {
+class TransactionUpdateRequestValidatorTest {
   private TransactionUpdateRequestValidator instanceUnderTest;
   private TransactionLoadPort transactionLoadPort;
   private BalanceLoadPort balanceLoadPort;

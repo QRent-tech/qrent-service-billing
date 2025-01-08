@@ -46,7 +46,8 @@ public class DriverServiceConfig {
       final DriverLoadPort loadPort,
       final DriverAddRequestMapper addRequestMapper,
       final DriverUpdateRequestMapper updateRequestMapper,
-      final UpdateRequestValidator<DriverUpdateRequest> updateBusinessRuleValidator) {
+      final UpdateRequestValidator<DriverUpdateRequest> updateRequestValidator) {
+
     return new DriverUseCaseService(
         contractQuery,
         updateUseCase,
@@ -56,6 +57,6 @@ public class DriverServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        updateBusinessRuleValidator);
+        updateRequestValidator);
   }
 }

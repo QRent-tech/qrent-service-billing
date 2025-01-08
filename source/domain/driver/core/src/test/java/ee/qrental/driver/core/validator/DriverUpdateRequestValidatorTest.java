@@ -17,7 +17,7 @@ import java.time.Month;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DriverUpdateBusinessRuleValidatorTest {
+class DriverUpdateRequestValidatorTest {
 
   private DriverUpdateRequestValidator instanceUnderTest;
   private DriverLoadPort loadPort;

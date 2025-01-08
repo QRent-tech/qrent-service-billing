@@ -2,6 +2,7 @@ package ee.qrental.transaction.core.service.rent;
 
 import static java.util.stream.Collectors.toList;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.in.response.CarLinkResponse;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
@@ -17,7 +18,6 @@ import ee.qrental.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
 import ee.qrental.transaction.api.out.rent.RentCalculationAddPort;
 import ee.qrental.transaction.core.mapper.rent.RentCalculationAddRequestMapper;
 import ee.qrental.transaction.core.service.TransactionUseCaseService;
-import ee.qrental.transaction.core.validator.RentCalculationAddBusinessRuleValidator;
 import ee.qrental.transaction.domain.rent.RentCalculation;
 import ee.qrental.transaction.domain.rent.RentCalculationResult;
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
@@ -38,7 +38,7 @@ public class RentCalculationService implements RentCalculationAddUseCase {
   private final TransactionUseCaseService transactionUseCaseService;
   private final RentCalculationAddPort rentCalculationAddPort;
   private final RentCalculationAddRequestMapper addRequestMapper;
-  private final RentCalculationAddBusinessRuleValidator addBusinessRuleValidator;
+  private final AddRequestValidator<RentCalculationAddRequest> addRequestValidator;
   private final EmailSendUseCase emailSendUseCase;
   private final GetUserAccountQuery userAccountQuery;
   private final GetQWeekQuery qWeekQuery;
@@ -48,7 +48,7 @@ public class RentCalculationService implements RentCalculationAddUseCase {
   @Override
   public Long add(final RentCalculationAddRequest addRequest) {
     final var calculationStartTime = System.currentTimeMillis();
-    final var violationsCollector = addBusinessRuleValidator.validate(addRequest);
+    final var violationsCollector = addRequestValidator.validate(addRequest);
     if (violationsCollector.hasViolations()) {
       addRequest.setViolations(violationsCollector.getViolations());
 

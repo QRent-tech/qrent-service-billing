@@ -2,6 +2,7 @@ package ee.qrental.transaction.core.validator;
 
 import static java.lang.String.format;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
@@ -14,19 +15,21 @@ import java.time.LocalTime;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class RentCalculationAddBusinessRuleValidator {
+public class RentCalculationAddRequestValidator
+    implements AddRequestValidator<RentCalculationAddRequest> {
 
   private final RentCalculationLoadPort loadPort;
   private final BalanceLoadPort balanceLoadPort;
   private final GetQWeekQuery qWeekQuery;
 
+  @Override
   public ViolationsCollector validate(final RentCalculationAddRequest addRequest) {
     final var violationsCollector = new ViolationsCollector();
     final var qWeek = qWeekQuery.getById(addRequest.getQWeekId());
     // checkIfCalculationDayIsMonday(violationsCollector);
     checkIfWeeklyRentAlreadyCalculated(qWeek, violationsCollector);
     checkIfBalanceAlreadyCalculatedForRequestedWeek(qWeek, violationsCollector);
-    //checkIfPreviousWeekHasCalculatedRent(qWeek, violationsCollector);
+    // checkIfPreviousWeekHasCalculatedRent(qWeek, violationsCollector);
     return violationsCollector;
   }
 
@@ -40,7 +43,9 @@ public class RentCalculationAddBusinessRuleValidator {
     final var latestCalculatedQWeekId = loadPort.loadLastCalculationQWeekId();
     if (previousWeek.getId() != latestCalculatedQWeekId) {
       final var violation =
-          format("Rent Calculation for previous week - %d was not calculated.", previousWeek.getNumber());
+          format(
+              "Rent Calculation for previous week - %d was not calculated.",
+              previousWeek.getNumber());
       System.out.println(violation);
       violationsCollector.collect(violation);
     }
