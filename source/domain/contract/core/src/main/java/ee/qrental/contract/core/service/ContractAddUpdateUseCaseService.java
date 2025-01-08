@@ -4,7 +4,6 @@ import static jakarta.transaction.Transactional.TxType.SUPPORTS;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
-import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
@@ -14,8 +13,6 @@ import ee.qrental.contract.api.out.ContractAddPort;
 import ee.qrental.contract.api.out.ContractLoadPort;
 import ee.qrental.contract.api.out.ContractUpdatePort;
 import ee.qrental.contract.core.mapper.ContractAddRequestMapper;
-import ee.qrental.contract.core.mapper.ContractUpdateRequestMapper;
-import ee.qrental.contract.core.validator.ContractDeleteRequestValidator;
 import ee.qrental.contract.domain.Contract;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -24,7 +21,7 @@ import java.time.LocalDate;
 
 @Transactional(SUPPORTS)
 @AllArgsConstructor
-public class ContractUseCaseService implements ContractAddUseCase, ContractUpdateUseCase {
+public class ContractAddUpdateUseCaseService implements ContractAddUseCase, ContractUpdateUseCase {
   private final ContractAddPort addPort;
   private final ContractUpdatePort updatePort;
   private final ContractLoadPort loadPort;

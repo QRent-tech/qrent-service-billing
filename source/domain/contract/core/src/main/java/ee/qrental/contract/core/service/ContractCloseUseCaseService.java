@@ -1,6 +1,7 @@
 package ee.qrental.contract.core.service;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.CloseRequestValidator;
 import ee.qrental.contract.api.in.request.ContractCloseRequest;
 import ee.qrental.contract.api.in.response.ContractPreCloseResponse;
 import ee.qrental.contract.api.in.response.InsuranceCaseForContractCloseResponse;
@@ -27,7 +28,7 @@ public class ContractCloseUseCaseService implements ContractCloseUseCase {
   private final GetDriverQuery driverQuery;
   private final GetInsuranceCaseQuery insuranceCaseQuery;
   private final InsuranceCaseCloseUseCase insuranceCaseCloseUseCase;
-  private final ContractCloseRequestValidator closeRuleValidator;
+  private final CloseRequestValidator<ContractCloseRequest> closeRuleValidator;
   private final QDateTime qDateTime;
 
   @Override
