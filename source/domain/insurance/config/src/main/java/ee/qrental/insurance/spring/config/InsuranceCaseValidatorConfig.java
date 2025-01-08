@@ -1,9 +1,11 @@
 package ee.qrental.insurance.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;
 import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
-import ee.qrental.insurance.core.validator.InsuranceCalculationAddBusinessRuleValidator;
+import ee.qrental.insurance.core.validator.InsuranceCalculationAddRequestValidator;
 import ee.qrental.insurance.core.validator.InsuranceCaseCloseBusinessRuleValidator;
 import ee.qrental.insurance.core.validator.InsuranceCaseUpdateBusinessRuleValidator;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
@@ -28,8 +30,8 @@ public class InsuranceCaseValidatorConfig {
   }
 
   @Bean
-  InsuranceCalculationAddBusinessRuleValidator getInsuranceCalculationAddBusinessRuleValidator(
+  AddRequestValidator<InsuranceCalculationAddRequest> getInsuranceCalculationAddRequestValidator(
       final GetQWeekQuery qWeekQuery, final GetRentCalculationQuery rentCalculationQuery) {
-    return new InsuranceCalculationAddBusinessRuleValidator(qWeekQuery, rentCalculationQuery);
+    return new InsuranceCalculationAddRequestValidator(qWeekQuery, rentCalculationQuery);
   }
 }

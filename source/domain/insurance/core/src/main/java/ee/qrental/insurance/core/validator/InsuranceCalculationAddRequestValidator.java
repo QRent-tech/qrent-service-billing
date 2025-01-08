@@ -1,5 +1,6 @@
 package ee.qrental.insurance.core.validator;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
@@ -7,11 +8,13 @@ import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class InsuranceCalculationAddBusinessRuleValidator {
+public class InsuranceCalculationAddRequestValidator
+    implements AddRequestValidator<InsuranceCalculationAddRequest> {
   private final GetQWeekQuery qWeekQuery;
   private final GetRentCalculationQuery rentCalculationQuery;
 
-  public ViolationsCollector validateAdd(final InsuranceCalculationAddRequest request) {
+  @Override
+  public ViolationsCollector validate(final InsuranceCalculationAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
     checkIfRentCalculationIsDone(request, violationsCollector);
 

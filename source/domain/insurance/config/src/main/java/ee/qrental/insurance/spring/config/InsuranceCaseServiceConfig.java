@@ -1,6 +1,7 @@
 package ee.qrental.insurance.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
@@ -8,13 +9,13 @@ import ee.qrental.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseBalanceQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
+import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
 import ee.qrental.insurance.api.out.*;
 import ee.qrental.insurance.core.mapper.*;
 import ee.qrental.insurance.core.service.*;
 import ee.qrental.insurance.core.service.balance.*;
 import ee.qrental.insurance.core.service.kasko.QKaskoQueryService;
-import ee.qrental.insurance.core.validator.InsuranceCalculationAddBusinessRuleValidator;
 import ee.qrental.insurance.core.validator.InsuranceCaseUpdateBusinessRuleValidator;
 import ee.qrental.insurance.core.validator.InsuranceCaseCloseBusinessRuleValidator;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
@@ -142,7 +143,7 @@ public class InsuranceCaseServiceConfig {
       final InsuranceCalculationAddRequestMapper calculationAddRequestMapper,
       final GetQWeekQuery qWeekQuery,
       final InsuranceCaseBalanceCalculator insuranceCaseBalanceCalculator,
-      final InsuranceCalculationAddBusinessRuleValidator addBusinessRuleValidator) {
+      final AddRequestValidator<InsuranceCalculationAddRequest> addRequestValidator) {
 
     return new InsuranceCalculationUseCaseService(
         caseLoadPort,
@@ -151,7 +152,7 @@ public class InsuranceCaseServiceConfig {
         calculationAddRequestMapper,
         qWeekQuery,
         insuranceCaseBalanceCalculator,
-        addBusinessRuleValidator);
+        addRequestValidator);
   }
 
   @Bean
