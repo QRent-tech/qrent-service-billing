@@ -1,13 +1,17 @@
 package ee.qrental.insurance.spring.config;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.CloseRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
+import ee.qrental.insurance.api.in.request.InsuranceCaseCloseRequest;
+import ee.qrental.insurance.api.in.request.InsuranceCaseUpdateRequest;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;
 import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrental.insurance.core.validator.InsuranceCalculationAddRequestValidator;
-import ee.qrental.insurance.core.validator.InsuranceCaseCloseBusinessRuleValidator;
-import ee.qrental.insurance.core.validator.InsuranceCaseUpdateBusinessRuleValidator;
+import ee.qrental.insurance.core.validator.InsuranceCaseCloseRequestValidator;
+import ee.qrental.insurance.core.validator.InsuranceCaseUpdateRequestValidator;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,17 +20,17 @@ import org.springframework.context.annotation.Configuration;
 public class InsuranceCaseValidatorConfig {
 
   @Bean
-  InsuranceCaseUpdateBusinessRuleValidator getInsuranceCaseBusinessRuleValidator(
+  UpdateRequestValidator<InsuranceCaseUpdateRequest> getInsuranceCaseUpdateRequestValidator(
       final InsuranceCaseLoadPort insuranceCaseLoadPort,
       final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort) {
-    return new InsuranceCaseUpdateBusinessRuleValidator(
+    return new InsuranceCaseUpdateRequestValidator(
         insuranceCaseLoadPort, insuranceCaseBalanceLoadPort);
   }
 
   @Bean
-  InsuranceCaseCloseBusinessRuleValidator getInsuranceCaseCloseBusinessRuleValidator(
+  CloseRequestValidator<InsuranceCaseCloseRequest> getInsuranceCaseCloseRequestValidator(
       final InsuranceCaseLoadPort loadPort) {
-    return new InsuranceCaseCloseBusinessRuleValidator(loadPort);
+    return new InsuranceCaseCloseRequestValidator(loadPort);
   }
 
   @Bean
