@@ -6,12 +6,13 @@ import static org.mockito.Mockito.when;
 
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 import ee.qrental.transaction.api.in.request.TransactionUpdateRequest;
 import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.domain.Transaction;
 import ee.qrental.transaction.domain.balance.Balance;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,6 +42,7 @@ class TransactionUpdateRequestValidatorTest {
     final var updateRequest = new TransactionUpdateRequest();
     updateRequest.setId(1L);
     updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
+    updateRequest.setAmount(BigDecimal.valueOf(100L));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -53,15 +55,22 @@ class TransactionUpdateRequestValidatorTest {
   }
 
   @Test
-  public void testUpdateIfTransactionDateBeforeCalculationDate() {
+  public void testUpdateIfTransactionDateInDbIsBeforeCalculationDate() {
     // given
     final var updateRequest = new TransactionUpdateRequest();
     updateRequest.setId(1L);
     updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
+    updateRequest.setAmount(BigDecimal.valueOf(100L));
+    updateRequest.setDriverId(3L);
     final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
+        Transaction.builder()
+            .id(1L)
+            .date(LocalDate.of(2023, Month.JANUARY, 25))
+            .driverId(3L)
+            .build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
+    when(balanceLoadPort.loadLatestByDriverId(3L))
+        .thenReturn(Balance.builder().qWeekId(99L).build());
     when(qWeekQuery.getById(99L))
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
@@ -76,7 +85,7 @@ class TransactionUpdateRequestValidatorTest {
             .getViolations()
             .get(0)
             .contains(
-                "Update for the Transaction with id=1 is prohibited. Transaction is already calculated in Balance"));
+                "Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 25, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023"));
   }
 
   @Test
@@ -85,10 +94,17 @@ class TransactionUpdateRequestValidatorTest {
     final var updateRequest = new TransactionUpdateRequest();
     updateRequest.setId(1L);
     updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
+    updateRequest.setAmount(BigDecimal.valueOf(100L));
+    updateRequest.setDriverId(3L);
     final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 26)).build();
+        Transaction.builder()
+            .id(1L)
+            .date(LocalDate.of(2023, Month.JANUARY, 26))
+            .driverId(3L)
+            .build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
+    when(balanceLoadPort.loadLatestByDriverId(3L))
+        .thenReturn(Balance.builder().qWeekId(99L).build());
     when(qWeekQuery.getById(99L))
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
@@ -103,7 +119,7 @@ class TransactionUpdateRequestValidatorTest {
             .getViolations()
             .get(0)
             .contains(
-                "Update for the Transaction with id=1 is prohibited. Transaction is already calculated in Balance"));
+                "Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 26, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023"));
   }
 
   @Test
@@ -113,6 +129,7 @@ class TransactionUpdateRequestValidatorTest {
     updateRequest.setId(1L);
     updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
     updateRequest.setDriverId(2L);
+    updateRequest.setAmount(BigDecimal.valueOf(100L));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
@@ -133,10 +150,17 @@ class TransactionUpdateRequestValidatorTest {
     final var updateRequest = new TransactionUpdateRequest();
     updateRequest.setId(1L);
     updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 25));
+    updateRequest.setAmount(BigDecimal.valueOf(100L));
+    updateRequest.setDriverId(3L);
     final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
+        Transaction.builder()
+            .id(1L)
+            .date(LocalDate.of(2023, Month.JANUARY, 27))
+            .driverId(3L)
+            .build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
+    when(balanceLoadPort.loadLatestByDriverId(3L))
+        .thenReturn(Balance.builder().qWeekId(99L).build());
     when(qWeekQuery.getById(99L))
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
@@ -147,8 +171,8 @@ class TransactionUpdateRequestValidatorTest {
     assertTrue(violationsCollector.hasViolations());
     assertEquals(1, violationsCollector.getViolations().size());
     assertEquals(
-        violationsCollector.getViolations().get(0),
-        "Transaction new date 25-01-2023 must be after the latest calculated Balance date: 26-01-2023");
+            "Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 25, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023",
+            violationsCollector.getViolations().get(0));
   }
 
   @Test
@@ -157,10 +181,17 @@ class TransactionUpdateRequestValidatorTest {
     final var updateRequest = new TransactionUpdateRequest();
     updateRequest.setId(1L);
     updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 26));
+    updateRequest.setAmount(BigDecimal.valueOf(100L));
+    updateRequest.setDriverId(3L);
     final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
+        Transaction.builder()
+            .id(1L)
+            .date(LocalDate.of(2023, Month.JANUARY, 27))
+            .driverId(3L)
+            .build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
+    when(balanceLoadPort.loadLatestByDriverId(3L))
+        .thenReturn(Balance.builder().qWeekId(99L).build());
     when(qWeekQuery.getById(99L))
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
@@ -171,8 +202,8 @@ class TransactionUpdateRequestValidatorTest {
     assertTrue(violationsCollector.hasViolations());
     assertEquals(1, violationsCollector.getViolations().size());
     assertEquals(
-        violationsCollector.getViolations().get(0),
-        "Transaction new date 26-01-2023 must be after the latest calculated Balance date: 26-01-2023");
+            "Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 26, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023",
+            violationsCollector.getViolations().get(0));
   }
 
   @Test
@@ -181,6 +212,7 @@ class TransactionUpdateRequestValidatorTest {
     final var updateRequest = new TransactionUpdateRequest();
     updateRequest.setId(1L);
     updateRequest.setDate(LocalDate.of(2023, Month.JANUARY, 28));
+    updateRequest.setAmount(BigDecimal.valueOf(100L));
     final var transactionFromDb =
         Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);

@@ -10,6 +10,8 @@ import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.domain.balance.Balance;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,6 +40,8 @@ class TransactionAddRequestValidatorTest {
     final var addRequest = new TransactionAddRequest();
     addRequest.setDate(LocalDate.of(2023, Month.JANUARY, 25));
     addRequest.setDriverId(2L);
+    addRequest.setTransactionTypeId(5L);
+    addRequest.setAmount(BigDecimal.valueOf(100L));
     when(balanceLoadPort.loadLatestByDriverId(2L)).thenReturn(null);
 
     // when
@@ -53,6 +57,8 @@ class TransactionAddRequestValidatorTest {
     final var addRequest = new TransactionAddRequest();
     addRequest.setDate(LocalDate.of(2023, Month.JANUARY, 25));
     addRequest.setDriverId(2L);
+    addRequest.setTransactionTypeId(5L);
+    addRequest.setAmount(BigDecimal.valueOf(100L));
 
     when(balanceLoadPort.loadLatestByDriverId(2L))
         .thenReturn(Balance.builder().qWeekId(99L).build());
@@ -69,7 +75,7 @@ class TransactionAddRequestValidatorTest {
         violationsCollector
             .getViolations()
             .get(0)
-            .contains("must be after the latest calculated Balance date"));
+            .contains("Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 25, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023"));
   }
 
   @Test
@@ -78,6 +84,8 @@ class TransactionAddRequestValidatorTest {
     final var addRequest = new TransactionAddRequest();
     addRequest.setDate(LocalDate.of(2023, Month.JANUARY, 26));
     addRequest.setDriverId(2L);
+    addRequest.setTransactionTypeId(5L);
+    addRequest.setAmount(BigDecimal.valueOf(100L));
 
     when(balanceLoadPort.loadLatestByDriverId(2L))
         .thenReturn(Balance.builder().qWeekId(99L).build());
@@ -93,7 +101,8 @@ class TransactionAddRequestValidatorTest {
         violationsCollector
             .getViolations()
             .get(0)
-            .contains("must be after the latest calculated Balance date"));
+            .contains(
+                "Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 26, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023"));
   }
 
   @Test
@@ -102,6 +111,8 @@ class TransactionAddRequestValidatorTest {
     final var addRequest = new TransactionAddRequest();
     addRequest.setDate(LocalDate.of(2023, Month.JANUARY, 27));
     addRequest.setDriverId(2L);
+    addRequest.setTransactionTypeId(5L);
+    addRequest.setAmount(BigDecimal.valueOf(100L));
 
     // when
     final var violationsCollector = instanceUnderTest.validate(addRequest);

@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.request.TransactionDeleteRequest;
-import ee.qrental.transaction.api.in.request.TransactionUpdateRequest;
 import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.domain.Transaction;
@@ -55,9 +54,14 @@ class TransactionDeleteRequestValidatorTest {
     // given
     final var deleteRequest = new TransactionDeleteRequest(1L);
     final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 25)).build();
+        Transaction.builder()
+            .id(1L)
+            .date(LocalDate.of(2023, Month.JANUARY, 25))
+            .driverId(3L)
+            .build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
+    when(balanceLoadPort.loadLatestByDriverId(3L))
+        .thenReturn(Balance.builder().qWeekId(99L).build());
     when(qWeekQuery.getById(99L))
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
@@ -67,12 +71,9 @@ class TransactionDeleteRequestValidatorTest {
     // then
     assertTrue(violationsCollector.hasViolations());
     assertEquals(1, violationsCollector.getViolations().size());
-    assertTrue(
-        violationsCollector
-            .getViolations()
-            .get(0)
-            .equals(
-                "Delete for the Transaction with id=1 is prohibited. Transaction is already calculated in Balance"));
+    assertEquals(
+        "Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 25, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023",
+        violationsCollector.getViolations().get(0));
   }
 
   @Test
@@ -80,9 +81,14 @@ class TransactionDeleteRequestValidatorTest {
     // given
     final var deleteRequest = new TransactionDeleteRequest(1L);
     final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 26)).build();
+        Transaction.builder()
+            .id(1L)
+            .date(LocalDate.of(2023, Month.JANUARY, 26))
+            .driverId(3L)
+            .build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
+    when(balanceLoadPort.loadLatestByDriverId(3L))
+        .thenReturn(Balance.builder().qWeekId(99L).build());
     when(qWeekQuery.getById(99L))
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 
@@ -92,12 +98,9 @@ class TransactionDeleteRequestValidatorTest {
     // then
     assertTrue(violationsCollector.hasViolations());
     assertEquals(1, violationsCollector.getViolations().size());
-    assertTrue(
-        violationsCollector
-            .getViolations()
-            .get(0)
-            .equals(
-                "Delete for the Transaction with id=1 is prohibited. Transaction is already calculated in Balance"));
+    assertEquals(
+        "Any operations with Transaction are prohibited because a Transaction's date (new or existing) Jan 26, 2023 is before or equals the latest calculated Balance date: Jan 26, 2023",
+        violationsCollector.getViolations().get(0));
   }
 
   @Test
@@ -105,9 +108,14 @@ class TransactionDeleteRequestValidatorTest {
     // given
     final var deleteRequest = new TransactionDeleteRequest(1L);
     final var transactionFromDb =
-        Transaction.builder().id(1L).date(LocalDate.of(2023, Month.JANUARY, 27)).build();
+        Transaction.builder()
+            .id(1L)
+            .date(LocalDate.of(2023, Month.JANUARY, 27))
+            .driverId(3L)
+            .build();
     when(transactionLoadPort.loadById(1L)).thenReturn(transactionFromDb);
-    when(balanceLoadPort.loadLatest()).thenReturn(Balance.builder().qWeekId(99L).build());
+    when(balanceLoadPort.loadLatestByDriverId(3L))
+        .thenReturn(Balance.builder().qWeekId(99L).build());
     when(qWeekQuery.getById(99L))
         .thenReturn(QWeekResponse.builder().end(LocalDate.of(2023, Month.JANUARY, 26)).build());
 

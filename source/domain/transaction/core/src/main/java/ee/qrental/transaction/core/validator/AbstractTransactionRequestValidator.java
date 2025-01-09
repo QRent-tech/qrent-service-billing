@@ -59,7 +59,7 @@ public abstract class AbstractTransactionRequestValidator {
           balanceLatestCalculatedDate.format(ofLocalizedDate(MEDIUM));
       violationsCollector.collect(
           format(
-              "Any operations with Transaction are prohibited because a Transaction's date (new or existing) %s is before the latest calculated Balance date: %s",
+              "Any operations with Transaction are prohibited because a Transaction's date (new or existing) %s is before or equals the latest calculated Balance date: %s",
               formattedTransactionDate, formattedBalanceCalculatedDate));
     }
   }
