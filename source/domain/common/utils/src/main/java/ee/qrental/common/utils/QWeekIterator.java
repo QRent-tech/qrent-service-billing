@@ -2,6 +2,7 @@ package ee.qrental.common.utils;
 
 import java.time.LocalDate;
 import lombok.Getter;
+import org.threeten.extra.YearWeek;
 
 public class QWeekIterator {
 
@@ -23,8 +24,9 @@ public class QWeekIterator {
     LocalDate currentWeekStart;
     LocalDate currentWeekEnd;
 
-    final var year = startPeriod.getYear();
-    final var currentWeekNumber = QTimeUtils.getWeekNumber(startPeriod);
+    final var yearWeekStartPeriod =  YearWeek.from( startPeriod );
+    final var year = yearWeekStartPeriod.getYear();
+    final var currentWeekNumber = yearWeekStartPeriod.getWeek();
     currentWeekStart = startPeriod;
     currentWeekEnd = calculateWeekEndDate(year, currentWeekNumber);
 
