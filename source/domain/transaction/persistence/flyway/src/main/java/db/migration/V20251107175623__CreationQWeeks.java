@@ -15,7 +15,7 @@ import static ee.qrental.common.utils.QTimeUtils.getLastDayOfWeekInYear;
 import static java.lang.String.format;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-public class V20231107175623__CreationQWeeks extends BaseJavaMigration {
+public class V20251107175623__CreationQWeeks extends BaseJavaMigration {
 
   private static final String WEEK_PATTERN = "dd-MMM";
 
@@ -24,7 +24,7 @@ public class V20231107175623__CreationQWeeks extends BaseJavaMigration {
     final var startDate = LocalDate.of(2023, Month.JANUARY, 2);
     final var endDate = LocalDate.now();
     final var weekIterator = new QWeekIterator(startDate, endDate);
-    final var weekPattern = "dd-MMM";
+
     try (var statement = context.getConnection().createStatement()) {
       while (weekIterator.hasNext()) {
         final var week = weekIterator.next();

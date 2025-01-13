@@ -24,10 +24,16 @@ public class CallSignRequestValidator
   private final CallSignLoadPort loadPort;
   private final CallSignLinkLoadPort callSignLinkLoadPort;
 
+  private static final int MAX_COMMENT_LENGTH = 200;
+  private static final int MIN_CALL_SIGN_NUMBER = 1;
+  private static final int MAX_CALL_SIGN_NUMBER = 999;
+
   @Override
   public ViolationsCollector validate(final CallSignAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
+    checkValidNumberForAdd(request, violationsCollector);
     checkUniquenessForAdd(request, violationsCollector);
+    checkCommentForAdd(request, violationsCollector);
 
     return violationsCollector;
   }
@@ -47,6 +53,32 @@ public class CallSignRequestValidator
     checkReferences(request.getId(), violationsCollector);
 
     return violationsCollector;
+  }
+
+  private void checkValidNumberForAdd(
+      final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
+
+    final var callSign = request.getCallSign();
+
+    if (callSign >= MIN_CALL_SIGN_NUMBER && callSign <= MAX_CALL_SIGN_NUMBER) {
+      return;
+    }
+
+    violationsCollector.collect(
+        format(
+            "Invalid number call sign (Min %d and Max %d)",
+            MIN_CALL_SIGN_NUMBER, MAX_CALL_SIGN_NUMBER));
+  }
+
+  private void checkCommentForAdd(
+      final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
+    final var comment = request.getComment();
+
+    if (comment.length() <= MAX_COMMENT_LENGTH) {
+      return;
+    }
+
+    violationsCollector.collect(format("Too long comment (Max %d characters)", MAX_COMMENT_LENGTH));
   }
 
   private void checkUniquenessForAdd(
