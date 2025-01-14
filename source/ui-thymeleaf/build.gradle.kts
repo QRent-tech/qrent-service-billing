@@ -1,9 +1,11 @@
 
 val isGitPropertyPluginEnabled = System.getenv("GIT_PROPERTIES_GENERATION")?.toBoolean() ?: true
 
+println("GIT_PROPERTIES_GENERATION: $isGitPropertyPluginEnabled")
 if (isGitPropertyPluginEnabled) {
     apply(plugin = "com.gorylenko.gradle-git-properties")
 }
+
 dependencies {
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:cross:email:api:in"))
