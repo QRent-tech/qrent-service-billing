@@ -15,7 +15,7 @@ import static ee.qrental.common.utils.QTimeUtils.getLastDayOfWeekInYear;
 import static java.lang.String.format;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-public class V20251107175623__CreationQWeeks extends BaseJavaMigration {
+public class V20231107175623__CreationQWeeks extends BaseJavaMigration {
 
   private static final String WEEK_PATTERN = "dd-MMM";
 
