@@ -1,7 +1,10 @@
 
-val isGitPropertyPluginEnabled = System.getenv("GIT_PROPERTIES_GENERATION")?.toBoolean() ?: true
+val isGitPropertyPluginEnabledVar = System.getenv("GIT_PROPERTIES_GENERATION")
+println("GIT_PROPERTIES_GENERATION: $isGitPropertyPluginEnabledVar")
 
-println("GIT_PROPERTIES_GENERATION: $isGitPropertyPluginEnabled")
+val isGitPropertyPluginEnabled = System.getenv("GIT_PROPERTIES_GENERATION")?.toBoolean() ?: true
+println("isGitPropertyPluginEnabled: $isGitPropertyPluginEnabled")
+
 if (isGitPropertyPluginEnabled) {
     apply(plugin = "com.gorylenko.gradle-git-properties")
 }
