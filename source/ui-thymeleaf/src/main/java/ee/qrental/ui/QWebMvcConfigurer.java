@@ -1,6 +1,6 @@
-package ee.qrental.ui.websecurity;
+package ee.qrental.ui;
 
-import ee.qrental.ui.GitInfoInjectionInterceptor;
+import ee.qrental.ui.interceptor.GitInfoInjectionInterceptor;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.actuate.info.InfoPropertiesInfoContributor;
 import org.springframework.boot.info.GitProperties;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @AllArgsConstructor
-public class LoginConfigurator implements WebMvcConfigurer {
+public class QWebMvcConfigurer implements WebMvcConfigurer {
 
   private final InfoPropertiesInfoContributor<GitProperties> gitContributor;
 

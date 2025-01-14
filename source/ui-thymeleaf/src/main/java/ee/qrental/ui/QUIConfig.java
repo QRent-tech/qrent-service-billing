@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = "ee.qrental.ui.controller")
-public class UIConfig {
+public class QUIConfig {
 
   @Bean
   QDateFormatter getQDateFormatter() {
