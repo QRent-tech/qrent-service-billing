@@ -1,24 +1,26 @@
 package ee.qrental.ui.websecurity;
 
-import ee.qrental.ui.GitInfoInterceptor;
+import ee.qrental.ui.GitInfoInjectionInterceptor;
+import lombok.AllArgsConstructor;
+import org.springframework.boot.actuate.info.InfoPropertiesInfoContributor;
+import org.springframework.boot.info.GitProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 @Configuration
-public class LoginConfigurator  implements WebMvcConfigurer {
+@AllArgsConstructor
+public class LoginConfigurator implements WebMvcConfigurer {
 
-    public void addViewControllers(final ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
-    }
+  private final InfoPropertiesInfoContributor<GitProperties> gitContributor;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+  public void addViewControllers(final ViewControllerRegistry registry) {
+    registry.addViewController("/login").setViewName("login");
+  }
 
-    registry.addInterceptor(new GitInfoInterceptor());
-        registry.addInterceptor(new TransactionInterceptor()).addPathPatterns("/person/save/*");
-    }
-
+  @Override
+  public void addInterceptors(final InterceptorRegistry registry) {
+    registry.addInterceptor(new GitInfoInjectionInterceptor(gitContributor));
+  }
 }
