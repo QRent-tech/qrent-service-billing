@@ -2,6 +2,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
     id("java")
     id("java-library")
+    id("com.gorylenko.gradle-git-properties") version "2.3.2"
 }
 group = "ee.qrental"
 
@@ -15,6 +16,7 @@ subprojects {
         plugin("java")
         plugin("java-library")
         plugin("io.spring.dependency-management")
+        plugin("com.gorylenko.gradle-git-properties")
     }
 
 
