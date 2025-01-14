@@ -112,7 +112,7 @@ public class CallSignRequestValidatorTest {
   }
 
   @Test
-  public void testIfCallSignUpdateDomainFromDbIsNull() {
+  public void testCallSignUpdateRequestIfNoObjectWithSuchId() {
     // given
     final var updateRequest = new CallSignUpdateRequest();
     updateRequest.setId(1L);
@@ -131,14 +131,14 @@ public class CallSignRequestValidatorTest {
   }
 
   @Test
-  public void testIfCallSignUpdateTwoObjectsIsEqual() {
+  public void testCallSignUpdateRequestIfCallSignNumberAlreadyInUse() {
     // given
     final var updateRequest = new CallSignUpdateRequest();
     updateRequest.setCallSign(1);
     updateRequest.setId(1L);
     updateRequest.setComment("");
 
-    when(loadPort.loadByCallSign(1)).thenReturn(CallSign.builder().callSign(1).id(1L).build());
+    when(loadPort.loadByCallSign(1)).thenReturn(CallSign.builder().callSign(1).id(2L).build());
 
     // when
     final var violationCollector = instanceUnderTest.validate(updateRequest);
@@ -151,7 +151,7 @@ public class CallSignRequestValidatorTest {
   }
 
   @Test
-  public void testIfCallSignUpdateNotUniquenessBecauseSuchNumberAlreadyUse() {
+  public void testIfCallSignUpdateNotUniquenessBecauseSuchNumberAlreadyInUse() {
     // given
     final var updateRequest = new CallSignUpdateRequest();
     updateRequest.setCallSign(1);
