@@ -22,6 +22,10 @@ public class GitInfoInjectionInterceptor implements HandlerInterceptor {
       final HttpServletResponse response,
       final Object handler,
       final ModelAndView modelAndView) {
+    if (modelAndView == null) {
+      return;
+    }
+
     final var builder = new Info.Builder();
     gitContributor.contribute(builder);
     final var details = builder.build().getDetails();
@@ -32,9 +36,14 @@ public class GitInfoInjectionInterceptor implements HandlerInterceptor {
     final var gitCommitAbbrev = ((Map<String, Object>) (gitCommitMap.get("id"))).get("abbrev");
     final var gitCommitUserEmail = ((Map<String, Object>) (gitCommitMap.get("user"))).get("email");
 
-    modelAndView.getModel().put("gitBranch", gitCommitBranch);
-    modelAndView.getModel().put("gitCommitAbbrev", gitCommitAbbrev);
-    modelAndView.getModel().put("gitCommitTime", gitCommitTime);
-    modelAndView.getModel().put("gitCommitUserEmail", gitCommitUserEmail);
+    final var model = modelAndView.getModel();
+    if (model == null) {
+      return;
+    }
+
+    model.put("gitBranch", gitCommitBranch);
+    model.put("gitCommitAbbrev", gitCommitAbbrev);
+    model.put("gitCommitTime", gitCommitTime);
+    model.put("gitCommitUserEmail", gitCommitUserEmail);
   }
 }
