@@ -112,6 +112,66 @@ public class CallSignRequestValidatorTest {
   }
 
   @Test
+  public void testIfCallSignUpdateDomainFromDbIsNull() {
+    // given
+    final var updateRequest = new CallSignUpdateRequest();
+    updateRequest.setId(1L);
+    updateRequest.setComment("");
+
+    when(loadPort.loadByCallSign(1)).thenReturn(null);
+
+    // when
+    final var violationCollector = instanceUnderTest.validate(updateRequest);
+
+    // then
+    assertTrue(violationCollector.hasViolations());
+    assertEquals(
+        "Update of CallSign Link failed. No Record with id = 1",
+        violationCollector.getViolations().get(0));
+  }
+
+  @Test
+  public void testIfCallSignUpdateTwoObjectsIsEqual() {
+    // given
+    final var updateRequest = new CallSignUpdateRequest();
+    updateRequest.setCallSign(1);
+    updateRequest.setId(1L);
+    updateRequest.setComment("");
+
+    when(loadPort.loadByCallSign(1)).thenReturn(CallSign.builder().callSign(1).id(1L).build());
+
+    // when
+    final var violationCollector = instanceUnderTest.validate(updateRequest);
+
+    // then
+    assertTrue(violationCollector.hasViolations());
+    assertEquals(
+        "Update of CallSign Link failed. No Record with id = 1",
+        violationCollector.getViolations().get(0));
+  }
+
+  @Test
+  public void testIfCallSignUpdateNotUniquenessBecauseSuchNumberAlreadyUse() {
+    // given
+    final var updateRequest = new CallSignUpdateRequest();
+    updateRequest.setCallSign(1);
+    updateRequest.setId(1L);
+    updateRequest.setComment("");
+
+    when(loadPort.loadById(1L)).thenReturn(CallSign.builder().id(1L).build());
+    when(loadPort.loadByCallSign(1)).thenReturn(CallSign.builder().build());
+
+    // when
+    final var violationCollector = instanceUnderTest.validate(updateRequest);
+
+    // then
+    assertTrue(violationCollector.hasViolations());
+    assertEquals(
+        "Call Sign 1 can not be updated, because such Number already in use",
+        violationCollector.getViolations().get(0));
+  }
+
+  @Test
   public void testIfCallSignDeleteRequestDoesntHaveCallSignLinks() {
     // given
     final var deleteRequest = new CallSignDeleteRequest(1L);
