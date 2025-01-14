@@ -1,3 +1,7 @@
+plugins {
+    id("com.gorylenko.gradle-git-properties")
+}
+
 dependencies {
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:cross:email:api:in"))

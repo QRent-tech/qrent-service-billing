@@ -16,7 +16,6 @@ subprojects {
         plugin("java")
         plugin("java-library")
         plugin("io.spring.dependency-management")
-        plugin("com.gorylenko.gradle-git-properties")
     }
 
 
