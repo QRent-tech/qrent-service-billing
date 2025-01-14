@@ -1,5 +1,7 @@
 package ee.qrental.transaction.core.service.kind;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.transaction.api.in.request.kind.TransactionKindAddRequest;
 import ee.qrental.transaction.api.in.request.kind.TransactionKindDeleteRequest;
 import ee.qrental.transaction.api.in.request.kind.TransactionKindUpdateRequest;
@@ -12,8 +14,7 @@ import ee.qrental.transaction.api.out.kind.TransactionKindLoadPort;
 import ee.qrental.transaction.api.out.kind.TransactionKindUpdatePort;
 import ee.qrental.transaction.core.mapper.kind.TransactionKindAddRequestMapper;
 import ee.qrental.transaction.core.mapper.kind.TransactionKindUpdateRequestMapper;
-import ee.qrental.transaction.core.validator.TransactionKindAddBusinessRuleValidator;
-import ee.qrental.transaction.core.validator.TransactionKindUpdateBusinessRuleValidator;
+import ee.qrental.transaction.core.validator.TransactionKindUpdateRequestValidator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -28,12 +29,12 @@ public class TransactionKindUseCaseService
   private final TransactionKindLoadPort loadPort;
   private final TransactionKindAddRequestMapper addRequestMapper;
   private final TransactionKindUpdateRequestMapper updateRequestMapper;
-  private final TransactionKindAddBusinessRuleValidator addBusinessRuleValidator;
-  private final TransactionKindUpdateBusinessRuleValidator updateBusinessRuleValidator;
+  private final AddRequestValidator<TransactionKindAddRequest> addRequestValidator;
+  private final UpdateRequestValidator<TransactionKindUpdateRequest> updateRequestValidator;
 
   @Override
   public Long add(final TransactionKindAddRequest request) {
-    final var violationsCollector = addBusinessRuleValidator.validate(request);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
@@ -45,7 +46,7 @@ public class TransactionKindUseCaseService
   @Override
   public void update(final TransactionKindUpdateRequest request) {
     checkExistence(request.getId());
-    final var violationsCollector = updateBusinessRuleValidator.validate(request);
+    final var violationsCollector = updateRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 

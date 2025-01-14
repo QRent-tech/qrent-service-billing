@@ -1,6 +1,8 @@
 package ee.qrental.car.core.service;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.car.api.in.request.CarLinkAddRequest;
 import ee.qrental.car.api.in.request.CarLinkDeleteRequest;
 import ee.qrental.car.api.in.request.CarLinkCloseRequest;
@@ -14,9 +16,6 @@ import ee.qrental.car.api.out.CarLinkDeletePort;
 import ee.qrental.car.api.out.CarLinkLoadPort;
 import ee.qrental.car.api.out.CarLinkUpdatePort;
 import ee.qrental.car.core.mapper.CarLinkAddRequestMapper;
-import ee.qrental.car.core.mapper.CarLinkUpdateRequestMapper;
-import ee.qrental.car.core.validator.CarLinkAddBusinessRuleValidator;
-import ee.qrental.car.core.validator.CarLinkUpdateBusinessRuleValidator;
 import ee.qrental.car.domain.CarLink;
 import lombok.AllArgsConstructor;
 
@@ -31,9 +30,8 @@ public class CarLinkUseCaseService
   private final CarLinkDeletePort deletePort;
   private final CarLinkLoadPort loadPort;
   private final CarLinkAddRequestMapper addRequestMapper;
-  private final CarLinkUpdateRequestMapper updateRequestMapper;
-  private final CarLinkAddBusinessRuleValidator addValidator;
-  private final CarLinkUpdateBusinessRuleValidator updateValidator;
+  private final AddRequestValidator<CarLinkAddRequest> addValidator;
+  private final UpdateRequestValidator<CarLinkUpdateRequest> updateValidator;
   private final QDateTime qDateTime;
 
   @Override

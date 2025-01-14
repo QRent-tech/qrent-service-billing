@@ -1,7 +1,13 @@
 package ee.qrental.transaction.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.DeleteRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
+import ee.qrental.transaction.api.in.request.TransactionAddRequest;
+import ee.qrental.transaction.api.in.request.TransactionDeleteRequest;
+import ee.qrental.transaction.api.in.request.TransactionUpdateRequest;
 import ee.qrental.transaction.api.out.TransactionAddPort;
 import ee.qrental.transaction.api.out.TransactionDeletePort;
 import ee.qrental.transaction.api.out.TransactionLoadPort;
@@ -12,8 +18,6 @@ import ee.qrental.transaction.core.mapper.TransactionUpdateRequestMapper;
 import ee.qrental.transaction.core.service.TransactionQueryService;
 import ee.qrental.transaction.core.service.TransactionUseCaseService;
 import ee.qrental.transaction.core.service.strategy.*;
-import ee.qrental.transaction.core.validator.TransactionAddBusinessRuleValidator;
-import ee.qrental.transaction.core.validator.TransactionUpdateDeleteBusinessRuleValidator;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
@@ -50,15 +54,17 @@ public class TransactionServiceConfig {
       final TransactionDeletePort deletePort,
       final TransactionAddRequestMapper addRequestMapper,
       final TransactionUpdateRequestMapper updateRequestMapper,
-      final TransactionUpdateDeleteBusinessRuleValidator businessRuleValidator,
-      final TransactionAddBusinessRuleValidator addBusinessRuleValidator) {
+      final AddRequestValidator<TransactionAddRequest> addRequestValidator,
+      final UpdateRequestValidator<TransactionUpdateRequest> updateRequestValidator,
+      final DeleteRequestValidator<TransactionDeleteRequest> deleteRequestValidator) {
     return new TransactionUseCaseService(
         addPort,
         updatePort,
         deletePort,
         addRequestMapper,
         updateRequestMapper,
-        businessRuleValidator,
-        addBusinessRuleValidator);
+        addRequestValidator,
+        updateRequestValidator,
+        deleteRequestValidator);
   }
 }

@@ -7,7 +7,7 @@ import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrental.insurance.api.out.InsuranceCaseUpdatePort;
-import ee.qrental.insurance.core.validator.InsuranceCaseCloseBusinessRuleValidator;
+import ee.qrental.insurance.core.validator.InsuranceCaseCloseRequestValidator;
 import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
@@ -32,7 +32,7 @@ class InsuranceCaseCloseUseCaseServiceTest {
 
   private InsuranceCaseUpdatePort updatePort;
   private InsuranceCaseLoadPort loadPort;
-  private InsuranceCaseCloseBusinessRuleValidator closeRuleValidator;
+  private InsuranceCaseCloseRequestValidator closeRuleValidator;
   private GetQKaskoQuery getQKaskoQuery;
   private GetQWeekQuery qWeekQuery;
   private GetDriverQuery driverQuery;
@@ -45,7 +45,7 @@ class InsuranceCaseCloseUseCaseServiceTest {
   void setUp() {
     updatePort = mock(InsuranceCaseUpdatePort.class);
     loadPort = mock(InsuranceCaseLoadPort.class);
-    closeRuleValidator = mock(InsuranceCaseCloseBusinessRuleValidator.class);
+    closeRuleValidator = mock(InsuranceCaseCloseRequestValidator.class);
     getQKaskoQuery = mock(GetQKaskoQuery.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     driverQuery = mock(GetDriverQuery.class);

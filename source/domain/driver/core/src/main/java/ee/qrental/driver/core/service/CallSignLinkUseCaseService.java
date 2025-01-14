@@ -15,7 +15,7 @@ import ee.qrental.driver.api.out.CallSignLinkLoadPort;
 import ee.qrental.driver.api.out.CallSignLinkUpdatePort;
 import ee.qrental.driver.core.mapper.CallSignLinkAddRequestMapper;
 import ee.qrental.driver.core.mapper.CallSignLinkUpdateRequestMapper;
-import ee.qrental.driver.core.validator.CallSignLinkBusinessRuleValidator;
+import ee.qrental.driver.core.validator.CallSignLinkRequestValidator;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.CallSignLink;
 import lombok.AllArgsConstructor;
@@ -33,25 +33,24 @@ public class CallSignLinkUseCaseService
   private final CallSignLinkLoadPort loadPort;
   private final CallSignLinkAddRequestMapper addRequestMapper;
   private final CallSignLinkUpdateRequestMapper updateRequestMapper;
-  private final CallSignLinkBusinessRuleValidator businessRuleValidator;
+  private final CallSignLinkRequestValidator requestValidator;
   private final QDateTime qDateTime;
 
   @Override
   public Long add(final CallSignLinkAddRequest request) {
-    final var domain = addRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateAdd(domain);
+    final var violationsCollector = requestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
       return null;
     }
 
-    return addPort.add(addRequestMapper.toDomain(request)).getId();
+    final var domain = addRequestMapper.toDomain(request);
+    return addPort.add(domain).getId();
   }
 
   @Override
   public void update(final CallSignLinkUpdateRequest request) {
-    final var domain = updateRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateUpdate(domain);
+    final var violationsCollector = requestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 
@@ -75,6 +74,9 @@ public class CallSignLinkUseCaseService
 
   @Override
   public void delete(final CallSignLinkDeleteRequest request) {
+
+
+
     deletePort.delete(request.getId());
   }
 

@@ -1,6 +1,7 @@
 package ee.qrental.transaction.spring.config.rent;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.in.query.GetCarQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
@@ -9,6 +10,7 @@ import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
+import ee.qrental.transaction.api.in.request.rent.RentCalculationAddRequest;
 import ee.qrental.transaction.api.out.rent.RentCalculationAddPort;
 import ee.qrental.transaction.api.out.rent.RentCalculationLoadPort;
 import ee.qrental.transaction.api.out.type.TransactionTypeLoadPort;
@@ -18,7 +20,6 @@ import ee.qrental.transaction.core.service.TransactionUseCaseService;
 import ee.qrental.transaction.core.service.rent.RentCalculationQueryService;
 import ee.qrental.transaction.core.service.rent.RentCalculationService;
 import ee.qrental.transaction.core.service.rent.RentTransactionGenerator;
-import ee.qrental.transaction.core.validator.RentCalculationAddBusinessRuleValidator;
 import ee.qrental.user.api.in.query.GetUserAccountQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +45,7 @@ public class RentServiceConfig {
       final TransactionUseCaseService transactionUseCaseService,
       final RentCalculationAddPort rentCalculationAddPort,
       final RentCalculationAddRequestMapper addRequestMapper,
-      final RentCalculationAddBusinessRuleValidator addBusinessRuleValidator,
+      final AddRequestValidator<RentCalculationAddRequest> addRequestValidator,
       final EmailSendUseCase emailSendUseCase,
       final GetUserAccountQuery userAccountQuery,
       final GetQWeekQuery weekQuery,
@@ -57,7 +58,7 @@ public class RentServiceConfig {
         transactionUseCaseService,
         rentCalculationAddPort,
         addRequestMapper,
-        addBusinessRuleValidator,
+        addRequestValidator,
         emailSendUseCase,
         userAccountQuery,
         weekQuery,

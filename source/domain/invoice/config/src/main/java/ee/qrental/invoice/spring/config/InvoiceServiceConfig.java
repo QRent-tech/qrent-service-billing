@@ -1,11 +1,14 @@
 package ee.qrental.invoice.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import ee.qrental.invoice.api.in.query.GetInvoiceQuery;
+import ee.qrental.invoice.api.in.request.InvoiceAddRequest;
+import ee.qrental.invoice.api.in.request.InvoiceCalculationAddRequest;
 import ee.qrental.invoice.api.in.usecase.InvoicePdfUseCase;
 import ee.qrental.invoice.api.in.usecase.InvoiceSendByEmailUseCase;
 import ee.qrental.invoice.api.out.*;
@@ -13,8 +16,6 @@ import ee.qrental.invoice.core.mapper.*;
 import ee.qrental.invoice.core.service.*;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfConverter;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfModelMapper;
-import ee.qrental.invoice.core.validator.InvoiceBusinessRuleValidator;
-import ee.qrental.invoice.core.validator.InvoiceCalculationBusinessRuleValidator;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
@@ -42,7 +43,7 @@ public class InvoiceServiceConfig {
       final InvoiceLoadPort loadPort,
       final InvoiceAddRequestMapper addRequestMapper,
       final InvoiceUpdateRequestMapper updateRequestMapper,
-      final InvoiceBusinessRuleValidator businessRuleValidator) {
+      final AddRequestValidator<InvoiceAddRequest> addRequestValidator) {
     return new InvoiceUseCaseService(
         addPort,
         updatePort,
@@ -50,7 +51,7 @@ public class InvoiceServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        businessRuleValidator);
+        addRequestValidator);
   }
 
   @Bean
@@ -84,7 +85,7 @@ public class InvoiceServiceConfig {
       final EmailSendUseCase emailSendUseCase,
       final InvoiceCalculationLoadPort loadPort,
       final InvoiceCalculationAddRequestMapper addRequestMapper,
-      final InvoiceCalculationBusinessRuleValidator invoiceCalculationBusinessRuleValidator,
+      final AddRequestValidator<InvoiceCalculationAddRequest> addRequestValidator,
       final InvoiceCalculationAddPort invoiceCalculationAddPort,
       final InvoiceToPdfConverter invoiceToPdfConverter,
       final InvoiceToPdfModelMapper invoiceToPdfModelMapper) {
@@ -99,7 +100,7 @@ public class InvoiceServiceConfig {
         emailSendUseCase,
         loadPort,
         addRequestMapper,
-        invoiceCalculationBusinessRuleValidator,
+        addRequestValidator,
         invoiceCalculationAddPort,
         invoiceToPdfConverter,
         invoiceToPdfModelMapper);

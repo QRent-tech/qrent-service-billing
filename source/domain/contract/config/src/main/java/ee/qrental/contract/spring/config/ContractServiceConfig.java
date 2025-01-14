@@ -1,7 +1,13 @@
 package ee.qrental.contract.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.CloseRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.query.GetContractQuery;
+import ee.qrental.contract.api.in.request.ContractAddRequest;
+import ee.qrental.contract.api.in.request.ContractCloseRequest;
+import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrental.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrental.contract.api.in.usecase.ContractSendByEmailUseCase;
@@ -11,8 +17,7 @@ import ee.qrental.contract.core.service.*;
 import ee.qrental.contract.core.service.pdf.ContractToPdfConverter;
 import ee.qrental.contract.core.service.pdf.ContractToPdfModelMapper;
 import ee.qrental.contract.core.service.ContractEndDateCalculator;
-import ee.qrental.contract.core.validator.ContractBusinessRuleValidator;
-import ee.qrental.contract.core.validator.ContractCloseBusinessRuleValidator;
+import ee.qrental.contract.core.validator.ContractCloseRequestValidator;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
@@ -41,16 +46,23 @@ public class ContractServiceConfig {
   }
 
   @Bean
-  ContractUseCaseService getContractUseCaseService(
+  ContractAddUpdateUseCaseService getContractUseCaseService(
       final ContractAddPort addPort,
       final ContractUpdatePort updatePort,
       final ContractLoadPort loadPort,
       final ContractAddRequestMapper addRequestMapper,
-      final ContractBusinessRuleValidator businessRuleValidator,
+      final AddRequestValidator<ContractAddRequest> addRequestValidator,
+      final UpdateRequestValidator<ContractUpdateRequest> updateRequestValidator,
       final QDateTime qDateTime) {
 
-    return new ContractUseCaseService(
-        addPort, updatePort, loadPort, addRequestMapper, businessRuleValidator, qDateTime);
+    return new ContractAddUpdateUseCaseService(
+        addPort,
+        updatePort,
+        loadPort,
+        addRequestMapper,
+        addRequestValidator,
+        updateRequestValidator,
+        qDateTime);
   }
 
   @Bean
@@ -60,7 +72,7 @@ public class ContractServiceConfig {
       final GetDriverQuery driverQuery,
       final GetInsuranceCaseQuery insuranceCaseQuery,
       final InsuranceCaseCloseUseCase insuranceCaseCloseUseCase,
-      final ContractCloseBusinessRuleValidator closeRuleValidator,
+      final CloseRequestValidator<ContractCloseRequest> closeRuleValidator,
       final QDateTime qDateTime) {
 
     return new ContractCloseUseCaseService(

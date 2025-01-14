@@ -1,8 +1,15 @@
 package ee.qrental.contract.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.CloseRequestValidator;
+import ee.qrent.common.in.validation.UpdateRequestValidator;
+import ee.qrental.contract.api.in.request.ContractAddRequest;
+import ee.qrental.contract.api.in.request.ContractCloseRequest;
+import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.out.ContractLoadPort;
-import ee.qrental.contract.core.validator.ContractBusinessRuleValidator;
-import ee.qrental.contract.core.validator.ContractCloseBusinessRuleValidator;
+import ee.qrental.contract.core.validator.ContractAddRequestValidator;
+import ee.qrental.contract.core.validator.ContractCloseRequestValidator;
+import ee.qrental.contract.core.validator.ContractUpdateRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,14 +17,20 @@ import org.springframework.context.annotation.Configuration;
 public class ContractValidatorConfig {
 
   @Bean
-  ContractBusinessRuleValidator getContractBusinessRuleValidator(
+  AddRequestValidator<ContractAddRequest> getContractAddRequestValidator(
       final ContractLoadPort contractLoadPort) {
-    return new ContractBusinessRuleValidator(contractLoadPort);
+    return new ContractAddRequestValidator(contractLoadPort);
   }
 
   @Bean
-  ContractCloseBusinessRuleValidator getContractCloseBusinessRuleValidator(
+  UpdateRequestValidator<ContractUpdateRequest> getContractUpdateRequestValidator(
       final ContractLoadPort contractLoadPort) {
-    return new ContractCloseBusinessRuleValidator(contractLoadPort);
+    return new ContractUpdateRequestValidator(contractLoadPort);
+  }
+
+  @Bean
+  CloseRequestValidator<ContractCloseRequest> getContractCloseRequestValidator(
+      final ContractLoadPort contractLoadPort) {
+    return new ContractCloseRequestValidator(contractLoadPort);
   }
 }

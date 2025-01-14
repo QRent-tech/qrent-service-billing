@@ -1,15 +1,17 @@
 package ee.qrental.firm.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrental.constant.api.in.request.QWeekAddRequest;
 import ee.qrental.constant.api.out.QWeekLoadPort;
-import ee.qrental.constant.core.validator.QWeekAddBusinessRuleValidator;
+import ee.qrental.constant.core.validator.QWeekAddRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class QWeekValidatorConfig {
   @Bean
-  public QWeekAddBusinessRuleValidator getQQWeekAddBusinessRuleValidator(
+  public AddRequestValidator<QWeekAddRequest> getQWeekAddRequestValidator(
       final QWeekLoadPort loadPort) {
-    return new QWeekAddBusinessRuleValidator(loadPort);
+    return new QWeekAddRequestValidator(loadPort);
   }
 }

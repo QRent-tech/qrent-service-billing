@@ -1,7 +1,7 @@
 package ee.qrental.user.spring.config;
 
 import ee.qrental.user.api.out.UserAccountLoadPort;
-import ee.qrental.user.core.validator.UserAccountBusinessRuleValidator;
+import ee.qrental.user.core.validator.UserAccountRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class UserAccountValidatorConfig {
 
   @Bean
-  UserAccountBusinessRuleValidator getUserAccountBusinessRuleValidator(final UserAccountLoadPort loadPort) {
-    return new UserAccountBusinessRuleValidator(loadPort);
+  UserAccountRequestValidator getUserAccountRequestValidator(final UserAccountLoadPort loadPort) {
+    return new UserAccountRequestValidator(loadPort);
   }
 }

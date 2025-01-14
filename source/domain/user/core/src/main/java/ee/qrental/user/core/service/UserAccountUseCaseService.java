@@ -19,7 +19,7 @@ import ee.qrental.user.api.out.UserAccountLoadPort;
 import ee.qrental.user.api.out.UserAccountUpdatePort;
 import ee.qrental.user.core.mapper.UserAccountAddRequestMapper;
 import ee.qrental.user.core.mapper.UserAccountUpdateRequestMapper;
-import ee.qrental.user.core.validator.UserAccountBusinessRuleValidator;
+import ee.qrental.user.core.validator.UserAccountRequestValidator;
 import jakarta.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Random;
@@ -35,19 +35,19 @@ public class UserAccountUseCaseService
   private final UserAccountLoadPort loadPort;
   private final UserAccountAddRequestMapper addRequestMapper;
   private final UserAccountUpdateRequestMapper updateRequestMapper;
-  private final UserAccountBusinessRuleValidator businessRuleValidator;
+  private final UserAccountRequestValidator requestValidator;
   private final EmailSendUseCase emailSendUseCase;
   private final PasswordUseCase passwordUseCase;
 
   @Transactional
   @Override
   public Long add(final UserAccountAddRequest request) {
-    final var domain = addRequestMapper.toDomain(request);
-    final var violationsCollector = businessRuleValidator.validateAdd(domain);
+    final var violationsCollector = requestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
       return null;
     }
+    final var domain = addRequestMapper.toDomain(request);
     final var password = generatePassword();
     final var encodedPassword = passwordUseCase.encode(password);
     domain.setPassword(encodedPassword);
@@ -75,12 +75,21 @@ public class UserAccountUseCaseService
 
   @Override
   public void update(final UserAccountUpdateRequest request) {
-    checkExistence(request.getId());
+    final var violationsCollector = requestValidator.validate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+      return;
+    }
     updatePort.update(updateRequestMapper.toDomain(request));
   }
 
   @Override
   public void delete(final UserAccountDeleteRequest request) {
+    final var violationsCollector = requestValidator.validate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+      return;
+    }
     deletePort.delete(request.getId());
   }
 
@@ -94,10 +103,11 @@ public class UserAccountUseCaseService
     int leftLimit = 48; // numeral '0'
     int rightLimit = 122; // letter 'z'
     final var random = new Random();
-      return random.ints(leftLimit, rightLimit + 1)
-            .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-            .limit(8)
-            .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-            .toString();
+    return random
+        .ints(leftLimit, rightLimit + 1)
+        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+        .limit(8)
+        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+        .toString();
   }
 }

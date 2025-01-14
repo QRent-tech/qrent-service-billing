@@ -5,7 +5,7 @@ import ee.qrental.user.api.out.*;
 import ee.qrental.user.core.mapper.*;
 import ee.qrental.user.core.service.RoleQueryService;
 import ee.qrental.user.core.service.RoleUseCaseService;
-import ee.qrental.user.core.validator.RoleBusinessRuleValidator;
+import ee.qrental.user.core.validator.RoleRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,7 +28,7 @@ public class RoleServiceConfig {
       final RoleLoadPort loadPort,
       final RoleAddRequestMapper addRequestMapper,
       final RoleUpdateRequestMapper updateRequestMapper,
-      final RoleBusinessRuleValidator businessRuleValidator) {
+      final RoleRequestValidator requestValidator) {
 
     return new RoleUseCaseService(
      addPort,
@@ -37,6 +37,6 @@ public class RoleServiceConfig {
      loadPort,
      addRequestMapper,
      updateRequestMapper,
-     businessRuleValidator);
+            requestValidator);
   }
 }

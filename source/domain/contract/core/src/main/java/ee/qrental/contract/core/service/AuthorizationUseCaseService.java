@@ -7,7 +7,7 @@ import ee.qrental.contract.api.in.usecase.*;
 import ee.qrental.contract.api.out.*;
 import ee.qrental.contract.core.mapper.AuthorizationAddRequestMapper;
 import ee.qrental.contract.core.mapper.AuthorizationUpdateRequestMapper;
-import ee.qrental.contract.core.validator.AuthorizationAddBusinessRuleValidator;
+import ee.qrental.contract.core.validator.AuthorizationAddRequestValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
@@ -24,11 +24,11 @@ public class AuthorizationUseCaseService
   private final AuthorizationLoadPort loadPort;
   private final AuthorizationAddRequestMapper addRequestMapper;
   private final AuthorizationUpdateRequestMapper updateRequestMapper;
-  private final AuthorizationAddBusinessRuleValidator addBusinessRuleValidator;
+  private final AuthorizationAddRequestValidator addRequestValidator;
 
   @Override
   public Long add(final AuthorizationAddRequest request) {
-    final var violationsCollector = addBusinessRuleValidator.validate(request);
+    final var violationsCollector = addRequestValidator.validate(request);
     if (violationsCollector.hasViolations()) {
       request.setViolations(violationsCollector.getViolations());
 

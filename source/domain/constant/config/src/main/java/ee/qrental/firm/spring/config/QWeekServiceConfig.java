@@ -1,7 +1,9 @@
 package ee.qrental.firm.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrental.constant.api.in.request.QWeekAddRequest;
 import ee.qrental.constant.api.out.QWeekAddPort;
 import ee.qrental.constant.api.out.QWeekDeletePort;
 import ee.qrental.constant.api.out.QWeekLoadPort;
@@ -9,7 +11,6 @@ import ee.qrental.constant.api.out.QWeekUpdatePort;
 import ee.qrental.constant.core.mapper.*;
 import ee.qrental.constant.core.service.QWeekQueryService;
 import ee.qrental.constant.core.service.QWeekUseCaseService;
-import ee.qrental.constant.core.validator.QWeekAddBusinessRuleValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,7 +24,8 @@ public class QWeekServiceConfig {
       final QWeekUpdateRequestMapper updateRequestMapper,
       final QDateTime qDateTime,
       final QWeekUseCaseService qWeekUseCaseService) {
-    return new QWeekQueryService(loadPort, mapper, updateRequestMapper, qDateTime, qWeekUseCaseService);
+    return new QWeekQueryService(
+        loadPort, mapper, updateRequestMapper, qDateTime, qWeekUseCaseService);
   }
 
   @Bean
@@ -34,7 +36,7 @@ public class QWeekServiceConfig {
       final QWeekLoadPort loadPort,
       final QWeekAddRequestMapper addRequestMapper,
       final QWeekUpdateRequestMapper updateRequestMapper,
-      final QWeekAddBusinessRuleValidator addBusinessRuleValidator) {
+      final AddRequestValidator<QWeekAddRequest> addRequestValidator) {
     return new QWeekUseCaseService(
         addPort,
         updatePort,
@@ -42,6 +44,6 @@ public class QWeekServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        addBusinessRuleValidator);
+        addRequestValidator);
   }
 }

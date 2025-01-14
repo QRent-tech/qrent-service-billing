@@ -12,7 +12,7 @@ import ee.qrental.user.core.mapper.UserAccountResponseMapper;
 import ee.qrental.user.core.mapper.UserAccountUpdateRequestMapper;
 import ee.qrental.user.core.service.UserAccountQueryService;
 import ee.qrental.user.core.service.UserAccountUseCaseService;
-import ee.qrental.user.core.validator.UserAccountBusinessRuleValidator;
+import ee.qrental.user.core.validator.UserAccountRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,7 +35,7 @@ public class UserAccountServiceConfig {
       final UserAccountLoadPort loadPort,
       final UserAccountAddRequestMapper addRequestMapper,
       final UserAccountUpdateRequestMapper updateRequestMapper,
-      final UserAccountBusinessRuleValidator businessRuleValidator,
+      final UserAccountRequestValidator requestValidator,
       final EmailSendUseCase emailSendUseCase, final PasswordUseCase passwordUseCase) {
     return new UserAccountUseCaseService(
         addPort, 
@@ -44,7 +44,7 @@ public class UserAccountServiceConfig {
             loadPort, 
             addRequestMapper, 
             updateRequestMapper,
-            businessRuleValidator,
+            requestValidator,
             emailSendUseCase, passwordUseCase);
   }
 }
