@@ -1,13 +1,20 @@
+import com.gorylenko.GenerateGitPropertiesTask
+
 plugins {
     id("io.spring.dependency-management") version "1.1.0"
     id("java")
     id("java-library")
+    id("com.gorylenko.gradle-git-properties") version "2.3.2"
 }
 group = "ee.qrental"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType<GenerateGitPropertiesTask> {
+    gitProperties.failOnNoGitDirectory = false
 }
 
 subprojects {
@@ -16,7 +23,6 @@ subprojects {
         plugin("java-library")
         plugin("io.spring.dependency-management")
     }
-
 
     dependencyManagement {
         imports {

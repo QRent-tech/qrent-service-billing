@@ -5,8 +5,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/headFragment.html :: qrental-head"></head>
-
 <body class="container">
 <div th:insert="${bodyContent}"></div>
+<footer class="py-3 my-4 fixed-bottom">
+    <div class="row">
+        <div class="col text-center"> <span th:text="|Branch: ${gitBranch}, Commit: ${gitCommitAbbrev}|"
+                                            class="badge rounded-pill text-bg-dark">???</span>
+            <span th:text="|On: ${gitCommitTime} by ${gitCommitUserEmail}|"
+                  class="badge rounded-pill text-bg-secondary">???</span></div>
+    </div>
+</footer>
 </body>
 </html>

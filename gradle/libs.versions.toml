@@ -1,5 +1,5 @@
 [libraries]
-q-lombok = "org.projectlombok:lombok:1.18.26"
+q-lombok = "org.projectlombok:lombok:1.18.30"
 q-jakarta-persistence = "jakarta.persistence:jakarta.persistence-api:3.1.0"
 q-jakarta-transaction = "jakarta.transaction:jakarta.transaction-api:2.0.1"
 q-hibernate-envers = "org.hibernate.orm:hibernate-envers:6.6.2.Final"

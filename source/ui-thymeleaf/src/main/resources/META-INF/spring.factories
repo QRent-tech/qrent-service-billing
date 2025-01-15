@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrental.ui.UIConfig
+ee.qrental.ui.QUIConfig
