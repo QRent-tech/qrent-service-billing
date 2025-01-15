@@ -1,10 +1,14 @@
 package ee.qrental.driver.spring.config;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrental.driver.api.in.request.DriverAddRequest;
+import ee.qrental.driver.api.in.request.DriverDeleteRequest;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.api.out.*;
 import ee.qrental.driver.core.mapper.DriverAddRequestMapper;
@@ -46,7 +50,9 @@ public class DriverServiceConfig {
       final DriverLoadPort loadPort,
       final DriverAddRequestMapper addRequestMapper,
       final DriverUpdateRequestMapper updateRequestMapper,
-      final UpdateRequestValidator<DriverUpdateRequest> updateRequestValidator) {
+      final AddRequestValidator<DriverAddRequest> addRequestValidator,
+      final UpdateRequestValidator<DriverUpdateRequest> updateRequestValidator,
+      final DeleteRequestValidator<DriverDeleteRequest> deleteRequestValidator) {
 
     return new DriverUseCaseService(
         contractQuery,
@@ -57,6 +63,8 @@ public class DriverServiceConfig {
         loadPort,
         addRequestMapper,
         updateRequestMapper,
-        updateRequestValidator);
+        addRequestValidator,
+        updateRequestValidator,
+            deleteRequestValidator);
   }
 }

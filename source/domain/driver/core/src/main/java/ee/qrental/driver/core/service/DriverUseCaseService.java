@@ -1,5 +1,7 @@
 package ee.qrental.driver.core.service;
 
+import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
@@ -13,7 +15,6 @@ import ee.qrental.driver.api.in.usecase.DriverUpdateUseCase;
 import ee.qrental.driver.api.out.*;
 import ee.qrental.driver.core.mapper.DriverAddRequestMapper;
 import ee.qrental.driver.core.mapper.DriverUpdateRequestMapper;
-import ee.qrental.driver.core.validator.DriverUpdateRequestValidator;
 import ee.qrental.driver.domain.Driver;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -30,11 +31,19 @@ public class DriverUseCaseService
   private final DriverLoadPort loadPort;
   private final DriverAddRequestMapper addRequestMapper;
   private final DriverUpdateRequestMapper updateRequestMapper;
+  private final AddRequestValidator<DriverAddRequest> addRequestValidator;
   private final UpdateRequestValidator<DriverUpdateRequest> updateRequestValidator;
+  private final DeleteRequestValidator<DriverDeleteRequest> deleteRequestValidator;
 
   @Transactional
   @Override
   public Long add(final DriverAddRequest request) {
+    final var violationsCollector = addRequestValidator.validate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+
+      return null;
+    }
     final var driverId = driverAddPort.add(addRequestMapper.toDomain(request)).getId();
 
     return driverId;
@@ -93,6 +102,12 @@ public class DriverUseCaseService
   @Transactional
   @Override
   public void delete(final DriverDeleteRequest request) {
+    final var violationsCollector = deleteRequestValidator.validate(request);
+    if (violationsCollector.hasViolations()) {
+      request.setViolations(violationsCollector.getViolations());
+
+      return;
+    }
     deletePort.delete(request.getId());
   }
 
