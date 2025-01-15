@@ -1,13 +1,13 @@
 package ee.qrental.firm.core.mapper;
 
 import ee.qrent.common.in.mapper.AddRequestMapper;
-import ee.qrental.firm.api.in.request.WeekObligationAddRequest;
+import ee.qrental.firm.api.in.request.FirmAddRequest;
 import ee.qrental.firm.domain.Firm;
 
-public class FirmAddRequestMapper implements AddRequestMapper<WeekObligationAddRequest, Firm> {
+public class FirmAddRequestMapper implements AddRequestMapper<FirmAddRequest, Firm> {
 
   @Override
-  public Firm toDomain(WeekObligationAddRequest request) {
+  public Firm toDomain(FirmAddRequest request) {
     return Firm.builder()
         .id(null)
         .name(request.getName())

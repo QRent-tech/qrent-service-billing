@@ -10,6 +10,7 @@ import ee.qrental.firm.core.mapper.FirmResponseMapper;
 import ee.qrental.firm.core.mapper.FirmUpdateRequestMapper;
 import ee.qrental.firm.core.service.FirmQueryService;
 import ee.qrental.firm.core.service.FirmUseCaseService;
+import ee.qrental.firm.core.validator.FirmRequestValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,8 +32,15 @@ public class FirmServiceConfig {
       final FirmDeletePort deletePort,
       final FirmLoadPort loadPort,
       final FirmAddRequestMapper addRequestMapper,
-      final FirmUpdateRequestMapper updateRequestMapper) {
+      final FirmUpdateRequestMapper updateRequestMapper,
+      final FirmRequestValidator requestValidator) {
     return new FirmUseCaseService(
-        addPort, updatePort, deletePort, loadPort, addRequestMapper, updateRequestMapper);
+        addPort,
+        updatePort,
+        deletePort,
+        loadPort,
+        addRequestMapper,
+        updateRequestMapper,
+        requestValidator);
   }
 }

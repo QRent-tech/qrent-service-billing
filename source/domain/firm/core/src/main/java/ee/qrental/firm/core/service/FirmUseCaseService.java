@@ -1,9 +1,9 @@
 package ee.qrental.firm.core.service;
 
-import ee.qrental.firm.api.in.request.WeekObligationAddRequest;
+import ee.qrental.firm.api.in.request.FirmAddRequest;
 import ee.qrental.firm.api.in.request.FirmDeleteRequest;
 import ee.qrental.firm.api.in.request.FirmUpdateRequest;
-import ee.qrental.firm.api.in.usecase.WeekObligationAddUseCase;
+import ee.qrental.firm.api.in.usecase.FirmAddUseCase;
 import ee.qrental.firm.api.in.usecase.FirmDeleteUseCase;
 import ee.qrental.firm.api.in.usecase.FirmUpdateUseCase;
 import ee.qrental.firm.api.out.FirmAddPort;
@@ -12,11 +12,11 @@ import ee.qrental.firm.api.out.FirmLoadPort;
 import ee.qrental.firm.api.out.FirmUpdatePort;
 import ee.qrental.firm.core.mapper.FirmAddRequestMapper;
 import ee.qrental.firm.core.mapper.FirmUpdateRequestMapper;
+import ee.qrental.firm.core.validator.FirmRequestValidator;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class FirmUseCaseService
-    implements WeekObligationAddUseCase, FirmUpdateUseCase, FirmDeleteUseCase {
+public class FirmUseCaseService implements FirmAddUseCase, FirmUpdateUseCase, FirmDeleteUseCase {
 
   private final FirmAddPort addPort;
   private final FirmUpdatePort updatePort;
@@ -24,9 +24,10 @@ public class FirmUseCaseService
   private final FirmLoadPort loadPort;
   private final FirmAddRequestMapper addRequestMapper;
   private final FirmUpdateRequestMapper updateRequestMapper;
+  private final FirmRequestValidator requestValidator;
 
   @Override
-  public Long add(final WeekObligationAddRequest request) {
+  public Long add(final FirmAddRequest request) {
     return addPort.add(addRequestMapper.toDomain(request)).getId();
   }
 

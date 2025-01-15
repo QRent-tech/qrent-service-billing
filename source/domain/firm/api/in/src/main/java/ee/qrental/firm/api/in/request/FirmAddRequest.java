@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WeekObligationAddRequest extends AbstractAddRequest {
+public class FirmAddRequest extends AbstractAddRequest {
   private String name;
   private String ceoFirstName;
   private String ceoLastName;
