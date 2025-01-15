@@ -19,10 +19,6 @@ public class QTimeUtils {
 
   public static final DateTimeFormatter Q_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-  public static final LocalDate INVOICE_START_CALCULATION_DATE = LocalDate.of(2023, MARCH, 05);
-  public static final LocalDate BALANCE_START_CALCULATION_DATE = LocalDate.of(2023, JANUARY, 02);
-  public static final LocalDate RENT_START_CALCULATION_DATE = LocalDate.of(2023, JANUARY, 01);
-
   public static int getWeekNumber(final LocalDate date) {
     return date.get(WeekFields.of(Locale.UK).weekOfWeekBasedYear());
   }
