@@ -17,6 +17,10 @@ public class DriverAdapterMapper {
   private final FriendshipAdapterMapper friendshipAdapterMapper;
 
   public Driver mapToDomain(final DriverJakartaEntity entity) {
+    if (entity == null) {
+      return null;
+    }
+
     final var callSign = getActiveCallSign(entity.getId());
     final var friendship = getFriendship(entity.getId());
 
