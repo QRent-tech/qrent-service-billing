@@ -6,10 +6,8 @@ import org.threeten.extra.YearWeek;
 
 public class QWeekIterator {
 
-  @Getter
-  private final LocalDate endPeriod;
-  @Getter
-  private LocalDate startPeriod;
+  @Getter private final LocalDate endPeriod;
+  @Getter private LocalDate startPeriod;
 
   public QWeekIterator(LocalDate startPeriod, LocalDate endPeriod) {
     this.startPeriod = startPeriod;
@@ -24,13 +22,13 @@ public class QWeekIterator {
     LocalDate currentWeekStart;
     LocalDate currentWeekEnd;
 
-    final var yearWeekStartPeriod =  YearWeek.from( startPeriod );
+    final var yearWeekStartPeriod = YearWeek.from(startPeriod);
     final var year = yearWeekStartPeriod.getYear();
     final var currentWeekNumber = yearWeekStartPeriod.getWeek();
     currentWeekStart = startPeriod;
     currentWeekEnd = calculateWeekEndDate(year, currentWeekNumber);
 
-    final var week = new Week(currentWeekStart, currentWeekEnd, currentWeekNumber);
+    final var week = new Week(year, currentWeekNumber, currentWeekStart, currentWeekEnd);
 
     moveStartPeriodToTheNextWeek(year, currentWeekNumber);
 

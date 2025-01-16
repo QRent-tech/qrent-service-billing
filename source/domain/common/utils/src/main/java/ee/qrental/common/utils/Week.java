@@ -2,16 +2,9 @@ package ee.qrental.common.utils;
 
 import java.time.LocalDate;
 
-public record Week(LocalDate start, LocalDate end, int weekNumber) {
-  public int getYear() {
-    return start.getYear();
-  }
+public record Week(int year, int weekNumber, LocalDate start, LocalDate end) {
   @Override
   public String toString() {
-    return "Week{" +
-            "start=" + start +
-            ", end=" + end +
-            ", weekNumber=" + weekNumber +
-            '}';
+    return "Week{" + "start=" + start + ", end=" + end + ", weekNumber=" + weekNumber + '}';
   }
 }

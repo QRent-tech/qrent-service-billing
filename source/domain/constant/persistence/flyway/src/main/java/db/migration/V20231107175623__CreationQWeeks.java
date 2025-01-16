@@ -37,7 +37,7 @@ public class V20231107175623__CreationQWeeks extends BaseJavaMigration {
   }
 
   private String getInsertSql(final Week week) {
-    final var year = week.getYear();
+    final var year = week.year();
     final var weekNumber = week.weekNumber();
     final var start = QTimeUtils.getFirstDayOfWeekInYear(year, weekNumber);
     final var startDescription = ofPattern(WEEK_PATTERN).format(start);
