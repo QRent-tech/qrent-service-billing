@@ -2,10 +2,10 @@ package ee.qrental.constant.core.validator;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.common.utils.QTimeUtils;
 import ee.qrental.constant.api.in.request.QWeekAddRequest;
 import ee.qrental.constant.api.out.QWeekLoadPort;
 import lombok.AllArgsConstructor;
+import org.threeten.extra.YearWeek;
 
 import static java.lang.String.format;
 
@@ -23,8 +23,9 @@ public class QWeekAddRequestValidator implements AddRequestValidator<QWeekAddReq
   private void checkIfWeekForDateAlreadyCreated(
       final QWeekAddRequest addRequest, final ViolationsCollector violationCollector) {
     final var weekDate = addRequest.getWeekDate();
-    final var year = weekDate.getYear();
-    final var weekNumber = QTimeUtils.getWeekNumber(weekDate);
+    final var yearWeek = YearWeek.from(weekDate);
+    final var year = yearWeek.getYear();
+    final var weekNumber = yearWeek.getWeek();
 
     final var weekFromDb = loadPort.loadByYearAndNumber(year, weekNumber);
 
