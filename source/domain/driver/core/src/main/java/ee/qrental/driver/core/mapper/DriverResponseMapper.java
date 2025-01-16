@@ -21,7 +21,7 @@ public class DriverResponseMapper implements ResponseMapper<DriverResponse, Driv
   @Override
   public DriverResponse toResponse(final Driver domain) {
     final var qFirmId = domain.getQFirmId();
-    final var qFirmName = firmQuery.getById(qFirmId).getName();
+    final var qFirmName = qFirmId == null ? null : firmQuery.getById(qFirmId).getName();
     final var callSign = getCallSign(domain.getCallSign());
 
     return DriverResponse.builder()

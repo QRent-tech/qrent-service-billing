@@ -1,7 +1,6 @@
 package ee.qrental.driver.adapter.mapper;
 
 import ee.qrental.driver.adapter.repository.CallSignLinkRepository;
-import ee.qrental.driver.adapter.repository.DriverRepository;
 import ee.qrental.driver.adapter.repository.FriendshipRepository;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.Driver;
@@ -28,7 +27,7 @@ public class DriverAdapterMapper {
         .friendship(friendship)
         .firstName(entity.getFirstName())
         .lastName(entity.getLastName())
-        .taxNumber(entity.getIsikukood())
+        .taxNumber(entity.getTaxNumber())
         .phone(entity.getPhone())
         .email(entity.getEmail())
         .companyName(entity.getCompanyName())
@@ -65,7 +64,7 @@ public class DriverAdapterMapper {
         .active(domain.getActive())
         .firstName(domain.getFirstName())
         .lastName(domain.getLastName())
-        .isikukood(domain.getTaxNumber())
+        .taxNumber(domain.getTaxNumber())
         .phone(domain.getPhone())
         .email(domain.getEmail())
         .companyName(domain.getCompanyName())

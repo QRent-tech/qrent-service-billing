@@ -13,6 +13,9 @@ public class FirmHandler {
   private final FirmLinkRepository firmLinkRepository;
 
   public void addHandle(final Driver domain, final DriverJakartaEntity driverSaved) {
+    if (domain.getQFirmId() == null) {
+      return;
+    }
     final var firLinkToSave = getFirmLinkToSave(driverSaved, domain);
     firmLinkRepository.save(firLinkToSave);
   }
@@ -31,10 +34,11 @@ public class FirmHandler {
   public void updateHandle(final Driver domain, final DriverJakartaEntity driverSaved) {
     final var driverId = domain.getId();
     final var activeFirmLink =
-            firmLinkRepository.findOneByDriverIdAndRequiredDate(driverId, LocalDate.now());
+        firmLinkRepository.findOneByDriverIdAndRequiredDate(driverId, LocalDate.now());
     final var firmIdFromDomain = domain.getQFirmId();
     if (firmIdFromDomain == null && activeFirmLink == null) {
-      System.out.printf("Firm for Driver with id=%d was not assigned, no changes required", driverId);
+      System.out.printf(
+          "Firm for Driver with id=%d was not assigned, no changes required", driverId);
       return;
     }
     if (firmIdFromDomain == null) {
@@ -50,7 +54,7 @@ public class FirmHandler {
       return;
     }
 
-    if (!firmIdFromDomain.equals(activeFirmLink.getFirmId()) ) {
+    if (!firmIdFromDomain.equals(activeFirmLink.getFirmId())) {
       System.out.printf("Firm for Driver with id=%d must be unassigned", driverId);
       disableActiveFirmLink(activeFirmLink);
       final var callSignLinkToSave = getFirmLinkToSave(driverSaved, domain);

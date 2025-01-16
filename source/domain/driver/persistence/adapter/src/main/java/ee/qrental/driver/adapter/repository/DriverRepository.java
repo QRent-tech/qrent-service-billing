@@ -12,6 +12,8 @@ public interface DriverRepository {
 
   DriverJakartaEntity findById(final Long id);
 
+  DriverJakartaEntity findByTaxNumber(final Long taxNumber);
+
   void deleteById(final Long id);
 
   List<DriverJakartaEntity> findAllByMatchCountAndQWeekId(
