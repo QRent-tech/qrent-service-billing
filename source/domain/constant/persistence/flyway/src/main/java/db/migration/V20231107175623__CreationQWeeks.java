@@ -1,6 +1,6 @@
 package db.migration;
 
-
+import ee.qrental.common.utils.QTimeUtils;
 import ee.qrental.common.utils.QWeekIterator;
 import ee.qrental.common.utils.Week;
 import org.flywaydb.core.api.migration.BaseJavaMigration;
@@ -9,13 +9,10 @@ import org.flywaydb.core.api.migration.Context;
 import java.time.LocalDate;
 import java.time.Month;
 
-
-import static ee.qrental.common.utils.QTimeUtils.getFirstDayOfWeekInYear;
-import static ee.qrental.common.utils.QTimeUtils.getLastDayOfWeekInYear;
 import static java.lang.String.format;
 import static java.time.format.DateTimeFormatter.ofPattern;
 
-public class V20251107175623__CreationQWeeks extends BaseJavaMigration {
+public class V20231107175623__CreationQWeeks extends BaseJavaMigration {
 
   private static final String WEEK_PATTERN = "dd-MMM";
 
@@ -42,9 +39,9 @@ public class V20251107175623__CreationQWeeks extends BaseJavaMigration {
   private String getInsertSql(final Week week) {
     final var year = week.getYear();
     final var weekNumber = week.weekNumber();
-    final var start = getFirstDayOfWeekInYear(year, weekNumber);
+    final var start = QTimeUtils.getFirstDayOfWeekInYear(year, weekNumber);
     final var startDescription = ofPattern(WEEK_PATTERN).format(start);
-    final var end = getLastDayOfWeekInYear(year, weekNumber);
+    final var end = QTimeUtils.getLastDayOfWeekInYear(year, weekNumber);
     final var endDescription = ofPattern(WEEK_PATTERN).format(end);
     final var description = format("%s ... %s", startDescription, endDescription);
 
