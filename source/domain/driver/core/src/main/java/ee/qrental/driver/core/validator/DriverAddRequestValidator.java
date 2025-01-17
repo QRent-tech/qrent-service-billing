@@ -10,7 +10,7 @@ import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @AllArgsConstructor
 public class DriverAddRequestValidator implements AddRequestValidator<DriverAddRequest> {
@@ -19,276 +19,253 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
   private final GetQWeekQuery qWeekQuery;
   private final QDateTime qDateTime;
 
-  private static final int MIN_OBLIGATION = 1;
-  private static final int MAX_OBLIGATION = 1000;
-  private static final int MAX_FIRST_NAME_LENGTH = 50;
-  private static final int MAX_LAST_NAME_LENGTH = 50;
-  private static final int LENGTH_OF_ISIKUKOOD = 11;
-  private static final int MAX_ADDRESS_LENGTH = 100;
-  private static final int MAX_LICENSE_NUMBER_LENGTH = 20;
-  private static final int MAX_TAXI_LICENSE_LENGTH = 15;
-  private static final int MIN_PHONE_NUMBER_LENGTH = 5;
-  private static final int MAX_PHONE_NUMBER_LENGTH = 50;
-  private static final int MAX_COMPANY_NAME_LENGTH = 50;
-  private static final int MAX_REG_NUMBER_LENGTH = 15;
-  private static final int MAX_VAT_LENGTH = 50;
-  private static final int MAX_CEO_FIRST_NAME_LENGTH = 50;
-  private static final int MAX_CEO_LAST_NAME_LENGTH = 50;
-  private static final int LENGTH_OF_CEO_ISIKUKOOD = 11;
-  private static final int MAX_ADDRESS_COMPANY_LENGTH = 50;
-  private static final int MAX_COMMENT_LENGTH = 200;
-
-  //  private boolean containsLetters(String input) {
-  //    String letterRegex = ".*[A-Za-z].*";
-  //
-  //    return !input.matches(letterRegex);
-  //  }
-  //
-  //  private boolean containsDigits(String input) {
-  //    String digitRegex = ".*[0-9].*";
-  //
-  //    return !input.matches(digitRegex);
-  //  }
-
-  private boolean isValidEmail(String input) {
-    String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-
-    return input.matches(emailRegex);
-  }
+  private static final BigDecimal MIN_VALUE_OBLIGATION = BigDecimal.valueOf(1);
+  private static final BigDecimal MAX_VALUE_OBLIGATION = BigDecimal.valueOf(1000);
+  private static final int MAX_LENGTH_FIRST_NAME = 50;
+  private static final int MAX_LENGTH_LAST_NAME = 50;
+  private static final int FIXED_LENGTH_TAX_NUMBER = 11;
+  private static final int MAX_LENGTH_ADDRESS = 100;
+  private static final int MAX_LENGTH_LICENSE_NUMBER = 20;
+  private static final int MAX_LENGTH_TAXI_LICENSE = 15;
+  private static final int MIN_LENGTH_PHONE_NUMBER = 5;
+  private static final int MAX_LENGTH_PHONE_NUMBER = 50;
+  private static final int MAX_LENGTH_COMPANY_NAME = 50;
+  private static final int MAX_LENGTH_REG_NUMBER = 15;
+  private static final int MAX_LENGTH_VAT = 50;
+  private static final int MAX_LENGTH_CEO_FIRST_NAME = 50;
+  private static final int MAX_LENGTH_CEO_LAST_NAME = 50;
+  private static final int FIXED_LENGTH_CEO_TAX_NUMBER = 11;
+  private static final int MAX_LENGTH_COMPANY_ADDRESS = 50;
+  private static final int MAX_LENGTH_COMMENT = 200;
 
   @Override
   public ViolationsCollector validate(final DriverAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
-    checkObligationValidNumberForAdd(request, violationsCollector);
-    checkFirstNameValidForAdd(request, violationsCollector);
-    checkLastNameValidForAdd(request, violationsCollector);
-    checkIsikukoodValidForAdd(request, violationsCollector);
-    checkAddressLengthForAdd(request, violationsCollector);
-    checkLicenseNumberValidForAdd(request, violationsCollector);
-    checkLicenseExpirationDateValidForAdd(request, violationsCollector);
-    checkTaxiLicenseValidForAdd(request, violationsCollector);
-    checkPhoneNumberValidForAdd(request, violationsCollector);
-    checkEmailValidForAdd(request, violationsCollector);
-    checkCompanyNameValidForAdd(request, violationsCollector);
-    checkRegistrationNumberValidForAdd(request, violationsCollector);
-    checkVatValidForAdd(request, violationsCollector);
-    checkCeoFirstNameValidForAdd(request, violationsCollector);
-    checkCeoLastNameValidForAdd(request, violationsCollector);
-    checkCeoIsikukoodValidForAdd(request, violationsCollector);
-    checkAddressCompanyValidForAdd(request, violationsCollector);
-    checkCommentValidForAdd(request, violationsCollector);
+    checkObligationValidNumber(request, violationsCollector);
+    checkFirstNameValid(request, violationsCollector);
+    checkLastNameValid(request, violationsCollector);
+    checkIsikukoodValid(request, violationsCollector);
+    checkAddressLength(request, violationsCollector);
+    checkLicenseNumberValid(request, violationsCollector);
+    checkLicenseExpirationDateValid(request, violationsCollector);
+    checkTaxiLicenseValid(request, violationsCollector);
+    checkPhoneNumberValid(request, violationsCollector);
+    checkEmailValid(request, violationsCollector);
+    checkCompanyNameValid(request, violationsCollector);
+    checkRegistrationNumberValid(request, violationsCollector);
+    checkCompanyVatValid(request, violationsCollector);
+    checkCeoFirstNameValid(request, violationsCollector);
+    checkCeoLastNameValid(request, violationsCollector);
+    checkCeoIsikukoodValid(request, violationsCollector);
+    checkCompanyAddressValid(request, violationsCollector);
+    checkCommentValid(request, violationsCollector);
 
     return violationsCollector;
   }
 
-  private void checkObligationValidNumberForAdd(
+  private void checkObligationValidNumber(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     if (!request.getHasRequiredObligation()) {
       return;
     }
-
     final var obligation = request.getRequiredObligation();
-
-    if (obligation.intValue() >= MIN_OBLIGATION && obligation.intValue() <= MAX_OBLIGATION) {
+    if (obligation.compareTo(MIN_VALUE_OBLIGATION) >= 0
+        && obligation.compareTo(MAX_VALUE_OBLIGATION) <= 0) {
       return;
     }
-
     violationsCollector.collect(
-        format("Invalid obligation (Min %d and Max %d)", MIN_OBLIGATION, MAX_OBLIGATION));
+        format(
+            "Invalid Obligation (Min %s and Max %s)", MIN_VALUE_OBLIGATION, MAX_VALUE_OBLIGATION));
   }
 
-  private void checkFirstNameValidForAdd(
+  private void checkFirstNameValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var firstName = request.getFirstName();
-
-    //    if (containsLetters(firstName)) {
-    //      violationsCollector.collect("First name must have letters");
-    //      return;
-    //    }
-
-    if (firstName.length() <= MAX_FIRST_NAME_LENGTH) {
+    if (firstName == null) {
       return;
     }
-
+    if (firstName.length() <= MAX_LENGTH_FIRST_NAME) {
+      return;
+    }
     violationsCollector.collect(
-        format("Too long first name (Max %d characters)", MAX_FIRST_NAME_LENGTH));
+        format("Too long First name (Max %d characters)", MAX_LENGTH_FIRST_NAME));
   }
 
-  private void checkLastNameValidForAdd(
+  private void checkLastNameValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var lastName = request.getLastName();
-
-    //    if (containsLetters(lastName)) {
-    //      violationsCollector.collect("Last name must have letters");
-    //      return;
-    //    }
-
-    if (lastName.length() <= MAX_LAST_NAME_LENGTH) {
+    if (lastName == null) {
       return;
     }
-
+    if (lastName.length() <= MAX_LENGTH_LAST_NAME) {
+      return;
+    }
     violationsCollector.collect(
-        format("Too long last name (Max %d characters)", MAX_LAST_NAME_LENGTH));
+        format("Too long Last name (Max %d characters)", MAX_LENGTH_LAST_NAME));
   }
 
-  private void checkIsikukoodValidForAdd(
+  private void checkIsikukoodValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var taxNumber = request.getTaxNumber();
-
-    if (taxNumber.toString().length() != LENGTH_OF_ISIKUKOOD) {
-      violationsCollector.collect(
-          format("Isikukood must be %d characters long", LENGTH_OF_ISIKUKOOD));
+    if (taxNumber == null) {
       return;
     }
-
-    final var fromDb = loadPort.loadByTaxNumber(taxNumber);
-
-    if (fromDb != null) {
-      violationsCollector.collect(format("Isikukood %d already exists", taxNumber));
+    if (taxNumber.toString().length() != FIXED_LENGTH_TAX_NUMBER) {
+      violationsCollector.collect(
+          format("Isikukood must be %d characters long", FIXED_LENGTH_TAX_NUMBER));
+      return;
     }
+    final var fromDb = loadPort.loadByTaxNumber(taxNumber);
+    if (fromDb == null) {
+      return;
+    }
+    violationsCollector.collect(format("Isikukood %d already exists", taxNumber));
   }
 
-  private void checkAddressLengthForAdd(
+  private void checkAddressLength(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
-    final var addressLength = request.getAddress().length();
-
-    if (addressLength <= MAX_ADDRESS_LENGTH) {
+    final var address = request.getAddress();
+    if (address == null) {
       return;
     }
-
-    violationsCollector.collect(format("Too long address (Max %d characters)", MAX_ADDRESS_LENGTH));
+    if (address.length() <= MAX_LENGTH_ADDRESS) {
+      return;
+    }
+    violationsCollector.collect(format("Too long Address (Max %d characters)", MAX_LENGTH_ADDRESS));
   }
 
-  private void checkLicenseNumberValidForAdd(
+  private void checkLicenseNumberValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var licenseNumber = request.getDriverLicenseNumber();
-
-    if (licenseNumber.length() <= MAX_LICENSE_NUMBER_LENGTH) {
+    if (licenseNumber == null) {
       return;
     }
-
+    if (licenseNumber.length() <= MAX_LENGTH_LICENSE_NUMBER) {
+      return;
+    }
     violationsCollector.collect(
-        format("Too long license number (Max %d characters)", MAX_LICENSE_NUMBER_LENGTH));
+        format("Too long License number (Max %d characters)", MAX_LENGTH_LICENSE_NUMBER));
   }
 
-  private void checkLicenseExpirationDateValidForAdd(
+  private void checkLicenseExpirationDateValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var licenseExpirationDate = request.getDriverLicenseExp();
-
-    if (!licenseExpirationDate.isBefore(LocalDate.now())) {
+    if (licenseExpirationDate == null) {
       return;
     }
-
+    if (!licenseExpirationDate.isBefore(qDateTime.getToday())) {
+      return;
+    }
     violationsCollector.collect("License expiration date is in the past");
   }
 
-  private void checkTaxiLicenseValidForAdd(
+  private void checkTaxiLicenseValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
-    final var taxiLicenseLength = request.getTaxiLicense().length();
-
-    if (taxiLicenseLength <= MAX_TAXI_LICENSE_LENGTH) {
+    final var taxiLicense = request.getTaxiLicense();
+    if (taxiLicense == null) {
       return;
     }
-
+    if (taxiLicense.length() <= MAX_LENGTH_TAXI_LICENSE) {
+      return;
+    }
     violationsCollector.collect(
-        format("Too long taxi license (Max %d characters)", MAX_TAXI_LICENSE_LENGTH));
+        format("Too long Taxi license (Max %d characters)", MAX_LENGTH_TAXI_LICENSE));
   }
 
-  private void checkPhoneNumberValidForAdd(
+  private void checkPhoneNumberValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
-    final var phoneNumberLength = request.getPhone().length();
 
-    if (phoneNumberLength >= MIN_PHONE_NUMBER_LENGTH
-        && phoneNumberLength <= MAX_PHONE_NUMBER_LENGTH) {
+    final var phoneNumber = request.getPhone();
+    if (phoneNumber == null) {
       return;
     }
-
+    if (phoneNumber.length() >= MIN_LENGTH_PHONE_NUMBER
+        && phoneNumber.length() <= MAX_LENGTH_PHONE_NUMBER) {
+      return;
+    }
     violationsCollector.collect(
         format(
-            "Invalid phone number (Min %d and Max %d)",
-            MIN_PHONE_NUMBER_LENGTH, MAX_PHONE_NUMBER_LENGTH));
+            "Invalid Phone number (Min %d and Max %d)",
+            MIN_LENGTH_PHONE_NUMBER, MAX_LENGTH_PHONE_NUMBER));
   }
 
-  private void checkEmailValidForAdd(
+  private void checkEmailValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var email = request.getEmail();
-
+    if (email == null) {
+      return;
+    }
     if (isValidEmail(email)) {
       return;
     }
-
     violationsCollector.collect("Invalid email (Example email@gmail.com)");
   }
 
-  private void checkCompanyNameValidForAdd(
+  private void checkCompanyNameValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
-    final var companyNameLength = request.getCompanyName().length();
-
-    if (companyNameLength < MAX_COMPANY_NAME_LENGTH) {
+    final var companyName = request.getCompanyName();
+    if (companyName == null) {
       return;
     }
-
+    if (companyName.length() <= MAX_LENGTH_COMPANY_NAME) {
+      return;
+    }
     violationsCollector.collect(
-        format("Too long company name (Max %d characters)", MAX_COMPANY_NAME_LENGTH));
+        format("Too long Company name (Max %d characters)", MAX_LENGTH_COMPANY_NAME));
   }
 
-  private void checkRegistrationNumberValidForAdd(
+  private void checkRegistrationNumberValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
-    final var regNumberLength = request.getRegNumber().length();
-
-    if (regNumberLength < MAX_REG_NUMBER_LENGTH) {
+    final var regNumber = request.getRegNumber();
+    if (regNumber == null) {
       return;
     }
-
+    if (regNumber.length() <= MAX_LENGTH_REG_NUMBER) {
+      return;
+    }
     violationsCollector.collect(
-        format("Too long registration number (Max %d characters)", MAX_REG_NUMBER_LENGTH));
+        format("Too long Registration number (Max %d characters)", MAX_LENGTH_REG_NUMBER));
   }
 
-  private void checkVatValidForAdd(
+  private void checkCompanyVatValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var vat = request.getCompanyVat();
-
     if (vat == null) {
       return;
     }
-
-    if (vat.length() < MAX_VAT_LENGTH) {
+    if (vat.length() <= MAX_LENGTH_VAT) {
       return;
     }
-
-    violationsCollector.collect(format("Too long VAT (Max %d characters)", MAX_VAT_LENGTH));
+    violationsCollector.collect(format("Too long Company VAT (Max %d characters)", MAX_LENGTH_VAT));
   }
 
-  private void checkCeoFirstNameValidForAdd(
+  private void checkCeoFirstNameValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var ceoFirstName = request.getCompanyCeoFirstName();
-
     if (ceoFirstName == null) {
       return;
     }
-
-    if (ceoFirstName.length() < MAX_CEO_FIRST_NAME_LENGTH) {
+    if (ceoFirstName.length() <= MAX_LENGTH_CEO_FIRST_NAME) {
       return;
     }
-
     violationsCollector.collect(
-        format("Too long CEO First name (Max %d characters)", MAX_CEO_FIRST_NAME_LENGTH));
+        format("Too long CEO First name (Max %d characters)", MAX_LENGTH_CEO_FIRST_NAME));
   }
 
-  private void checkCeoLastNameValidForAdd(
+  private void checkCeoLastNameValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var ceoLastName = request.getCompanyCeoLastName();
@@ -296,62 +273,56 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     if (ceoLastName == null) {
       return;
     }
-
-    if (ceoLastName.length() < MAX_CEO_LAST_NAME_LENGTH) {
+    if (ceoLastName.length() <= MAX_LENGTH_CEO_LAST_NAME) {
       return;
     }
-
     violationsCollector.collect(
-        format("Too long CEO Last name (Max %d characters)", MAX_CEO_LAST_NAME_LENGTH));
+        format("Too long CEO Last name (Max %d characters)", MAX_LENGTH_CEO_LAST_NAME));
   }
 
-  private void checkCeoIsikukoodValidForAdd(
+  private void checkCeoIsikukoodValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
-    final var ceoIsikukood = String.valueOf(request.getCompanyCeoTaxNumber());
-
+    final var ceoIsikukood = request.getCompanyCeoTaxNumber();
     if (ceoIsikukood == null) {
       return;
     }
-
-    if (ceoIsikukood.length() != LENGTH_OF_CEO_ISIKUKOOD) {
+    if (String.valueOf(ceoIsikukood).length() != FIXED_LENGTH_CEO_TAX_NUMBER) {
       return;
     }
-
     violationsCollector.collect(
-        format("CEO Isikukood must be %d characters long", LENGTH_OF_CEO_ISIKUKOOD));
+        format("CEO Isikukood must be %d characters long", FIXED_LENGTH_CEO_TAX_NUMBER));
   }
 
-  private void checkAddressCompanyValidForAdd(
+  private void checkCompanyAddressValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
-    final var addressCompany = request.getCompanyAddress();
-
-    if (addressCompany == null) {
+    final var companyAddress = request.getCompanyAddress();
+    if (companyAddress == null) {
       return;
     }
-
-    if (addressCompany.length() < MAX_ADDRESS_COMPANY_LENGTH) {
+    if (companyAddress.length() <= MAX_LENGTH_COMPANY_ADDRESS) {
       return;
     }
-
     violationsCollector.collect(
-        format("Too long Address company (Max %d characters)", MAX_ADDRESS_COMPANY_LENGTH));
+        format("Too long Company address (Max %d characters)", MAX_LENGTH_COMPANY_ADDRESS));
   }
 
-  private void checkCommentValidForAdd(
+  private void checkCommentValid(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
 
     final var comment = request.getComment();
-
     if (comment == null) {
       return;
     }
-
-    if (comment.length() < MAX_COMMENT_LENGTH) {
+    if (comment.length() <= MAX_LENGTH_COMMENT) {
       return;
     }
+    violationsCollector.collect(format("Too long Comment (Max %d characters)", MAX_LENGTH_COMMENT));
+  }
 
-    violationsCollector.collect(format("Too long comment (Max %d characters)", MAX_COMMENT_LENGTH));
+  private boolean isValidEmail(String input) {
+    final var emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    return input.matches(emailRegex);
   }
 }

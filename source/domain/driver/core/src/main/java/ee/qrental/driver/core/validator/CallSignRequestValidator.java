@@ -57,13 +57,10 @@ public class CallSignRequestValidator
 
   private void checkValidNumberForAdd(
       final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
-
     final var callSign = request.getCallSign();
-
     if (callSign >= MIN_CALL_SIGN_NUMBER && callSign <= MAX_CALL_SIGN_NUMBER) {
       return;
     }
-
     violationsCollector.collect(
         format(
             "Invalid number call sign (Min %d and Max %d)",
@@ -73,11 +70,9 @@ public class CallSignRequestValidator
   private void checkCommentForAdd(
       final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
     final var comment = request.getComment();
-
     if (comment.length() <= MAX_COMMENT_LENGTH) {
       return;
     }
-
     violationsCollector.collect(format("Too long comment (Max %d characters)", MAX_COMMENT_LENGTH));
   }
 
@@ -88,7 +83,6 @@ public class CallSignRequestValidator
     if (domainFromDb == null) {
       return;
     }
-
     violationCollector.collect(format("Call Sign %d already exists", callSign));
   }
 
