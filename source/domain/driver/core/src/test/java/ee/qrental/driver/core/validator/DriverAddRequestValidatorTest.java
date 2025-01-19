@@ -1,6 +1,7 @@
 package ee.qrental.driver.core.validator;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
@@ -21,13 +22,16 @@ public class DriverAddRequestValidatorTest {
   private DriverLoadPort loadPort;
   private GetQWeekQuery qWeekQuery;
   private QDateTime qDateTime;
+  private AttributeChecker attributeChecker;
 
   @BeforeEach
   void init() {
     loadPort = mock(DriverLoadPort.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     qDateTime = mock(QDateTime.class);
-    instanceUnderTest = new DriverAddRequestValidator(loadPort, qWeekQuery, qDateTime);
+    attributeChecker = mock(AttributeChecker.class);
+    instanceUnderTest =
+        new DriverAddRequestValidator(loadPort, qWeekQuery, qDateTime, attributeChecker);
   }
 
   @Test

@@ -2,6 +2,7 @@ package ee.qrental.driver.spring.config;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
+import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
@@ -20,9 +21,12 @@ public class DriverValidatorConfig {
 
   @Bean
   AddRequestValidator<DriverAddRequest> getDriverAddRequestValidator(
-      final DriverLoadPort loadPort, final GetQWeekQuery qWeekQuery, final QDateTime qDateTime) {
+      final DriverLoadPort loadPort,
+      final GetQWeekQuery qWeekQuery,
+      final QDateTime qDateTime,
+      final AttributeChecker attributeChecker) {
 
-    return new DriverAddRequestValidator(loadPort, qWeekQuery, qDateTime);
+    return new DriverAddRequestValidator(loadPort, qWeekQuery, qDateTime, attributeChecker);
   }
 
   @Bean
@@ -34,7 +38,7 @@ public class DriverValidatorConfig {
 
   @Bean
   DeleteRequestValidator<DriverDeleteRequest> getDriverDeleteRequestValidator(
-          final DriverLoadPort loadPort, final GetQWeekQuery qWeekQuery, final QDateTime qDateTime) {
+      final DriverLoadPort loadPort, final GetQWeekQuery qWeekQuery, final QDateTime qDateTime) {
 
     return new DriverDeleteRequestValidator(loadPort, qWeekQuery, qDateTime);
   }
