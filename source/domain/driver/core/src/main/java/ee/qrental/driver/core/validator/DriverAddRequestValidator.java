@@ -21,8 +21,8 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
   private final QDateTime qDateTime;
   private final AttributeChecker attributeChecker;
 
-  private static final BigDecimal VALUE_MIN_OBLIGATION = BigDecimal.valueOf(1);
-  private static final BigDecimal VALUE_MAX_OBLIGATION = BigDecimal.valueOf(1000);
+  private static final BigDecimal DECIMAL_MIN_OBLIGATION = BigDecimal.valueOf(1);
+  private static final BigDecimal DECIMAL_MAX_OBLIGATION = BigDecimal.valueOf(1000);
   private static final int LENGTH_MAX_FIRST_NAME = 50;
   private static final int LENGTH_MAX_LAST_NAME = 50;
   private static final int LENGTH_FIXED_TAX_NUMBER = 11;
@@ -67,17 +67,16 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
 
   private void checkObligationNumber(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
-    if (!request.getHasRequiredObligation()) {
-      return;
+    if (request.getHasRequiredObligation()) {
+      final var attributeName = "Required Obligation";
+      final var attributeValue = request.getRequiredObligation();
+      attributeChecker.checkDecimalValueRange(
+          attributeName,
+          attributeValue,
+          DECIMAL_MIN_OBLIGATION,
+          DECIMAL_MAX_OBLIGATION,
+          violationsCollector);
     }
-    final var obligation = request.getRequiredObligation();
-    if (obligation.compareTo(VALUE_MIN_OBLIGATION) >= 0
-        && obligation.compareTo(VALUE_MAX_OBLIGATION) <= 0) {
-      return;
-    }
-    violationsCollector.collect(
-        format(
-            "Invalid Obligation (Min %s and Max %s)", VALUE_MIN_OBLIGATION, VALUE_MAX_OBLIGATION));
   }
 
   private void checkFirstName(

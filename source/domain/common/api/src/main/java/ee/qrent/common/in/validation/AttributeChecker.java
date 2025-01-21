@@ -19,5 +19,10 @@ public interface AttributeChecker {
       final Object attributeValue,
       final ViolationsCollector violationsCollector);
 
-
+  <V extends Comparable> void checkDecimalValueRange(
+      final String attributeName,
+      final V attributeValue,
+      final V minValue,
+      final V maxValue,
+      final ViolationsCollector violationsCollector);
 }

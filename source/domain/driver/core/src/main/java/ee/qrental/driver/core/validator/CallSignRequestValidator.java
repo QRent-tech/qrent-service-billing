@@ -2,10 +2,7 @@ package ee.qrental.driver.core.validator;
 
 import static java.lang.String.format;
 
-import ee.qrent.common.in.validation.AddRequestValidator;
-import ee.qrent.common.in.validation.DeleteRequestValidator;
-import ee.qrent.common.in.validation.UpdateRequestValidator;
-import ee.qrent.common.in.validation.ViolationsCollector;
+import ee.qrent.common.in.validation.*;
 import ee.qrental.driver.api.in.request.CallSignAddRequest;
 import ee.qrental.driver.api.in.request.CallSignDeleteRequest;
 import ee.qrental.driver.api.in.request.CallSignUpdateRequest;
@@ -13,6 +10,7 @@ import ee.qrental.driver.api.out.CallSignLinkLoadPort;
 import ee.qrental.driver.api.out.CallSignLoadPort;
 
 import java.util.Objects;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -23,10 +21,11 @@ public class CallSignRequestValidator
 
   private final CallSignLoadPort loadPort;
   private final CallSignLinkLoadPort callSignLinkLoadPort;
+  private final AttributeChecker attributeChecker;
 
-  private static final int MAX_COMMENT_LENGTH = 200;
-  private static final int MIN_CALL_SIGN_NUMBER = 1;
-  private static final int MAX_CALL_SIGN_NUMBER = 999;
+  private static final int LENGTH_MAX_COMMENT = 200;
+  private static final Integer DECIMAL_MIN_CALL_SIGN = 1;
+  private static final Integer DECIMAL_MAX_CALL_SIGN = 999;
 
   @Override
   public ViolationsCollector validate(final CallSignAddRequest request) {
@@ -57,23 +56,21 @@ public class CallSignRequestValidator
 
   private void checkValidNumberForAdd(
       final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
-    final var callSign = request.getCallSign();
-    if (callSign >= MIN_CALL_SIGN_NUMBER && callSign <= MAX_CALL_SIGN_NUMBER) {
-      return;
-    }
-    violationsCollector.collect(
-        format(
-            "Invalid number call sign (Min %d and Max %d)",
-            MIN_CALL_SIGN_NUMBER, MAX_CALL_SIGN_NUMBER));
+    final var attributeName = "Call Sign";
+    final var attributeValue = request.getCallSign();
+    attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    attributeChecker.checkDecimalValueRange(
+        attributeName,
+        attributeValue,
+        DECIMAL_MIN_CALL_SIGN,
+        DECIMAL_MAX_CALL_SIGN,
+        violationsCollector);
   }
 
   private void checkCommentForAdd(
       final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
-    final var comment = request.getComment();
-    if (comment.length() <= MAX_COMMENT_LENGTH) {
-      return;
-    }
-    violationsCollector.collect(format("Too long comment (Max %d characters)", MAX_COMMENT_LENGTH));
+    attributeChecker.checkLength(
+        "Comment", request.getComment(), null, LENGTH_MAX_COMMENT, violationsCollector);
   }
 
   private void checkUniquenessForAdd(

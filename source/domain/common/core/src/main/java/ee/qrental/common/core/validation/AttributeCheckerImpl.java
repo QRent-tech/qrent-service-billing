@@ -8,6 +8,49 @@ import java.util.function.Supplier;
 import static java.lang.String.format;
 
 public class AttributeCheckerImpl implements AttributeChecker {
+
+  @Override
+  public <V extends Comparable> void checkDecimalValueRange(
+      final String attributeName,
+      final V attributeValue,
+      final V minValue,
+      final V maxValue,
+      final ViolationsCollector violationsCollector) {
+
+    if (minValue == null && maxValue == null
+        || attributeName == null
+        || violationsCollector == null) {
+      throw invalidCallExceptionSupplier().get();
+    }
+    if (attributeValue == null) {
+      return;
+    }
+    if (minValue == null) {
+      if (attributeValue.compareTo(maxValue) > 0) {
+        violationsCollector.collect(
+            format(
+                "Invalid value for %s. Valid length must be not more then: %d)",
+                attributeName, maxValue));
+      }
+    }
+
+    if (maxValue == null) {
+      if (attributeValue.compareTo(minValue) < 0) {
+        violationsCollector.collect(
+            format(
+                "Invalid value for %s. Valid length must be less then: %d)",
+                attributeName, minValue));
+      }
+    }
+
+    if (attributeValue.compareTo(minValue) < 0 || attributeValue.compareTo(maxValue) > 0) {
+      violationsCollector.collect(
+          format(
+              "Invalid value for %s. Valid value must be in a range: [%d ... %d])",
+              attributeName, minValue, maxValue));
+    }
+  }
+
   @Override
   public void checkLength(
       final String attributeName,
