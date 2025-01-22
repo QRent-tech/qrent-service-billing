@@ -69,8 +69,8 @@ public class CallSignRequestValidator
 
   private void checkCommentForAdd(
       final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
-    attributeChecker.checkLength(
-        "Comment", request.getComment(), null, LENGTH_MAX_COMMENT, violationsCollector);
+    attributeChecker.checkStringLengthMax(
+        "Comment", request.getComment(), LENGTH_MAX_COMMENT, violationsCollector);
   }
 
   private void checkUniquenessForAdd(

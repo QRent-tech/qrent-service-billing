@@ -5,6 +5,9 @@ dependencies {
         annotationProcessor(libs.q.lombok)
 
         testImplementation("org.junit.jupiter:junit-jupiter-engine")
+        testImplementation("org.mockito:mockito-core")
+        testImplementation("org.mockito:mockito-junit-jupiter")
+        testImplementation("org.mockito:mockito-inline:5.2.0")
     }
 }
 

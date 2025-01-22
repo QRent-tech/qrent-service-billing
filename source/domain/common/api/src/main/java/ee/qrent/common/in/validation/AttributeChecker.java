@@ -1,14 +1,22 @@
 package ee.qrent.common.in.validation;
 
+import java.math.BigDecimal;
+
 public interface AttributeChecker {
-  void checkLength(
+  void checkStringLengthRange(
       final String attributeName,
       final String attributeValue,
       final Integer minLength,
       final Integer maxLength,
       final ViolationsCollector violationsCollector);
 
-  void checkFixedLength(
+  void checkStringLengthMax(
+      final String attributeName,
+      final String attributeValue,
+      final Integer maxLength,
+      final ViolationsCollector violationsCollector);
+
+  void checkStringLengthFixed(
       final String attributeName,
       final Object attributeValue,
       final Integer length,
@@ -19,10 +27,10 @@ public interface AttributeChecker {
       final Object attributeValue,
       final ViolationsCollector violationsCollector);
 
-  <V extends Comparable> void checkDecimalValueRange(
+  void checkDecimalValueRange(
       final String attributeName,
-      final V attributeValue,
-      final V minValue,
-      final V maxValue,
+      final BigDecimal attributeValue,
+      final BigDecimal minValue,
+      final BigDecimal maxValue,
       final ViolationsCollector violationsCollector);
 }

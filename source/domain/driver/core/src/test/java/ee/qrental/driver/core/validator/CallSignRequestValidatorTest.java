@@ -1,5 +1,6 @@
 package ee.qrental.driver.core.validator;
 
+import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrental.driver.api.in.request.CallSignAddRequest;
 import ee.qrental.driver.api.in.request.CallSignDeleteRequest;
 import ee.qrental.driver.api.in.request.CallSignUpdateRequest;
@@ -22,12 +23,14 @@ public class CallSignRequestValidatorTest {
   private CallSignRequestValidator instanceUnderTest;
   private CallSignLoadPort loadPort;
   private CallSignLinkLoadPort linkLoadPort;
+  private AttributeChecker attributeChecker;
 
   @BeforeEach
   void init() {
     loadPort = mock(CallSignLoadPort.class);
     linkLoadPort = mock(CallSignLinkLoadPort.class);
-    instanceUnderTest = new CallSignRequestValidator(loadPort, linkLoadPort);
+    attributeChecker = mock(AttributeChecker.class);
+    instanceUnderTest = new CallSignRequestValidator(loadPort, linkLoadPort, attributeChecker);
   }
 
   @Test

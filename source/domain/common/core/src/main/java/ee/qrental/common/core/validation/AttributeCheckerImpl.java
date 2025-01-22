@@ -3,6 +3,7 @@ package ee.qrental.common.core.validation;
 import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.in.validation.ViolationsCollector;
 
+import java.math.BigDecimal;
 import java.util.function.Supplier;
 
 import static java.lang.String.format;
@@ -10,14 +11,15 @@ import static java.lang.String.format;
 public class AttributeCheckerImpl implements AttributeChecker {
 
   @Override
-  public <V extends Comparable> void checkDecimalValueRange(
+  public void checkDecimalValueRange(
       final String attributeName,
-      final V attributeValue,
-      final V minValue,
-      final V maxValue,
+      final BigDecimal attributeValue,
+      final BigDecimal minValue,
+      final BigDecimal maxValue,
       final ViolationsCollector violationsCollector) {
 
-    if (minValue == null && maxValue == null
+    if (minValue == null
+        || maxValue == null
         || attributeName == null
         || violationsCollector == null) {
       throw invalidCallExceptionSupplier().get();
@@ -25,68 +27,34 @@ public class AttributeCheckerImpl implements AttributeChecker {
     if (attributeValue == null) {
       return;
     }
-    if (minValue == null) {
-      if (attributeValue.compareTo(maxValue) > 0) {
-        violationsCollector.collect(
-            format(
-                "Invalid value for %s. Valid length must be not more then: %d)",
-                attributeName, maxValue));
-      }
-    }
-
-    if (maxValue == null) {
-      if (attributeValue.compareTo(minValue) < 0) {
-        violationsCollector.collect(
-            format(
-                "Invalid value for %s. Valid length must be less then: %d)",
-                attributeName, minValue));
-      }
-    }
 
     if (attributeValue.compareTo(minValue) < 0 || attributeValue.compareTo(maxValue) > 0) {
       violationsCollector.collect(
           format(
-              "Invalid value for %s. Valid value must be in a range: [%d ... %d])",
+              "Invalid value for %s. Valid value must be in a range: [%s ... %s])",
               attributeName, minValue, maxValue));
     }
   }
 
   @Override
-  public void checkLength(
+  public void checkStringLengthRange(
       final String attributeName,
       final String attributeValue,
       final Integer minLength,
       final Integer maxLength,
       final ViolationsCollector violationsCollector) {
 
-    if (minLength == null && maxLength == null
+    if (minLength == null
+        || maxLength == null
         || attributeName == null
         || violationsCollector == null) {
       throw invalidCallExceptionSupplier().get();
     }
-
     if (attributeValue == null) {
+
       return;
     }
     final int length = attributeValue.length();
-    if (minLength == null) {
-      if (length > maxLength) {
-        violationsCollector.collect(
-            format(
-                "Invalid value for %s. Current length: %d. Valid length must be not more then: %d)",
-                attributeName, length, maxLength));
-      }
-    }
-
-    if (maxLength == null) {
-      if (length < minLength) {
-        violationsCollector.collect(
-            format(
-                "Invalid value for %s. Current length: %d. Valid length must be not less then: %d)",
-                attributeName, length, minLength));
-      }
-    }
-
     if (length < minLength || length > maxLength) {
       violationsCollector.collect(
           format(
@@ -96,11 +64,35 @@ public class AttributeCheckerImpl implements AttributeChecker {
   }
 
   @Override
-  public void checkFixedLength(
+  public void checkStringLengthMax(
+      final String attributeName,
+      final String attributeValue,
+      final Integer maxLength,
+      final ViolationsCollector violationsCollector) {
+
+    if (maxLength == null || attributeName == null || violationsCollector == null) {
+      throw invalidCallExceptionSupplier().get();
+    }
+
+    final int length = attributeValue.length();
+    if (length > maxLength) {
+      violationsCollector.collect(
+          format(
+              "Invalid value for %s. Current length: %d. Valid length must be not more then: %d)",
+              attributeName, length, maxLength));
+    }
+  }
+
+  @Override
+  public void checkStringLengthFixed(
       final String attributeName,
       final Object attributeValue,
       final Integer length,
       final ViolationsCollector violationsCollector) {
+
+    if (length == null || attributeName == null || violationsCollector == null) {
+      throw invalidCallExceptionSupplier().get();
+    }
     if (attributeValue == null) {
       return;
     }
