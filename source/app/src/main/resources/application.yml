@@ -1,5 +1,8 @@
 server:
   port: ${PORT:8181}
+  servlet:
+    session:
+      timeout=60m:
 spring:
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
@@ -29,3 +32,6 @@ management:
   info:
     git:
       mode: full
+
+
+      'server.servlet.session.timeout=15m'
