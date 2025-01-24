@@ -9,6 +9,7 @@ import ee.qrental.driver.api.in.request.CallSignUpdateRequest;
 import ee.qrental.driver.api.out.CallSignLinkLoadPort;
 import ee.qrental.driver.api.out.CallSignLoadPort;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -24,8 +25,8 @@ public class CallSignRequestValidator
   private final AttributeChecker attributeChecker;
 
   private static final int LENGTH_MAX_COMMENT = 200;
-  private static final Integer DECIMAL_MIN_CALL_SIGN = 1;
-  private static final Integer DECIMAL_MAX_CALL_SIGN = 999;
+  private static final BigDecimal DECIMAL_MIN_CALL_SIGN = BigDecimal.ONE;
+  private static final BigDecimal DECIMAL_MAX_CALL_SIGN = BigDecimal.valueOf(999);
 
   @Override
   public ViolationsCollector validate(final CallSignAddRequest request) {
@@ -61,7 +62,7 @@ public class CallSignRequestValidator
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
     attributeChecker.checkDecimalValueRange(
         attributeName,
-        attributeValue,
+        BigDecimal.valueOf(attributeValue),
         DECIMAL_MIN_CALL_SIGN,
         DECIMAL_MAX_CALL_SIGN,
         violationsCollector);

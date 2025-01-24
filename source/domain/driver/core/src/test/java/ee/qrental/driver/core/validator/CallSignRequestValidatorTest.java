@@ -10,13 +10,15 @@ import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.CallSignLink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 public class CallSignRequestValidatorTest {
 
@@ -42,11 +44,27 @@ public class CallSignRequestValidatorTest {
 
     // when
     final var violationCollector = instanceUnderTest.validate(addRequest);
+    doNothing()
+        .when(attributeChecker)
+        .checkRequired("Call Sign", addRequest.getCallSign(), violationCollector);
+    doNothing()
+        .when(attributeChecker)
+        .checkDecimalValueRange(
+            "Call Sign",
+            BigDecimal.valueOf(addRequest.getCallSign()),
+            BigDecimal.ONE,
+            BigDecimal.valueOf(999),
+            violationCollector);
+    doNothing()
+        .when(attributeChecker)
+        .checkStringLengthMax("Comment", addRequest.getComment(), 200, violationCollector);
 
     // then
-    assertTrue(violationCollector.hasViolations());
-    assertEquals(
-        "Invalid number call sign (Min 1 and Max 999)", violationCollector.getViolations().get(0));
+    verify(attributeChecker, times(1))
+        .checkRequired("Call Sign", addRequest.getCallSign(), violationCollector);
+    verify(attributeChecker, times(1))
+            .checkDecimalValueRange("Call Sign", addRequest.getCallSign(), violationCollector);
+    verify(attributeChecker, times(1))
   }
 
   @Test
