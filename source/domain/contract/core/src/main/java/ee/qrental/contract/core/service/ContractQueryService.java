@@ -5,6 +5,7 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.response.ContractResponse;
@@ -23,6 +24,8 @@ public class ContractQueryService implements GetContractQuery {
 
   private final Comparator<ContractResponse> DEFAULT_COMPARATOR =
       comparing(ContractResponse::getCreated);
+
+  private final GetQWeekQuery qWeekQuery;
   private final ContractEndDateCalculator endDateCalculator;
   private final ContractLoadPort loadPort;
   private final ContractResponseMapper mapper;
@@ -68,6 +71,16 @@ public class ContractQueryService implements GetContractQuery {
     endDateCalculator.setEndDate(contract);
 
     return mapper.toResponse(contract);
+  }
+
+  @Override
+  public ContractResponse getActiveContractByDriverIdAndQWeekId(
+      final Long driverId, final Long qWekId) {
+    final var qWeek = qWeekQuery.getById(qWekId);
+    final var activeContractOnRequestedWeek =
+        loadPort.loadActiveByDateAndDriverId(qWeek.getStart(), driverId);
+
+    return mapper.toResponse(activeContractOnRequestedWeek);
   }
 
   @Override

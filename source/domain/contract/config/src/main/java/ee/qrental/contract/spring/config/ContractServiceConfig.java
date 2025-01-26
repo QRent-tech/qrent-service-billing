@@ -4,6 +4,7 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.CloseRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
 import ee.qrental.contract.api.in.request.ContractCloseRequest;
@@ -30,6 +31,7 @@ public class ContractServiceConfig {
 
   @Bean
   GetContractQuery getContractQueryService(
+      final GetQWeekQuery qWeekQuery,
       final ContractEndDateCalculator endDateCalculator,
       final ContractLoadPort loadPort,
       final ContractResponseMapper mapper,
@@ -37,7 +39,7 @@ public class ContractServiceConfig {
       final QDateTime qDateTime) {
 
     return new ContractQueryService(
-        endDateCalculator, loadPort, mapper, updateRequestMapper, qDateTime);
+        qWeekQuery, endDateCalculator, loadPort, mapper, updateRequestMapper, qDateTime);
   }
 
   @Bean
