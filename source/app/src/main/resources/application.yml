@@ -32,6 +32,3 @@ management:
   info:
     git:
       mode: full
-
-
-      'server.servlet.session.timeout=15m'
