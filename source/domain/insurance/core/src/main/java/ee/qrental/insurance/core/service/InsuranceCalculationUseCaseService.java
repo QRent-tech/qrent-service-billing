@@ -1,5 +1,6 @@
 package ee.qrental.insurance.core.service;
 
+import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.groupingBy;
 
@@ -40,16 +41,13 @@ public class InsuranceCalculationUseCaseService implements InsuranceCalculationA
     final var qWeekId = request.getQWeekId();
     final var activeCases = caseLoadPort.loadActiveByQWeekId(qWeekId);
     if (!activeCases.isEmpty()) {
-
       final var qWeek = qWeekQuery.getById(qWeekId);
       final var insuranceCasesGroupByDriver =
           activeCases.stream().collect(groupingBy(InsuranceCase::getDriverId));
       System.out.println(
-          "----> Insurance Cases Balance Calculation. Calculated week: "
-              + qWeek.getYear()
-              + "-"
-              + qWeek.getNumber());
-
+          format(
+              "----> Insurance Cases Balance Calculation. Calculated week: %d - %d ",
+              qWeek.getYear(), qWeek.getNumber()));
       insuranceCasesGroupByDriver.forEach(
           (driverId, insuranceCases) -> {
             final var activeCase = insuranceCases.stream().findFirst().get();
