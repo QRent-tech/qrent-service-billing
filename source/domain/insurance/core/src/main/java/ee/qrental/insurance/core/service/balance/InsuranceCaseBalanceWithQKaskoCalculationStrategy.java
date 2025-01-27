@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ee.qrental.insurance.core.service.balance.InsuranceCaseBalanceDeriveUtils.derive;
 import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.*;
 import static java.lang.Boolean.TRUE;
 import static java.math.BigDecimal.ZERO;
@@ -28,7 +29,6 @@ public class InsuranceCaseBalanceWithQKaskoCalculationStrategy
   private static final BigDecimal Q_KASKO_DISCOUNT_RATE = BigDecimal.valueOf(2);
 
   private final GetTransactionQuery transactionQuery;
-  private final InsuranceCaseBalanceDeriveService deriveService;
 
   public InsuranceCaseBalanceWithQKaskoCalculationStrategy(
       GetQWeekQuery qWeekQuery,
@@ -36,8 +36,7 @@ public class InsuranceCaseBalanceWithQKaskoCalculationStrategy
       GetTransactionTypeQuery transactionTypeQuery,
       TransactionAddUseCase transactionAddUseCase,
       InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
-      final GetTransactionQuery transactionQuery,
-      final InsuranceCaseBalanceDeriveService deriveService) {
+      final GetTransactionQuery transactionQuery) {
     super(
         qWeekQuery,
         qKaskoQuery,
@@ -45,7 +44,6 @@ public class InsuranceCaseBalanceWithQKaskoCalculationStrategy
         transactionAddUseCase,
         insuranceCaseBalanceLoadPort);
     this.transactionQuery = transactionQuery;
-    this.deriveService = deriveService;
   }
 
   @Override
@@ -70,7 +68,7 @@ public class InsuranceCaseBalanceWithQKaskoCalculationStrategy
     final var writeOffTransaction = getDamageWriteOffTransaction(driverId, requestedQWeek);
     final var selfResponsibilityTransaction =
         getSelfResponsibilityTransaction(driverId, requestedQWeek);
-    deriveService.derive(requestedBalance, writeOffTransaction, selfResponsibilityTransaction);
+    derive(requestedBalance, writeOffTransaction, selfResponsibilityTransaction);
     saveTransactionAndAddToBalance(writeOffTransaction, requestedBalance);
     saveTransactionAndAddToBalance(selfResponsibilityTransaction, requestedBalance);
 

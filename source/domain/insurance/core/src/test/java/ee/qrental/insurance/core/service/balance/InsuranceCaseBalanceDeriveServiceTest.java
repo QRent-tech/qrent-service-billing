@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InsuranceCaseBalanceDeriveServiceTest {
 
-  private final InsuranceCaseBalanceDeriveService instanceUnderTest =
-      new InsuranceCaseBalanceDeriveService();
+  private final InsuranceCaseBalanceDeriveUtils instanceUnderTest =
+      new InsuranceCaseBalanceDeriveUtils();
 
   @Test
   public void testIfNoSelfRespRequestAndAutomaticWriteOffLessThanDamageRemaining() {

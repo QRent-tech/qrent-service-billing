@@ -6,9 +6,10 @@ import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
+import lombok.experimental.UtilityClass;
 
-@AllArgsConstructor
-public class InsuranceCaseBalanceDeriveService {
+@UtilityClass
+public class InsuranceCaseBalanceDeriveUtils {
 
   public static void derive(
       final InsuranceCaseBalance requestedBalance,

@@ -25,7 +25,7 @@ class InsuranceCaseBalanceCalculatorServiceTest {
   private GetQKaskoQuery qKaskoQuery;
   private GetTransactionQuery transactionQuery;
   private GetTransactionTypeQuery transactionTypeQuery;
-  private InsuranceCaseBalanceDeriveService deriveService;
+  private InsuranceCaseBalanceDeriveUtils deriveService;
   private TransactionAddUseCase transactionAddUseCase;
   private GetQWeekQuery getQWeekQuery;
 
@@ -35,7 +35,7 @@ class InsuranceCaseBalanceCalculatorServiceTest {
     qKaskoQuery = mock(GetQKaskoQuery.class);
     transactionQuery = mock(GetTransactionQuery.class);
     transactionTypeQuery = mock(GetTransactionTypeQuery.class);
-    deriveService = mock(InsuranceCaseBalanceDeriveService.class);
+    deriveService = mock(InsuranceCaseBalanceDeriveUtils.class);
     transactionAddUseCase = mock(TransactionAddUseCase.class);
     getQWeekQuery = mock(GetQWeekQuery.class);
 

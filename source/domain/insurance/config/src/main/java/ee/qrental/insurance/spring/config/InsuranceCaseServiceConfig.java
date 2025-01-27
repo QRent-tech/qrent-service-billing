@@ -44,8 +44,7 @@ public class InsuranceCaseServiceConfig {
       final GetTransactionTypeQuery transactionTypeQuery,
       final TransactionAddUseCase transactionAddUseCase,
       final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
-      final GetTransactionQuery transactionQuery,
-      final InsuranceCaseBalanceDeriveService deriveService) {
+      final GetTransactionQuery transactionQuery) {
     return asList(
         new InsuranceCaseBalanceWithQKaskoCalculationStrategy(
             qWeekQuery,
@@ -53,8 +52,7 @@ public class InsuranceCaseServiceConfig {
             transactionTypeQuery,
             transactionAddUseCase,
             insuranceCaseBalanceLoadPort,
-            transactionQuery,
-            deriveService),
+            transactionQuery),
         new InsuranceCaseBalanceWithoutQKaskoCalculationStrategy(
             qWeekQuery,
             qKaskoQuery,
@@ -172,12 +170,6 @@ public class InsuranceCaseServiceConfig {
         qWeekQuery,
         insuranceCaseBalanceCalculator,
         addRequestValidator);
-  }
-
-  @Bean
-  InsuranceCaseBalanceDeriveService getInsuranceCaseBalanceDeriveService() {
-
-    return new InsuranceCaseBalanceDeriveService();
   }
 
   @Bean
