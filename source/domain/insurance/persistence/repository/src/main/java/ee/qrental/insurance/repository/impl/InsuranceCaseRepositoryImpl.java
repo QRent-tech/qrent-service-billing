@@ -24,7 +24,7 @@ public class InsuranceCaseRepositoryImpl implements InsuranceCaseRepository {
 
   @Override
   public List<InsuranceCaseJakartaEntity> findActiveByQWeekId(final Long qWeekId) {
-    return springDataRepository.findAllByActiveIsTrueAndQweekId(qWeekId);
+    return springDataRepository.findAllByActiveIsTrueAndQWeekId(qWeekId);
   }
 
   @Override

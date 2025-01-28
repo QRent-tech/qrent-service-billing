@@ -9,6 +9,8 @@ import java.util.List;
 public interface GetContractQuery extends BaseGetQuery<ContractUpdateRequest, ContractResponse> {
   ContractResponse getLatestContractByDriverId(final Long driverId);
 
+  ContractResponse getActiveContractByDriverIdAndQWeekId(final Long driverId, final Long qWekId);
+
   List<String> getAllDurations();
 
   List<ContractResponse> getAllActive();

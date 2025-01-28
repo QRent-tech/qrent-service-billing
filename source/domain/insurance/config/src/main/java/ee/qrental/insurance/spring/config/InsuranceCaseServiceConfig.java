@@ -20,7 +20,6 @@ import ee.qrental.insurance.core.mapper.*;
 import ee.qrental.insurance.core.service.*;
 import ee.qrental.insurance.core.service.balance.*;
 import ee.qrental.insurance.core.service.kasko.QKaskoQueryService;
-import ee.qrental.insurance.core.validator.InsuranceCaseUpdateRequestValidator;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.query.kind.GetTransactionKindQuery;
@@ -165,9 +164,8 @@ public class InsuranceCaseServiceConfig {
   }
 
   @Bean
-  GetQKaskoQuery getGetQKaskoQuery(
-      final GetContractQuery contractQuery, final GetQWeekQuery qWeekQuery) {
+  GetQKaskoQuery getGetQKaskoQuery(final GetContractQuery contractQuery) {
 
-    return new QKaskoQueryService(contractQuery, qWeekQuery);
+    return new QKaskoQueryService(contractQuery);
   }
 }
