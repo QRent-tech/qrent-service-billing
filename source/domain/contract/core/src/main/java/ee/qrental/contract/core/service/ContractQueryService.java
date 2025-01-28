@@ -79,6 +79,7 @@ public class ContractQueryService implements GetContractQuery {
     final var qWeek = qWeekQuery.getById(qWekId);
     final var activeContractOnRequestedWeek =
         loadPort.loadActiveByDateAndDriverId(qWeek.getStart(), driverId);
+    endDateCalculator.setEndDate(activeContractOnRequestedWeek);
 
     return mapper.toResponse(activeContractOnRequestedWeek);
   }
