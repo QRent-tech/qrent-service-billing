@@ -10,7 +10,6 @@ import ee.qrental.driver.api.out.CallSignLinkLoadPort;
 import ee.qrental.driver.api.out.CallSignLoadPort;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 
 import lombok.AllArgsConstructor;
 
