@@ -165,7 +165,7 @@ public class AttributeCheckerImplTest {
     // then
     assertTrue(violationsCollector.hasViolations());
     assertEquals(
-        "Invalid value for some name. Valid value must be in a range: [1 ... 9])",
+        "Invalid value for some name. Valid value must be in a range: [1 ... 9]",
         violationsCollector.getViolations().get(0));
   }
 
@@ -185,7 +185,7 @@ public class AttributeCheckerImplTest {
     // then
     assertTrue(violationsCollector.hasViolations());
     assertEquals(
-        "Invalid value for some name. Valid value must be in a range: [1 ... 9])",
+        "Invalid value for some name. Valid value must be in a range: [1 ... 9]",
         violationsCollector.getViolations().get(0));
   }
 
