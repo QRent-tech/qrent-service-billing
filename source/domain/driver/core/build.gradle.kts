@@ -19,6 +19,7 @@ dependencies {
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
     testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation(project(":source:domain:common:core"))
 }
 
 tasks.test {

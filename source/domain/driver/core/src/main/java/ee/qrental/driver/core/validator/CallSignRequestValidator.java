@@ -31,9 +31,10 @@ public class CallSignRequestValidator
   @Override
   public ViolationsCollector validate(final CallSignAddRequest request) {
     final var violationsCollector = new ViolationsCollector();
-    checkValidNumberForAdd(request, violationsCollector);
-    checkUniquenessForAdd(request, violationsCollector);
-    checkCommentForAdd(request, violationsCollector);
+    final var callSign = request.getCallSign();
+    checkValidNumber(callSign, violationsCollector);
+    checkComment(request.getComment(), violationsCollector);
+    checkUniqueness(callSign, violationsCollector);
 
     return violationsCollector;
   }
@@ -41,8 +42,11 @@ public class CallSignRequestValidator
   @Override
   public ViolationsCollector validate(final CallSignUpdateRequest request) {
     final var violationsCollector = new ViolationsCollector();
+    final var callSign = request.getCallSign();
+    checkValidNumber(callSign, violationsCollector);
+    checkComment(request.getComment(), violationsCollector);
     checkExistence(request.getId(), violationsCollector);
-    checkUniquenessForUpdate(request, violationsCollector);
+    checkUniqueness(callSign, violationsCollector);
 
     return violationsCollector;
   }
@@ -50,16 +54,20 @@ public class CallSignRequestValidator
   @Override
   public ViolationsCollector validate(final CallSignDeleteRequest request) {
     final var violationsCollector = new ViolationsCollector();
+    checkExistence(request.getId(), violationsCollector);
     checkReferences(request.getId(), violationsCollector);
 
     return violationsCollector;
   }
 
-  private void checkValidNumberForAdd(
-      final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
+  private void checkValidNumber(
+      final Integer callSign, final ViolationsCollector violationsCollector) {
     final var attributeName = "Call Sign";
-    final var attributeValue = request.getCallSign();
+    final var attributeValue = callSign;
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkDecimalValueRange(
         attributeName,
         BigDecimal.valueOf(attributeValue),
@@ -68,15 +76,13 @@ public class CallSignRequestValidator
         violationsCollector);
   }
 
-  private void checkCommentForAdd(
-      final CallSignAddRequest request, final ViolationsCollector violationsCollector) {
+  private void checkComment(final String comment, final ViolationsCollector violationsCollector) {
     attributeChecker.checkStringLengthMax(
-        "Comment", request.getComment(), LENGTH_MAX_COMMENT, violationsCollector);
+        "Comment", comment, LENGTH_MAX_COMMENT, violationsCollector);
   }
 
-  private void checkUniquenessForAdd(
-      final CallSignAddRequest request, final ViolationsCollector violationCollector) {
-    final var callSign = request.getCallSign();
+  private void checkUniqueness(
+      final Integer callSign, final ViolationsCollector violationCollector) {
     final var domainFromDb = loadPort.loadByCallSign(callSign);
     if (domainFromDb == null) {
       return;
@@ -84,22 +90,7 @@ public class CallSignRequestValidator
     violationCollector.collect(format("Call Sign %d already exists", callSign));
   }
 
-  private void checkUniquenessForUpdate(
-      final CallSignUpdateRequest request, final ViolationsCollector violationCollector) {
-    final var callSign = request.getCallSign();
-    final var domainFromDb = loadPort.loadByCallSign(callSign);
-    if (domainFromDb == null) {
-      return;
-    }
-    if (Objects.equals(domainFromDb.getId(), request.getId())) {
-      return;
-    }
-    violationCollector.collect(
-        format("Call Sign %d can not be updated, because such Number already in use", callSign));
-  }
-
   private void checkReferences(final Long id, final ViolationsCollector violationCollector) {
-
     final var callSignLinks = callSignLinkLoadPort.loadByCallSignId(id);
     if (callSignLinks.isEmpty()) {
       return;
@@ -112,7 +103,7 @@ public class CallSignRequestValidator
 
   private void checkExistence(final Long id, final ViolationsCollector violationCollector) {
     if (loadPort.loadById(id) == null) {
-      violationCollector.collect("Update of CallSign Link failed. No Record with id = " + id);
+      violationCollector.collect("Change of CallSign Link failed. No Record with id = " + id);
     }
   }
 }

@@ -1,6 +1,7 @@
 package ee.qrental.driver.core.validator;
 
 import ee.qrent.common.in.validation.AttributeChecker;
+import ee.qrental.common.core.validation.AttributeCheckerImpl;
 import ee.qrental.driver.api.in.request.CallSignAddRequest;
 import ee.qrental.driver.api.in.request.CallSignDeleteRequest;
 import ee.qrental.driver.api.in.request.CallSignUpdateRequest;
@@ -11,14 +12,9 @@ import ee.qrental.driver.domain.CallSignLink;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-
-import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class CallSignRequestValidatorTest {
 
@@ -31,196 +27,216 @@ public class CallSignRequestValidatorTest {
   void init() {
     loadPort = mock(CallSignLoadPort.class);
     linkLoadPort = mock(CallSignLinkLoadPort.class);
-    attributeChecker = mock(AttributeChecker.class);
+    attributeChecker = new AttributeCheckerImpl();
     instanceUnderTest = new CallSignRequestValidator(loadPort, linkLoadPort, attributeChecker);
   }
 
   @Test
-  public void testIfCallSignAddRequestWithInvalidCallSign() {
+  public void testIfCallSignAddRequestWithNullCallSignAndInvalidComment() {
     // given
     final var addRequest = new CallSignAddRequest();
-    addRequest.setCallSign(0);
-    addRequest.setComment("");
+    addRequest.setCallSign(null);
+    addRequest.setComment(
+        "201_Characters_123456789_123456789_123456789_"
+            + "123456789_123456789_123456789_123456789_123456789_123456789_"
+            + "23456789_123456789_123456789_123456789_123456789_123456789_"
+            + "123456789_123456789_123456789_1234567");
+
+    when(loadPort.loadByCallSign(addRequest.getCallSign())).thenReturn(null);
 
     // when
     final var violationCollector = instanceUnderTest.validate(addRequest);
-    doNothing()
-        .when(attributeChecker)
-        .checkRequired("Call Sign", addRequest.getCallSign(), violationCollector);
-    doNothing()
-        .when(attributeChecker)
-        .checkDecimalValueRange(
-            "Call Sign",
-            BigDecimal.valueOf(addRequest.getCallSign()),
-            BigDecimal.ONE,
-            BigDecimal.valueOf(999),
-            violationCollector);
-    doNothing()
-        .when(attributeChecker)
-        .checkStringLengthMax("Comment", addRequest.getComment(), 200, violationCollector);
 
     // then
-    verify(attributeChecker, times(1))
-        .checkRequired("Call Sign", addRequest.getCallSign(), violationCollector);
-    verify(attributeChecker, times(1))
-            .checkDecimalValueRange("Call Sign", addRequest.getCallSign(), violationCollector);
-    verify(attributeChecker, times(1))
+    assertTrue(violationCollector.hasViolations());
+    assertEquals(2, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation -> violation.equals("Invalid value for Call Sign. Value must be set")));
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals(
+                        "Invalid value for Comment. Current length: 201. Valid length must be not more then: 200)")));
   }
 
   @Test
-  public void testIfCallSignAddRequestWithInvalidCallSign2() {
+  public void testIfCallSignAddRequestWithCallSignNotInRange() {
     // given
     final var addRequest = new CallSignAddRequest();
     addRequest.setCallSign(1000);
-    addRequest.setComment("");
+    when(loadPort.loadByCallSign(addRequest.getCallSign())).thenReturn(null);
 
     // when
     final var violationCollector = instanceUnderTest.validate(addRequest);
 
     // then
     assertTrue(violationCollector.hasViolations());
-    assertEquals(
-        "Invalid number call sign (Min 1 and Max 999)", violationCollector.getViolations().get(0));
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals(
+                        "Invalid value for Call Sign. Valid value must be in a range: [1 ... 999]")));
   }
 
   @Test
-  public void testIfCallSignAddRequestWithTooLongComment() {
+  public void testIfCallSignAddRequestWithCallSignAlreadyInUse() {
     // given
     final var addRequest = new CallSignAddRequest();
-    addRequest.setCallSign(1);
-    addRequest.setComment(
-        "The quick brown fox jumps over the lazy dog, showcasing agility and speed. Meanwhile, a curious cat watches from afar, pondering the mystery of life and enjoying the warmth of a sunny afternoon. 123123123");
+    addRequest.setCallSign(5);
+    when(loadPort.loadByCallSign(addRequest.getCallSign())).thenReturn(CallSign.builder().build());
 
     // when
     final var violationCollector = instanceUnderTest.validate(addRequest);
 
     // then
     assertTrue(violationCollector.hasViolations());
-    assertEquals(
-        "Too long comment (Max 200 characters)", violationCollector.getViolations().get(0));
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(violation -> violation.equals("Call Sign 5 already exists")));
   }
 
   @Test
-  public void testIfCallSignAddNotUniquenessCallSignNumber() {
-    // given
-    final var addRequest = new CallSignAddRequest();
-    addRequest.setCallSign(1);
-    addRequest.setComment("");
-    when(loadPort.loadByCallSign(1)).thenReturn(CallSign.builder().callSign(1).build());
-
-    // when
-    final var violationCollector = instanceUnderTest.validate(addRequest);
-
-    // then
-    assertTrue(violationCollector.hasViolations());
-    assertEquals("Call Sign 1 already exists", violationCollector.getViolations().get(0));
-  }
-
-  @Test
-  public void testIfCallSignUpdateCheckExistenceIsNull() {
+  public void testIfCallSignUpdateRequestHasUnexistentId() {
     // given
     final var updateRequest = new CallSignUpdateRequest();
-    updateRequest.setId(1L);
-    updateRequest.setCallSign(1);
-    updateRequest.setComment("");
-    when(loadPort.loadById(1L)).thenReturn(CallSign.builder().build());
-
-    // when
-    final var violationCollector = instanceUnderTest.validate(updateRequest);
-
-    // then
-    assertFalse(violationCollector.hasViolations());
-  }
-
-  @Test
-  public void testCallSignUpdateRequestIfNoObjectWithSuchId() {
-    // given
-    final var updateRequest = new CallSignUpdateRequest();
-    updateRequest.setId(1L);
-    updateRequest.setComment("");
-
-    when(loadPort.loadByCallSign(1)).thenReturn(null);
+    updateRequest.setId(11l);
+    updateRequest.setCallSign(5);
+    when(loadPort.loadById(11L)).thenReturn(null);
 
     // when
     final var violationCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertTrue(violationCollector.hasViolations());
-    assertEquals(
-        "Update of CallSign Link failed. No Record with id = 1",
-        violationCollector.getViolations().get(0));
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals("Change of CallSign Link failed. No Record with id = 11")));
   }
 
   @Test
-  public void testCallSignUpdateRequestIfCallSignNumberAlreadyInUse() {
+  public void testIfCallSignUpdateRequestWithNullCallSignAndInvalidComment() {
     // given
     final var updateRequest = new CallSignUpdateRequest();
-    updateRequest.setCallSign(1);
-    updateRequest.setId(1L);
-    updateRequest.setComment("");
+    updateRequest.setId(11l);
+    updateRequest.setCallSign(null);
+    updateRequest.setComment(
+        "201_Characters_123456789_123456789_123456789_"
+            + "123456789_123456789_123456789_123456789_123456789_123456789_"
+            + "23456789_123456789_123456789_123456789_123456789_123456789_"
+            + "123456789_123456789_123456789_1234567");
 
-    when(loadPort.loadByCallSign(1)).thenReturn(CallSign.builder().callSign(1).id(2L).build());
+    when(loadPort.loadById(updateRequest.getId())).thenReturn(CallSign.builder().build());
+    when(loadPort.loadByCallSign(updateRequest.getCallSign())).thenReturn(null);
 
     // when
     final var violationCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertTrue(violationCollector.hasViolations());
-    assertEquals(
-        "Update of CallSign Link failed. No Record with id = 1",
-        violationCollector.getViolations().get(0));
+    assertEquals(2, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation -> violation.equals("Invalid value for Call Sign. Value must be set")));
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals(
+                        "Invalid value for Comment. Current length: 201. Valid length must be not more then: 200)")));
   }
 
   @Test
-  public void testIfCallSignUpdateNotUniquenessBecauseSuchNumberAlreadyInUse() {
+  public void testIfCallSignUpdateRequestWithCallSignNotInRange() {
     // given
     final var updateRequest = new CallSignUpdateRequest();
-    updateRequest.setCallSign(1);
-    updateRequest.setId(1L);
-    updateRequest.setComment("");
-
-    when(loadPort.loadById(1L)).thenReturn(CallSign.builder().id(1L).build());
-    when(loadPort.loadByCallSign(1)).thenReturn(CallSign.builder().build());
+    updateRequest.setId(11l);
+    updateRequest.setCallSign(1000);
+    when(loadPort.loadByCallSign(updateRequest.getCallSign())).thenReturn(null);
+    when(loadPort.loadById(updateRequest.getId())).thenReturn(CallSign.builder().build());
 
     // when
     final var violationCollector = instanceUnderTest.validate(updateRequest);
 
     // then
     assertTrue(violationCollector.hasViolations());
-    assertEquals(
-        "Call Sign 1 can not be updated, because such Number already in use",
-        violationCollector.getViolations().get(0));
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals(
+                        "Invalid value for Call Sign. Valid value must be in a range: [1 ... 999]")));
   }
 
   @Test
-  public void testIfCallSignDeleteRequestDoesntHaveCallSignLinks() {
+  public void testIfCallSignUpdateRequestWithCallSignAlreadyInUse() {
     // given
-    final var deleteRequest = new CallSignDeleteRequest(1L);
-    when(linkLoadPort.loadByCallSignId(1L)).thenReturn(emptyList());
+    final var updateRequest = new CallSignUpdateRequest();
+    updateRequest.setId(11l);
+    updateRequest.setCallSign(5);
+    when(loadPort.loadByCallSign(updateRequest.getCallSign()))
+        .thenReturn(CallSign.builder().build());
+    when(loadPort.loadById(updateRequest.getId())).thenReturn(CallSign.builder().build());
 
     // when
-    final var violationCollector = instanceUnderTest.validate(deleteRequest);
+    final var violationCollector = instanceUnderTest.validate(updateRequest);
 
     // then
-    assertFalse(violationCollector.hasViolations());
+    assertTrue(violationCollector.hasViolations());
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(violation -> violation.equals("Call Sign 5 already exists")));
   }
 
   @Test
-  public void testIfCallSignDeleteRequestHasCallSignLinks() {
+  public void testIfCallSignDeleteRequestHasUnexistentId() {
     // given
-    final var deleteRequest = new CallSignDeleteRequest(1L);
-    final var callSignLinks =
-        new ArrayList<CallSignLink>(singletonList(CallSignLink.builder().build()));
-
-    when(linkLoadPort.loadByCallSignId(1L)).thenReturn(callSignLinks);
+    final var deleteRequest = new CallSignDeleteRequest(11l);
+    when(loadPort.loadById(11L)).thenReturn(null);
 
     // when
     final var violationCollector = instanceUnderTest.validate(deleteRequest);
 
     // then
     assertTrue(violationCollector.hasViolations());
-    assertEquals(
-        "Call Sign with id: 1 can not be deleted, because it uses in 1 Call Sign Links",
-        violationCollector.getViolations().get(0));
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals("Change of CallSign Link failed. No Record with id = 11")));
+  }
+
+  @Test
+  public void testIfCallSignDeleteRequestHasReferences() {
+    // given
+    final var deleteRequest = new CallSignDeleteRequest(11l);
+    when(loadPort.loadById(11L)).thenReturn(CallSign.builder().build());
+    when(linkLoadPort.loadByCallSignId(11L))
+        .thenReturn(singletonList(CallSignLink.builder().build()));
+
+    // when
+    final var violationCollector = instanceUnderTest.validate(deleteRequest);
+
+    // then
+    assertTrue(violationCollector.hasViolations());
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals(
+                        "Call Sign with id: 11 can not be deleted, because it uses in 1 Call Sign Links")));
   }
 }

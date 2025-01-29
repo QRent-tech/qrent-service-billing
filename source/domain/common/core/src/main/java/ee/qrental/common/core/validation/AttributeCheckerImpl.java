@@ -31,7 +31,7 @@ public class AttributeCheckerImpl implements AttributeChecker {
     if (attributeValue.compareTo(minValue) < 0 || attributeValue.compareTo(maxValue) > 0) {
       violationsCollector.collect(
           format(
-              "Invalid value for %s. Valid value must be in a range: [%s ... %s])",
+              "Invalid value for %s. Valid value must be in a range: [%s ... %s]",
               attributeName, minValue, maxValue));
     }
   }
@@ -72,6 +72,10 @@ public class AttributeCheckerImpl implements AttributeChecker {
 
     if (maxLength == null || attributeName == null || violationsCollector == null) {
       throw invalidCallExceptionSupplier().get();
+    }
+
+    if(attributeValue == null) {
+      return;
     }
 
     final int length = attributeValue.length();
