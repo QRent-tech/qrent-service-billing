@@ -22,11 +22,10 @@ public class DriverValidatorConfig {
   @Bean
   AddRequestValidator<DriverAddRequest> getDriverAddRequestValidator(
       final DriverLoadPort loadPort,
-      final GetQWeekQuery qWeekQuery,
       final QDateTime qDateTime,
       final AttributeChecker attributeChecker) {
 
-    return new DriverAddRequestValidator(loadPort, qWeekQuery, qDateTime, attributeChecker);
+    return new DriverAddRequestValidator(loadPort, qDateTime, attributeChecker);
   }
 
   @Bean

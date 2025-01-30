@@ -6,7 +6,6 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,6 @@ import java.math.BigDecimal;
 public class DriverAddRequestValidator implements AddRequestValidator<DriverAddRequest> {
 
   private final DriverLoadPort loadPort;
-  private final GetQWeekQuery qWeekQuery;
   private final QDateTime qDateTime;
   private final AttributeChecker attributeChecker;
 
@@ -70,6 +68,11 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     if (request.getHasRequiredObligation()) {
       final var attributeName = "Required Obligation";
       final var attributeValue = request.getRequiredObligation();
+      attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+
+      if (attributeValue == null) {
+        return;
+      }
       attributeChecker.checkDecimalValueRange(
           attributeName,
           attributeValue,
@@ -84,6 +87,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "First name";
     final var attributeValue = request.getFirstName();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthRange(
         attributeName, attributeValue, 1, LENGTH_MAX_FIRST_NAME, violationsCollector);
   }
@@ -93,6 +99,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Last name";
     final var attributeValue = request.getLastName();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthMax(
         attributeName, attributeValue, LENGTH_MAX_LAST_NAME, violationsCollector);
   }
@@ -102,6 +111,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Isikukood";
     final var attributeValue = request.getTaxNumber();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthFixed(
         attributeName, attributeValue, LENGTH_FIXED_TAX_NUMBER, violationsCollector);
     checkTaxNumberUniqueness(attributeValue, violationsCollector);
@@ -122,6 +134,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Address";
     final var attributeValue = request.getAddress();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthMax(
         attributeName, attributeValue, LENGTH_MAX_ADDRESS, violationsCollector);
   }
@@ -131,6 +146,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Driver License number";
     final var attributeValue = request.getDriverLicenseNumber();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthMax(
         attributeName, attributeValue, LENGTH_MAX_DRIVER_LICENSE_NUMBER, violationsCollector);
   }
@@ -140,6 +158,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Driver License expiration date";
     final var attributeValue = request.getDriverLicenseExp();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     if (attributeValue.isBefore(qDateTime.getToday())) {
       violationsCollector.collect("License expiration date is in the past");
     }
@@ -150,6 +171,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Taxi license number";
     final var attributeValue = request.getTaxiLicense();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthMax(
         attributeName, attributeValue, LENGTH_MAX_TAXI_LICENSE_NUMBER, violationsCollector);
   }
@@ -159,6 +183,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Phone number(s)";
     final var attributeValue = request.getPhone();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthRange(
         attributeName,
         attributeValue,
@@ -172,6 +199,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "Email";
     final var attributeValue = request.getEmail();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     checkEmailPattern(attributeValue, violationsCollector);
   }
 
@@ -204,6 +234,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "CEO First name";
     final var attributeValue = request.getCompanyCeoFirstName();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthMax(
         attributeName, attributeValue, LENGTH_MAX_CEO_FIRST_NAME, violationsCollector);
   }
@@ -213,6 +246,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     final var attributeName = "CEO Last name";
     final var attributeValue = request.getCompanyCeoLastName();
     attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    if (attributeValue == null) {
+      return;
+    }
     attributeChecker.checkStringLengthMax(
         attributeName, attributeValue, LENGTH_MAX_CEO_LAST_NAME, violationsCollector);
   }

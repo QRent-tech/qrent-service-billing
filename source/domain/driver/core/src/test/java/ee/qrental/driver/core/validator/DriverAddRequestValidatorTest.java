@@ -2,6 +2,7 @@ package ee.qrental.driver.core.validator;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AttributeChecker;
+import ee.qrental.common.core.validation.AttributeCheckerImpl;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -20,33 +23,62 @@ public class DriverAddRequestValidatorTest {
 
   private DriverAddRequestValidator instanceUnderTest;
   private DriverLoadPort loadPort;
-  private GetQWeekQuery qWeekQuery;
+
   private QDateTime qDateTime;
   private AttributeChecker attributeChecker;
 
   @BeforeEach
   void init() {
     loadPort = mock(DriverLoadPort.class);
-    qWeekQuery = mock(GetQWeekQuery.class);
     qDateTime = mock(QDateTime.class);
-    attributeChecker = mock(AttributeChecker.class);
-    instanceUnderTest =
-        new DriverAddRequestValidator(loadPort, qWeekQuery, qDateTime, attributeChecker);
+    attributeChecker = new AttributeCheckerImpl();
+    instanceUnderTest = new DriverAddRequestValidator(loadPort, qDateTime, attributeChecker);
+    when(qDateTime.getToday()).thenReturn(LocalDate.of(2025, Month.JANUARY, 15));
+  }
+
+  private DriverAddRequest getValidDriverAddRequest() {
+    final var addRequest = new DriverAddRequest();
+    addRequest.setActive(true);
+    addRequest.setHasRequiredObligation(Boolean.FALSE);
+    addRequest.setFirstName("John");
+    addRequest.setLastName("Doe");
+    addRequest.setTaxNumber(38408190101L);
+    addRequest.setAddress("Tallinn, Str. Lootsa, 45b");
+    addRequest.setDriverLicenseNumber("AR-TY_45879");
+    addRequest.setDriverLicenseExp(qDateTime.getToday().plus(2, ChronoUnit.DAYS));
+    addRequest.setTaxiLicense("TLL-T-958");
+    addRequest.setPhone("+3729876587, +383050478955");
+    addRequest.setEmail("test.f.l@gmail.com");
+    addRequest.setCompanyName("Driver&Company");
+    addRequest.setRegNumber("REG-7878");
+    addRequest.setCompanyAddress("Tallinn, Str. Lootsa, 88c");
+    addRequest.setCompanyVat("VAT-8989");
+    addRequest.setCompanyCeoFirstName("CEO_FN");
+    addRequest.setCompanyCeoLastName("CEO_LN");
+    addRequest.setCompanyCeoTaxNumber(4381082590101L);
+    addRequest.setComment("This is a comment");
+
+    return addRequest;
   }
 
   @Test
-  void testObligationNumber1() {
+  void testObligationNumberIfObligationRequiredButNotSet() {
     // given
-    final var addRequest = new DriverAddRequest();
+    final var addRequest = getValidDriverAddRequest();
     addRequest.setHasRequiredObligation(true);
-    addRequest.setRequiredObligation(BigDecimal.valueOf(0));
-    addRequest.setDriverLicenseExp(null);
+    addRequest.setRequiredObligation(null);
 
     // when
     final var violationCollector = instanceUnderTest.validate(addRequest);
 
     // then
     assertTrue(violationCollector.hasViolations());
+    assertEquals(1, violationCollector.getViolations().size());
+    assertTrue(
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals("Invalid value for Required Obligation. Value must be set")));
   }
 
   @Test
