@@ -58,7 +58,7 @@ public class AttributeCheckerImpl implements AttributeChecker {
     if (length < minLength || length > maxLength) {
       violationsCollector.collect(
           format(
-              "Invalid value for %s. Current length: %d. Valid length must be in a range: [%d ... %d])",
+              "Invalid value for %s. Current length: %d. Valid length must be in a range: [%d ... %d]",
               attributeName, length, minLength, maxLength));
     }
   }
@@ -82,7 +82,7 @@ public class AttributeCheckerImpl implements AttributeChecker {
     if (length > maxLength) {
       violationsCollector.collect(
           format(
-              "Invalid value for %s. Current length: %d. Valid length must be not more then: %d)",
+              "Invalid value for %s. Current length: %d. Valid length must be not more then: %d",
               attributeName, length, maxLength));
     }
   }
@@ -105,7 +105,7 @@ public class AttributeCheckerImpl implements AttributeChecker {
     if (attributeValueLength != length) {
       violationsCollector.collect(
           format(
-              "Invalid value for %s. Current length: %d. Valid length must equal to: %d)",
+              "Invalid value for %s. Current length: %d. Valid length must equal to: %d",
               attributeName, attributeValueLength, length));
     }
   }

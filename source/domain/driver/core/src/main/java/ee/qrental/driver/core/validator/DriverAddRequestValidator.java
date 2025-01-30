@@ -90,8 +90,8 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     if (attributeValue == null) {
       return;
     }
-    attributeChecker.checkStringLengthRange(
-        attributeName, attributeValue, 1, LENGTH_MAX_FIRST_NAME, violationsCollector);
+    attributeChecker.checkStringLengthMax(
+        attributeName, attributeValue,  LENGTH_MAX_FIRST_NAME, violationsCollector);
   }
 
   private void checkLastName(

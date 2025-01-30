@@ -59,7 +59,7 @@ public class CallSignRequestValidatorTest {
             .anyMatch(
                 violation ->
                     violation.equals(
-                        "Invalid value for Comment. Current length: 201. Valid length must be not more then: 200)")));
+                        "Invalid value for Comment. Current length: 201. Valid length must be not more then: 200")));
   }
 
   @Test
@@ -152,7 +152,7 @@ public class CallSignRequestValidatorTest {
             .anyMatch(
                 violation ->
                     violation.equals(
-                        "Invalid value for Comment. Current length: 201. Valid length must be not more then: 200)")));
+                        "Invalid value for Comment. Current length: 201. Valid length must be not more then: 200")));
   }
 
   @Test
