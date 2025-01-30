@@ -17,4 +17,6 @@ public interface DriverSpringDataRepository extends JpaRepository<DriverJakartaE
       nativeQuery = true)
   List<DriverJakartaEntity> findAllByMatchCountAndQWeekId(
       @Param("matchCount") final Integer matchCount, @Param("qWeekId") final Long qWeekId);
+
+  DriverJakartaEntity findByTaxNumber(final Long taxNumber);
 }

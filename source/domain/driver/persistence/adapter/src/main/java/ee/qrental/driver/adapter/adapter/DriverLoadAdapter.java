@@ -31,4 +31,9 @@ public class DriverLoadAdapter implements DriverLoadPort {
         .map(mapper::mapToDomain)
         .collect(toList());
   }
+
+  @Override
+  public Driver loadByTaxNumber(final Long taxNumber) {
+    return mapper.mapToDomain(repository.findByTaxNumber(taxNumber));
+  }
 }

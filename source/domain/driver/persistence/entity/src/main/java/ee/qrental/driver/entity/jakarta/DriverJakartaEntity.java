@@ -34,7 +34,7 @@ public class DriverJakartaEntity {
   private String lastName;
 
   @Column(name = "isikukood")
-  private Long isikukood;
+  private Long taxNumber;
 
   @Column(name = "phone")
   private String phone;
