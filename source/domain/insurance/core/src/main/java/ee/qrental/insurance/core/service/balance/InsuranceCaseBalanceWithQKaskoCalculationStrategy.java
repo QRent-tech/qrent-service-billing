@@ -45,6 +45,11 @@ public class InsuranceCaseBalanceWithQKaskoCalculationStrategy
         insuranceCaseBalanceLoadPort);
     this.transactionQuery = transactionQuery;
   }
+  @Override
+  public boolean canApply(final Long driverId, final Long qWeekId) {
+
+    return getQKaskoQuery().hasQKasko(driverId, qWeekId);
+  }
 
   @Override
   public InsuranceCaseBalance calculate(

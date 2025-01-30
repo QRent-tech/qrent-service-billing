@@ -8,7 +8,9 @@ import ee.qrental.insurance.domain.InsuranceCaseBalance;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 import ee.qrental.transaction.api.in.usecase.TransactionAddUseCase;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
@@ -18,16 +20,13 @@ public abstract class AbstractInsuranceCaseBalanceCalculationStrategy
     implements InsuranceCaseBalanceCalculationStrategy {
 
   private final GetQWeekQuery qWeekQuery;
+
+  @Getter(AccessLevel.PROTECTED)
   private final GetQKaskoQuery qKaskoQuery;
+
   private final GetTransactionTypeQuery transactionTypeQuery;
   private final TransactionAddUseCase transactionAddUseCase;
   private final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort;
-
-  @Override
-  public boolean canApply(final Long driverId, final Long qWeekId) {
-
-    return qKaskoQuery.hasQKasko(qWeekId, driverId);
-  }
 
   protected InsuranceCaseBalance getPreviousWeekInsuranceCaseBalance(
       final InsuranceCase insuranceCase, final Long requestedWeekId) {
