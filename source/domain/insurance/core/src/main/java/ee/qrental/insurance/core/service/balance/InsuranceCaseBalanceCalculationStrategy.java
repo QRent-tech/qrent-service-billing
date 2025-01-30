@@ -5,6 +5,7 @@ import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.insurance.domain.InsuranceCaseBalance;
 
 public interface InsuranceCaseBalanceCalculationStrategy {
+
   boolean canApply(final Long qWeekId, final Long driverId);
 
   InsuranceCaseBalance calculate(

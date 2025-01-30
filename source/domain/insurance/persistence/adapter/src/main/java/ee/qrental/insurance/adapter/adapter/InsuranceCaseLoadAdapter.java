@@ -60,4 +60,9 @@ public class InsuranceCaseLoadAdapter implements InsuranceCaseLoadPort {
   public List<InsuranceCase> loadAllActiveByDriverId(final Long driverId) {
     return repository.findActiveByDriverId(driverId).stream().map(mapper::mapToDomain).toList();
   }
+
+  @Override
+  public List<Long> loadPaymentTransactionIdsByInsuranceCaseId(Long insuranceCaseId) {
+    return repository.findPaymentTransactionIdsByInsuranceCaseId(insuranceCaseId);
+  }
 }

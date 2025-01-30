@@ -44,7 +44,8 @@ public class InsuranceCaseServiceConfig {
       final GetTransactionTypeQuery transactionTypeQuery,
       final TransactionAddUseCase transactionAddUseCase,
       final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
-      final GetTransactionQuery transactionQuery) {
+      final GetTransactionQuery transactionQuery,
+      final GetInsuranceCaseQuery insuranceCaseQuery) {
     return asList(
         new InsuranceCaseBalanceWithQKaskoCalculationStrategy(
             qWeekQuery,
@@ -58,7 +59,8 @@ public class InsuranceCaseServiceConfig {
             qKaskoQuery,
             transactionTypeQuery,
             transactionAddUseCase,
-            insuranceCaseBalanceLoadPort));
+            insuranceCaseBalanceLoadPort,
+            insuranceCaseQuery));
   }
 
   @Bean
@@ -90,6 +92,7 @@ public class InsuranceCaseServiceConfig {
 
   @Bean
   GetInsuranceCaseQuery getInsuranceCaseQueryService(
+      final GetTransactionQuery transactionQuery,
       final InsuranceCaseLoadPort loadPort,
       final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
       final InsuranceCaseResponseMapper mapper,
@@ -97,6 +100,7 @@ public class InsuranceCaseServiceConfig {
       final InsuranceCaseUpdateRequestMapper updateRequestMapper) {
 
     return new InsuranceCaseQueryService(
+        transactionQuery,
         loadPort,
         insuranceCaseBalanceLoadPort,
         mapper,

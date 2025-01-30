@@ -2,6 +2,7 @@ package ee.qrental.insurance.core.service.balance;
 
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;
 import ee.qrental.insurance.domain.InsuranceCase;
@@ -19,18 +20,22 @@ import static java.math.BigDecimal.ZERO;
 public class InsuranceCaseBalanceWithoutQKaskoCalculationStrategy
     extends AbstractInsuranceCaseBalanceCalculationStrategy {
 
+  private final GetInsuranceCaseQuery insuranceCaseQuery;
+
   public InsuranceCaseBalanceWithoutQKaskoCalculationStrategy(
       final GetQWeekQuery qWeekQuery,
       final GetQKaskoQuery qKaskoQuery,
       final GetTransactionTypeQuery transactionTypeQuery,
       final TransactionAddUseCase transactionAddUseCase,
-      final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort) {
+      final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
+      final GetInsuranceCaseQuery insuranceCaseQuery) {
     super(
         qWeekQuery,
         qKaskoQuery,
         transactionTypeQuery,
         transactionAddUseCase,
         insuranceCaseBalanceLoadPort);
+    this.insuranceCaseQuery = insuranceCaseQuery;
   }
 
   @Override
@@ -44,15 +49,16 @@ public class InsuranceCaseBalanceWithoutQKaskoCalculationStrategy
       final InsuranceCase insuranceCase, final QWeekResponse requestedQWeek) {
     final var requestedQWeekId = requestedQWeek.getId();
     final var driverId = insuranceCase.getDriverId();
+    final var originalDamageAmount = insuranceCase.getDamageAmount();
     final var previousWeekBalance =
         getPreviousWeekInsuranceCaseBalance(insuranceCase, requestedQWeekId);
     var damageAmount = ZERO;
     if (previousWeekBalance == null) {
-      damageAmount = insuranceCase.getDamageAmount();
+      damageAmount = originalDamageAmount;
     } else {
-      final var damageRemaining = previousWeekBalance.getDamageRemaining();
-      final var selfResponsibilityRemaining = previousWeekBalance.getSelfResponsibilityRemaining();
-      damageAmount = selfResponsibilityRemaining.add(damageRemaining);
+      final var paidAmount =
+          insuranceCaseQuery.getPaidAmountByInsuranceCaseId(insuranceCase.getId());
+      damageAmount = originalDamageAmount.subtract(paidAmount);
     }
     final var damageTransaction = getDamageTransaction(driverId, requestedQWeek, damageAmount);
     final var requestedBalance =
