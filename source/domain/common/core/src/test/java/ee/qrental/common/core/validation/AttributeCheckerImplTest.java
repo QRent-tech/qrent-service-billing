@@ -205,7 +205,7 @@ public class AttributeCheckerImplTest {
     // then
     assertTrue(violationsCollector.hasViolations());
     assertEquals(
-        "Invalid value for some name. Current length: 6. Valid length must be in a range: [2 ... 5])",
+        "Invalid value for some name. Current length: 6. Valid length must be in a range: [2 ... 5]",
         violationsCollector.getViolations().get(0));
   }
 
@@ -225,7 +225,7 @@ public class AttributeCheckerImplTest {
     // then
     assertTrue(violationsCollector.hasViolations());
     assertEquals(
-        "Invalid value for some name. Current length: 1. Valid length must be in a range: [2 ... 5])",
+        "Invalid value for some name. Current length: 1. Valid length must be in a range: [2 ... 5]",
         violationsCollector.getViolations().get(0));
   }
 
@@ -244,7 +244,7 @@ public class AttributeCheckerImplTest {
     // then
     assertTrue(violationsCollector.hasViolations());
     assertEquals(
-        "Invalid value for some name. Current length: 3. Valid length must equal to: 2)",
+        "Invalid value for some name. Current length: 3. Valid length must equal to: 2",
         violationsCollector.getViolations().get(0));
   }
 
