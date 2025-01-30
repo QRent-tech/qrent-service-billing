@@ -61,4 +61,9 @@ public class InsuranceCaseRepositoryImpl implements InsuranceCaseRepository {
   public List<InsuranceCaseJakartaEntity> findActiveByDriverId(final Long driverId) {
     return springDataRepository.findActiveByDriverId(driverId);
   }
+
+  @Override
+  public List<Long> findPaymentTransactionIdsByInsuranceCaseId(Long insuranceCaseId) {
+    return  springDataRepository.findPaymentTransactionIdsByInsuranceCaseId(insuranceCaseId);
+  }
 }

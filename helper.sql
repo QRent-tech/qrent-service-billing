@@ -66,18 +66,18 @@ from balance_calculation_result bcr
 where bcr.balance_id in
       (select bl.id
        from balance bl
-       where q_week_id in (select qw.id from q_week qw where qw.number = 23 and qw.year = 2024));
+       where q_week_id in (select qw.id from q_week qw where qw.number = 39 and qw.year = 2024));
 
 delete
 from balance_transaction btr
 where btr.balance_id in
       (select bl.id
        from balance bl
-       where q_week_id in (select qw.id from q_week qw where qw.number = 23 and qw.year = 2024));
+       where q_week_id in (select qw.id from q_week qw where qw.number = 39 and qw.year = 2024));
 
 delete
 from balance bl
-where q_week_id in (select qw.id from q_week qw where qw.number = 23 and qw.year = 2024);
+where q_week_id in (select qw.id from q_week qw where qw.number = 39 and qw.year = 2024);
 
 delete
 from transaction tx

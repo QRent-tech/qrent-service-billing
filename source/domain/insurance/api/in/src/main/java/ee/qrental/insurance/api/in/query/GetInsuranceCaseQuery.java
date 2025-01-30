@@ -5,6 +5,7 @@ import ee.qrental.insurance.api.in.request.InsuranceCaseUpdateRequest;
 import ee.qrental.insurance.api.in.response.InsuranceCaseBalanceResponse;
 import ee.qrental.insurance.api.in.response.InsuranceCaseResponse;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface GetInsuranceCaseQuery
@@ -22,4 +23,6 @@ public interface GetInsuranceCaseQuery
 
   List<InsuranceCaseBalanceResponse> getInsuranceCaseBalancesByInsuranceCase(
       final Long insuranceCaseId);
+
+  BigDecimal getPaidAmountByInsuranceCaseId(final Long insuranceCaseId);
 }

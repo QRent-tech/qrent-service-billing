@@ -1,7 +1,9 @@
 package ee.qrental.insurance.core.service;
 
+import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.toList;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
@@ -13,11 +15,14 @@ import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrental.insurance.core.mapper.InsuranceCaseBalanceResponseMapper;
 import ee.qrental.insurance.core.mapper.InsuranceCaseResponseMapper;
 import ee.qrental.insurance.core.mapper.InsuranceCaseUpdateRequestMapper;
+import ee.qrental.transaction.api.in.query.GetTransactionQuery;
+import ee.qrental.transaction.api.in.response.TransactionResponse;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class InsuranceCaseQueryService implements GetInsuranceCaseQuery {
 
+  private final GetTransactionQuery transactionQuery;
   private final InsuranceCaseLoadPort loadPort;
   private final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort;
   private final InsuranceCaseResponseMapper responseMapper;
@@ -51,7 +56,9 @@ public class InsuranceCaseQueryService implements GetInsuranceCaseQuery {
 
   @Override
   public List<InsuranceCaseResponse> getActiveByDriverId(final Long driverId) {
-    return loadPort.loadAllActiveByDriverId(driverId).stream().map(responseMapper::toResponse).collect(toList());
+    return loadPort.loadAllActiveByDriverId(driverId).stream()
+        .map(responseMapper::toResponse)
+        .collect(toList());
   }
 
   @Override
@@ -75,5 +82,16 @@ public class InsuranceCaseQueryService implements GetInsuranceCaseQuery {
     return insuranceCaseBalanceLoadPort.loadAllByInsuranceCseId(insuranceCaseId).stream()
         .map(domain -> insuranceCaseBalanceResponseMapper.toResponse(domain))
         .toList();
+  }
+
+  @Override
+  public BigDecimal getPaidAmountByInsuranceCaseId(final Long insuranceCaseId) {
+    final var paymentTransactionIds =
+        loadPort.loadPaymentTransactionIdsByInsuranceCaseId(insuranceCaseId);
+
+    return transactionQuery.getAllByIds(paymentTransactionIds).stream()
+        .map(TransactionResponse::getRealAmount)
+        .reduce(ZERO, BigDecimal::add)
+        .abs();
   }
 }

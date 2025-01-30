@@ -29,28 +29,45 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
 @Configuration
 @EnableTransactionManagement
 public class InsuranceCaseServiceConfig {
 
   @Bean
-  InsuranceCaseBalanceCalculator getInsuranceCaseBalanceCalculator(
+  List<InsuranceCaseBalanceCalculationStrategy> getInsuranceCaseBalanceCalculationStrategies(
+      final GetQWeekQuery qWeekQuery,
       final GetQKaskoQuery qKaskoQuery,
+      final GetTransactionTypeQuery transactionTypeQuery,
+      final TransactionAddUseCase transactionAddUseCase,
       final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
       final GetTransactionQuery transactionQuery,
-      final GetTransactionTypeQuery transactionTypeQuery,
-      final InsuranceCaseBalanceDeriveService deriveService,
-      final TransactionAddUseCase transactionAddUseCase,
-      final GetQWeekQuery getQWeekQuery) {
+      final GetInsuranceCaseQuery insuranceCaseQuery) {
+    return asList(
+        new InsuranceCaseBalanceWithQKaskoCalculationStrategy(
+            qWeekQuery,
+            qKaskoQuery,
+            transactionTypeQuery,
+            transactionAddUseCase,
+            insuranceCaseBalanceLoadPort,
+            transactionQuery),
+        new InsuranceCaseBalanceWithoutQKaskoCalculationStrategy(
+            qWeekQuery,
+            qKaskoQuery,
+            transactionTypeQuery,
+            transactionAddUseCase,
+            insuranceCaseBalanceLoadPort,
+            insuranceCaseQuery));
+  }
 
-    return new InsuranceCaseBalanceCalculatorService(
-        qKaskoQuery,
-        insuranceCaseBalanceLoadPort,
-        transactionQuery,
-        transactionTypeQuery,
-        deriveService,
-        transactionAddUseCase,
-        getQWeekQuery);
+  @Bean
+  InsuranceCaseBalanceCalculator getInsuranceCaseBalanceCalculator(
+      List<InsuranceCaseBalanceCalculationStrategy> calculationStrategies) {
+
+    return new InsuranceCaseBalanceCalculationService(calculationStrategies);
   }
 
   @Bean
@@ -75,6 +92,7 @@ public class InsuranceCaseServiceConfig {
 
   @Bean
   GetInsuranceCaseQuery getInsuranceCaseQueryService(
+      final GetTransactionQuery transactionQuery,
       final InsuranceCaseLoadPort loadPort,
       final InsuranceCaseBalanceLoadPort insuranceCaseBalanceLoadPort,
       final InsuranceCaseResponseMapper mapper,
@@ -82,6 +100,7 @@ public class InsuranceCaseServiceConfig {
       final InsuranceCaseUpdateRequestMapper updateRequestMapper) {
 
     return new InsuranceCaseQueryService(
+        transactionQuery,
         loadPort,
         insuranceCaseBalanceLoadPort,
         mapper,
@@ -155,12 +174,6 @@ public class InsuranceCaseServiceConfig {
         qWeekQuery,
         insuranceCaseBalanceCalculator,
         addRequestValidator);
-  }
-
-  @Bean
-  InsuranceCaseBalanceDeriveService getInsuranceCaseBalanceDeriveService() {
-
-    return new InsuranceCaseBalanceDeriveService();
   }
 
   @Bean
