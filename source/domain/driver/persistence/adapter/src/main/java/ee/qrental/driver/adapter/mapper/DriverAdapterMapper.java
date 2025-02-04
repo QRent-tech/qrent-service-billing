@@ -71,6 +71,7 @@ public class DriverAdapterMapper {
         .taxNumber(domain.getTaxNumber())
         .phone(domain.getPhone())
         .email(domain.getEmail())
+        .companyVat(domain.getCompanyVat())
         .companyName(domain.getCompanyName())
         .companyCeoFirstName(domain.getCompanyCeoFirstName())
         .companyCeoLastName(domain.getCompanyCeoLastName())

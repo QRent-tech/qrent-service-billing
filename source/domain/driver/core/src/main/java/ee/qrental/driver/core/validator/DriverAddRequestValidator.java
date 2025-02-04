@@ -34,7 +34,6 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
   private static final int LENGTH_MAX_VAT = 50;
   private static final int LENGTH_MAX_CEO_FIRST_NAME = 50;
   private static final int LENGTH_MAX_CEO_LAST_NAME = 50;
-  private static final int LENGTH_FIXED_CEO_TAX_NUMBER = 11;
   private static final int LENGTH_MAX_COMPANY_ADDRESS = 50;
   private static final int LENGTH_MAX_COMMENT = 200;
 
@@ -56,7 +55,7 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     checkCompanyVat(request, violationsCollector);
     checkCeoFirstName(request, violationsCollector);
     checkCeoLastName(request, violationsCollector);
-    checkCeoIsikukood(request, violationsCollector);
+    checkCeoTaxNumber(request, violationsCollector);
     checkCompanyAddress(request, violationsCollector);
     checkComment(request, violationsCollector);
 
@@ -91,7 +90,7 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
       return;
     }
     attributeChecker.checkStringLengthMax(
-        attributeName, attributeValue,  LENGTH_MAX_FIRST_NAME, violationsCollector);
+        attributeName, attributeValue, LENGTH_MAX_FIRST_NAME, violationsCollector);
   }
 
   private void checkLastName(
@@ -253,7 +252,7 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
         attributeName, attributeValue, LENGTH_MAX_CEO_LAST_NAME, violationsCollector);
   }
 
-  private void checkCeoIsikukood(
+  private void checkCeoTaxNumber(
       final DriverAddRequest request, final ViolationsCollector violationsCollector) {
     final var attributeName = "CEO Isikukood";
     final var attributeValue = request.getCompanyCeoTaxNumber();
@@ -261,11 +260,9 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
     if (attributeValue == null) {
       return;
     }
-    if (String.valueOf(attributeValue).length() != LENGTH_FIXED_CEO_TAX_NUMBER) {
-      return;
-    }
-    violationsCollector.collect(
-        format("CEO Isikukood must be %d characters long", LENGTH_FIXED_CEO_TAX_NUMBER));
+    attributeChecker.checkStringLengthFixed(
+        attributeName, attributeValue, LENGTH_FIXED_TAX_NUMBER, violationsCollector);
+    checkTaxNumberUniqueness(attributeValue, violationsCollector);
   }
 
   private void checkCompanyAddress(
