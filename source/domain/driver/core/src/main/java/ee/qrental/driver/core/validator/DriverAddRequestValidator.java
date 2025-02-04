@@ -34,7 +34,7 @@ public class DriverAddRequestValidator implements AddRequestValidator<DriverAddR
   private static final int LENGTH_MAX_VAT = 50;
   private static final int LENGTH_MAX_CEO_FIRST_NAME = 50;
   private static final int LENGTH_MAX_CEO_LAST_NAME = 50;
-  private static final int LENGTH_MAX_COMPANY_ADDRESS = 50;
+  private static final int LENGTH_MAX_COMPANY_ADDRESS = 120;
   private static final int LENGTH_MAX_COMMENT = 200;
 
   @Override
