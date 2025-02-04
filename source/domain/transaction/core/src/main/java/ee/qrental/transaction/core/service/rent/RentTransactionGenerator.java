@@ -21,7 +21,7 @@ import static java.math.BigDecimal.valueOf;
 public class RentTransactionGenerator {
 
   private static final Integer ABSENCE_DAYS_COUNT_THRESHOLD_PER_WEEK = 2;
-  private static final Long NEW_CAR_AGE = 3L;
+  private static final Long NEW_CAR_AGE = 4L;
   private static final BigDecimal OLD_CAR_RATE = valueOf(150L);
   private static final BigDecimal NEW_CAR_RATE = valueOf(240L);
   private static final BigDecimal RATE_DECREASE_STEP = valueOf(10L);
