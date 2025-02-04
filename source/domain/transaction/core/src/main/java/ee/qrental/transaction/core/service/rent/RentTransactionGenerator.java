@@ -133,38 +133,30 @@ public class RentTransactionGenerator {
     final var carId = carLink.getCarId();
     final var car = carQuery.getById(carId);
     final var carAge = getCarAge(car);
+    // new car age = 4
     if (carAge < NEW_CAR_AGE) {
-
+      //240
       return NEW_CAR_RATE;
     }
 
-    if (carAge == 3) {
-
+    if (carAge == 4) {
+      //240 - 10
       return NEW_CAR_RATE.subtract(RATE_DECREASE_STEP);
     }
-
-    if (carAge == 4) {
-
-      return NEW_CAR_RATE.subtract(RATE_DECREASE_STEP).subtract(RATE_DECREASE_STEP);
-    }
-
     if (carAge == 5) {
-
+      //240 - 10 - 10
       return NEW_CAR_RATE
-          .subtract(RATE_DECREASE_STEP)
           .subtract(RATE_DECREASE_STEP)
           .subtract(RATE_DECREASE_STEP);
     }
-
     if (carAge == 6) {
-
+      //240 - 10 - 10 - 10
       return NEW_CAR_RATE
-          .subtract(RATE_DECREASE_STEP)
           .subtract(RATE_DECREASE_STEP)
           .subtract(RATE_DECREASE_STEP)
           .subtract(RATE_DECREASE_STEP);
     }
-
+    //150
     return OLD_CAR_RATE;
   }
 

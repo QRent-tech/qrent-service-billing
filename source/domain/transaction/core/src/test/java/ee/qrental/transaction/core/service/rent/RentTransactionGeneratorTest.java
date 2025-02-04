@@ -137,7 +137,7 @@ class RentTransactionGeneratorTest {
     assertEquals(30L, transactionAddRequest.getTransactionTypeId());
     assertEquals(21L, transactionAddRequest.getDriverId());
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
-    assertEquals(BigDecimal.valueOf(230), transactionAddRequest.getAmount());
+    assertEquals(BigDecimal.valueOf(240), transactionAddRequest.getAmount());
   }
 
   @Test
@@ -172,7 +172,7 @@ class RentTransactionGeneratorTest {
     assertEquals(30L, transactionAddRequest.getTransactionTypeId());
     assertEquals(21L, transactionAddRequest.getDriverId());
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
-    assertEquals(BigDecimal.valueOf(220), transactionAddRequest.getAmount());
+    assertEquals(BigDecimal.valueOf(230), transactionAddRequest.getAmount());
   }
 
   @Test
@@ -207,7 +207,7 @@ class RentTransactionGeneratorTest {
     assertEquals(30L, transactionAddRequest.getTransactionTypeId());
     assertEquals(21L, transactionAddRequest.getDriverId());
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
-    assertEquals(BigDecimal.valueOf(210), transactionAddRequest.getAmount());
+    assertEquals(BigDecimal.valueOf(220), transactionAddRequest.getAmount());
   }
 
   @Test
@@ -242,7 +242,7 @@ class RentTransactionGeneratorTest {
     assertEquals(30L, transactionAddRequest.getTransactionTypeId());
     assertEquals(21L, transactionAddRequest.getDriverId());
     assertEquals(LocalDate.of(2024, Month.JANUARY, 2), transactionAddRequest.getDate());
-    assertEquals(BigDecimal.valueOf(200), transactionAddRequest.getAmount());
+    assertEquals(BigDecimal.valueOf(210), transactionAddRequest.getAmount());
   }
 
   @Test
