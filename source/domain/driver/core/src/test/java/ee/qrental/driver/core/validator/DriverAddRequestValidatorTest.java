@@ -42,7 +42,7 @@ public class DriverAddRequestValidatorTest {
     addRequest.setHasRequiredObligation(Boolean.FALSE);
     addRequest.setFirstName("John");
     addRequest.setLastName("Doe");
-    addRequest.setTaxNumber(38408190101L);
+    addRequest.setTaxNumber(48108259011L);
     addRequest.setAddress("Tallinn, Str. Lootsa, 45b");
     addRequest.setDriverLicenseNumber("AR-TY_45879");
     addRequest.setDriverLicenseExp(qDateTime.getToday().plus(2, ChronoUnit.DAYS));
@@ -55,7 +55,7 @@ public class DriverAddRequestValidatorTest {
     addRequest.setCompanyVat("VAT-8989");
     addRequest.setCompanyCeoFirstName("CEO_FN");
     addRequest.setCompanyCeoLastName("CEO_LN");
-    addRequest.setCompanyCeoTaxNumber(4381082590101L);
+    addRequest.setCompanyCeoTaxNumber(48108259011L);
     addRequest.setComment("This is a comment");
 
     return addRequest;
