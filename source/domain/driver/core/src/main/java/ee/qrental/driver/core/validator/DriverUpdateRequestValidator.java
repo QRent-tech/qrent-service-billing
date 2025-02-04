@@ -4,40 +4,71 @@ import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
 import static java.lang.String.format;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
 import ee.qrental.driver.domain.Driver;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-@AllArgsConstructor
-public class DriverUpdateRequestValidator implements UpdateRequestValidator<DriverUpdateRequest> {
+public class DriverUpdateRequestValidator extends AbstractDriverRequestValidator
+    implements UpdateRequestValidator<DriverUpdateRequest> {
 
-  private final DriverLoadPort loadPort;
   private final GetQWeekQuery qWeekQuery;
-  private final QDateTime qDateTime;
+
+  public DriverUpdateRequestValidator(
+      final AttributeChecker attributeChecker,
+      final DriverLoadPort loadPort,
+      final GetQWeekQuery qWeekQuery,
+      final QDateTime qDateTime) {
+    super(loadPort, attributeChecker, qDateTime);
+    this.qWeekQuery = qWeekQuery;
+  }
 
   @Override
   public ViolationsCollector validate(final DriverUpdateRequest request) {
-    final var violationsCollector = new ViolationsCollector();
-    final var driverFromDb = loadPort.loadById(request.getId());
+    final var violationsCollector = getViolationCollector();
+    checkObligationNumber(
+        request.getHasRequiredObligation(), request.getRequiredObligation(), violationsCollector);
+    checkFirstName(request.getFirstName(), violationsCollector);
+    checkLastName(request.getLastName(), violationsCollector);
+    checkTaxNumber(request.getTaxNumber(), violationsCollector);
+    checkAddress(request.getAddress(), violationsCollector);
+    checkLicenseNumber(request.getDriverLicenseNumber(), violationsCollector);
+    checkLicenseExpirationDate(request.getDriverLicenseExp(), violationsCollector);
+    checkTaxiLicense(request.getTaxiLicense(), violationsCollector);
+    checkPhoneNumber(request.getPhone(), violationsCollector);
+    checkEmail(request.getEmail(), violationsCollector);
+    checkCompanyName(request.getCompanyName(), violationsCollector);
+    checkRegistrationNumber(request.getRegNumber(), violationsCollector);
+    checkCompanyVat(request.getCompanyVat(), violationsCollector);
+    checkCeoFirstName(request.getCompanyCeoFirstName(), violationsCollector);
+    checkCeoLastName(request.getCompanyCeoLastName(), violationsCollector);
+    checkCeoTaxNumber(request.getCompanyCeoTaxNumber(), violationsCollector);
+    checkCompanyAddress(request.getCompanyAddress(), violationsCollector);
+    checkComment(request.getComment(), violationsCollector);
+    checkRecommendation(request, violationsCollector);
+
+    return violationsCollector;
+  }
+
+  private void checkRecommendation(
+      final DriverUpdateRequest request, final ViolationsCollector violationsCollector) {
+    final var driverFromDb = getLoadPort().loadById(request.getId());
     final var isRecommendationUpdated = isRecommendationUpdated(request, driverFromDb);
     if (isRecommendationUpdated) {
       final var latestDateForUpdate = getLastDateForUpdate(driverFromDb.getCreatedDate());
-      if (latestDateForUpdate.isBefore(qDateTime.getToday())) {
+      if (latestDateForUpdate.isBefore(getQDateTime().getToday())) {
         violationsCollector.collect(
             format(
                 "Driver's recommendation can not be changes after creation week is passed. Last date for update was: "
                     + latestDateForUpdate));
       }
     }
-
-    return violationsCollector;
   }
 
   private LocalDate getLastDateForUpdate(final LocalDate driverCreationDate) {

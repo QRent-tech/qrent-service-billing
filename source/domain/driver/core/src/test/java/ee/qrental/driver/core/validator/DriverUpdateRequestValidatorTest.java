@@ -6,6 +6,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.validation.AttributeChecker;
+import ee.qrental.common.core.validation.AttributeCheckerImpl;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;
@@ -23,13 +25,16 @@ class DriverUpdateRequestValidatorTest {
   private DriverLoadPort loadPort;
   private GetQWeekQuery qWeekQuery;
   private QDateTime qDateTime;
+  private AttributeChecker attributeChecker;
 
   @BeforeEach
   void init() {
     loadPort = mock(DriverLoadPort.class);
     qWeekQuery = mock(GetQWeekQuery.class);
     qDateTime = mock(QDateTime.class);
-    instanceUnderTest = new DriverUpdateRequestValidator(loadPort, qWeekQuery, qDateTime);
+    attributeChecker = new AttributeCheckerImpl();
+    instanceUnderTest =
+        new DriverUpdateRequestValidator(attributeChecker, loadPort, qWeekQuery, qDateTime);
   }
 
   @Test

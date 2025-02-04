@@ -32,7 +32,7 @@ public class DriverAddRequestValidatorTest {
     loadPort = mock(DriverLoadPort.class);
     qDateTime = mock(QDateTime.class);
     attributeChecker = new AttributeCheckerImpl();
-    instanceUnderTest = new DriverAddRequestValidator(loadPort, qDateTime, attributeChecker);
+    instanceUnderTest = new DriverAddRequestValidator(attributeChecker, loadPort, qDateTime);
     when(qDateTime.getToday()).thenReturn(LocalDate.of(2025, Month.JANUARY, 15));
   }
 
@@ -139,6 +139,7 @@ public class DriverAddRequestValidatorTest {
                     violation.equals(
                         "Invalid value for First name. Current length: 51. Valid length must be not more then: 50")));
   }
+
   @Test
   void testIfLastNameNotSet() {
     // given
@@ -152,9 +153,9 @@ public class DriverAddRequestValidatorTest {
     assertTrue(violationCollector.hasViolations());
     assertEquals(1, violationCollector.getViolations().size());
     assertTrue(
-            violationCollector.getViolations().stream()
-                    .anyMatch(
-                            violation -> violation.equals("Invalid value for Last name. Value must be set")));
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation -> violation.equals("Invalid value for Last name. Value must be set")));
   }
 
   @Test
@@ -170,12 +171,13 @@ public class DriverAddRequestValidatorTest {
     assertTrue(violationCollector.hasViolations());
     assertEquals(1, violationCollector.getViolations().size());
     assertTrue(
-            violationCollector.getViolations().stream()
-                    .anyMatch(
-                            violation ->
-                                    violation.equals(
-                                            "Invalid value for Last name. Current length: 51. Valid length must be not more then: 50")));
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals(
+                        "Invalid value for Last name. Current length: 51. Valid length must be not more then: 50")));
   }
+
   @Test
   void testIfTaxNumberNotSet() {
     // given
@@ -189,9 +191,9 @@ public class DriverAddRequestValidatorTest {
     assertTrue(violationCollector.hasViolations());
     assertEquals(1, violationCollector.getViolations().size());
     assertTrue(
-            violationCollector.getViolations().stream()
-                    .anyMatch(
-                            violation -> violation.equals("Invalid value for Isikukood. Value must be set")));
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation -> violation.equals("Invalid value for Isikukood. Value must be set")));
   }
 
   @Test
@@ -207,10 +209,10 @@ public class DriverAddRequestValidatorTest {
     assertTrue(violationCollector.hasViolations());
     assertEquals(1, violationCollector.getViolations().size());
     assertTrue(
-            violationCollector.getViolations().stream()
-                    .anyMatch(
-                            violation ->
-                                    violation.equals(
-                                            "Invalid value for Isikukood. Current length: 12. Valid length must equal to: 11")));
+        violationCollector.getViolations().stream()
+            .anyMatch(
+                violation ->
+                    violation.equals(
+                        "Invalid value for Isikukood. Current length: 12. Valid length must equal to: 11")));
   }
 }
