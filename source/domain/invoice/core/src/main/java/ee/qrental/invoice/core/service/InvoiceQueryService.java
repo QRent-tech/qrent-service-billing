@@ -1,7 +1,9 @@
 package ee.qrental.invoice.core.service;
 
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 
+import ee.qrental.driver.api.in.request.CallSignLinkResponse;
 import ee.qrental.invoice.api.in.query.GetInvoiceQuery;
 import ee.qrental.invoice.api.in.request.InvoiceUpdateRequest;
 import ee.qrental.invoice.api.in.response.InvoiceImmutableResponse;
@@ -9,6 +11,8 @@ import ee.qrental.invoice.api.in.response.InvoiceResponse;
 import ee.qrental.invoice.api.out.InvoiceLoadPort;
 import ee.qrental.invoice.core.mapper.InvoiceResponseMapper;
 import ee.qrental.invoice.core.mapper.InvoiceUpdateRequestMapper;
+
+import java.util.Comparator;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -21,7 +25,10 @@ public class InvoiceQueryService implements GetInvoiceQuery {
 
   @Override
   public List<InvoiceResponse> getAll() {
-    return loadPort.loadAll().stream().map(responseMapper::toResponse).collect(toList());
+    return loadPort.loadAll().stream()
+        .map(responseMapper::toResponse)
+        .sorted(getInvoiceYearAndWeekComparator())
+        .collect(toList());
   }
 
   @Override
@@ -47,7 +54,19 @@ public class InvoiceQueryService implements GetInvoiceQuery {
   @Override
   public List<InvoiceResponse> getAllByCalculationId(Long calculationId) {
     return loadPort.loadAllByCalculationId(calculationId).stream()
-            .map(responseMapper::toResponse)
-            .toList();
+        .map(responseMapper::toResponse)
+        .sorted(getInvoiceYearAndWeekComparator())
+        .toList();
+  }
+
+  private Comparator<InvoiceResponse> getInvoiceYearAndWeekComparator() {
+    return (invoice1, invoice2) -> {
+      final var yearComparison = invoice2.getYear().compareTo(invoice1.getYear());
+      if (yearComparison != 0) {
+        return yearComparison;
+      }
+
+      return invoice2.getWeekNumber().compareTo(invoice1.getWeekNumber());
+    };
   }
 }
