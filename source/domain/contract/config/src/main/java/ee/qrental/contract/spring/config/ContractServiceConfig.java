@@ -90,7 +90,7 @@ public class ContractServiceConfig {
   }
 
   @Bean
-  List<ContractToPdfConversionStrategy> getContractPdfUseCase() {
+  List<ContractToPdfConversionStrategy> getContractToPdfConversionStrategies() {
     return asList(new ContractToPdfConversionStrategyOld(), new ContractToPdfConversionStrategyNew());
   }
 
