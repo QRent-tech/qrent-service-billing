@@ -32,11 +32,13 @@ public class DriverUpdateRequestValidator extends AbstractDriverRequestValidator
   @Override
   public ViolationsCollector validate(final DriverUpdateRequest request) {
     final var violationsCollector = getViolationCollector();
+    final var driverFromDB = getLoadPort().loadById(request.getId());
+
     checkObligationNumber(
         request.getHasRequiredObligation(), request.getRequiredObligation(), violationsCollector);
     checkFirstName(request.getFirstName(), violationsCollector);
     checkLastName(request.getLastName(), violationsCollector);
-    checkTaxNumber(request.getTaxNumber(), violationsCollector);
+    validateTaxNumber(driverFromDB.getTaxNumber(), request.getTaxNumber(), violationsCollector);
     checkAddress(request.getAddress(), violationsCollector);
     checkLicenseNumber(request.getDriverLicenseNumber(), violationsCollector);
     checkLicenseExpirationDate(request.getDriverLicenseExp(), violationsCollector);
@@ -54,6 +56,18 @@ public class DriverUpdateRequestValidator extends AbstractDriverRequestValidator
     checkRecommendation(request, violationsCollector);
 
     return violationsCollector;
+  }
+
+  private void validateTaxNumber(
+      final Long taxNumberFromDb,
+      final Long taxNumberFromRequest,
+      final ViolationsCollector violationsCollector) {
+    checkTaxNumber(taxNumberFromRequest, violationsCollector);
+
+    if (taxNumberFromDb.equals(taxNumberFromRequest)) {
+      return;
+    }
+    checkTaxNumberUniqueness(taxNumberFromRequest, violationsCollector);
   }
 
   private void checkRecommendation(

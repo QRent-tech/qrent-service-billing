@@ -24,7 +24,7 @@ public class DriverAddRequestValidator extends AbstractDriverRequestValidator
         request.getHasRequiredObligation(), request.getRequiredObligation(), violationsCollector);
     checkFirstName(request.getFirstName(), violationsCollector);
     checkLastName(request.getLastName(), violationsCollector);
-    checkTaxNumber(request.getTaxNumber(), violationsCollector);
+    validateTaxNumber(request.getTaxNumber(), violationsCollector);
     checkAddress(request.getAddress(), violationsCollector);
     checkLicenseNumber(request.getDriverLicenseNumber(), violationsCollector);
     checkLicenseExpirationDate(request.getDriverLicenseExp(), violationsCollector);
@@ -41,5 +41,10 @@ public class DriverAddRequestValidator extends AbstractDriverRequestValidator
     checkComment(request.getComment(), violationsCollector);
 
     return violationsCollector;
+  }
+
+  private void validateTaxNumber(final Long taxNumber, final ViolationsCollector violationsCollector){
+    checkTaxNumber(taxNumber, violationsCollector);
+    checkTaxNumberUniqueness(taxNumber, violationsCollector);
   }
 }

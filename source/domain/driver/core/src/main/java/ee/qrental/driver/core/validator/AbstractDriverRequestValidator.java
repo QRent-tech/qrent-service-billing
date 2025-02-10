@@ -97,10 +97,9 @@ public abstract class AbstractDriverRequestValidator {
     }
     attributeChecker.checkStringLengthFixed(
         attributeName, attributeValue, LENGTH_FIXED_TAX_NUMBER, violationsCollector);
-    checkTaxNumberUniqueness(attributeValue, violationsCollector);
   }
 
-  private void checkTaxNumberUniqueness(
+  protected void checkTaxNumberUniqueness(
       final Long taxNumber, final ViolationsCollector violationsCollector) {
     final var fromDb = loadPort.loadByTaxNumber(taxNumber);
     if (fromDb == null) {
@@ -243,7 +242,6 @@ public abstract class AbstractDriverRequestValidator {
     }
     attributeChecker.checkStringLengthFixed(
         attributeName, attributeValue, LENGTH_FIXED_TAX_NUMBER, violationsCollector);
-    checkTaxNumberUniqueness(attributeValue, violationsCollector);
   }
 
   protected void checkCompanyAddress(
