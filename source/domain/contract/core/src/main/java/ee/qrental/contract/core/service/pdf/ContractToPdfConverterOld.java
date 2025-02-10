@@ -263,7 +263,7 @@ public class ContractToPdfConverterOld {
         rentnik.addCell(rentnikcell5);
 
         final var rentnikcell6 =
-                new Cell(new Paragraph("Rentniku juhatuse liige või seadusliku esindaja isikukood: " + model.getRenterCeoIsikukood(),
+                new Cell(new Paragraph("Rentniku juhatuse liige või seadusliku esindaja isikukood: " + model.getRenterCeoTaxNumber(),
                         new Font(Font.TIMES_ROMAN, 9, Font.NORMAL)));
         rentnikcell6.setBorder(NO_BORDER);
         rentnikcell6.setHorizontalAlignment(LEFT);

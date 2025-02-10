@@ -15,10 +15,10 @@ public class ContractPdfModel {
     private String renterRegistrationNumber;
     private String renterAddress;
     private String renterCeoName;
-    private Long renterCeoIsikukood;
+    private Long renterCeoTaxNumber;
     private String renterPhone;
     private String renterEmail;
-    private Long driverIsikukood;
+    private Long driverTaxNumber;
     private String driverLicenceNumber;
     private String qFirmName;
     private String qFirmPostAddress;

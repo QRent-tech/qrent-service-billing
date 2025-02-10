@@ -21,9 +21,26 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
 
   @Override
   public boolean canApply(final ContractPdfModel contract) {
-    //TODO add condition
+    // TODO add condition
 
     return false;
+  }
+
+  private static Cell getChapterCell(final String chapterNumber) {
+    final var chapterCell =
+        new Cell(new Paragraph(chapterNumber + ".", new Font(TIMES_ROMAN, 9, BOLD)));
+    chapterCell.setBorder(NO_BORDER);
+    chapterCell.setHorizontalAlignment(LEFT);
+
+    return chapterCell;
+  }
+
+  private static Cell getSubChapterCell(final String subChapterNumber) {
+    final var subChapterCell = new Cell(new Paragraph(subChapterNumber, new Font(TIMES_ROMAN, 9, NORMAL)));
+    subChapterCell.setBorder(NO_BORDER);
+    subChapterCell.setHorizontalAlignment(LEFT);
+
+    return subChapterCell;
   }
 
   @SneakyThrows
@@ -36,111 +53,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     contractPdfDoc.add(getHeaderTable(model));
     contractPdfDoc.add(new Paragraph("\n"));
     contractPdfDoc.add(getRenterTable(model));
-
-    final var rentnik = new Table(1);
-    rentnik.setPadding(0f);
-    rentnik.setSpacing(0f);
-    rentnik.setWidth(100f);
-    rentnik.setBorderColor(white);
-    rentnik.setHorizontalAlignment(LEFT);
-    rentnik.setBorder(NO_BORDER);
-    rentnik.setBorder(NO_BORDER);
-
-    final var rentnikcell1 =
-        new Cell(new Paragraph("RENTNIKU ANDMED: ", new Font(TIMES_ROMAN, 10, BOLD)));
-    rentnikcell1.setBorder(NO_BORDER);
-    rentnikcell1.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell1);
-
-    final var rentnikcell2 =
-        new Cell(
-            new Paragraph(
-                "Rentniku nimi: " + getTextOrEmpty(model.getRenterName()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell2.setBorder(NO_BORDER);
-    rentnikcell2.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell2);
-
-    final var rentnikcell3 =
-        new Cell(
-            new Paragraph(
-                "Rentniku reg. nr. või isikukood: "
-                    + getTextOrEmpty(model.getRenterRegistrationNumber()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell3.setBorder(NO_BORDER);
-    rentnikcell3.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell3);
-
-    final var rentnikcell4 =
-        new Cell(
-            new Paragraph(
-                "Rentniku aadress:  " + getTextOrEmpty(model.getRenterAddress()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell4.setBorder(NO_BORDER);
-    rentnikcell4.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell4);
-
-    final var rentnikcell5 =
-        new Cell(
-            new Paragraph(
-                "Rentniku seadusliku või volitatud esindaja nimi:  "
-                    + getTextOrEmpty(model.getRenterCeoName()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell5.setBorder(NO_BORDER);
-    rentnikcell5.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell5);
-
-    final var rentnikcell6 =
-        new Cell(
-            new Paragraph(
-                "Rentniku seadusliku või volitatud esindaja isikukood:  "
-                    + model.getRenterCeoIsikukood(),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell6.setBorder(NO_BORDER);
-    rentnikcell6.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell6);
-
-    final var rentnikcell7 =
-        new Cell(
-            new Paragraph(
-                "Rentniku või selle seadusliku ega volitatud esindaja juhiloa number:  "
-                    + getTextOrEmpty(model.getDriverLicenceNumber()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell7.setBorder(NO_BORDER);
-    rentnikcell7.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell7);
-
-    final var rentnikcell8 =
-        new Cell(
-            new Paragraph(
-                "Rentniku või selle seadusliku ega volitatud esindaja kontaktaadress:   "
-                    + getTextOrEmpty(model.getDriverAddress()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell8.setBorder(NO_BORDER);
-    rentnikcell8.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell8);
-
-    final var rentnikcell9 =
-        new Cell(
-            new Paragraph(
-                "Rentniku või selle seadusliku ega volitatud esindaja kontakttelefon:   "
-                    + getTextOrEmpty(model.getRenterPhone()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell9.setBorder(NO_BORDER);
-    rentnikcell9.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell9);
-
-    final var rentnikcell10 =
-        new Cell(
-            new Paragraph(
-                "Rentniku või selle seadusliku ega volitatud esindaja e-post:    "
-                    + getTextOrEmpty(model.getRenterEmail()),
-                new Font(TIMES_ROMAN, 9, NORMAL)));
-    rentnikcell10.setBorder(NO_BORDER);
-    rentnikcell10.setHorizontalAlignment(LEFT);
-    rentnik.addCell(rentnikcell10);
-
-    contractPdfDoc.add(rentnik);
+    contractPdfDoc.add(getTenantTable(model));
 
     final var body1 = new Table(2);
     body1.setWidths(new float[] {1, 20});
@@ -150,22 +63,13 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1.setBorderColor(white);
     body1.setHorizontalAlignment(LEFT);
     body1.setBorder(NO_BORDER);
-    body1.setBorder(NO_BORDER);
-
-    final var body1cell1 = new Cell(new Paragraph("I.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body1cell1.setBorder(NO_BORDER);
-    body1cell1.setHorizontalAlignment(LEFT);
-    body1.addCell(body1cell1);
+    body1.addCell(getChapterCell("I"));
 
     final var body1cell2 = new Cell(new Paragraph("Üldsätted", new Font(TIMES_ROMAN, 9, BOLD)));
     body1cell2.setBorder(NO_BORDER);
     body1cell2.setHorizontalAlignment(LEFT);
     body1.addCell(body1cell2);
-
-    final var body1cell3 = new Cell(new Paragraph("1.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1cell3.setBorder(NO_BORDER);
-    body1cell3.setHorizontalAlignment(LEFT);
-    body1.addCell(body1cell3);
+    body1.addCell(getSubChapterCell("1.1"));
 
     final var body1cell4 =
         new Cell(
@@ -177,11 +81,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1cell4.setBorder(NO_BORDER);
     body1cell4.setHorizontalAlignment(JUSTIFIED);
     body1.addCell(body1cell4);
-
-    final var body1cell5 = new Cell(new Paragraph("1.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1cell5.setBorder(NO_BORDER);
-    body1cell5.setHorizontalAlignment(LEFT);
-    body1.addCell(body1cell5);
+    body1.addCell(getSubChapterCell("1.2"));
 
     final var body1cell6 =
         new Cell(
@@ -193,10 +93,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1cell6.setHorizontalAlignment(JUSTIFIED);
     body1.addCell(body1cell6);
 
-    final var body1cell7 = new Cell(new Paragraph("1.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1cell7.setBorder(NO_BORDER);
-    body1cell7.setHorizontalAlignment(LEFT);
-    body1.addCell(body1cell7);
+    body1.addCell(getSubChapterCell("1.3"));
 
     final var body1cell8 =
         new Cell(
@@ -209,10 +106,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1cell8.setHorizontalAlignment(JUSTIFIED);
     body1.addCell(body1cell8);
 
-    final var body1cell9 = new Cell(new Paragraph("1.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1cell9.setBorder(NO_BORDER);
-    body1cell9.setHorizontalAlignment(LEFT);
-    body1.addCell(body1cell9);
+    body1.addCell(getSubChapterCell("1.4"));
 
     final var body1cell10 =
         new Cell(
@@ -233,12 +127,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2.setBorderColor(white);
     body2.setHorizontalAlignment(LEFT);
     body2.setBorder(NO_BORDER);
-    body2.setBorder(NO_BORDER);
-
-    final var body2cell1 = new Cell(new Paragraph("II.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body2cell1.setBorder(NO_BORDER);
-    body2cell1.setHorizontalAlignment(LEFT);
-    body2.addCell(body2cell1);
+    body2.addCell(getChapterCell("II"));
 
     final var body2cell2 =
         new Cell(new Paragraph("Rendilepingu tingimused", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -246,10 +135,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2cell2.setHorizontalAlignment(LEFT);
     body2.addCell(body2cell2);
 
-    final var body2cell3 = new Cell(new Paragraph("2.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2cell3.setBorder(NO_BORDER);
-    body2cell3.setHorizontalAlignment(LEFT);
-    body2.addCell(body2cell3);
+    body2.addCell(getSubChapterCell("2.1"));
 
     final var body2cell4 =
         new Cell(
@@ -261,10 +147,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2cell4.setHorizontalAlignment(JUSTIFIED);
     body2.addCell(body2cell4);
 
-    final var body2cell5 = new Cell(new Paragraph("2.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2cell5.setBorder(NO_BORDER);
-    body2cell5.setHorizontalAlignment(LEFT);
-    body2.addCell(body2cell5);
+    body2.addCell(getSubChapterCell("2.2"));
 
     final var body2cell6 =
         new Cell(
@@ -276,10 +159,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2cell6.setHorizontalAlignment(JUSTIFIED);
     body2.addCell(body2cell6);
 
-    final var body2cell7 = new Cell(new Paragraph("2.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2cell7.setBorder(NO_BORDER);
-    body2cell7.setHorizontalAlignment(LEFT);
-    body2.addCell(body2cell7);
+    body2.addCell(getSubChapterCell("2.3"));
 
     final var body2cell8 =
         new Cell(
@@ -290,10 +170,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2cell8.setHorizontalAlignment(JUSTIFIED);
     body2.addCell(body2cell8);
 
-    final var body2cell9 = new Cell(new Paragraph("2.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2cell9.setBorder(NO_BORDER);
-    body2cell9.setHorizontalAlignment(LEFT);
-    body2.addCell(body2cell9);
+    body2.addCell(getSubChapterCell("2.4"));
 
     final var body2cell10 =
         new Cell(
@@ -306,10 +183,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2cell10.setHorizontalAlignment(JUSTIFIED);
     body2.addCell(body2cell10);
 
-    final var body2cell11 = new Cell(new Paragraph("2.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2cell11.setBorder(NO_BORDER);
-    body2cell11.setHorizontalAlignment(LEFT);
-    body2.addCell(body2cell11);
+    body2.addCell(getSubChapterCell("2.5"));
 
     final var body2cell12 =
         new Cell(
@@ -330,12 +204,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3.setBorderColor(white);
     body3.setHorizontalAlignment(LEFT);
     body3.setBorder(NO_BORDER);
-    body3.setBorder(NO_BORDER);
-
-    final var body3cell1 = new Cell(new Paragraph("III.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body3cell1.setBorder(NO_BORDER);
-    body3cell1.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell1);
+    body3.addCell(getChapterCell("III"));
 
     final var body3cell2 =
         new Cell(new Paragraph(" Eritingimused ", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -343,10 +212,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell2.setHorizontalAlignment(LEFT);
     body3.addCell(body3cell2);
 
-    final var body3cell3 = new Cell(new Paragraph("3.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell3.setBorder(NO_BORDER);
-    body3cell3.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell3);
+    body3.addCell(getSubChapterCell("3.1"));
 
     final var body3cell4 =
         new Cell(
@@ -357,10 +223,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell4.setHorizontalAlignment(JUSTIFIED);
     body3.addCell(body3cell4);
 
-    final var body3cell5 = new Cell(new Paragraph("3.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell5.setBorder(NO_BORDER);
-    body3cell5.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell5);
+    body3.addCell(getSubChapterCell("3.2"));
 
     final var body3cell6 =
         new Cell(
@@ -377,10 +240,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell6.setHorizontalAlignment(JUSTIFIED);
     body3.addCell(body3cell6);
 
-    final var body3cell7 = new Cell(new Paragraph("3.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell7.setBorder(NO_BORDER);
-    body3cell7.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell7);
+    body3.addCell(getSubChapterCell("3.3"));
 
     final var body3cell8 =
         new Cell(
@@ -391,10 +251,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell8.setHorizontalAlignment(JUSTIFIED);
     body3.addCell(body3cell8);
 
-    final var body3cell9 = new Cell(new Paragraph("3.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell9.setBorder(NO_BORDER);
-    body3cell9.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell9);
+    body3.addCell(getSubChapterCell("3.4"));
 
     final var body3cell10 =
         new Cell(
@@ -405,10 +262,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell10.setHorizontalAlignment(JUSTIFIED);
     body3.addCell(body3cell10);
 
-    final var body3cell11 = new Cell(new Paragraph("3.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell11.setBorder(NO_BORDER);
-    body3cell11.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell11);
+    body3.addCell(getSubChapterCell("3.5"));
 
     final var body3cell12 =
         new Cell(
@@ -420,10 +274,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell12.setHorizontalAlignment(JUSTIFIED);
     body3.addCell(body3cell12);
 
-    final var body3cell13 = new Cell(new Paragraph("3.6", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell13.setBorder(NO_BORDER);
-    body3cell13.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell13);
+    body3.addCell(getSubChapterCell("3.6"));
 
     final var body3cell14 =
         new Cell(
@@ -445,13 +296,13 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
                 "Rentnik (esindaja ) füüsilise isikuna ("
                     + getTextOrEmpty(model.getRenterCeoName())
                     + " "
-                    + model.getRenterCeoIsikukood()
+                    + model.getRenterCeoTaxNumber()
                     + ") avaldab ja kinnitab oma allkirjaga tagasivõtmatult,"
                     + "et ta käendab käesolevas lepingus tekkitavad kohustused mis tekkivad majandustegevuse raames, kuivõrd olles Põhivõlgniku juhatuse liige ja Põhivõlgniku tegelik "
                     + "kasusaav omanik ("
                     + getTextOrEmpty(model.getRenterCeoName())
                     + " "
-                    + model.getRenterCeoIsikukood()
+                    + model.getRenterCeoTaxNumber()
                     + "), tagab Käendaja nimetatud lepingus tekkivad kohustused antava käendusega Pooled avaldavad, "
                     + "et nad ei käsitle käesoleva võlatunnistuse antud käendust tarbijakäendusena võlaõigusseaduse tähenduses. Käendaja vastutab Rendileandja ees täies ulatuses solidaarselt,"
                     + " tagades kõiki Rendileandja nõudeid Rentniku vastu, mis tekivad või võivad tekkida käesoleva lepingu alusel.",
@@ -490,10 +341,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell20.setHorizontalAlignment(JUSTIFIED);
     body3.addCell(body3cell20);
 
-    final var body3cell21 = new Cell(new Paragraph("3.7", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell21.setBorder(NO_BORDER);
-    body3cell21.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell21);
+    body3.addCell(getSubChapterCell("3.7"));
 
     final var body3cell22 =
         new Cell(
@@ -506,10 +354,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3cell22.setHorizontalAlignment(JUSTIFIED);
     body3.addCell(body3cell22);
 
-    final var body3cell23 = new Cell(new Paragraph("3.8", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3cell23.setBorder(NO_BORDER);
-    body3cell23.setHorizontalAlignment(LEFT);
-    body3.addCell(body3cell23);
+    body3.addCell(getSubChapterCell("3.8"));
 
     final var body3cell24 =
         new Cell(
@@ -530,37 +375,14 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4.setBorderColor(white);
     body4.setHorizontalAlignment(LEFT);
     body4.setBorder(NO_BORDER);
-    body4.setBorder(NO_BORDER);
-
-    final var body4cell1 = new Cell(new Paragraph("IV.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body4cell1.setBorder(NO_BORDER);
-    body4cell1.setHorizontalAlignment(LEFT);
-    body4.addCell(body4cell1);
+    body4.addCell(getChapterCell("IV"));
 
     final var body4cell2 = new Cell(new Paragraph(" Lõppsätted ", new Font(TIMES_ROMAN, 9, BOLD)));
     body4cell2.setBorder(NO_BORDER);
     body4cell2.setHorizontalAlignment(LEFT);
     body4.addCell(body4cell2);
 
-    /*       final var body4cell3 =
-                    new Cell(new Paragraph("IV.1",
-                            new Font(Font.TIMES_ROMAN, 9, Font.NORMAL)));
-            body4cell3.setBorder(NO_BORDER);
-            body4cell3.setHorizontalAlignment(LEFT);
-            body4.addCell(body4cell3);
-
-            final var body4cell4 =
-                    new Cell(new Paragraph("Rendiauto informatsioon ja seisund, ning informatsioon üleantud tagatise kohta" +
-                            " auto üleandmise ajaks on määratud Üleandmise / Vastuvõtmise aktis.",
-                            new Font(Font.TIMES_ROMAN, 8, Font.NORMAL)));
-            body4cell4.setBorder(NO_BORDER);
-            body4cell4.setHorizontalAlignment(JUSTIFIED);
-            body4.addCell(body4cell4);
-    */
-    final var body4cell5 = new Cell(new Paragraph("4.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4cell5.setBorder(NO_BORDER);
-    body4cell5.setHorizontalAlignment(LEFT);
-    body4.addCell(body4cell5);
+    body4.addCell(getSubChapterCell("4.1"));
 
     final var body4cell6 =
         new Cell(
@@ -572,10 +394,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4cell6.setHorizontalAlignment(JUSTIFIED);
     body4.addCell(body4cell6);
 
-    final var body4cell7 = new Cell(new Paragraph("4.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4cell7.setBorder(NO_BORDER);
-    body4cell7.setHorizontalAlignment(LEFT);
-    body4.addCell(body4cell7);
+    body4.addCell(getSubChapterCell("4.2"));
 
     final var body4cell8 =
         new Cell(
@@ -587,10 +406,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4cell8.setHorizontalAlignment(JUSTIFIED);
     body4.addCell(body4cell8);
 
-    final var body4cell9 = new Cell(new Paragraph("4.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4cell9.setBorder(NO_BORDER);
-    body4cell9.setHorizontalAlignment(LEFT);
-    body4.addCell(body4cell9);
+    body4.addCell(getSubChapterCell("4.3"));
 
     final var body4cell10 =
         new Cell(
@@ -643,22 +459,14 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1a.setBorderColor(white);
     body1a.setHorizontalAlignment(LEFT);
     body1a.setBorder(NO_BORDER);
-    body1a.setBorder(NO_BORDER);
-
-    final var body1acell1 = new Cell(new Paragraph("I.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body1acell1.setBorder(NO_BORDER);
-    body1acell1.setHorizontalAlignment(LEFT);
-    body1a.addCell(body1acell1);
+    body1a.addCell(getChapterCell("I"));
 
     final var body1acell2 = new Cell(new Paragraph("ÜLDSÄTTED", new Font(TIMES_ROMAN, 9, BOLD)));
     body1acell2.setBorder(NO_BORDER);
     body1acell2.setHorizontalAlignment(LEFT);
     body1a.addCell(body1acell2);
 
-    final var body1acell3 = new Cell(new Paragraph("1.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1acell3.setBorder(NO_BORDER);
-    body1acell3.setHorizontalAlignment(LEFT);
-    body1a.addCell(body1acell3);
+    body1a.addCell(getSubChapterCell("1.1"));
 
     final var body1acell4 =
         new Cell(
@@ -732,10 +540,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1acell14.setHorizontalAlignment(JUSTIFIED);
     body1a.addCell(body1acell14);
 
-    final var body1acell15 = new Cell(new Paragraph("1.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1acell15.setBorder(NO_BORDER);
-    body1acell15.setHorizontalAlignment(LEFT);
-    body1a.addCell(body1acell15);
+    body1a.addCell(getSubChapterCell("1.2"));
 
     final var body1acell16 =
         new Cell(
@@ -747,10 +552,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1acell16.setHorizontalAlignment(JUSTIFIED);
     body1a.addCell(body1acell16);
 
-    final var body1acell17 = new Cell(new Paragraph("1.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1acell17.setBorder(NO_BORDER);
-    body1acell17.setHorizontalAlignment(LEFT);
-    body1a.addCell(body1acell17);
+    body1a.addCell(getSubChapterCell("1.3"));
 
     final var body1acell18 =
         new Cell(
@@ -762,10 +564,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1acell18.setHorizontalAlignment(JUSTIFIED);
     body1a.addCell(body1acell18);
 
-    final var body1acell19 = new Cell(new Paragraph("1.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body1acell19.setBorder(NO_BORDER);
-    body1acell19.setHorizontalAlignment(LEFT);
-    body1a.addCell(body1acell19);
+    body1a.addCell(getSubChapterCell("1.4"));
 
     final var body1acell20 =
         new Cell(
@@ -811,22 +610,14 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2a.setBorderColor(white);
     body2a.setHorizontalAlignment(LEFT);
     body2a.setBorder(NO_BORDER);
-    body2a.setBorder(NO_BORDER);
-
-    final var body2acell1 = new Cell(new Paragraph("II.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body2acell1.setBorder(NO_BORDER);
-    body2acell1.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell1);
+    body2a.addCell(getChapterCell("II"));
 
     final var body2acell2 = new Cell(new Paragraph("MÕISTED", new Font(TIMES_ROMAN, 9, BOLD)));
     body2acell2.setBorder(NO_BORDER);
     body2acell2.setHorizontalAlignment(LEFT);
     body2a.addCell(body2acell2);
 
-    final var body2acell3 = new Cell(new Paragraph("2.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell3.setBorder(NO_BORDER);
-    body2acell3.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell3);
+    body2a.addCell(getSubChapterCell("2.1"));
 
     final var body2acell4 =
         new Cell(
@@ -836,10 +627,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell4.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell4);
 
-    final var body2acell5 = new Cell(new Paragraph("2.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell5.setBorder(NO_BORDER);
-    body2acell5.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell5);
+    body2a.addCell(getSubChapterCell("2.2"));
 
     final var body2acell6 =
         new Cell(
@@ -851,10 +639,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell6.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell6);
 
-    final var body2acell7 = new Cell(new Paragraph("2.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell7.setBorder(NO_BORDER);
-    body2acell7.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell7);
+    body2a.addCell(getSubChapterCell("2.3"));
 
     final var body2acell8 =
         new Cell(
@@ -865,10 +650,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell8.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell8);
 
-    final var body2acell9 = new Cell(new Paragraph("2.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell9.setBorder(NO_BORDER);
-    body2acell9.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell9);
+    body2a.addCell(getSubChapterCell("2.4"));
 
     final var body2acell10 =
         new Cell(
@@ -881,10 +663,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell10.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell10);
 
-    final var body2acell11 = new Cell(new Paragraph("2.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell11.setBorder(NO_BORDER);
-    body2acell11.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell11);
+    body2a.addCell(getSubChapterCell("2.5"));
 
     final var body2acell12 =
         new Cell(
@@ -897,10 +676,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell12.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell12);
 
-    final var body2acell13 = new Cell(new Paragraph("2.6", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell13.setBorder(NO_BORDER);
-    body2acell13.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell13);
+    body2a.addCell(getSubChapterCell("2.6"));
 
     final var body2acell14 =
         new Cell(
@@ -913,10 +689,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell14.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell14);
 
-    final var body2acell15 = new Cell(new Paragraph("2.7", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell15.setBorder(NO_BORDER);
-    body2acell15.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell15);
+    body2a.addCell(getSubChapterCell("2.7"));
 
     final var body2acell16 =
         new Cell(
@@ -929,10 +702,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell16.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell16);
 
-    final var body2acell17 = new Cell(new Paragraph("2.8", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell17.setBorder(NO_BORDER);
-    body2acell17.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell17);
+    body2a.addCell(getSubChapterCell("2.8"));
 
     final var body2acell18 =
         new Cell(
@@ -944,10 +714,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell18.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell18);
 
-    final var body2acell19 = new Cell(new Paragraph("2.9", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell19.setBorder(NO_BORDER);
-    body2acell19.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell19);
+    body2a.addCell(getSubChapterCell("2.9"));
 
     final var body2acell20 =
         new Cell(
@@ -960,10 +727,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell20.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell20);
 
-    final var body2acell21 = new Cell(new Paragraph("2.10", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell21.setBorder(NO_BORDER);
-    body2acell21.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell21);
+    body2a.addCell(getSubChapterCell("2.10"));
 
     final var body2acell22 =
         new Cell(
@@ -974,10 +738,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell22.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell22);
 
-    final var body2acell23 = new Cell(new Paragraph("2.11", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell23.setBorder(NO_BORDER);
-    body2acell23.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell23);
+    body2a.addCell(getSubChapterCell("2.11"));
 
     final var body2acell24 =
         new Cell(
@@ -990,10 +751,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell24.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell24);
 
-    final var body2acell25 = new Cell(new Paragraph("2.12", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell25.setBorder(NO_BORDER);
-    body2acell25.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell25);
+    body2a.addCell(getSubChapterCell("2.12"));
 
     final var body2acell26 =
         new Cell(
@@ -1005,10 +763,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell26.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell26);
 
-    final var body2acell27 = new Cell(new Paragraph("2.13", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell27.setBorder(NO_BORDER);
-    body2acell27.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell27);
+    body2a.addCell(getSubChapterCell("2.13"));
 
     final var body2acell28 =
         new Cell(
@@ -1019,10 +774,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell28.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell28);
 
-    final var body2acell29 = new Cell(new Paragraph("2.14", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell29.setBorder(NO_BORDER);
-    body2acell29.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell29);
+    body2a.addCell(getSubChapterCell("2.14"));
 
     final var body2acell30 =
         new Cell(
@@ -1033,10 +785,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell30.setHorizontalAlignment(JUSTIFIED);
     body2a.addCell(body2acell30);
 
-    final var body2acell31 = new Cell(new Paragraph("2.15", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body2acell31.setBorder(NO_BORDER);
-    body2acell31.setHorizontalAlignment(LEFT);
-    body2a.addCell(body2acell31);
+    body2a.addCell(getSubChapterCell("2.15"));
 
     final var body2acell32 =
         new Cell(
@@ -1057,12 +806,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3a.setBorderColor(white);
     body3a.setHorizontalAlignment(LEFT);
     body3a.setBorder(NO_BORDER);
-    body3a.setBorder(NO_BORDER);
-
-    final var body3acell1 = new Cell(new Paragraph("III.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body3acell1.setBorder(NO_BORDER);
-    body3acell1.setHorizontalAlignment(LEFT);
-    body3a.addCell(body3acell1);
+    body3a.addCell(getChapterCell("III"));
 
     final var body3acell2 =
         new Cell(new Paragraph("SÕIDUKI KASUTUSTINGIMUSED", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -1070,10 +814,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3acell2.setHorizontalAlignment(LEFT);
     body3a.addCell(body3acell2);
 
-    final var body3acell3 = new Cell(new Paragraph("3.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3acell3.setBorder(NO_BORDER);
-    body3acell3.setHorizontalAlignment(LEFT);
-    body3a.addCell(body3acell3);
+    body3a.addCell(getSubChapterCell("3.1"));
 
     final var body3acell4 =
         new Cell(
@@ -1084,10 +825,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3acell4.setHorizontalAlignment(JUSTIFIED);
     body3a.addCell(body3acell4);
 
-    final var body3acell5 = new Cell(new Paragraph("3.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3acell5.setBorder(NO_BORDER);
-    body3acell5.setHorizontalAlignment(LEFT);
-    body3a.addCell(body3acell5);
+    body3a.addCell(getSubChapterCell("3.2"));
 
     final var body3acell6 =
         new Cell(
@@ -1099,10 +837,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3acell6.setHorizontalAlignment(JUSTIFIED);
     body3a.addCell(body3acell6);
 
-    final var body3acell7 = new Cell(new Paragraph("3.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3acell7.setBorder(NO_BORDER);
-    body3acell7.setHorizontalAlignment(LEFT);
-    body3a.addCell(body3acell7);
+    body3a.addCell(getSubChapterCell("3.3"));
 
     final var body3acell8 =
         new Cell(
@@ -1408,12 +1143,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4a.setBorderColor(white);
     body4a.setHorizontalAlignment(LEFT);
     body4a.setBorder(NO_BORDER);
-    body4a.setBorder(NO_BORDER);
-
-    final var body4acell1 = new Cell(new Paragraph("IV.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body4acell1.setBorder(NO_BORDER);
-    body4acell1.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell1);
+    body4a.addCell(getChapterCell("IV"));
 
     final var body4acell2 =
         new Cell(
@@ -1423,10 +1153,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell2.setHorizontalAlignment(LEFT);
     body4a.addCell(body4acell2);
 
-    final var body4acell3 = new Cell(new Paragraph("4.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell3.setBorder(NO_BORDER);
-    body4acell3.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell3);
+    body4a.addCell(getSubChapterCell("4.1"));
 
     final var body4acell4 =
         new Cell(
@@ -1437,10 +1164,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell4.setHorizontalAlignment(JUSTIFIED);
     body4a.addCell(body4acell4);
 
-    final var body4acell5 = new Cell(new Paragraph("4.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell5.setBorder(NO_BORDER);
-    body4acell5.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell5);
+    body4a.addCell(getSubChapterCell("4.2"));
 
     final var body4acell6 =
         new Cell(
@@ -1451,10 +1175,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell6.setHorizontalAlignment(JUSTIFIED);
     body4a.addCell(body4acell6);
 
-    final var body4acell7 = new Cell(new Paragraph("4.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell7.setBorder(NO_BORDER);
-    body4acell7.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell7);
+    body4a.addCell(getSubChapterCell("4.3"));
 
     final var body4acell8 =
         new Cell(
@@ -1465,10 +1186,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell8.setHorizontalAlignment(JUSTIFIED);
     body4a.addCell(body4acell8);
 
-    final var body4acell9 = new Cell(new Paragraph("4.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell9.setBorder(NO_BORDER);
-    body4acell9.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell9);
+    body4a.addCell(getSubChapterCell("4.4"));
 
     final var body4acell10 =
         new Cell(
@@ -1479,10 +1197,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell10.setHorizontalAlignment(JUSTIFIED);
     body4a.addCell(body4acell10);
 
-    final var body4acell11 = new Cell(new Paragraph("4.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell11.setBorder(NO_BORDER);
-    body4acell11.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell11);
+    body4a.addCell(getSubChapterCell("4.5"));
 
     final var body4acell12 =
         new Cell(
@@ -1493,10 +1208,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell12.setHorizontalAlignment(JUSTIFIED);
     body4a.addCell(body4acell12);
 
-    final var body4acell13 = new Cell(new Paragraph("4.6", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell13.setBorder(NO_BORDER);
-    body4acell13.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell13);
+    body4a.addCell(getSubChapterCell("4.6"));
 
     final var body4acell14 =
         new Cell(
@@ -1509,10 +1221,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell14.setHorizontalAlignment(JUSTIFIED);
     body4a.addCell(body4acell14);
 
-    final var body4acell15 = new Cell(new Paragraph("4.7", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell15.setBorder(NO_BORDER);
-    body4acell15.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell15);
+    body4a.addCell(getSubChapterCell("4.7"));
 
     final var body4acell16 =
         new Cell(
@@ -1525,10 +1234,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell16.setHorizontalAlignment(JUSTIFIED);
     body4a.addCell(body4acell16);
 
-    final var body4acell17 = new Cell(new Paragraph("4.8", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body4acell17.setBorder(NO_BORDER);
-    body4acell17.setHorizontalAlignment(LEFT);
-    body4a.addCell(body4acell17);
+    body4a.addCell(getSubChapterCell("4.8"));
 
     final var body4acell18 =
         new Cell(new Paragraph("Kulumine ei hõlma:", new Font(TIMES_ROMAN, 8, NORMAL)));
@@ -1655,12 +1361,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body5.setBorderColor(white);
     body5.setHorizontalAlignment(LEFT);
     body5.setBorder(NO_BORDER);
-    body5.setBorder(NO_BORDER);
-
-    final var body5cell1 = new Cell(new Paragraph("V.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body5cell1.setBorder(NO_BORDER);
-    body5cell1.setHorizontalAlignment(LEFT);
-    body5.addCell(body5cell1);
+    body5.addCell(getChapterCell("V"));
 
     final var body5cell2 =
         new Cell(new Paragraph(" SÜNDMUSED KASUTUSEPERIOODIL ", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -1668,10 +1369,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body5cell2.setHorizontalAlignment(LEFT);
     body5.addCell(body5cell2);
 
-    final var body5cell3 = new Cell(new Paragraph("5.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body5cell3.setBorder(NO_BORDER);
-    body5cell3.setHorizontalAlignment(LEFT);
-    body5.addCell(body5cell3);
+    body5.addCell(getSubChapterCell("5.1"));
 
     final var body5cell4 =
         new Cell(
@@ -1686,10 +1384,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body5cell4.setHorizontalAlignment(JUSTIFIED);
     body5.addCell(body5cell4);
 
-    final var body5cell5 = new Cell(new Paragraph("5.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body5cell5.setBorder(NO_BORDER);
-    body5cell5.setHorizontalAlignment(LEFT);
-    body5.addCell(body5cell5);
+    body5.addCell(getSubChapterCell("5.2"));
 
     final var body5cell6 =
         new Cell(
@@ -1703,10 +1398,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body5cell6.setHorizontalAlignment(JUSTIFIED);
     body5.addCell(body5cell6);
 
-    final var body5cell7 = new Cell(new Paragraph("5.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body5cell7.setBorder(NO_BORDER);
-    body5cell7.setHorizontalAlignment(LEFT);
-    body5.addCell(body5cell7);
+    body5.addCell(getSubChapterCell("5.3"));
 
     final var body5cell8 =
         new Cell(
@@ -1719,10 +1411,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body5cell8.setHorizontalAlignment(JUSTIFIED);
     body5.addCell(body5cell8);
 
-    final var body5cell9 = new Cell(new Paragraph("5.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body5cell9.setBorder(NO_BORDER);
-    body5cell9.setHorizontalAlignment(LEFT);
-    body5.addCell(body5cell9);
+    body5.addCell(getSubChapterCell("5.4"));
 
     final var body5cell10 =
         new Cell(
@@ -1745,22 +1434,14 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body6.setBorderColor(white);
     body6.setHorizontalAlignment(LEFT);
     body6.setBorder(NO_BORDER);
-    body6.setBorder(NO_BORDER);
-
-    final var body6cell1 = new Cell(new Paragraph("VI.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body6cell1.setBorder(NO_BORDER);
-    body6cell1.setHorizontalAlignment(LEFT);
-    body6.addCell(body6cell1);
+    body6.addCell(getChapterCell("VI"));
 
     final var body6cell2 = new Cell(new Paragraph(" VASTUTUS", new Font(TIMES_ROMAN, 9, BOLD)));
     body6cell2.setBorder(NO_BORDER);
     body6cell2.setHorizontalAlignment(LEFT);
     body6.addCell(body6cell2);
 
-    final var body6cell3 = new Cell(new Paragraph("6.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body6cell3.setBorder(NO_BORDER);
-    body6cell3.setHorizontalAlignment(LEFT);
-    body6.addCell(body6cell3);
+    body6.addCell(getSubChapterCell("6.1"));
 
     final var body6cell4 =
         new Cell(new Paragraph(" Hüvitamise üldsätted", new Font(TIMES_ROMAN, 8, NORMAL)));
@@ -1888,22 +1569,14 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body7.setBorderColor(white);
     body7.setHorizontalAlignment(LEFT);
     body7.setBorder(NO_BORDER);
-    body7.setBorder(NO_BORDER);
-
-    final var body7cell1 = new Cell(new Paragraph("VII.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body7cell1.setBorder(NO_BORDER);
-    body7cell1.setHorizontalAlignment(LEFT);
-    body7.addCell(body7cell1);
+    body7.addCell(getChapterCell("VII"));
 
     final var body7cell2 = new Cell(new Paragraph(" TRAHVID ", new Font(TIMES_ROMAN, 9, BOLD)));
     body7cell2.setBorder(NO_BORDER);
     body7cell2.setHorizontalAlignment(LEFT);
     body7.addCell(body7cell2);
 
-    final var body7cell3 = new Cell(new Paragraph("7.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body7cell3.setBorder(NO_BORDER);
-    body7cell3.setHorizontalAlignment(LEFT);
-    body7.addCell(body7cell3);
+    body7.addCell(getSubChapterCell("7.1"));
 
     final var body7cell4 =
         new Cell(
@@ -1914,10 +1587,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body7cell4.setHorizontalAlignment(JUSTIFIED);
     body7.addCell(body7cell4);
 
-    final var body7cell5 = new Cell(new Paragraph("7.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body7cell5.setBorder(NO_BORDER);
-    body7cell5.setHorizontalAlignment(LEFT);
-    body7.addCell(body7cell5);
+    body7.addCell(getSubChapterCell("7.2"));
 
     final var body7cell6 =
         new Cell(
@@ -1928,10 +1598,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body7cell6.setHorizontalAlignment(JUSTIFIED);
     body7.addCell(body7cell6);
 
-    final var body7cell7 = new Cell(new Paragraph("7.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body7cell7.setBorder(NO_BORDER);
-    body7cell7.setHorizontalAlignment(LEFT);
-    body7.addCell(body7cell7);
+    body7.addCell(getSubChapterCell("7.3"));
 
     final var body7cell8 =
         new Cell(
@@ -1942,10 +1609,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body7cell8.setHorizontalAlignment(JUSTIFIED);
     body7.addCell(body7cell8);
 
-    final var body7cell9 = new Cell(new Paragraph("7.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body7cell9.setBorder(NO_BORDER);
-    body7cell9.setHorizontalAlignment(LEFT);
-    body7.addCell(body7cell9);
+    body7.addCell(getSubChapterCell("7.4"));
 
     final var body7cell10 =
         new Cell(
@@ -1963,10 +1627,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body7cell10.setHorizontalAlignment(JUSTIFIED);
     body7.addCell(body7cell10);
 
-    final var body7cell11 = new Cell(new Paragraph("7.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body7cell11.setBorder(NO_BORDER);
-    body7cell11.setHorizontalAlignment(LEFT);
-    body7.addCell(body7cell11);
+    body7.addCell(getSubChapterCell("7.5"));
 
     final var body7cell12 =
         new Cell(
@@ -2089,12 +1750,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8.setBorderColor(white);
     body8.setHorizontalAlignment(LEFT);
     body8.setBorder(NO_BORDER);
-    body8.setBorder(NO_BORDER);
-
-    final var body8cell1 = new Cell(new Paragraph("VIII.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body8cell1.setBorder(NO_BORDER);
-    body8cell1.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell1);
+    body8.addCell(getChapterCell("VIII"));
 
     final var body8cell2 =
         new Cell(new Paragraph(" TRAHVIDE ERISÄTTED ", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -2102,10 +1758,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell2.setHorizontalAlignment(LEFT);
     body8.addCell(body8cell2);
 
-    final var body8cell3 = new Cell(new Paragraph("8.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell3.setBorder(NO_BORDER);
-    body8cell3.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell3);
+    body8.addCell(getSubChapterCell("8.1"));
 
     final var body8cell4 =
         new Cell(
@@ -2122,10 +1775,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell4.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell4);
 
-    final var body8cell5 = new Cell(new Paragraph("8.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell5.setBorder(NO_BORDER);
-    body8cell5.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell5);
+    body8.addCell(getSubChapterCell("8.2"));
 
     final var body8cell6 =
         new Cell(
@@ -2137,10 +1787,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell6.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell6);
 
-    final var body8cell7 = new Cell(new Paragraph("8.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell7.setBorder(NO_BORDER);
-    body8cell7.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell7);
+    body8.addCell(getSubChapterCell("8.3"));
 
     final var body8cell8 =
         new Cell(
@@ -2151,10 +1798,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell8.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell8);
 
-    final var body8cell9 = new Cell(new Paragraph("8.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell9.setBorder(NO_BORDER);
-    body8cell9.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell9);
+    body8.addCell(getSubChapterCell("8.4"));
 
     final var body8cell10 =
         new Cell(
@@ -2165,10 +1809,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell10.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell10);
 
-    final var body8cell11 = new Cell(new Paragraph("8.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell11.setBorder(NO_BORDER);
-    body8cell11.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell11);
+    body8.addCell(getSubChapterCell("8.5"));
 
     final var body8cell12 =
         new Cell(
@@ -2179,10 +1820,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell12.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell12);
 
-    final var body8cell13 = new Cell(new Paragraph("8.6", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell13.setBorder(NO_BORDER);
-    body8cell13.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell13);
+    body8.addCell(getSubChapterCell("8.6"));
 
     final var body8cell14 =
         new Cell(
@@ -2194,10 +1832,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell14.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell14);
 
-    final var body8cell15 = new Cell(new Paragraph("8.7", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell15.setBorder(NO_BORDER);
-    body8cell15.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell15);
+    body8.addCell(getSubChapterCell("8.7"));
 
     final var body8cell16 =
         new Cell(
@@ -2208,10 +1843,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell16.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell16);
 
-    final var body8cell17 = new Cell(new Paragraph("8.8", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell17.setBorder(NO_BORDER);
-    body8cell17.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell17);
+    body8.addCell(getSubChapterCell("8.8"));
 
     final var body8cell18 =
         new Cell(
@@ -2222,10 +1854,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell18.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell18);
 
-    final var body8cell19 = new Cell(new Paragraph("8.9", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell19.setBorder(NO_BORDER);
-    body8cell19.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell19);
+    body8.addCell(getSubChapterCell("8.9"));
 
     final var body8cell20 =
         new Cell(
@@ -2236,10 +1865,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell20.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell20);
 
-    final var body8cell21 = new Cell(new Paragraph("8.10", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell21.setBorder(NO_BORDER);
-    body8cell21.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell21);
+    body8.addCell(getSubChapterCell("8.10"));
 
     final var body8cell22 =
         new Cell(
@@ -2252,10 +1878,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell22.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell22);
 
-    final var body8cell23 = new Cell(new Paragraph("8.11", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell23.setBorder(NO_BORDER);
-    body8cell23.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell23);
+    body8.addCell(getSubChapterCell("8.11"));
 
     final var body8cell24 =
         new Cell(
@@ -2266,10 +1889,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell24.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell24);
 
-    final var body8cell25 = new Cell(new Paragraph("8.12", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell25.setBorder(NO_BORDER);
-    body8cell25.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell25);
+    body8.addCell(getSubChapterCell("8.12"));
 
     final var body8cell26 =
         new Cell(
@@ -2280,10 +1900,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body8cell26.setHorizontalAlignment(JUSTIFIED);
     body8.addCell(body8cell26);
 
-    final var body8cell27 = new Cell(new Paragraph("8.13", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body8cell27.setBorder(NO_BORDER);
-    body8cell27.setHorizontalAlignment(LEFT);
-    body8.addCell(body8cell27);
+    body8.addCell(getSubChapterCell("8.13"));
 
     final var body8cell28 =
         new Cell(
@@ -2306,12 +1923,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body9.setBorderColor(white);
     body9.setHorizontalAlignment(LEFT);
     body9.setBorder(NO_BORDER);
-    body9.setBorder(NO_BORDER);
-
-    final var body9cell1 = new Cell(new Paragraph("IX.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body9cell1.setBorder(NO_BORDER);
-    body9cell1.setHorizontalAlignment(LEFT);
-    body9.addCell(body9cell1);
+    body9.addCell(getChapterCell("IX"));
 
     final var body9cell2 =
         new Cell(new Paragraph("KAHJU HINDAMINE. KAHJUKÄSITLUS ", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -2319,10 +1931,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body9cell2.setHorizontalAlignment(LEFT);
     body9.addCell(body9cell2);
 
-    final var body9cell3 = new Cell(new Paragraph("9.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body9cell3.setBorder(NO_BORDER);
-    body9cell3.setHorizontalAlignment(LEFT);
-    body9.addCell(body9cell3);
+    body9.addCell(getSubChapterCell("9.1"));
 
     final var body9cell4 =
         new Cell(
@@ -2334,10 +1943,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body9cell4.setHorizontalAlignment(JUSTIFIED);
     body9.addCell(body9cell4);
 
-    final var body9cell5 = new Cell(new Paragraph("9.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body9cell5.setBorder(NO_BORDER);
-    body9cell5.setHorizontalAlignment(LEFT);
-    body9.addCell(body9cell5);
+    body9.addCell(getSubChapterCell("9.2"));
 
     final var body9cell6 =
         new Cell(
@@ -2349,10 +1955,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body9cell6.setHorizontalAlignment(JUSTIFIED);
     body9.addCell(body9cell6);
 
-    final var body9cell7 = new Cell(new Paragraph("9.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body9cell7.setBorder(NO_BORDER);
-    body9cell7.setHorizontalAlignment(LEFT);
-    body9.addCell(body9cell7);
+    body9.addCell(getSubChapterCell("9.3"));
 
     final var body9cell8 =
         new Cell(
@@ -2369,10 +1972,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body9cell8.setHorizontalAlignment(JUSTIFIED);
     body9.addCell(body9cell8);
 
-    final var body9cell9 = new Cell(new Paragraph("9.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body9cell9.setBorder(NO_BORDER);
-    body9cell9.setHorizontalAlignment(LEFT);
-    body9.addCell(body9cell9);
+    body9.addCell(getSubChapterCell("9.4"));
 
     final var body9cell10 =
         new Cell(
@@ -2383,10 +1983,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body9cell10.setHorizontalAlignment(JUSTIFIED);
     body9.addCell(body9cell10);
 
-    final var body9cell11 = new Cell(new Paragraph("9.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body9cell11.setBorder(NO_BORDER);
-    body9cell11.setHorizontalAlignment(LEFT);
-    body9.addCell(body9cell11);
+    body9.addCell(getSubChapterCell("9.5"));
 
     final var body9cell12 =
         new Cell(
@@ -2397,10 +1994,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body9cell12.setHorizontalAlignment(JUSTIFIED);
     body9.addCell(body9cell12);
 
-    final var body9cell13 = new Cell(new Paragraph("9.6", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body9cell13.setBorder(NO_BORDER);
-    body9cell13.setHorizontalAlignment(LEFT);
-    body9.addCell(body9cell13);
+    body9.addCell(getSubChapterCell("9.6"));
 
     final var body9cell14 =
         new Cell(
@@ -2422,12 +2016,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body10.setBorderColor(white);
     body10.setHorizontalAlignment(LEFT);
     body10.setBorder(NO_BORDER);
-    body10.setBorder(NO_BORDER);
-
-    final var body10cell1 = new Cell(new Paragraph("X.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body10cell1.setBorder(NO_BORDER);
-    body10cell1.setHorizontalAlignment(LEFT);
-    body10.addCell(body10cell1);
+    body10.addCell(getChapterCell("X"));
 
     final var body10cell2 =
         new Cell(new Paragraph("VÄÄRTEOTRAHVID, MAKSUD JA TASUD ", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -2435,10 +2024,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body10cell2.setHorizontalAlignment(LEFT);
     body10.addCell(body10cell2);
 
-    final var body10cell3 = new Cell(new Paragraph("10.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body10cell3.setBorder(NO_BORDER);
-    body10cell3.setHorizontalAlignment(LEFT);
-    body10.addCell(body10cell3);
+    body10.addCell(getSubChapterCell("10.1"));
 
     final var body10cell4 =
         new Cell(
@@ -2463,12 +2049,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body11a.setBorderColor(white);
     body11a.setHorizontalAlignment(LEFT);
     body11a.setBorder(NO_BORDER);
-    body11a.setBorder(NO_BORDER);
-
-    final var body11acell1 = new Cell(new Paragraph("XI.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body11acell1.setBorder(NO_BORDER);
-    body11acell1.setHorizontalAlignment(LEFT);
-    body11a.addCell(body11acell1);
+    body11a.addCell(getChapterCell("XI"));
 
     final var body11acell2 =
         new Cell(new Paragraph("RENDILEANDJA VASTUTUS ", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -2476,10 +2057,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body11acell2.setHorizontalAlignment(LEFT);
     body11a.addCell(body11acell2);
 
-    final var body11acell3 = new Cell(new Paragraph("11.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body11acell3.setBorder(NO_BORDER);
-    body11acell3.setHorizontalAlignment(LEFT);
-    body11a.addCell(body11acell3);
+    body11a.addCell(getSubChapterCell("11.1"));
 
     final var body11acell4 =
         new Cell(
@@ -2491,10 +2069,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body11acell4.setHorizontalAlignment(JUSTIFIED);
     body11a.addCell(body11acell4);
 
-    final var body11acell5 = new Cell(new Paragraph("11.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body11acell5.setBorder(NO_BORDER);
-    body11acell5.setHorizontalAlignment(LEFT);
-    body11a.addCell(body11acell5);
+    body11a.addCell(getSubChapterCell("11.2"));
 
     final var body11acell6 =
         new Cell(
@@ -2586,12 +2161,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12a.setBorderColor(white);
     body12a.setHorizontalAlignment(LEFT);
     body12a.setBorder(NO_BORDER);
-    body12a.setBorder(NO_BORDER);
-
-    final var body12acell1 = new Cell(new Paragraph("XII.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body12acell1.setBorder(NO_BORDER);
-    body12acell1.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell1);
+    body12a.addCell(getChapterCell("XII"));
 
     final var body12acell2 =
         new Cell(
@@ -2601,10 +2171,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell2.setHorizontalAlignment(LEFT);
     body12a.addCell(body12acell2);
 
-    final var body12acell3 = new Cell(new Paragraph("12.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell3.setBorder(NO_BORDER);
-    body12acell3.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell3);
+    body12a.addCell(getSubChapterCell("12.1"));
 
     final var body12acell4 =
         new Cell(
@@ -2615,10 +2182,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell4.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell4);
 
-    final var body12acell5 = new Cell(new Paragraph("12.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell5.setBorder(NO_BORDER);
-    body12acell5.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell5);
+    body12a.addCell(getSubChapterCell("12.2"));
 
     final var body12acell6 =
         new Cell(
@@ -2629,10 +2193,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell6.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell6);
 
-    final var body12acell7 = new Cell(new Paragraph("12.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell7.setBorder(NO_BORDER);
-    body12acell7.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell7);
+    body12a.addCell(getSubChapterCell("12.3"));
 
     final var body12acell8 =
         new Cell(
@@ -2645,10 +2206,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell8.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell8);
 
-    final var body12acell9 = new Cell(new Paragraph("12.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell9.setBorder(NO_BORDER);
-    body12acell9.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell9);
+    body12a.addCell(getSubChapterCell("12.4"));
 
     final var body12acell10 =
         new Cell(
@@ -2661,10 +2219,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell10.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell10);
 
-    final var body12acell11 = new Cell(new Paragraph("12.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell11.setBorder(NO_BORDER);
-    body12acell11.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell11);
+    body12a.addCell(getSubChapterCell("12.5"));
 
     final var body12acell12 =
         new Cell(
@@ -2675,10 +2230,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell12.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell12);
 
-    final var body12acell13 = new Cell(new Paragraph("12.6", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell13.setBorder(NO_BORDER);
-    body12acell13.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell13);
+    body12a.addCell(getSubChapterCell("12.6"));
 
     final var body12acell14 =
         new Cell(
@@ -2690,10 +2242,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell14.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell14);
 
-    final var body12acell15 = new Cell(new Paragraph("12.7", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell15.setBorder(NO_BORDER);
-    body12acell15.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell15);
+    body12a.addCell(getSubChapterCell("12.7"));
 
     final var body12acell16 =
         new Cell(
@@ -2705,10 +2254,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell16.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell16);
 
-    final var body12acell17 = new Cell(new Paragraph("12.8", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell17.setBorder(NO_BORDER);
-    body12acell17.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell17);
+    body12a.addCell(getSubChapterCell("12.8"));
 
     final var body12acell18 =
         new Cell(
@@ -2720,10 +2266,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell18.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell18);
 
-    final var body12acell19 = new Cell(new Paragraph("12.9", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell19.setBorder(NO_BORDER);
-    body12acell19.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell19);
+    body12a.addCell(getSubChapterCell("12.9"));
 
     final var body12acell20 =
         new Cell(
@@ -2734,11 +2277,8 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell20.setBorder(NO_BORDER);
     body12acell20.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell20);
-    //
-    final var body12acell21 = new Cell(new Paragraph("12.10", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell21.setBorder(NO_BORDER);
-    body12acell21.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell21);
+
+    body12a.addCell(getSubChapterCell("12.10"));
 
     final var body12acell22 =
         new Cell(
@@ -2749,10 +2289,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell22.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell22);
 
-    final var body12acell23 = new Cell(new Paragraph("12.11", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell23.setBorder(NO_BORDER);
-    body12acell23.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell23);
+    body12a.addCell(getSubChapterCell("12.11"));
 
     final var body12acell24 =
         new Cell(
@@ -2765,10 +2302,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell24.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell24);
 
-    final var body12acell25 = new Cell(new Paragraph("12.12", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell25.setBorder(NO_BORDER);
-    body12acell25.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell25);
+    body12a.addCell(getSubChapterCell("12.12"));
 
     final var body12acell26 =
         new Cell(
@@ -2780,10 +2314,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell26.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell26);
 
-    final var body12acell27 = new Cell(new Paragraph("12.13", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell27.setBorder(NO_BORDER);
-    body12acell27.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell27);
+    body12a.addCell(getSubChapterCell("12.13"));
 
     final var body12acell28 =
         new Cell(
@@ -2797,10 +2328,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body12acell28.setHorizontalAlignment(JUSTIFIED);
     body12a.addCell(body12acell28);
 
-    final var body12acell29 = new Cell(new Paragraph("12.14", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body12acell29.setBorder(NO_BORDER);
-    body12acell29.setHorizontalAlignment(LEFT);
-    body12a.addCell(body12acell29);
+    body12a.addCell(getSubChapterCell("12.14"));
 
     final var body12acell30 =
         new Cell(
@@ -2870,12 +2398,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body13a.setBorderColor(white);
     body13a.setHorizontalAlignment(LEFT);
     body13a.setBorder(NO_BORDER);
-    body13a.setBorder(NO_BORDER);
-
-    final var body13acell1 = new Cell(new Paragraph("XIII.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body13acell1.setBorder(NO_BORDER);
-    body13acell1.setHorizontalAlignment(LEFT);
-    body13a.addCell(body13acell1);
+    body13a.addCell(getChapterCell("XIII"));
 
     final var body13acell2 =
         new Cell(new Paragraph("LEPINGU LÕPETAMINE", new Font(TIMES_ROMAN, 9, BOLD)));
@@ -2883,10 +2406,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body13acell2.setHorizontalAlignment(LEFT);
     body13a.addCell(body13acell2);
 
-    final var body13acell3 = new Cell(new Paragraph("13.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body13acell3.setBorder(NO_BORDER);
-    body13acell3.setHorizontalAlignment(LEFT);
-    body13a.addCell(body13acell3);
+    body13a.addCell(getSubChapterCell("13.1"));
 
     final var body13acell4 =
         new Cell(
@@ -2902,10 +2422,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body13acell4.setHorizontalAlignment(JUSTIFIED);
     body13a.addCell(body13acell4);
 
-    final var body13acell5 = new Cell(new Paragraph("13.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body13acell5.setBorder(NO_BORDER);
-    body13acell5.setHorizontalAlignment(LEFT);
-    body13a.addCell(body13acell5);
+    body13a.addCell(getSubChapterCell("13.2"));
 
     final var body13acell6 =
         new Cell(
@@ -2916,10 +2433,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body13acell6.setHorizontalAlignment(JUSTIFIED);
     body13a.addCell(body13acell6);
 
-    final var body13acell7 = new Cell(new Paragraph("13.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body13acell7.setBorder(NO_BORDER);
-    body13acell7.setHorizontalAlignment(LEFT);
-    body13a.addCell(body13acell7);
+    body13a.addCell(getSubChapterCell("13.3"));
 
     final var body13acell8 =
         new Cell(
@@ -2930,10 +2444,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body13acell8.setHorizontalAlignment(JUSTIFIED);
     body13a.addCell(body13acell8);
 
-    final var body13acell9 = new Cell(new Paragraph("13.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body13acell9.setBorder(NO_BORDER);
-    body13acell9.setHorizontalAlignment(LEFT);
-    body13a.addCell(body13acell9);
+    body13a.addCell(getSubChapterCell("13.4"));
 
     final var body13acell10 =
         new Cell(
@@ -3152,10 +2663,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body13acell40.setHorizontalAlignment(JUSTIFIED);
     body13a.addCell(body13acell40);
 
-    final var body13acell41 = new Cell(new Paragraph("13.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body13acell41.setBorder(NO_BORDER);
-    body13acell41.setHorizontalAlignment(LEFT);
-    body13a.addCell(body13acell41);
+    body13a.addCell(getSubChapterCell("13.5"));
 
     final var body13acell42 =
         new Cell(
@@ -3176,22 +2684,14 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body14a.setBorderColor(white);
     body14a.setHorizontalAlignment(LEFT);
     body14a.setBorder(NO_BORDER);
-    body14a.setBorder(NO_BORDER);
-
-    final var body14acell1 = new Cell(new Paragraph("XIV.", new Font(TIMES_ROMAN, 9, BOLD)));
-    body14acell1.setBorder(NO_BORDER);
-    body14acell1.setHorizontalAlignment(LEFT);
-    body14a.addCell(body14acell1);
+    body14a.addCell(getChapterCell("XIV"));
 
     final var body14acell2 = new Cell(new Paragraph("LÕPPSÄTTED", new Font(TIMES_ROMAN, 9, BOLD)));
     body14acell2.setBorder(NO_BORDER);
     body14acell2.setHorizontalAlignment(LEFT);
     body14a.addCell(body14acell2);
 
-    final var body14acell3 = new Cell(new Paragraph("14.1", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body14acell3.setBorder(NO_BORDER);
-    body14acell3.setHorizontalAlignment(LEFT);
-    body14a.addCell(body14acell3);
+    body14a.addCell(getSubChapterCell("14.1"));
 
     final var body14acell4 =
         new Cell(
@@ -3204,10 +2704,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body14acell4.setHorizontalAlignment(JUSTIFIED);
     body14a.addCell(body14acell4);
 
-    final var body14acell5 = new Cell(new Paragraph("14.2", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body14acell5.setBorder(NO_BORDER);
-    body14acell5.setHorizontalAlignment(LEFT);
-    body14a.addCell(body14acell5);
+    body14a.addCell(getSubChapterCell("14.2"));
 
     final var body14acell6 =
         new Cell(
@@ -3218,10 +2715,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body14acell6.setHorizontalAlignment(JUSTIFIED);
     body14a.addCell(body14acell6);
 
-    final var body14acell7 = new Cell(new Paragraph("14.3", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body14acell7.setBorder(NO_BORDER);
-    body14acell7.setHorizontalAlignment(LEFT);
-    body14a.addCell(body14acell7);
+    body14a.addCell(getSubChapterCell("14.3"));
 
     final var body14acell8 =
         new Cell(
@@ -3232,10 +2726,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body14acell8.setHorizontalAlignment(JUSTIFIED);
     body14a.addCell(body14acell8);
 
-    final var body14acell9 = new Cell(new Paragraph("14.4", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body14acell9.setBorder(NO_BORDER);
-    body14acell9.setHorizontalAlignment(LEFT);
-    body14a.addCell(body14acell9);
+    body14a.addCell(getSubChapterCell("14.4"));
 
     final var body14acell10 =
         new Cell(
@@ -3246,10 +2737,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body14acell10.setHorizontalAlignment(JUSTIFIED);
     body14a.addCell(body14acell10);
 
-    final var body14acell11 = new Cell(new Paragraph("14.5", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body14acell11.setBorder(NO_BORDER);
-    body14acell11.setHorizontalAlignment(LEFT);
-    body14a.addCell(body14acell11);
+    body14a.addCell(getSubChapterCell("14.5"));
 
     final var body14acell12 =
         new Cell(
@@ -3260,10 +2748,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body14acell12.setHorizontalAlignment(JUSTIFIED);
     body14a.addCell(body14acell12);
 
-    final var body14acell13 = new Cell(new Paragraph("14.6", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body14acell13.setBorder(NO_BORDER);
-    body14acell13.setHorizontalAlignment(LEFT);
-    body14a.addCell(body14acell13);
+    body14a.addCell(getSubChapterCell("14.6"));
 
     final var body14acell14 =
         new Cell(
@@ -3549,7 +3034,6 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     header.setBorderColor(white);
     header.setHorizontalAlignment(RIGHT);
     header.setBorder(NO_BORDER);
-    header.setBorder(NO_BORDER);
 
     final var logo = Image.getInstance("Images/qRentalGroup_gorznt.png");
     logo.scaleAbsolute(50f, 20f);
@@ -3585,40 +3069,91 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     renterTable.setBorderColor(white);
     renterTable.setHorizontalAlignment(LEFT);
     renterTable.setBorder(NO_BORDER);
-    renterTable.setBorder(NO_BORDER);
 
     final var labelValue = "RENDILEANDJA ANDMED: ";
-    renterTable.addCell(getCellForRenterTable(labelValue, BOLD));
+    renterTable.addCell(getQCell(labelValue));
     final var qFirmNameValue = model.getQFirmName();
-    renterTable.addCell(getCellForRenterTable(qFirmNameValue, BOLD));
+    renterTable.addCell(getQCell(qFirmNameValue));
     final var hereinafterLabel = "edaspidi Rendileandja.";
-    renterTable.addCell(getCellForRenterTable(hereinafterLabel, BOLD));
+    renterTable.addCell(getQCellBold(hereinafterLabel));
     final var qFirmAddressValue = "Asukoht:  " + getTextOrEmpty(model.getQFirmPostAddress());
-    renterTable.addCell(getCellForRenterTable(qFirmAddressValue, NORMAL));
+    renterTable.addCell(getQCell(qFirmAddressValue));
     final var qFirmRegNumberValue = "Registrinumber:  " + getTextOrEmpty(model.getQFirmRegNumber());
-    renterTable.addCell(getCellForRenterTable(qFirmRegNumberValue, NORMAL));
+    renterTable.addCell(getQCell(qFirmRegNumberValue));
     final var qFirmVatNumberValue = "KMKR:  " + getTextOrEmpty(model.getQFirmVatNumber());
-    renterTable.addCell(getCellForRenterTable(qFirmVatNumberValue, NORMAL));
+    renterTable.addCell(getQCell(qFirmVatNumberValue));
     final var qFirmIbanValue = "Pangakonto number:  " + getTextOrEmpty(model.getQFirmIban());
-    renterTable.addCell(getCellForRenterTable(qFirmIbanValue, NORMAL));
+    renterTable.addCell(getQCell(qFirmIbanValue));
     final var qFirmEmailValue = "E-post:  " + getTextOrEmpty(model.getQFirmEmail());
-    renterTable.addCell(getCellForRenterTable(qFirmEmailValue, NORMAL));
+    renterTable.addCell(getQCell(qFirmEmailValue));
     final var qFirmPhoneValue = "Kontakttelefon:  " + getTextOrEmpty(model.getQFirmPhone());
-    renterTable.addCell(getCellForRenterTable(qFirmPhoneValue, NORMAL));
+    renterTable.addCell(getQCell(qFirmPhoneValue));
     final var qFirmCeoValue =
         "Rendileandja esindaja:  "
             + getTextOrEmpty(model.getQFirmCeo() + " või volitatud isik Nadežda Tarraste");
-    renterTable.addCell(getCellForRenterTable(qFirmCeoValue, NORMAL));
+    renterTable.addCell(getQCell(qFirmCeoValue));
 
     return renterTable;
   }
 
-  private static Cell getCellForRenterTable(final String value, final Integer fontStyle) {
-    final var renterDataCell = new Cell(new Paragraph(value, new Font(TIMES_ROMAN, 9, fontStyle)));
-    renterDataCell.setBorder(NO_BORDER);
-    renterDataCell.setHorizontalAlignment(LEFT);
+  private static Table getTenantTable(final ContractPdfModel model) {
+    final var tenantTable = new Table(1);
+    tenantTable.setPadding(0f);
+    tenantTable.setSpacing(0f);
+    tenantTable.setWidth(100f);
+    tenantTable.setBorderColor(white);
+    tenantTable.setHorizontalAlignment(LEFT);
+    tenantTable.setBorder(NO_BORDER);
+    final var tenantDataLabel = "RENTNIKU ANDMED: ";
+    tenantTable.addCell(getQCellBold(tenantDataLabel));
+    final var tenantNameValue = "Rentniku nimi: " + getTextOrEmpty(model.getRenterName());
+    tenantTable.addCell(getQCell(tenantNameValue));
+    final var tenantRegNumberValue =
+        "Rentniku reg. nr. või isikukood: " + getTextOrEmpty(model.getRenterRegistrationNumber());
+    tenantTable.addCell(getQCell(tenantRegNumberValue));
+    final var tenantAddressValue = "Rentniku aadress: " + getTextOrEmpty(model.getRenterAddress());
+    tenantTable.addCell(getQCell(tenantAddressValue));
+    final var tenantCeoNameValue =
+        "Rentniku seadusliku või volitatud esindaja nimi:  "
+            + getTextOrEmpty(model.getRenterCeoName());
+    tenantTable.addCell(getQCell(tenantCeoNameValue));
+    final var tenantCeoTaxNumberValue =
+        "Rentniku seadusliku või volitatud esindaja isikukood:  " + model.getRenterCeoTaxNumber();
+    tenantTable.addCell(getQCell(tenantCeoTaxNumberValue));
+    final var tenantDriverLicenceNumberValue =
+        "Rentniku või selle seadusliku ega volitatud esindaja juhiloa number:  "
+            + getTextOrEmpty(model.getDriverLicenceNumber());
+    tenantTable.addCell(getQCell(tenantDriverLicenceNumberValue));
+    final var tenantDriverAddressValue =
+        "Rentniku või selle seadusliku ega volitatud esindaja kontaktaadress:   "
+            + getTextOrEmpty(model.getDriverAddress());
+    tenantTable.addCell(getQCell(tenantDriverAddressValue));
+    final var tenantPhoneValue =
+        "Rentniku või selle seadusliku ega volitatud esindaja kontakttelefon:   "
+            + getTextOrEmpty(model.getRenterPhone());
+    tenantTable.addCell(getQCell(tenantPhoneValue));
+    final var tenantEmailValue =
+        "Rentniku või selle seadusliku ega volitatud esindaja e-post:   "
+            + getTextOrEmpty(model.getRenterEmail());
+    tenantTable.addCell(getQCell(tenantEmailValue));
 
-    return renterDataCell;
+    return tenantTable;
+  }
+
+  private static Cell getQCell(final String value) {
+    final var cell = new Cell(new Paragraph(value, new Font(TIMES_ROMAN, 9, NORMAL)));
+    cell.setBorder(NO_BORDER);
+    cell.setHorizontalAlignment(LEFT);
+
+    return cell;
+  }
+
+  private static Cell getQCellBold(final String value) {
+    final var cell = new Cell(new Paragraph(value, new Font(TIMES_ROMAN, 10, BOLD)));
+    cell.setBorder(NO_BORDER);
+    cell.setHorizontalAlignment(LEFT);
+
+    return cell;
   }
 
   private static String getTextOrEmpty(final String text) {
