@@ -173,7 +173,7 @@ public class ContractToPdfConverterOld {
         rendileandja.addCell(rendileandjacell8);
 
         final var rendileandjacell9 =
-                new Cell(new Paragraph("Kontakttelefon:  " + getTextOrEmpty(model.getQFirmVatPhone()),
+                new Cell(new Paragraph("Kontakttelefon:  " + getTextOrEmpty(model.getQFirmPhone()),
                         new Font(Font.TIMES_ROMAN, 9, Font.NORMAL)));
         rendileandjacell9.setBorder(NO_BORDER);
         rendileandjacell9.setHorizontalAlignment(LEFT);

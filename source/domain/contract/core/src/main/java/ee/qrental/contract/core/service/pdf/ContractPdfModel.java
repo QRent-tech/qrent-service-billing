@@ -26,7 +26,7 @@ public class ContractPdfModel {
     private String qFirmVatNumber;
     private String qFirmIban;
     private String qFirmEmail;
-    private String qFirmVatPhone;
+    private String qFirmPhone;
     private String qFirmCeo;
     private String driverAddress;
     private String carVin;

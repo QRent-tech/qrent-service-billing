@@ -15,16 +15,18 @@ import ee.qrental.contract.api.in.usecase.ContractSendByEmailUseCase;
 import ee.qrental.contract.api.out.*;
 import ee.qrental.contract.core.mapper.*;
 import ee.qrental.contract.core.service.*;
-import ee.qrental.contract.core.service.pdf.ContractToPdfConverter;
-import ee.qrental.contract.core.service.pdf.ContractToPdfModelMapper;
+import ee.qrental.contract.core.service.pdf.*;
 import ee.qrental.contract.core.service.ContractEndDateCalculator;
-import ee.qrental.contract.core.validator.ContractCloseRequestValidator;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrental.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 @Configuration
 public class ContractServiceConfig {
@@ -88,9 +90,15 @@ public class ContractServiceConfig {
   }
 
   @Bean
-  ContractToPdfConverter getContractToPdfConverter() {
+  List<ContractToPdfConversionStrategy> getContractPdfUseCase() {
+    return asList(new ContractToPdfConversionStrategyOld(), new ContractToPdfConversionStrategyNew());
+  }
 
-    return new ContractToPdfConverter();
+  @Bean
+  ContractToPdfConverter getContractToPdfConverter(
+      final List<ContractToPdfConversionStrategy> strategies) {
+
+    return new ContractToPdfConverter(strategies);
   }
 
   @Bean

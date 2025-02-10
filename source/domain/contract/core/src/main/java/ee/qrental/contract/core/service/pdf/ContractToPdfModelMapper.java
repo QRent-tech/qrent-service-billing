@@ -32,7 +32,7 @@ public class ContractToPdfModelMapper {
         .qFirmVatNumber(contract.getQFirmVatNumber())
         .qFirmIban(contract.getQFirmIban())
         .qFirmEmail(contract.getQFirmEmail())
-        .qFirmVatPhone(contract.getQFirmVatPhone())
+        .qFirmPhone(contract.getQFirmVatPhone())
         .qFirmCeo(contract.getQFirmCeo())
         .carVin(contract.getCarVin())
         .carManufacturer(contract.getCarManufacturer())
