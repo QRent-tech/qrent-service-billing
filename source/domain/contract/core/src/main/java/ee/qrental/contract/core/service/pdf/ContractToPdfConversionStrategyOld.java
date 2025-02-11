@@ -26,8 +26,6 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     return false;
   }
 
-
-
   @SneakyThrows
   @Override
   public InputStream getPdfInputStream(final ContractPdfModel model) {
@@ -55,53 +53,27 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1cell2.setHorizontalAlignment(LEFT);
     body1.addCell(body1cell2);
     body1.addCell(getSubChapterCell("1.1"));
-
-    final var body1cell4 =
-        new Cell(
-            new Paragraph(
-                "Lepingu põhitingimused kasutatud mõistete selgitused on toodud Lepingu üldtingimustes ja nende lisades, "
-                    + "mis on käesoleva lepingu lahutamata osa. Käesoleva lepingu allakirjutamisega kinnitab tagasivõtmatult Rentnik, "
-                    + "et ta on läbi lugenud, arusaanud, andnud ning nõustunud lepingu üldtingimustega. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1cell4.setBorder(NO_BORDER);
-    body1cell4.setHorizontalAlignment(JUSTIFIED);
-    body1.addCell(body1cell4);
+    body1.addCell(
+        getQTextCell(
+            "Lepingu põhitingimused kasutatud mõistete selgitused on toodud Lepingu üldtingimustes ja nende lisades, "
+                + "mis on käesoleva lepingu lahutamata osa. Käesoleva lepingu allakirjutamisega kinnitab tagasivõtmatult Rentnik, "
+                + "et ta on läbi lugenud, arusaanud, andnud ning nõustunud lepingu üldtingimustega. "));
     body1.addCell(getSubChapterCell("1.2"));
-
-    final var body1cell6 =
-        new Cell(
-            new Paragraph(
-                "Kõik käesoleva lepingu eritingimused on pooltel vahel eraldi läbiräägitud ja kokkulepitud."
-                    + " Pooled tagasivõtmatult kinnitavad, et iga eritingimuses sätestatud omab imperatiivsed kohaldamist võrreldes üldtingimustes sätestatuga. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1cell6.setBorder(NO_BORDER);
-    body1cell6.setHorizontalAlignment(JUSTIFIED);
-    body1.addCell(body1cell6);
-
+    body1.addCell(
+        getQTextCell(
+            "Kõik käesoleva lepingu eritingimused on pooltel vahel eraldi läbiräägitud ja kokkulepitud."
+                + " Pooled tagasivõtmatult kinnitavad, et iga eritingimuses sätestatud omab imperatiivsed kohaldamist võrreldes üldtingimustes sätestatuga. "));
     body1.addCell(getSubChapterCell("1.3"));
-
-    final var body1cell8 =
-        new Cell(
-            new Paragraph(
-                "Rendileandja ja Rentnik sõlmivad lepingu poolte majandustegevuse raames, mille alusel Rentnikul on õigus rentida tulu saamiseks,"
-                    + " ehk taksoteenuse osutamiseks vaba auto Rendileandja autopargist. Käesoleva lepingu kohaselt kohustub Rendileandja andma Rentnikule kasutamiseks lepingus "
-                    + "ja üldtingimustes toodud vaba sõidukit oma autopargist - rendieseme ehk Rendiauto. Rentnik on kohustatud maksma selle eest tasu (Renti) Rendileandjale kogu Rendiperioodi eest.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1cell8.setBorder(NO_BORDER);
-    body1cell8.setHorizontalAlignment(JUSTIFIED);
-    body1.addCell(body1cell8);
-
+    body1.addCell(
+        getQTextCell(
+            "Rendileandja ja Rentnik sõlmivad lepingu poolte majandustegevuse raames, mille alusel Rentnikul on õigus rentida tulu saamiseks,"
+                + " ehk taksoteenuse osutamiseks vaba auto Rendileandja autopargist. Käesoleva lepingu kohaselt kohustub Rendileandja andma Rentnikule kasutamiseks lepingus "
+                + "ja üldtingimustes toodud vaba sõidukit oma autopargist - rendieseme ehk Rendiauto. Rentnik on kohustatud maksma selle eest tasu (Renti) Rendileandjale kogu Rendiperioodi eest."));
     body1.addCell(getSubChapterCell("1.4"));
-
-    final var body1cell10 =
-        new Cell(
-            new Paragraph(
-                "Rendileping sõlmitakse määramata tähtajaks, ja see kehtib poolte poolt ülesütlemise avalduse esitamiseni. Leping pikeneb automaatselt perioodiks, mis on võrdne käesoleva lepingu punktis 3.2 nimetatud renditeenuse minimaalse kestusega. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1cell10.setBorder(NO_BORDER);
-    body1cell10.setHorizontalAlignment(JUSTIFIED);
-    body1.addCell(body1cell10);
-
+    body1.addCell(
+        getQTextCell(
+            "Rendileping sõlmitakse määramata tähtajaks, ja see kehtib poolte poolt ülesütlemise avalduse esitamiseni. "
+                + "Leping pikeneb automaatselt perioodiks, mis on võrdne käesoleva lepingu punktis 3.2 nimetatud renditeenuse minimaalse kestusega. "));
     contractPdfDoc.add(body1);
 
     final var body2 = new Table(2);
@@ -119,66 +91,29 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2cell2.setBorder(NO_BORDER);
     body2cell2.setHorizontalAlignment(LEFT);
     body2.addCell(body2cell2);
-
     body2.addCell(getSubChapterCell("2.1"));
-
-    final var body2cell4 =
-        new Cell(
-            new Paragraph(
-                "Renditav ese (auto) on Rendileandja poolt Rentnikule vastavalt üleandmise vastuvõtmise aktile,"
-                    + " mis on käesoleva lepingu lahutamatu osa, antud Rendileandja autopargist vaba auto. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2cell4.setBorder(NO_BORDER);
-    body2cell4.setHorizontalAlignment(JUSTIFIED);
-    body2.addCell(body2cell4);
-
+    body2.addCell(
+        getQTextCell(
+            "Renditav ese (auto) on Rendileandja poolt Rentnikule vastavalt üleandmise vastuvõtmise aktile, "
+                + "mis on käesoleva lepingu lahutamatu osa, antud Rendileandja autopargist vaba auto. "));
     body2.addCell(getSubChapterCell("2.2"));
-
-    final var body2cell6 =
-        new Cell(
-            new Paragraph(
-                "Iga renditava auto hind lepitakse kokku eraldi ning sõltub autoomadustest. "
-                    + "Pooled fikseerivad rendihinda suurust eraldi üleandmise-vastuvõtmise aktis, mis on käesoleva lepingu lisa ja/või lisad. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2cell6.setBorder(NO_BORDER);
-    body2cell6.setHorizontalAlignment(JUSTIFIED);
-    body2.addCell(body2cell6);
-
+    body2.addCell(
+        getQTextCell(
+            "Iga renditava auto hind lepitakse kokku eraldi ning sõltub autoomadustest. "
+                + "Pooled fikseerivad rendihinda suurust eraldi üleandmise-vastuvõtmise aktis, mis on käesoleva lepingu lisa ja/või lisad. "));
     body2.addCell(getSubChapterCell("2.3"));
-
-    final var body2cell8 =
-        new Cell(
-            new Paragraph(
-                "Rendiauto tagatis on 300 eurot. Rendileandjal on õigus tasaarvestada rendilepingu lõpetamisel Rentniku täitmata kohustused tagatise arvelt. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2cell8.setBorder(NO_BORDER);
-    body2cell8.setHorizontalAlignment(JUSTIFIED);
-    body2.addCell(body2cell8);
-
+    body2.addCell(
+        getQTextCell(
+            "Rendiauto tagatis on 300 eurot. Rendileandjal on õigus tasaarvestada rendilepingu lõpetamisel Rentniku täitmata kohustused tagatise arvelt. "));
     body2.addCell(getSubChapterCell("2.4"));
-
-    final var body2cell10 =
-        new Cell(
-            new Paragraph(
-                "Rentnik kohustub tasuma rendileandjale ettemaksu iga nädala rendi eest sularahas Rendileandja kontoris, "
-                    + "mis asub aadressil Lasnamäe 30a, Tallinn, või ülekandega Rendileandja pangakontole (või muule Rendileandja esindajaga maaratud pangakontole) "
-                    + "asjakohase selgitusega – ”autorent + auto number”, mitte hiljem, kui iga nädala teisipäeva kella 16:00’ni. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2cell10.setBorder(NO_BORDER);
-    body2cell10.setHorizontalAlignment(JUSTIFIED);
-    body2.addCell(body2cell10);
-
+    body2.addCell(
+        getQTextCell(
+            "Rentnik kohustub tasuma rendileandjale ettemaksu iga nädala rendi eest sularahas Rendileandja kontoris, "
+                + "mis asub aadressil Lasnamäe 30a, Tallinn, või ülekandega Rendileandja pangakontole (või muule Rendileandja esindajaga maaratud pangakontole) "
+                + "asjakohase selgitusega – ”autorent + auto number”, mitte hiljem, kui iga nädala teisipäeva kella 16:00’ni. "));
     body2.addCell(getSubChapterCell("2.5"));
-
-    final var body2cell12 =
-        new Cell(
-            new Paragraph(
-                "Rendileping on tähtajatu ning kehtib kuni lepingu ülesütlemiseni. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2cell12.setBorder(NO_BORDER);
-    body2cell12.setHorizontalAlignment(JUSTIFIED);
-    body2.addCell(body2cell12);
-
+    body2.addCell(
+        getQTextCell("Rendileping on tähtajatu ning kehtib kuni lepingu ülesütlemiseni. "));
     contractPdfDoc.add(body2);
 
     final var body3 = new Table(2);
@@ -198,146 +133,72 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3.addCell(body3cell2);
 
     body3.addCell(getSubChapterCell("3.1"));
-
-    final var body3cell4 =
-        new Cell(
-            new Paragraph(
-                "Kütus ei sisaldu rendihinnas. Korralist tehnilist hooldust teostab Rendileandja.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell4.setBorder(NO_BORDER);
-    body3cell4.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell4);
-
+    body3.addCell(
+        getQTextCell(
+            "Kütus ei sisaldu rendihinnas. Korralist tehnilist hooldust teostab Rendileandja."));
     body3.addCell(getSubChapterCell("3.2"));
-
-    final var body3cell6 =
-        new Cell(
-            new Paragraph(
-                "Rendileandja poolt käesoleva koostöölepingu alusel osutatava renditeenuse  "
-                    + "minimaalne kestus on "
-                    + model.getDuration()
-                    + "  täis kalendrinädalat esimese rendiauto edastamise kuupäevast pärast käesoleva rendilepingu allkirjastamist. "
-                    + "Ülalnimetatud kestus hakatakse lugema tema esimese lepingujärgse rendiauto üleandmise-vastuvõtmise aktis märgitud kuupäevast. Renditeenuse kasutamise ennetähtaegsel "
-                    + "ja erakorralisel (käesoleva rendilepingu ja selle tüüptimgimuste alusel) lõpetamisel kohustub rentnik tasuma koige kasutamata rendinädalate eest vastavalt käesoleva "
-                    + "lepingu ja tema esimese lepingujärgse rendiauto üleandmise-vastuvõtmise akti tingimustele.  ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell6.setBorder(NO_BORDER);
-    body3cell6.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell6);
-
+    body3.addCell(
+        getQTextCell(
+            "Rendileandja poolt käesoleva koostöölepingu alusel osutatava renditeenuse  "
+                + "minimaalne kestus on "
+                + model.getDuration()
+                + "  täis kalendrinädalat esimese rendiauto edastamise kuupäevast pärast käesoleva rendilepingu allkirjastamist. "
+                + "Ülalnimetatud kestus hakatakse lugema tema esimese lepingujärgse rendiauto üleandmise-vastuvõtmise aktis märgitud kuupäevast. Renditeenuse kasutamise ennetähtaegsel "
+                + "ja erakorralisel (käesoleva rendilepingu ja selle tüüptimgimuste alusel) lõpetamisel kohustub rentnik tasuma koige kasutamata rendinädalate eest vastavalt käesoleva "
+                + "lepingu ja tema esimese lepingujärgse rendiauto üleandmise-vastuvõtmise akti tingimustele. "));
     body3.addCell(getSubChapterCell("3.3"));
-
-    final var body3cell8 =
-        new Cell(
-            new Paragraph(
-                "Rentnik vastutab kahju eest vastavalt üldtingimustes ptk VI,  VII ja VIII sätestatud järgi.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell8.setBorder(NO_BORDER);
-    body3cell8.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell8);
-
+    body3.addCell(
+        getQTextCell(
+            "Rentnik vastutab kahju eest vastavalt üldtingimustes ptk VI,  VII ja VIII sätestatud järgi."));
     body3.addCell(getSubChapterCell("3.4"));
-
-    final var body3cell10 =
-        new Cell(
-            new Paragraph(
-                "Viivis iga tasumata jäetud päeva eest on 0,1% kalendripäevas tasumata summalt.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell10.setBorder(NO_BORDER);
-    body3cell10.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell10);
-
+    body3.addCell(
+        getQTextCell(
+            "Viivis iga tasumata jäetud päeva eest on 0,1% kalendripäevas tasumata summalt."));
     body3.addCell(getSubChapterCell("3.5"));
-
-    final var body3cell12 =
-        new Cell(
-            new Paragraph(
-                "Võlalimiit on 240 eurot, mille ületamisel annab Rendileandja Rentnikule 14 päeva võlgade "
-                    + "kõrvaldamiseks siis edasi peatub Rendileandja renditeenuse osutamist ja loeb lepingu oluliselt rikutuks.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell12.setBorder(NO_BORDER);
-    body3cell12.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell12);
-
+    body3.addCell(
+        getQTextCell(
+            "Võlalimiit on 240 eurot, mille ületamisel annab Rendileandja Rentnikule 14 päeva võlgade "
+                + "kõrvaldamiseks siis edasi peatub Rendileandja renditeenuse osutamist ja loeb lepingu oluliselt rikutuks."));
     body3.addCell(getSubChapterCell("3.6"));
-
-    final var body3cell14 =
-        new Cell(
-            new Paragraph(
-                "Pooled on leppinud kokku eraldi, et käesolev leping on sõlmitud Rentniku majandustegevuse raames ning käesolevale ei kohada VÕS sätestatud tarbija sätted.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell14.setBorder(NO_BORDER);
-    body3cell14.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell14);
+    body3.addCell(
+        getQTextCell(
+            "Pooled on leppinud kokku eraldi, et käesolev leping on sõlmitud Rentniku majandustegevuse raames ning käesolevale ei kohada VÕS sätestatud tarbija sätted."));
     body3.addCell(getSubChapterCell("3.6.1"));
-
-    final var body3cell16 =
-        new Cell(
-            new Paragraph(
-                "Rentnik (esindaja ) füüsilise isikuna ("
-                    + getTextOrEmpty(model.getRenterCeoName())
-                    + " "
-                    + model.getRenterCeoTaxNumber()
-                    + ") avaldab ja kinnitab oma allkirjaga tagasivõtmatult,"
-                    + "et ta käendab käesolevas lepingus tekkitavad kohustused mis tekkivad majandustegevuse raames, kuivõrd olles Põhivõlgniku juhatuse liige ja Põhivõlgniku tegelik "
-                    + "kasusaav omanik ("
-                    + getTextOrEmpty(model.getRenterCeoName())
-                    + " "
-                    + model.getRenterCeoTaxNumber()
-                    + "), tagab Käendaja nimetatud lepingus tekkivad kohustused antava käendusega Pooled avaldavad, "
-                    + "et nad ei käsitle käesoleva võlatunnistuse antud käendust tarbijakäendusena võlaõigusseaduse tähenduses. Käendaja vastutab Rendileandja ees täies ulatuses solidaarselt,"
-                    + " tagades kõiki Rendileandja nõudeid Rentniku vastu, mis tekivad või võivad tekkida käesoleva lepingu alusel.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell16.setBorder(NO_BORDER);
-    body3cell16.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell16);
+    body3.addCell(
+        getQTextCell(
+            "Rentnik (esindaja ) füüsilise isikuna ("
+                + getTextOrEmpty(model.getRenterCeoName())
+                + " "
+                + model.getRenterCeoTaxNumber()
+                + ") avaldab ja kinnitab oma allkirjaga tagasivõtmatult,"
+                + "et ta käendab käesolevas lepingus tekkitavad kohustused mis tekkivad majandustegevuse raames, kuivõrd olles Põhivõlgniku juhatuse liige ja Põhivõlgniku tegelik "
+                + "kasusaav omanik ("
+                + getTextOrEmpty(model.getRenterCeoName())
+                + " "
+                + model.getRenterCeoTaxNumber()
+                + "), tagab Käendaja nimetatud lepingus tekkivad kohustused antava käendusega Pooled avaldavad, "
+                + "et nad ei käsitle käesoleva võlatunnistuse antud käendust tarbijakäendusena võlaõigusseaduse tähenduses. Käendaja vastutab Rendileandja ees täies ulatuses solidaarselt,"
+                + " tagades kõiki Rendileandja nõudeid Rentniku vastu, mis tekivad või võivad tekkida käesoleva lepingu alusel."));
     body3.addCell(getSubChapterCell("3.6.2"));
-
-    final var body3cell18 =
-        new Cell(
-            new Paragraph(
-                "Pooled on leppinud kokku, et käendaja füüsilise isikuna maksimaalne vastutuse piir on kuus tuhat eurot. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell18.setBorder(NO_BORDER);
-    body3cell18.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell18);
+    body3.addCell(
+        getQTextCell(
+            "Pooled on leppinud kokku, et käendaja füüsilise isikuna maksimaalne vastutuse piir on kuus tuhat eurot."));
     body3.addCell(getSubChapterCell("3.6.3"));
-
-    final var body3cell20 =
-        new Cell(
-            new Paragraph(
-                "Käendusega on tagatud nii põhi- kui kõrvalkohustuste täitmine, sealhulgas intresside, viiviste ja trahvide tasumise kohustus, "
-                    + "samuti Võlaõigusliku lepingu rikkumisest tuleneva kahju hüvitamise, Võlaõigusliku lepingu ülesütlemise või sellest taganemisega seotud kulude ja võla"
-                    + " sissenõudmise kulude tasumise kohustused. Käesolevale lepingule ei kohaldata VÕS § 143 sätestatut. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell20.setBorder(NO_BORDER);
-    body3cell20.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell20);
-
+    body3.addCell(
+        getQTextCell(
+            "Käendusega on tagatud nii põhi- kui kõrvalkohustuste täitmine, sealhulgas intresside, viiviste ja trahvide tasumise kohustus, "
+                + "samuti Võlaõigusliku lepingu rikkumisest tuleneva kahju hüvitamise, Võlaõigusliku lepingu ülesütlemise või sellest taganemisega seotud kulude ja võla"
+                + " sissenõudmise kulude tasumise kohustused. Käesolevale lepingule ei kohaldata VÕS § 143 sätestatut."));
     body3.addCell(getSubChapterCell("3.7"));
-
-    final var body3cell22 =
-        new Cell(
-            new Paragraph(
-                "Auto renditeenuste lõpetamiseks kohustub rentnik teavitada oma soovist renditud auto tagastada "
-                    + model.getDuration1()
-                    + " päeva enne järgmist esmaspäeva.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell22.setBorder(NO_BORDER);
-    body3cell22.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell22);
-
+    body3.addCell(
+        getQTextCell(
+            "Auto renditeenuste lõpetamiseks kohustub rentnik teavitada oma soovist renditud auto tagastada "
+                + model.getDuration1()
+                + " päeva enne järgmist esmaspäeva."));
     body3.addCell(getSubChapterCell("3.8"));
-
-    final var body3cell24 =
-        new Cell(
-            new Paragraph(
-                "Rentniku kohustused Rendileandja eest muutuvad sissenõutavaks  vastavalt lepingus sätestatud üldtingimustele.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3cell24.setBorder(NO_BORDER);
-    body3cell24.setHorizontalAlignment(JUSTIFIED);
-    body3.addCell(body3cell24);
-
+    body3.addCell(
+        getQTextCell(
+            "Rentniku kohustused Rendileandja eest muutuvad sissenõutavaks  vastavalt lepingus sätestatud üldtingimustele."));
     contractPdfDoc.add(body3);
 
     final var body4 = new Table(2);
@@ -354,47 +215,23 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4cell2.setBorder(NO_BORDER);
     body4cell2.setHorizontalAlignment(LEFT);
     body4.addCell(body4cell2);
-
     body4.addCell(getSubChapterCell("4.1"));
-
-    final var body4cell6 =
-        new Cell(
-            new Paragraph(
-                "Rendilepingust tulenevad vaidlused, milles Rentnik ja Rendileandja ei jõua kokkuleppele, "
-                    + "lahendatakse Harju Maakohtus vastavalt seadusele. Vaidluse läbivaatamisel kohtus rakendatakse käesoleva lepingu tingimusi.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4cell6.setBorder(NO_BORDER);
-    body4cell6.setHorizontalAlignment(JUSTIFIED);
-    body4.addCell(body4cell6);
-
+    body4.addCell(
+        getQTextCell(
+            "Rendilepingust tulenevad vaidlused, milles Rentnik ja Rendileandja ei jõua kokkuleppele, "
+                + "lahendatakse Harju Maakohtus vastavalt seadusele. Vaidluse läbivaatamisel kohtus rakendatakse käesoleva lepingu tingimusi."));
     body4.addCell(getSubChapterCell("4.2"));
-
-    final var body4cell8 =
-        new Cell(
-            new Paragraph(
-                "Pooled lepivad kokku, et Lepingu tingimusteks ei loeta Poolte varasemaid tahteavaldusi, "
-                    + "tegusid ega kokkuleppeid, mis ei ole Lepingus ega üldtingimustes otseselt sätestatud. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4cell8.setBorder(NO_BORDER);
-    body4cell8.setHorizontalAlignment(JUSTIFIED);
-    body4.addCell(body4cell8);
-
+    body4.addCell(
+        getQTextCell(
+            "Pooled lepivad kokku, et Lepingu tingimusteks ei loeta Poolte varasemaid tahteavaldusi, "
+                + "tegusid ega kokkuleppeid, mis ei ole Lepingus ega üldtingimustes otseselt sätestatud."));
     body4.addCell(getSubChapterCell("4.3"));
-
-    final var body4cell10 =
-        new Cell(
-            new Paragraph(
-                "Kõik käesoleva lepingu tingimustes tehtud muudatused loetakse kehtivaks ainult siis, "
-                    + "kui need on tehtud kirjalikult kehtiva lepingu lisana koos nende tingimustega nõustumise kinnitusega mõlema poole"
-                    + " allkirjade kujul käesoleval dokumendil. Kõik muud arutelud ja kokkulepped loetakse tühiseks. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4cell10.setBorder(NO_BORDER);
-    body4cell10.setHorizontalAlignment(JUSTIFIED);
-    body4.addCell(body4cell10);
-
+    body4.addCell(
+        getQTextCell(
+            "Kõik käesoleva lepingu tingimustes tehtud muudatused loetakse kehtivaks ainult siis, "
+                + "kui need on tehtud kirjalikult kehtiva lepingu lisana koos nende tingimustega nõustumise kinnitusega mõlema poole"
+                + " allkirjade kujul käesoleval dokumendil. Kõik muud arutelud ja kokkulepped loetakse tühiseks."));
     contractPdfDoc.add(body4);
-
-    // NEW ADD CONTRACT
 
     final var rendileandja2 = new Table(1);
     rendileandja2.setPadding(0f);
@@ -438,105 +275,38 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body1acell2.setBorder(NO_BORDER);
     body1acell2.setHorizontalAlignment(LEFT);
     body1a.addCell(body1acell2);
-
     body1a.addCell(getSubChapterCell("1.1"));
-
-    final var body1acell4 =
-        new Cell(
-            new Paragraph(
-                "Käesolevad juriidilise isiku Rendileandja renditeenuste kasutamise tingimused (tingimused), sätestavad:",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell4.setBorder(NO_BORDER);
-    body1acell4.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell4);
+    body1a.addCell(
+        getQTextCell(
+            "Käesolevad juriidilise isiku Rendileandja renditeenuste kasutamise tingimused (tingimused), sätestavad: "));
     body1a.addCell(getSubChapterCell("1.1.1"));
-
-    final var body1acell6 =
-        new Cell(new Paragraph("sõiduki rentimist", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell6.setBorder(NO_BORDER);
-    body1acell6.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell6);
-    body1a.addCell(getSubChapterCell("1.1.1"));
-
-    final var body1acell8 =
-        new Cell(
-            new Paragraph(
-                "sõiduki ja vara kasutamise tingimused ja nõuded",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell8.setBorder(NO_BORDER);
-    body1acell8.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell8);
+    body1a.addCell(getQTextCell("sõiduki rentimist"));
+    body1a.addCell(getSubChapterCell("1.1.2"));
+    body1a.addCell(getQTextCell("sõiduki ja vara kasutamise tingimused ja nõuded"));
     body1a.addCell(getSubChapterCell("1.1.3"));
-
-    final var body1acell10 =
-        new Cell(
-            new Paragraph(
-                "Rentniku vastutuse tingimused ja piirid", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell10.setBorder(NO_BORDER);
-    body1acell10.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell10);
+    body1a.addCell(getQTextCell("Rentniku vastutuse tingimused ja piirid"));
     body1a.addCell(getSubChapterCell("1.1.4"));
-
-    final var body1acell12 =
-        new Cell(new Paragraph("maksetingimused ", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell12.setBorder(NO_BORDER);
-    body1acell12.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell12);
+    body1a.addCell(getQTextCell("maksetingimused"));
     body1a.addCell(getSubChapterCell("1.1.5"));
-
-    final var body1acell14 =
-        new Cell(
-            new Paragraph(
-                "mistahes muud suhted seoses teenuste kasutamisega.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell14.setBorder(NO_BORDER);
-    body1acell14.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell14);
-
+    body1a.addCell(getQTextCell("mistahes muud suhted seoses teenuste kasutamisega."));
     body1a.addCell(getSubChapterCell("1.2"));
-
-    final var body1acell16 =
-        new Cell(
-            new Paragraph(
-                "Alates vastavalt VÕS § 339 rendilepingu sätestatule sõlmivad Rentnik ja Rendileandja lepingulise õigussuhte,"
-                    + "mida reguleerivad käesolevad tingimused (sealhulgas selle lisad), hinnakiri, teenuse hinnad ja muud sõiduki rentimise eritingimused (leping).",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell16.setBorder(NO_BORDER);
-    body1acell16.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell16);
-
+    body1a.addCell(
+        getQTextCell(
+            "Alates vastavalt VÕS § 339 rendilepingu sätestatule sõlmivad Rentnik ja Rendileandja lepingulise õigussuhte,"
+                + "mida reguleerivad käesolevad tingimused (sealhulgas selle lisad), hinnakiri, teenuse hinnad ja muud sõiduki rentimise eritingimused (leping)."));
     body1a.addCell(getSubChapterCell("1.3"));
-
-    final var body1acell18 =
-        new Cell(
-            new Paragraph(
-                "Enne sõiduki renti võtmist peab Rentnik tutvuma hinnakirja ja muude renditingimustega. "
-                    + "Rendilepingu sõlmimisel loetakse, et Rentnik on teenuse hindadest, hinnakirjast ja muudest rentimistingimustest teadlik ja on nendega nõustunud.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell18.setBorder(NO_BORDER);
-    body1acell18.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell18);
-
+    body1a.addCell(
+        getQTextCell(
+            "Enne sõiduki renti võtmist peab Rentnik tutvuma hinnakirja ja muude renditingimustega. "
+                + "Rendilepingu sõlmimisel loetakse, et Rentnik on teenuse hindadest, hinnakirjast ja muudest rentimistingimustest teadlik ja on nendega nõustunud."));
     body1a.addCell(getSubChapterCell("1.4"));
-
-    final var body1acell20 =
-        new Cell(
-            new Paragraph(
-                "Kui tingimuste sätestatud allikates esineb vastuolusid või lahknevusi, tõlgendatakse ja kohaldatakse lepingut järgmise prioriteetsuse alusel:",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell20.setBorder(NO_BORDER);
-    body1acell20.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell20);
+    body1a.addCell(
+        getQTextCell(
+            "Kui tingimuste sätestatud allikates esineb vastuolusid või lahknevusi, tõlgendatakse ja kohaldatakse lepingut järgmise prioriteetsuse alusel:"));
     body1a.addCell(getSubChapterCell("1.4.1"));
-
-    final var body1acell22 =
-        new Cell(
-            new Paragraph(
-                "rendilepingust toodud eritingimused, teenuse hinnad ja muud konkreetse sõiduki renditingimused;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell22.setBorder(NO_BORDER);
-    body1acell22.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell22);
+    body1a.addCell(
+        getQTextCell(
+            "rendilepingust toodud eritingimused, teenuse hinnad ja muud konkreetse sõiduki renditingimused;"));
     body1a.addCell(getSubChapterCell("1.4.2"));
 
     final var body1acell24 =
@@ -2719,7 +2489,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
 
   private static Cell getChapterCell(final String chapterNumber) {
     final var chapterCell =
-            new Cell(new Paragraph(chapterNumber + ".", new Font(TIMES_ROMAN, 9, BOLD)));
+        new Cell(new Paragraph(chapterNumber + ".", new Font(TIMES_ROMAN, 9, BOLD)));
     chapterCell.setBorder(NO_BORDER);
     chapterCell.setHorizontalAlignment(LEFT);
 
@@ -2727,7 +2497,8 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
   }
 
   private static Cell getSubChapterCell(final String subChapterNumber) {
-    final var subChapterCell = new Cell(new Paragraph(subChapterNumber, new Font(TIMES_ROMAN, 9, NORMAL)));
+    final var subChapterCell =
+        new Cell(new Paragraph(subChapterNumber, new Font(TIMES_ROMAN, 9, NORMAL)));
     subChapterCell.setBorder(NO_BORDER);
     subChapterCell.setHorizontalAlignment(LEFT);
 
@@ -2854,6 +2625,14 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     final var cell = new Cell(new Paragraph(value, new Font(TIMES_ROMAN, 9, NORMAL)));
     cell.setBorder(NO_BORDER);
     cell.setHorizontalAlignment(LEFT);
+
+    return cell;
+  }
+
+  private static Cell getQTextCell(final String value) {
+    final var cell = new Cell(new Paragraph(value, new Font(TIMES_ROMAN, 8, NORMAL)));
+    cell.setBorder(NO_BORDER);
+    cell.setHorizontalAlignment(JUSTIFIED);
 
     return cell;
   }
