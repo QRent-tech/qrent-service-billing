@@ -308,13 +308,7 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
         getQTextCell(
             "rendilepingust toodud eritingimused, teenuse hinnad ja muud konkreetse sõiduki renditingimused;"));
     body1a.addCell(getSubChapterCell("1.4.2"));
-
-    final var body1acell24 =
-        new Cell(new Paragraph("käesolevad tingimused;", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body1acell24.setBorder(NO_BORDER);
-    body1acell24.setHorizontalAlignment(JUSTIFIED);
-    body1a.addCell(body1acell24);
-
+    body1a.addCell(getQTextCell("käesolevad tingimused;"));
     contractPdfDoc.add(body1a);
 
     final var body2a = new Table(2);
@@ -331,186 +325,62 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body2acell2.setBorder(NO_BORDER);
     body2acell2.setHorizontalAlignment(LEFT);
     body2a.addCell(body2acell2);
-
     body2a.addCell(getSubChapterCell("2.1"));
-
-    final var body2acell4 =
-        new Cell(
-            new Paragraph(
-                "Rendileandja – " + model.getQFirmName(), new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell4.setBorder(NO_BORDER);
-    body2acell4.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell4);
-
+    body2a.addCell(getQTextCell("Rendileandja – " + model.getQFirmName()));
     body2a.addCell(getSubChapterCell("2.2"));
-
-    final var body2acell6 =
-        new Cell(
-            new Paragraph(
-                "Hinnakiri - lepingus ja/või eritingimustes ja/või auto üleandmise aktis fikseeritud rendi hind, trahvid, muud tasud ja lõivud. "
-                    + "Käesolevate tingimustega nõustudes nõustub Rentnik samal ajal ka käesolevate tingimuste lahutamatuks osaks oleva hinnakirjaga.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell6.setBorder(NO_BORDER);
-    body2acell6.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell6);
-
+    body2a.addCell(
+        getQTextCell(
+            "Hinnakiri - lepingus ja/või eritingimustes ja/või auto üleandmise aktis fikseeritud rendi hind, trahvid, muud tasud ja lõivud. Käesolevate tingimustega nõustudes nõustub Rentnik samal ajal ka käesolevate tingimuste lahutamatuks osaks oleva hinnakirjaga."));
     body2a.addCell(getSubChapterCell("2.3"));
-
-    final var body2acell8 =
-        new Cell(
-            new Paragraph(
-                "Liikluseeskirjad - asjaomases riigis kehtivad liikluseeskirjad ja nendega seotud õigusaktide sätted.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell8.setBorder(NO_BORDER);
-    body2acell8.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell8);
-
+    body2a.addCell(
+        getQTextCell(
+            "Liikluseeskirjad - asjaomases riigis kehtivad liikluseeskirjad ja nendega seotud õigusaktide sätted."));
     body2a.addCell(getSubChapterCell("2.4"));
-
-    final var body2acell10 =
-        new Cell(
-            new Paragraph(
-                "Rentnik - Rendileandja klient (füüsiline ja/või juriidiline isik), kes nõustub käesolevate tingimustega ja kasutab vastavalt "
-                    + "lepingule rendiauto teenuseid. Rentnikul on õigus kasutada sõidukit ainult siis, kui ta on vähemalt"
-                    + " 21 aastat vana ja omab mootorsõiduki juhistaaži vähemalt kaks aastat. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell10.setBorder(NO_BORDER);
-    body2acell10.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell10);
-
+    body2a.addCell(
+        getQTextCell(
+            "Rentnik - Rendileandja klient (füüsiline ja/või juriidiline isik), kes nõustub käesolevate tingimustega ja kasutab vastavalt lepingule rendiauto teenuseid. Rentnikul on õigus kasutada sõidukit ainult siis, kui ta on vähemalt 21 aastat vana ja omab mootorsõiduki juhistaaži vähemalt kaks aastat. "));
     body2a.addCell(getSubChapterCell("2.5"));
-
-    final var body2acell12 =
-        new Cell(
-            new Paragraph(
-                "Kasutusperiood - ajavahemik sõiduki üleandmise-vastuvõtmise akti alusel võtmise hetkest kuni sõiduki tagastamise vastuvõtmise "
-                    + "akti allkirjastamiseni. Kasutusperioodist lepitakse eraldi kokku lepingu eritingimustes. Kasutusperiood on arvestatud kalendri täisnädala kaupa ja "
-                    + "rendinädalaid peetakse ajaperioodi alates uue nädala Esmaspäeva kella 10:00’ni kuni järgmise nädala Esmaspäeva kella 10:00’ni.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell12.setBorder(NO_BORDER);
-    body2acell12.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell12);
-
+    body2a.addCell(
+        getQTextCell(
+            "Kasutusperiood - ajavahemik sõiduki üleandmise-vastuvõtmise akti alusel võtmise hetkest kuni sõiduki tagastamise vastuvõtmise akti allkirjastamiseni. Kasutusperioodist lepitakse eraldi kokku lepingu eritingimustes. Kasutusperiood on arvestatud kalendri täisnädala kaupa ja rendinädalaid peetakse ajaperioodi alates uue nädala Esmaspäeva kella 10:00’ni kuni järgmise nädala Esmaspäeva kella 10:00’ni."));
     body2a.addCell(getSubChapterCell("2.6"));
-
-    final var body2acell14 =
-        new Cell(
-            new Paragraph(
-                "Teenused - Rendileandja poolt Rentnikule osutatavad autorendi teenused vastavalt VÕS  § 399 sätestatule, mille käigus Rendileandja "
-                    + "annab teisele isikule (rentnikule) kasutamiseks rendilepingu eseme ning võimaldab talle rendilepingu esemest korrapärase majandamise reeglite järgi saadava vilja. "
-                    + "Rentnik on kohustatud maksma selle eest tasu (renti).  ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell14.setBorder(NO_BORDER);
-    body2acell14.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell14);
-
+    body2a.addCell(
+        getQTextCell(
+            "Teenused - Rendileandja poolt Rentnikule osutatavad autorendi teenused vastavalt VÕS  § 399 sätestatule, mille käigus Rendileandja annab teisele isikule (rentnikule) kasutamiseks rendilepingu eseme ning võimaldab talle rendilepingu esemest korrapärase majandamise reeglite järgi saadava vilja. Rentnik on kohustatud maksma selle eest tasu (renti)."));
     body2a.addCell(getSubChapterCell("2.7"));
-
-    final var body2acell16 =
-        new Cell(
-            new Paragraph(
-                "Üleandmise-vastuvõtmise akt - kirjalik dokument, millega fikseeritakse rendiauto registreerimisnumbrit, üleandmise-vastuvõtmise kuupäeva, "
-                    + "nädala rendihinda, auto seisundit (vigastusi ja puudusi) üleandmise ajal, ning Rendileandja ja Rentniku nõusolekut nimetatud üleandmise-vastuvõtmise akti andmetega,"
-                    + " mis kinnitatakse poolte allkirjadega.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell16.setBorder(NO_BORDER);
-    body2acell16.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell16);
-
+    body2a.addCell(
+        getQTextCell(
+            "Üleandmise-vastuvõtmise akt - kirjalik dokument, millega fikseeritakse rendiauto registreerimisnumbrit, üleandmise-vastuvõtmise kuupäeva, nädala rendihinda, auto seisundit (vigastusi ja puudusi) üleandmise ajal, ning Rendileandja ja Rentniku nõusolekut nimetatud üleandmise-vastuvõtmise akti andmetega, mis kinnitatakse poolte allkirjadega."));
     body2a.addCell(getSubChapterCell("2.8"));
-
-    final var body2acell18 =
-        new Cell(
-            new Paragraph(
-                "Rendiauto kahjustuste fikseerimise akt on kirjalik dokument millega fikseeritakse rendiesemele tekitatud vigastused selle"
-                    + " rentniku kasutamise aja jooksul. Akt sisaldab vigastuste kirjeldust ja määrab nende asukohti. Võimalusel lisatakse aktile kahjustuste fotosid. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell18.setBorder(NO_BORDER);
-    body2acell18.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell18);
-
+    body2a.addCell(
+        getQTextCell(
+            "Rendiauto kahjustuste fikseerimise akt on kirjalik dokument millega fikseeritakse rendiesemele tekitatud vigastused selle rentniku kasutamise aja jooksul. Akt sisaldab vigastuste kirjeldust ja määrab nende asukohti. Võimalusel lisatakse aktile kahjustuste fotosid."));
     body2a.addCell(getSubChapterCell("2.9"));
-
-    final var body2acell20 =
-        new Cell(
-            new Paragraph(
-                "Rendiauto (sõiduk) - vaba auto Rendileandja autopargist. Rendilepingu kohaselt kohustub Rendileandja andma Rentnikule "
-                    + "kasutamiseks rendilepingu ning käesoleva tingimuste sätestatu alusel vaba sõidukit oma autopargist - rendilepingu eseme ehk Rendiauto."
-                    + " Rentnik on kohustatud maksma selle eest tasu (Renti) Rendileandjale kogu Rendiperioodi eest.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell20.setBorder(NO_BORDER);
-    body2acell20.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell20);
-
+    body2a.addCell(
+        getQTextCell(
+            "Rendiauto (sõiduk) - vaba auto Rendileandja autopargist. Rendilepingu kohaselt kohustub Rendileandja andma Rentnikule kasutamiseks rendilepingu ning käesoleva tingimuste sätestatu alusel vaba sõidukit oma autopargist - rendilepingu eseme ehk Rendiauto. Rentnik on kohustatud maksma selle eest tasu (Renti) Rendileandjale kogu Rendiperioodi eest."));
     body2a.addCell(getSubChapterCell("2.10"));
-
-    final var body2acell22 =
-        new Cell(
-            new Paragraph(
-                "Rent - tasu rendiauto kasutamise perioodi eest vastavalt lepingus, aktis ja tüüptingimustes toodule.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell22.setBorder(NO_BORDER);
-    body2acell22.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell22);
-
+    body2a.addCell(
+        getQTextCell(
+            "Rent - tasu rendiauto kasutamise perioodi eest vastavalt lepingus, aktis ja tüüptingimustes toodule."));
     body2a.addCell(getSubChapterCell("2.11"));
-
-    final var body2acell24 =
-        new Cell(
-            new Paragraph(
-                "Rendi arvutamise põhimõtted - lepinguline nädala renditasu suurus üleandmise-vastuvõtmise hetkeks"
-                    + " sõltub üleantava auto omadustest ja määratakse eraldi iga auto üleandmise-vastuvõtmise aktis. Üleandmise-vastuvõtmise aktis "
-                    + "määratud renditasu on aktuaalne vaid täisrendinädala eest tasumise puhul. Täpsemalt sätestatud p.12.3.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell24.setBorder(NO_BORDER);
-    body2acell24.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell24);
-
+    body2a.addCell(
+        getQTextCell(
+            "Rendi arvutamise põhimõtted - lepinguline nädala renditasu suurus üleandmise-vastuvõtmise hetkeks sõltub üleantava auto omadustest ja määratakse eraldi iga auto üleandmise-vastuvõtmise aktis. Üleandmise-vastuvõtmise aktis määratud renditasu on aktuaalne vaid täisrendinädala eest tasumise puhul. Täpsemalt sätestatud p.12.3."));
     body2a.addCell(getSubChapterCell("2.12"));
-
-    final var body2acell26 =
-        new Cell(
-            new Paragraph(
-                "Leping - autorendi teenuste osutamise leping. Rentniku ja Rendiandja vahel sõlmitud teenuste osutamise "
-                    + "leping loetakse sõlmituks alates allakirjutamise hetkest. Lepingut reguleerivad sätted, nagu on sätestatud käesolevate tingimuste p. 1.2. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell26.setBorder(NO_BORDER);
-    body2acell26.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell26);
-
+    body2a.addCell(
+        getQTextCell(
+            "Leping - autorendi teenuste osutamise leping. Rentniku ja Rendiandja vahel sõlmitud teenuste osutamise leping loetakse sõlmituks alates allakirjutamise hetkest. Lepingut reguleerivad sätted, nagu on sätestatud käesolevate tingimuste p. 1.2. "));
     body2a.addCell(getSubChapterCell("2.13"));
-
-    final var body2acell28 =
-        new Cell(
-            new Paragraph(
-                "Käendus - erikokkuleppe sõlmitud lepingus eritingimusena.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell28.setBorder(NO_BORDER);
-    body2acell28.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell28);
-
+    body2a.addCell(getQTextCell("Käendus - erikokkuleppe sõlmitud lepingus eritingimusena."));
     body2a.addCell(getSubChapterCell("2.14"));
-
-    final var body2acell30 =
-        new Cell(
-            new Paragraph(
-                "Võlalimiit –  võla summa mille ületamisel loetakse leping oluliselt rikutuks. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell30.setBorder(NO_BORDER);
-    body2acell30.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell30);
-
+    body2a.addCell(
+        getQTextCell(
+            "Võlalimiit –  võla summa mille ületamisel loetakse leping oluliselt rikutuks."));
     body2a.addCell(getSubChapterCell("2.15"));
-
-    final var body2acell32 =
-        new Cell(
-            new Paragraph(
-                "Muude käesolevates tingimustes kasutatud mõistete tähendus vastab tingimuste p. 1.2 nimetatud allikates sätestatud tähendusele.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body2acell32.setBorder(NO_BORDER);
-    body2acell32.setHorizontalAlignment(JUSTIFIED);
-    body2a.addCell(body2acell32);
-
+    body2a.addCell(
+        getQTextCell(
+            "Muude käesolevates tingimustes kasutatud mõistete tähendus vastab tingimuste p. 1.2 nimetatud allikates sätestatud tähendusele."));
     contractPdfDoc.add(body2a);
 
     final var body3a = new Table(2);
@@ -528,250 +398,91 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body3acell2.setBorder(NO_BORDER);
     body3acell2.setHorizontalAlignment(LEFT);
     body3a.addCell(body3acell2);
-
     body3a.addCell(getSubChapterCell("3.1"));
-
-    final var body3acell4 =
-        new Cell(
-            new Paragraph(
-                "Rendileandja kohustub tagama, et rendiauto on heas sõidukorras ja selle vahetuks otstarbeks kasutamiseks ja käitamiseks sobilik, võttes arvesse sõiduki tavapärast kulumist.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell4.setBorder(NO_BORDER);
-    body3acell4.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell4);
-
+    body3a.addCell(
+        getQTextCell(
+            "Rendileandja kohustub tagama, et rendiauto on heas sõidukorras ja selle vahetuks otstarbeks kasutamiseks ja käitamiseks sobilik, võttes arvesse sõiduki tavapärast kulumist."));
     body3a.addCell(getSubChapterCell("3.2"));
-
-    final var body3acell6 =
-        new Cell(
-            new Paragraph(
-                "Defektideks ei loeta rikkeid ja talitlushäireid, mis ei mõjuta praegu ega lähitulevikus liiklusohutust (nt: kriimustused seadmete sise- "
-                    + "ja välispindadel, varuosad, multimeediaseadmete talitlushäireid, andurite rikked). Puudusi fikseeritakse üleandmise-vastuvõtmise aktis.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell6.setBorder(NO_BORDER);
-    body3acell6.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell6);
-
+    body3a.addCell(
+        getQTextCell(
+            "Defektideks ei loeta rikkeid ja talitlushäireid, mis ei mõjuta praegu ega lähitulevikus liiklusohutust (nt: kriimustused seadmete sise- ja välispindadel, varuosad, multimeediaseadmete talitlushäireid, andurite rikked). Puudusi fikseeritakse üleandmise-vastuvõtmise aktis."));
     body3a.addCell(getSubChapterCell("3.3"));
-
-    final var body3acell8 =
-        new Cell(
-            new Paragraph(
-                "Renditeenuse kasutamisel peab Rentnik muuhulgas:",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell8.setBorder(NO_BORDER);
-    body3acell8.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell8);
+    body3a.addCell(getQTextCell("Renditeenuse kasutamisel peab Rentnik muuhulgas:"));
     body3a.addCell(getSubChapterCell("3.3.1"));
-
-    final var body3acell10 =
-        new Cell(
-            new Paragraph(
-                "Rentnik on kohustatud vaatama sõiduki üle enne"
-                    + " selle vastuvõtmist ja veenduma selle sobilikkuses ja korrasolekus, tegema vastavasisulise märke autol olemasolevatest kahjustustest "
-                    + "üleandmise-vastuvõtmise aktil ja panna oma allkirja nende kinnitamiseks. Rentniku allkiri kinnitab tema nõusolekut ainult "
-                    + "üleandmise-vastuvõtmise aktil märgitud kahjustuste olemasoluga. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell10.setBorder(NO_BORDER);
-    body3acell10.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell10);
+    body3a.addCell(
+        getQTextCell(
+            "Rentnik on kohustatud vaatama sõiduki üle enne selle vastuvõtmist ja veenduma selle sobilikkuses ja korrasolekus, tegema vastavasisulise märke autol olemasolevatest kahjustustest üleandmise-vastuvõtmise aktil ja panna oma allkirja nende kinnitamiseks. Rentniku allkiri kinnitab tema nõusolekut ainult üleandmise-vastuvõtmise aktil märgitud kahjustuste olemasoluga."));
     body3a.addCell(getSubChapterCell("3.3.2"));
-
-    final var body3acell12 =
-        new Cell(
-            new Paragraph(
-                "täitma sõiduki käitamisnõudeid, sealhulgas mistahes käesolevates tingimustes nimetamata nõudeid, mis on selliste esemete kasutamisel tavapärased; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell12.setBorder(NO_BORDER);
-    body3acell12.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell12);
+    body3a.addCell(
+        getQTextCell(
+            "täitma sõiduki käitamisnõudeid, sealhulgas mistahes käesolevates tingimustes nimetamata nõudeid, mis on selliste esemete kasutamisel tavapärased; "));
     body3a.addCell(getSubChapterCell("3.3.3"));
-
-    final var body3acell14 =
-        new Cell(
-            new Paragraph(
-                "sõitma tähelepanelikult, ettevaatlikult, viisakalt ja ohutult, austades teisi liiklejaid ja inimesi,"
-                    + " võttes kõik vajalikud ettevaatusabinõud ja ohustamata teiste liiklejate, teiste inimeste või nende vara ja keskkonna ohutust;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell14.setBorder(NO_BORDER);
-    body3acell14.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell14);
+    body3a.addCell(
+        getQTextCell(
+            "sõitma tähelepanelikult, ettevaatlikult, viisakalt ja ohutult, austades teisi liiklejaid ja inimesi, võttes kõik vajalikud ettevaatusabinõud ja ohustamata teiste liiklejate, teiste inimeste või nende vara ja keskkonna ohutust;"));
     body3a.addCell(getSubChapterCell("3.3.4"));
-
-    final var body3acell16 =
-        new Cell(
-            new Paragraph(
-                "käituma piisavalt ettevaatlikult, mõistlikult, vastutustundlikult ja teadlikult;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell16.setBorder(NO_BORDER);
-    body3acell16.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell16);
+    body3a.addCell(
+        getQTextCell(
+            "käituma piisavalt ettevaatlikult, mõistlikult, vastutustundlikult ja teadlikult;"));
     body3a.addCell(getSubChapterCell("3.3.5"));
-
-    final var body3acell18 =
-        new Cell(
-            new Paragraph(
-                "olema täiesti kaine (0,00 promilli) ja mitte vaimset seisundit mõjutavate ainete mõju all;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell18.setBorder(NO_BORDER);
-    body3acell18.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell18);
+    body3a.addCell(
+        getQTextCell(
+            "olema täiesti kaine (0,00 promilli) ja mitte vaimset seisundit mõjutavate ainete mõju all;"));
     body3a.addCell(getSubChapterCell("3.3.6"));
-
-    final var body3acell20 =
-        new Cell(
-            new Paragraph(
-                "mitte juhtima sõidukit haige või väsinuna, kui sõiduki juhtimine võib ohustada liiklusohutust "
-                    + "või kui esineb mõni muu põhjus, miks Rentnik ei saa sõidukit vastavalt õigusaktides sätestatud nõuetele ohutult juhtida;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell20.setBorder(NO_BORDER);
-    body3acell20.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell20);
+    body3a.addCell(
+        getQTextCell(
+            "mitte juhtima sõidukit haige või väsinuna, kui sõiduki juhtimine võib ohustada liiklusohutust või kui esineb mõni muu põhjus, miks Rentnik ei saa sõidukit vastavalt õigusaktides sätestatud nõuetele ohutult juhtida;"));
     body3a.addCell(getSubChapterCell("3.3.7"));
-
-    final var body3acell22 =
-        new Cell(
-            new Paragraph(
-                "Rentnikul ei ole õigust lubada teistel isikutel sõidukit juhtida, kontrollida või kasutada, sõidukit edasi rentida, käesolevates tingimustes sätestatud mistahes õigusi või kohustusi üle anda; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell22.setBorder(NO_BORDER);
-    body3acell22.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell22);
+    body3a.addCell(
+        getQTextCell(
+            "Rentnikul ei ole õigust lubada teistel isikutel sõidukit juhtida, kontrollida või kasutada, sõidukit edasi rentida, käesolevates tingimustes sätestatud mistahes õigusi või kohustusi üle anda;"));
     body3a.addCell(getSubChapterCell("3.3.8"));
-
-    final var body3acell24 =
-        new Cell(
-            new Paragraph(
-                "Rentnikul ei ole õigust kopeerida, muuta või kustutada sõiduki süsteemis olevaid andmeid, omastada, hävitada või muul viisil kahjustada sõidukis olevaid sõiduki dokumente (nt tehnilist passi); ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell24.setBorder(NO_BORDER);
-    body3acell24.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell24);
-
-    final var body3acell25 = new Cell(new Paragraph("3.3.9", new Font(TIMES_ROMAN, 9, NORMAL)));
-    body3acell25.setBorder(NO_BORDER);
-    body3acell25.setHorizontalAlignment(LEFT);
-    body3a.addCell(body3acell25);
-
-    final var body3acell26 =
-        new Cell(
-            new Paragraph(
-                "Rentnikule on keelatud anda üle autoga seotud dokumendid ning poolte suhted reguleerivad dokumendid kolmandatele isikutele ilma teise poole nõusolekuta. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell26.setBorder(NO_BORDER);
-    body3acell26.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell26);
+    body3a.addCell(
+        getQTextCell(
+            "Rentnikul ei ole õigust kopeerida, muuta või kustutada sõiduki süsteemis olevaid andmeid, omastada, hävitada või muul viisil kahjustada sõidukis olevaid sõiduki dokumente (nt tehnilist passi);"));
+    body3a.addCell(getSubChapterCell("3.3.9"));
+    body3a.addCell(
+        getQTextCell(
+            "Rentnikule on keelatud anda üle autoga seotud dokumendid ning poolte suhted reguleerivad dokumendid kolmandatele isikutele ilma teise poole nõusolekuta."));
     body3a.addCell(getSubChapterCell("3.3.10"));
-
-    final var body3acell28 =
-        new Cell(
-            new Paragraph(
-                "Rentnikul ei ole õigust sõidukit lahti monteerida, remontida või muuta;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell28.setBorder(NO_BORDER);
-    body3acell28.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell28);
+    body3a.addCell(
+        getQTextCell("Rentnikul ei ole õigust sõidukit lahti monteerida, remontida või muuta;"));
     body3a.addCell(getSubChapterCell("3.3.11"));
-
-    final var body3acell30 =
-        new Cell(
-            new Paragraph(
-                "Rentnikul  ei ole õigust vedada sõidukis plahvatusohtlikke, tuleohtlikke, mürgiseid aineid või inimelule või "
-                    + "-tervisele kahjulikke aineid jms ega õigust kasutada sõidukis või sõiduki lähedal kütteseadmeid, lahtist tuld või muid võimalikke tuleallikaid;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell30.setBorder(NO_BORDER);
-    body3acell30.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell30);
+    body3a.addCell(
+        getQTextCell(
+            "Rentnikul  ei ole õigust vedada sõidukis plahvatusohtlikke, tuleohtlikke, mürgiseid aineid või inimelule või -tervisele kahjulikke aineid jms ega õigust kasutada sõidukis või sõiduki lähedal kütteseadmeid, lahtist tuld või muid võimalikke tuleallikaid;"));
     body3a.addCell(getSubChapterCell("3.3.12"));
-
-    final var body3acell32 =
-        new Cell(
-            new Paragraph(
-                "Rentnikul ei ole õigust kasutada sõidukit eesmärkidel, milleks see ei ole ette nähtud või kohandatud, nt kauba "
-                    + "vedamiseks või kasutada sõidukit suurema koorma vedamiseks (raskete veoste vedamiseks jne), suurte loomade vedamiseks, samuti metsas, veekogudes"
-                    + " ja muudel maastikel sõitmiseks, sõidukit üle koormata, koormat mitte nõuetekohaselt kinnitada ja paigutada; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell32.setBorder(NO_BORDER);
-    body3acell32.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell32);
+    body3a.addCell(
+        getQTextCell(
+            "Rentnikul ei ole õigust kasutada sõidukit eesmärkidel, milleks see ei ole ette nähtud või kohandatud, nt kauba vedamiseks või kasutada sõidukit suurema koorma vedamiseks (raskete veoste vedamiseks jne), suurte loomade vedamiseks, samuti metsas, veekogudes ja muudel maastikel sõitmiseks, sõidukit üle koormata, koormat mitte nõuetekohaselt kinnitada ja paigutada;"));
     body3a.addCell(getSubChapterCell("3.3.13"));
-
-    final var body3acell34 =
-        new Cell(
-            new Paragraph(
-                "Rentnikul ei ole õigust kasutada sõidukit võidusõitudel, võistlustel ega muudel spordi või võidusõiduga seotud eesmärkidel;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell34.setBorder(NO_BORDER);
-    body3acell34.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell34);
+    body3a.addCell(
+        getQTextCell(
+            "Rentnikul ei ole õigust kasutada sõidukit võidusõitudel, võistlustel ega muudel spordi või võidusõiduga seotud eesmärkidel;"));
     body3a.addCell(getSubChapterCell("3.3.14"));
-
-    final var body3acell36 =
-        new Cell(
-            new Paragraph(
-                "Rentnikul ei ole õigust kasutada sõidukit õppesõidukina ega kasutada sõidukit teiste sõidukite vedamiseks; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell36.setBorder(NO_BORDER);
-    body3acell36.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell36);
+    body3a.addCell(
+        getQTextCell(
+            "Rentnikul ei ole õigust kasutada sõidukit õppesõidukina ega kasutada sõidukit teiste sõidukite vedamiseks; "));
     body3a.addCell(getSubChapterCell("3.3.15"));
-
-    final var body3acell38 =
-        new Cell(new Paragraph("täitma liikluseeskirju; ", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell38.setBorder(NO_BORDER);
-    body3acell38.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell38);
+    body3a.addCell(getQTextCell("täitma liikluseeskirju;"));
     body3a.addCell(getSubChapterCell("3.3.16"));
-
-    final var body3acell40 =
-        new Cell(
-            new Paragraph(
-                "kaitsma sõidukit, kasutama sõidukit ja selles olevat vara hoolikalt, võtma kõik mõistlikud meetmed sõiduki turvalisuse tagamiseks (st lukustama sõiduki, sulgema aknad, lülitama tuled ja muusikaseadme välja jne);",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell40.setBorder(NO_BORDER);
-    body3acell40.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell40);
+    body3a.addCell(
+        getQTextCell(
+            "kaitsma sõidukit, kasutama sõidukit ja selles olevat vara hoolikalt, võtma kõik mõistlikud meetmed sõiduki turvalisuse tagamiseks (st lukustama sõiduki, sulgema aknad, lülitama tuled ja muusikaseadme välja jne);"));
     body3a.addCell(getSubChapterCell("3.3.17"));
-
-    final var body3acell42 =
-        new Cell(
-            new Paragraph(
-                "tagama, et A. sõidukis ei suitsetata ja B. väikseid lemmikloomi veetakse selleks ette nähtud spetsiaalses transpordikastis;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell42.setBorder(NO_BORDER);
-    body3acell42.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell42);
+    body3a.addCell(
+        getQTextCell(
+            "tagama, et A. sõidukis ei suitsetata ja B. väikseid lemmikloomi veetakse selleks ette nähtud spetsiaalses transpordikastis;"));
     body3a.addCell(getSubChapterCell("3.3.18"));
-
-    final var body3acell44 =
-        new Cell(
-            new Paragraph(
-                "enne sõidukiga sõitma asumist peab Rentnik veenduma, et sõidukil ei ole ilmseid rikkeid ja/või defekte ning nende olemasolu korral viivitamatult teavitama Rendileandja taasesitamist võimaldavas vormis; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell44.setBorder(NO_BORDER);
-    body3acell44.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell44);
+    body3a.addCell(
+        getQTextCell(
+            "enne sõidukiga sõitma asumist peab Rentnik veenduma, et sõidukil ei ole ilmseid rikkeid ja/või defekte ning nende olemasolu korral viivitamatult teavitama Rendileandja taasesitamist võimaldavas vormis;"));
     body3a.addCell(getSubChapterCell("3.3.19"));
-
-    final var body3acell46 =
-        new Cell(
-            new Paragraph(
-                "täitma muid õigusaktides sätestatud nõudeid. ", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell46.setBorder(NO_BORDER);
-    body3acell46.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell46);
+    body3a.addCell(getQTextCell("täitma muid õigusaktides sätestatud nõudeid. "));
     body3a.addCell(getSubChapterCell("3.3.20"));
-
-    final var body3acell48 =
-        new Cell(
-            new Paragraph(
-                "Sõiduki võib kasutada ainult Eesti territooriumil. Rentnikul on lubatud kasutada sõidukit väljaspool Eesti territooriumi üksnes Rendileandja "
-                    + "eelneval kirjalikul nõusolekul. Ettevõte otsustab nõusoleku andmise pärast seda, kui on hinnanud Rentnikul taotluse individuaalselt. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body3acell48.setBorder(NO_BORDER);
-    body3acell48.setHorizontalAlignment(JUSTIFIED);
-    body3a.addCell(body3acell48);
-
+    body3a.addCell(
+        getQTextCell(
+            "Sõiduki võib kasutada ainult Eesti territooriumil. Rentnikul on lubatud kasutada sõidukit väljaspool Eesti territooriumi üksnes Rendileandja eelneval kirjalikul nõusolekul. Ettevõte otsustab nõusoleku andmise pärast seda, kui on hinnanud Rentnikul taotluse individuaalselt."));
     contractPdfDoc.add(body3a);
 
     final var body4a = new Table(2);
@@ -791,173 +502,62 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body4acell2.setBorder(NO_BORDER);
     body4acell2.setHorizontalAlignment(LEFT);
     body4a.addCell(body4acell2);
-
     body4a.addCell(getSubChapterCell("4.1"));
-
-    final var body4acell4 =
-        new Cell(
-            new Paragraph(
-                "Sõiduki valjastamise koht on Lasnamäe 30a, Tallinn. Sõiduk antakse Rendileandja poolt üle Rentnikule kirjaliku poolte poolt allakirjutatud akti alusel. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell4.setBorder(NO_BORDER);
-    body4acell4.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell4);
-
+    body4a.addCell(
+        getQTextCell(
+            "Sõiduki valjastamise koht on Lasnamäe 30a, Tallinn. Sõiduk antakse Rendileandja poolt üle Rentnikule kirjaliku poolte poolt allakirjutatud akti alusel."));
     body4a.addCell(getSubChapterCell("4.2"));
-
-    final var body4acell6 =
-        new Cell(
-            new Paragraph(
-                "Sõiduki kasutamise periood ei ole piiratud. Pooled võivad lepingu eritingimustes leppida kokku minimaalsest ja maksimaalsest renditeenuse kestusest. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell6.setBorder(NO_BORDER);
-    body4acell6.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell6);
-
+    body4a.addCell(
+        getQTextCell(
+            "Sõiduki kasutamise periood ei ole piiratud. Pooled võivad lepingu eritingimustes leppida kokku minimaalsest ja maksimaalsest renditeenuse kestusest."));
     body4a.addCell(getSubChapterCell("4.3"));
-
-    final var body4acell8 =
-        new Cell(
-            new Paragraph(
-                "Sõiduki tagastamiskoht on Lasnamäe 30a, Tallinn. Sõiduk tagastatakse Rendileandjale Rendileandja ja Rentniku poolt kirjaliku allkirjastatud akti alusel.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell8.setBorder(NO_BORDER);
-    body4acell8.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell8);
-
+    body4a.addCell(
+        getQTextCell(
+            "Sõiduki tagastamiskoht on Lasnamäe 30a, Tallinn. Sõiduk tagastatakse Rendileandjale Rendileandja ja Rentniku poolt kirjaliku allkirjastatud akti alusel."));
     body4a.addCell(getSubChapterCell("4.4"));
-
-    final var body4acell10 =
-        new Cell(
-            new Paragraph(
-                "Rentnik on kohustatud kirjaliku üleandmise -vastuvõtmise akti alusel tagastama sõiduki lepingus määratud Rendiperioodi lõppemisel kokkulepitud kohas ja ettenähtud ajal. Sõidukit ei tohi maha jätta. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell10.setBorder(NO_BORDER);
-    body4acell10.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell10);
-
+    body4a.addCell(
+        getQTextCell(
+            "Rentnik on kohustatud kirjaliku üleandmise -vastuvõtmise akti alusel tagastama sõiduki lepingus määratud Rendiperioodi lõppemisel kokkulepitud kohas ja ettenähtud ajal. Sõidukit ei tohi maha jätta."));
     body4a.addCell(getSubChapterCell("4.5"));
-
-    final var body4acell12 =
-        new Cell(
-            new Paragraph(
-                "Rentnik vastutab täies ulatuses ka puuduste eest, mis on tekkinud sõidukil, mis on tagastatud Rendileandjale ilma kirjaliku üleandmise-vastuvõtmise aktita, kui ei ole tõendatud vastupidi ja/või algses üleandmise aktis märgitud. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell12.setBorder(NO_BORDER);
-    body4acell12.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell12);
-
+    body4a.addCell(
+        getQTextCell(
+            "Rentnik vastutab täies ulatuses ka puuduste eest, mis on tekkinud sõidukil, mis on tagastatud Rendileandjale ilma kirjaliku üleandmise-vastuvõtmise aktita, kui ei ole tõendatud vastupidi ja/või algses üleandmise aktis märgitud."));
     body4a.addCell(getSubChapterCell("4.6"));
-
-    final var body4acell14 =
-        new Cell(
-            new Paragraph(
-                "Tagatise summa arvestatakse lähtudes iga rendiauto omadusest eraldi, lepitakse kokku lepingutingimustega ning märgitakse lepingus või üleandmise aktis."
-                    + " Tagatise summa määr on 300 eurot, mis muutub tasumiseks kohustuslikuks viivitamatult peale rendilepingu allkirjastamist."
-                    + " Tagatise summa tagastatakse rentnikule mitte varem kui kolm nädalat parast auto rendiandjale tagastamist. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell14.setBorder(NO_BORDER);
-    body4acell14.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell14);
-
+    body4a.addCell(
+        getQTextCell(
+            "Tagatise summa arvestatakse lähtudes iga rendiauto omadusest eraldi, lepitakse kokku lepingutingimustega ning märgitakse lepingus või üleandmise aktis. Tagatise summa määr on 300 eurot, mis muutub tasumiseks kohustuslikuks viivitamatult peale rendilepingu allkirjastamist. Tagatise summa tagastatakse rentnikule mitte varem kui kolm nädalat parast auto rendiandjale tagastamist."));
     body4a.addCell(getSubChapterCell("4.7"));
-
-    final var body4acell16 =
-        new Cell(
-            new Paragraph(
-                "Rentnik peab tagastama rendiauto seisukorras, mis ei ole kehvem kui seisukord, milles selle kätte saadi ja võttes arvesse selle kulumist. Sõiduki "
-                    + "kulumine määratakse vastavalt Eesti Liisinguühingute Liidu poolt koostatud ja avaldatud „Sõidukite loomuliku ja ebaloomuliku kulumise määramise juhendile“,"
-                    + " mis on avaldatud liidu kodulehel https://www.liisingliit.ee/regulatsioon/juhendid-ja-aktid (juhend loetakse tingimuste lahutamatuks osaks), ja riikliku tehnoülevaatuse eeskirjale. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell16.setBorder(NO_BORDER);
-    body4acell16.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell16);
-
+    body4a.addCell(
+        getQTextCell(
+            "Rentnik peab tagastama rendiauto seisukorras, mis ei ole kehvem kui seisukord, milles selle kätte saadi ja võttes arvesse selle kulumist. Sõiduki kulumine määratakse vastavalt Eesti Liisinguühingute Liidu poolt koostatud ja avaldatud „Sõidukite loomuliku ja ebaloomuliku kulumise määramise juhendile“, mis on avaldatud liidu kodulehel https://www.liisingliit.ee/regulatsioon/juhendid-ja-aktid (juhend loetakse tingimuste lahutamatuks osaks), ja riikliku tehnoülevaatuse eeskirjale."));
     body4a.addCell(getSubChapterCell("4.8"));
-
-    final var body4acell18 =
-        new Cell(new Paragraph("Kulumine ei hõlma:", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell18.setBorder(NO_BORDER);
-    body4acell18.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell18);
+    body4a.addCell(getQTextCell("Kulumine ei hõlma:"));
     body4a.addCell(getSubChapterCell("4.8.1"));
-
-    final var body4acell20 =
-        new Cell(
-            new Paragraph(
-                "purunenud, deformeerunud või muul viisil mehaaniliselt või termiliselt kahjustatud osi, seadmeid ja mehhanisme;.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell20.setBorder(NO_BORDER);
-    body4acell20.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell20);
+    body4a.addCell(
+        getQTextCell(
+            "purunenud, deformeerunud või muul viisil mehaaniliselt või termiliselt kahjustatud osi, seadmeid ja mehhanisme;"));
     body4a.addCell(getSubChapterCell("4.8.2"));
-
-    final var body4acell22 =
-        new Cell(
-            new Paragraph(
-                "sõiduki keres olevaid mõlke, värvikihis olevaid pragusid ja nähtavaid kriimustusi.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell22.setBorder(NO_BORDER);
-    body4acell22.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell22);
+    body4a.addCell(
+        getQTextCell(
+            "sõiduki keres olevaid mõlke, värvikihis olevaid pragusid ja nähtavaid kriimustusi;"));
     body4a.addCell(getSubChapterCell("4.8.3"));
-
-    final var body4acell24 =
-        new Cell(
-            new Paragraph(
-                "värvikihi kulumist sõiduki tugeva pesemise/puhastamise tõttu;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell24.setBorder(NO_BORDER);
-    body4acell24.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell24);
+    body4a.addCell(getQTextCell("värvikihi kulumist sõiduki tugeva pesemise/puhastamise tõttu;"));
     body4a.addCell(getSubChapterCell("4.8.4"));
-
-    final var body4acell26 =
-        new Cell(
-            new Paragraph(
-                "kehva kvaliteediga remonditöid ja/või remonditöödest tulenevaid defekte (vaatamata sellele, et Rentnikul ei ole õigust sõidukit ise ega kolmandate isikute kaudu remontida);",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell26.setBorder(NO_BORDER);
-    body4acell26.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell26);
+    body4a.addCell(
+        getQTextCell(
+            "kehva kvaliteediga remonditöid ja/või remonditöödest tulenevaid defekte (vaatamata sellele, et Rentnikul ei ole õigust sõidukit ise ega kolmandate isikute kaudu remontida);"));
     body4a.addCell(getSubChapterCell("4.8.5"));
-
-    final var body4acell28 =
-        new Cell(
-            new Paragraph(
-                "sõidukikere akendel olevaid pragusid;", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell28.setBorder(NO_BORDER);
-    body4acell28.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell28);
+    body4a.addCell(getQTextCell("sõidukikere akendel olevaid pragusid;"));
     body4a.addCell(getSubChapterCell("4.8.6"));
-
-    final var body4acell30 =
-        new Cell(
-            new Paragraph(
-                "sõiduki valest kasutamisest ja/või puhastamisest tingitud kriimustusi sõidukikere akendel;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell30.setBorder(NO_BORDER);
-    body4acell30.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell30);
+    body4a.addCell(
+        getQTextCell(
+            "sõiduki valest kasutamisest ja/või puhastamisest tingitud kriimustusi sõidukikere akendel;"));
     body4a.addCell(getSubChapterCell("4.8.7"));
-
-    final var body4acell32 =
-        new Cell(
-            new Paragraph(
-                "salongi kahjustusi ja määrdumist, näiteks põlenud või määrdunud istmeid, katkiseid armatuurlaua osi või muid plastosi, pagasiruumi luuki, akende avamise käepidemeid jms;",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell32.setBorder(NO_BORDER);
-    body4acell32.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell32);
+    body4a.addCell(
+        getQTextCell(
+            "salongi kahjustusi ja määrdumist, näiteks põlenud või määrdunud istmeid, katkiseid armatuurlaua osi või muid plastosi, pagasiruumi luuki, akende avamise käepidemeid jms;"));
     body4a.addCell(getSubChapterCell("4.8.8"));
-
-    final var body4acell34 =
-        new Cell(
-            new Paragraph("sõidukikere geomeetria vigastusi.", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body4acell34.setBorder(NO_BORDER);
-    body4acell34.setHorizontalAlignment(JUSTIFIED);
-    body4a.addCell(body4acell34);
-
+    body4a.addCell(getQTextCell("sõidukikere geomeetria vigastusi."));
     contractPdfDoc.add(body4a);
 
     final var body5 = new Table(2);
@@ -975,62 +575,26 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body5cell2.setBorder(NO_BORDER);
     body5cell2.setHorizontalAlignment(LEFT);
     body5.addCell(body5cell2);
-
     body5.addCell(getSubChapterCell("5.1"));
-
-    final var body5cell4 =
-        new Cell(
-            new Paragraph(
-                "Kui sõiduk läheb rikki, sõiduki armatuurlaual hakkab põlema mistahes hoiatus, kuulda on kahtlast "
-                    + "kummalist heli või sõidukit ei ole võimalik enam ohutult kasutada ja juhtida, peab Rentnik koheselt: \n"
-                    + "a) lõpetama sõiduki kasutamise;\n"
-                    + "b) teavitama Rendileandja sellest telefoni teel ja\n"
-                    + "c) täitma muid Rendileandja juhiseid.\n",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body5cell4.setBorder(NO_BORDER);
-    body5cell4.setHorizontalAlignment(JUSTIFIED);
-    body5.addCell(body5cell4);
-
+    body5.addCell(
+        getQTextCell(
+            "Kui sõiduk läheb rikki, sõiduki armatuurlaual hakkab põlema mistahes hoiatus, kuulda on kahtlast "
+                + "kummalist heli või sõidukit ei ole võimalik enam ohutult kasutada ja juhtida, peab Rentnik koheselt: \n"
+                + "a) lõpetama sõiduki kasutamise;\n"
+                + "b) teavitama Rendileandja sellest telefoni teel ja\n"
+                + "c) täitma muid Rendileandja juhiseid.\n"));
     body5.addCell(getSubChapterCell("5.2"));
-
-    final var body5cell6 =
-        new Cell(
-            new Paragraph(
-                "Liiklusõnnetuse korral või sõiduki, kolmandate isikute või nende vara vigastamisel, "
-                    + "Rendileandja või selle vara mistahes muul viisil kahjustamisel peab Rentnik Rendileandjat sellest koheselt teavitama ja vajadusel "
-                    + "teavitama asjakohaseid riigiasutusi või teenistusi (politsei, tuletõrje jne), täitma liiklusõnnetuse deklaratsiooni ja/või tegema muid vajalikke toiminguid, "
-                    + "mida tuleb vastavalt kohaldatavatele õigusaktidele teha, samuti toiminguid, mida tuleb teha sõidukile, muule varale ja/või isikutele suurema kahju tekkimise vältimiseks või kahju vähendamiseks.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body5cell6.setBorder(NO_BORDER);
-    body5cell6.setHorizontalAlignment(JUSTIFIED);
-    body5.addCell(body5cell6);
-
+    body5.addCell(
+        getQTextCell(
+            "Liiklusõnnetuse korral või sõiduki, kolmandate isikute või nende vara vigastamisel, Rendileandja või selle vara mistahes muul viisil kahjustamisel peab Rentnik Rendileandjat sellest koheselt teavitama ja vajadusel teavitama asjakohaseid riigiasutusi või teenistusi (politsei, tuletõrje jne), täitma liiklusõnnetuse deklaratsiooni ja/või tegema muid vajalikke toiminguid, mida tuleb vastavalt kohaldatavatele õigusaktidele teha, samuti toiminguid, mida tuleb teha sõidukile, muule varale ja/või isikutele suurema kahju tekkimise vältimiseks või kahju vähendamiseks."));
     body5.addCell(getSubChapterCell("5.3"));
-
-    final var body5cell8 =
-        new Cell(
-            new Paragraph(
-                "Liiklusõnnetuse korral, milles pole Rentnik süüdi, tuleb liiklusõnnetuses osalenud juhtidel täita nõuetekohaselt "
-                    + "LE vorm nr.1 või kutsuda sündmuskohale politsei, et liiklusõnnetuse asjaolusid fikseerida. Selle LE vorm nr.1 või politsei poolt koostatud"
-                    + " sündmuskoha skeemi koopia mitteesitamisel Rendileandjale, on Rentnik täies ulatuses vastutav Rendileandjale tekitatud kahjude eest. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body5cell8.setBorder(NO_BORDER);
-    body5cell8.setHorizontalAlignment(JUSTIFIED);
-    body5.addCell(body5cell8);
-
+    body5.addCell(
+        getQTextCell(
+            "Liiklusõnnetuse korral, milles pole Rentnik süüdi, tuleb liiklusõnnetuses osalenud juhtidel täita nõuetekohaselt LE vorm nr.1 või kutsuda sündmuskohale politsei, et liiklusõnnetuse asjaolusid fikseerida. Selle LE vorm nr.1 või politsei poolt koostatud sündmuskoha skeemi koopia mitteesitamisel Rendileandjale, on Rentnik täies ulatuses vastutav Rendileandjale tekitatud kahjude eest."));
     body5.addCell(getSubChapterCell("5.4"));
-
-    final var body5cell10 =
-        new Cell(
-            new Paragraph(
-                "Kahju tekkimisel Rendileandjale või kolmandatele isikutele või dokumentide või esemete kadumisel on Rentnik "
-                    + "kohustatud esitama Rendileandjale kirjaliku seletuse juhtunu kohta hiljemalt 24 tunni möödumisel. Kui puudub muu võimalus kirjaliku seletuse "
-                    + "andmiseks, võib seda esitada Rendileandjale erandkorras ka lepingus toodud e-posti aadressile, varustades seletuse digitaalallkirjaga. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body5cell10.setBorder(NO_BORDER);
-    body5cell10.setHorizontalAlignment(JUSTIFIED);
-    body5.addCell(body5cell10);
-
+    body5.addCell(
+        getQTextCell(
+            "Kahju tekkimisel Rendileandjale või kolmandatele isikutele või dokumentide või esemete kadumisel on Rentnik kohustatud esitama Rendileandjale kirjaliku seletuse juhtunu kohta hiljemalt 24 tunni möödumisel. Kui puudub muu võimalus kirjaliku seletuse andmiseks, võib seda esitada Rendileandjale erandkorras ka lepingus toodud e-posti aadressile, varustades seletuse digitaalallkirjaga."));
     contractPdfDoc.add(body5);
 
     final var body6 = new Table(2);
@@ -1042,110 +606,61 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body6.setHorizontalAlignment(LEFT);
     body6.setBorder(NO_BORDER);
     body6.addCell(getChapterCell("VI"));
-
-    final var body6cell2 = new Cell(new Paragraph(" VASTUTUS", new Font(TIMES_ROMAN, 9, BOLD)));
+    final var body6cell2 = new Cell(new Paragraph("VASTUTUS", new Font(TIMES_ROMAN, 9, BOLD)));
     body6cell2.setBorder(NO_BORDER);
     body6cell2.setHorizontalAlignment(LEFT);
     body6.addCell(body6cell2);
-
     body6.addCell(getSubChapterCell("6.1"));
-
-    final var body6cell4 =
-        new Cell(new Paragraph(" Hüvitamise üldsätted", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body6cell4.setBorder(NO_BORDER);
-    body6cell4.setHorizontalAlignment(JUSTIFIED);
-    body6.addCell(body6cell4);
+    body6.addCell(getQTextCell("Hüvitamise üldsätted"));
     body6.addCell(getSubChapterCell("6.1.1"));
-
-    final var body6cell6 =
-        new Cell(
-            new Paragraph(
-                "Rentnik kui suurema ohu allika valdaja vastutab kogu sõiduki kasutusperioodi jooksul täielikult tingimuste ja "
-                    + "õigusaktide rikkumise eest ning Rendileandjale, sõidukile ja/või kolmandatele isikutele tekitatud kahju eest.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body6cell6.setBorder(NO_BORDER);
-    body6cell6.setHorizontalAlignment(JUSTIFIED);
-    body6.addCell(body6cell6);
+    body6.addCell(
+        getQTextCell(
+            "Rentnik kui suurema ohu allika valdaja vastutab kogu sõiduki kasutusperioodi jooksul täielikult tingimuste ja õigusaktide rikkumise eest ning Rendileandjale, sõidukile ja/või kolmandatele isikutele tekitatud kahju eest."));
     body6.addCell(getSubChapterCell("6.1.2"));
-
-    final var body6cell8 =
-        new Cell(
-            new Paragraph(
-                "Rentnik vastutab koos Rentnikuga sõidukit kasutavate isikute (nt kaassõitjate) ohutuse, tervise ja elu eest,"
-                    + " samuti enda vara või teiste isikute vara kahjustamise, hävimise või kaotsimineku eest, kui kohaldatavates õigusaktides ei ole sätestatud teisiti.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body6cell8.setBorder(NO_BORDER);
-    body6cell8.setHorizontalAlignment(JUSTIFIED);
-    body6.addCell(body6cell8);
+    body6.addCell(
+        getQTextCell(
+            "Rentnik vastutab koos Rentnikuga sõidukit kasutavate isikute (nt kaassõitjate) ohutuse, tervise ja elu eest, samuti enda vara või teiste isikute vara kahjustamise, hävimise või kaotsimineku eest, kui kohaldatavates õigusaktides ei ole sätestatud teisiti."));
     body6.addCell(getSubChapterCell("6.1.3"));
-
-    final var body6cell10 =
-        new Cell(
-            new Paragraph(
-                "Mitte ükski käesolevate tingimuste säte ei piira Rendileandjal õigust nõuda võlakohustuste täitmist kolmandate isikute"
-                    + " poolt (vastavalt lepinguvälisele vastutusele), kes põhjustasid oma tegevuse või tegevusetusega Rendileandjale kahju, kuid selline Rendileandja "
-                    + "õigus ei piira mingil juhul Rentniku eelnevalt nimetatud vastutust.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body6cell10.setBorder(NO_BORDER);
-    body6cell10.setHorizontalAlignment(JUSTIFIED);
-    body6.addCell(body6cell10);
+    body6.addCell(
+        getQTextCell(
+            "Mitte ükski käesolevate tingimuste säte ei piira Rendileandjal õigust nõuda võlakohustuste täitmist kolmandate isikute poolt (vastavalt lepinguvälisele vastutusele), kes põhjustasid oma tegevuse või tegevusetusega Rendileandjale kahju, kuid selline Rendileandja õigus ei piira mingil juhul Rentniku eelnevalt nimetatud vastutust."));
     body6.addCell(getSubChapterCell("6.1.4"));
-
-    final var body6cell12 =
-        new Cell(
-            new Paragraph(
-                "Käesolevate tingimuste tähenduses on Rendileandja poolt kantud kahju(d) järgmine(sed) (sealhulgas, kuid mitteainult):\n"
-                    + "a.\tRendileandja mainele, firmaväärtusele ja heale nimele, kaubamärgile ja ärinimele, Rendileandja üldjuhtimise põhimõtetele, samuti Rendileandja sotsiaalsele kuvandile tekitatud kahju;\n"
-                    + "b.\tsõidukile (sealhulgas selle väärtuse vähenemine), selle Rendileandjale või teistele isikutele kuuluvatele osadele ja varale, sealhulgas sõiduki lisatarvikutele tekitatud kahju;\n"
-                    + "c.\tkõik sõiduki transportimise, turvalisuse, puhastamise, parkimise, remonditöödega seotud kulud (nii tegelikult kantud kui ka veel kandmata kulud, mille sõltumatu hindaja on kindlaks teinud ja hinnanud kui vajalikud sõiduki remondikulud);\n"
-                    + "d.\tkahju hindamise, kindlakstegemise, kahjukäsitluse ja asjaajamisega seotud kulud;\n"
-                    + "e.\tsõiduki müügi, võõrandamisega seotud kulud;\n"
-                    + "f.\tvõlgnevuse sissenõudmise kulud;\n"
-                    + "g.\tkaudne kahju (nt saamata jäänud tulu, sõiduki jõude seismise aeg);\n"
-                    + "h.\tkahju ärahoidmise või vähendamisega seotud kulud;\n"
-                    + "i.\tkindlustushüvitised, mis jäävad Rendileandjale välja maksmata Rentniku poolt tingimuste rikkumise tõttu.\n",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body6cell12.setBorder(NO_BORDER);
-    body6cell12.setHorizontalAlignment(JUSTIFIED);
-    body6.addCell(body6cell12);
-
+    body6.addCell(
+        getQTextCell(
+            "Käesolevate tingimuste tähenduses on Rendileandja poolt kantud kahju(d) järgmine(sed) (sealhulgas, kuid mitteainult):\n"
+                + "a.\tRendileandja mainele, firmaväärtusele ja heale nimele, kaubamärgile ja ärinimele, Rendileandja üldjuhtimise põhimõtetele, samuti Rendileandja sotsiaalsele kuvandile tekitatud kahju;\n"
+                + "b.\tsõidukile (sealhulgas selle väärtuse vähenemine), selle Rendileandjale või teistele isikutele kuuluvatele osadele ja varale, sealhulgas sõiduki lisatarvikutele tekitatud kahju;\n"
+                + "c.\tkõik sõiduki transportimise, turvalisuse, puhastamise, parkimise, remonditöödega seotud kulud (nii tegelikult kantud kui ka veel kandmata kulud, mille sõltumatu hindaja on kindlaks teinud ja hinnanud kui vajalikud sõiduki remondikulud);\n"
+                + "d.\tkahju hindamise, kindlakstegemise, kahjukäsitluse ja asjaajamisega seotud kulud;\n"
+                + "e.\tsõiduki müügi, võõrandamisega seotud kulud;\n"
+                + "f.\tvõlgnevuse sissenõudmise kulud;\n"
+                + "g.\tkaudne kahju (nt saamata jäänud tulu, sõiduki jõude seismise aeg);\n"
+                + "h.\tkahju ärahoidmise või vähendamisega seotud kulud;\n"
+                + "i.\tkindlustushüvitised, mis jäävad Rendileandjale välja maksmata Rentniku poolt tingimuste rikkumise tõttu.\n"));
     final var body6cell13 = new Cell(new Paragraph("6.1.5", new Font(TIMES_ROMAN, 9, NORMAL)));
     body6cell13.setBorder(NO_BORDER);
     body6cell13.setHorizontalAlignment(LEFT);
     body6.addCell(body6cell13);
-
-    final var body6cell14 =
-        new Cell(
-            new Paragraph(
-                "Ilma et see piiraks käesolevate tingimuste mistahes sätteid, vastutab Rentnik täielikult sõiduki kahjustamise eest:\n"
-                    + "a.\tRentnik vastutab kogu kahju eest, mis on tema tegevuse ja või tegevusetuse tulemusena on tekitatud sõidukile (avarii, väline kahju, kriimustamised, deformeerimised jne. "
-                    + "Nimekiri ei ole lõplik).  Kahju hüvitamiseks pooled lähtuvad VÕS sätestatutest ja üleandmise-vastuvõtmise aktis märgitud andmetest.\n"
-                    + "b.\tkui sõiduk, selle lisatarvikud või nende mõni osa varastatakse või saab kahjustada, sest juht jättis aknad või katuseluugid lahti, katuse peale tõmbamata, uksed lukustamata jne;\n"
-                    + "c.\tkui sõiduk või selle mõni osa varastatakse või saab kahjustada isiku poolt, kes kasutas sõidukit koos Rentnikuga või Rentniku teadmisel ja tahtel.\n",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body6cell14.setBorder(NO_BORDER);
-    body6cell14.setHorizontalAlignment(JUSTIFIED);
-    body6.addCell(body6cell14);
+    body6.addCell(
+        getQTextCell(
+            "Ilma et see piiraks käesolevate tingimuste mistahes sätteid, vastutab Rentnik täielikult sõiduki kahjustamise eest:\n"
+                + "a.\tRentnik vastutab kogu kahju eest, mis on tema tegevuse ja või tegevusetuse tulemusena on tekitatud sõidukile (avarii, väline kahju, kriimustamised, deformeerimised jne. "
+                + "Nimekiri ei ole lõplik).  Kahju hüvitamiseks pooled lähtuvad VÕS sätestatutest ja üleandmise-vastuvõtmise aktis märgitud andmetest.\n"
+                + "b.\tkui sõiduk, selle lisatarvikud või nende mõni osa varastatakse või saab kahjustada, sest juht jättis aknad või katuseluugid lahti, katuse peale tõmbamata, uksed lukustamata jne;\n"
+                + "c.\tkui sõiduk või selle mõni osa varastatakse või saab kahjustada isiku poolt, kes kasutas sõidukit koos Rentnikuga või Rentniku teadmisel ja tahtel.\n"));
     body6.addCell(getSubChapterCell("6.1.6"));
-
-    final var body6cell16 =
-        new Cell(
-            new Paragraph(
-                "Juhul kui tingimusi rikub või muid ebaseaduslikke tegevusi või tegematajätmisi teeb ja/või kahju Rendileandjale ja/või teistele isikutele,"
-                    + " sealhulgas Rentnikule endale põhjustab kolmas isik, kellele Rentnik lubab, annab nõusoleku, annab üle või muul viisil võimaldab või teeb võimalikuks või mistahes muul viisil "
-                    + "loob oma aktiivse või passiivse tegevuse ja/või tegevusetusega otseselt või kaudselt, tahtlikult või hooletuse tõttu kolmandale isikule või kolmandate isikute rühmale võimaluse"
-                    + " pääseda sõidukisse, juhtida ja/või kasutada muul viisil sõidukit, selle lisatarvikuid ja/või  ei takista seda:\n"
-                    + "a.\t kannab Rentnik kõiki kolmandate isikute tegevusest või tegevusetusest tingitud tingimuste ja seaduste rikkumisest tulenevaid riske, vastutust ja kahju ja/või "
-                    + "vastutab Rendileandjale ja/või kolmandatele isikutele põhjustatud kahju eest;\n"
-                    + "b.\tkohaldatakse Rentniku suhtes tingimustes sätestatud trahve, kahjuhüvitisi ja muud vastutust ning nendest tulenevaid tagajärgi, lugedes sellised tegevused ja "
-                    + "rikkumised Rentnik enda poolt toime panduks ja kahju Rentnik enda poolt põhjustatuks;\n"
-                    + "c.\tLepingus nimetatud trahvid, parkimistrahvid, kiiruseületamise trahvid ja muud järelevalve organite poolt määratud trahvid Rentnik kohustatud tasuma 7 (seitsme) "
-                    + "päeva jooksul pärast Rentnikule trahvi teatavaks tegemisest ning kättetoimetamisest. Kättetoimetamine võib olla elektronile, sms, e-kiri, füüsiliselt kätte andmine jne.\n",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body6cell16.setBorder(NO_BORDER);
-    body6cell16.setHorizontalAlignment(JUSTIFIED);
-    body6.addCell(body6cell16);
-
+    body6.addCell(
+        getQTextCell(
+            "Juhul kui tingimusi rikub või muid ebaseaduslikke tegevusi või tegematajätmisi teeb ja/või kahju Rendileandjale ja/või teistele isikutele,"
+                + " sealhulgas Rentnikule endale põhjustab kolmas isik, kellele Rentnik lubab, annab nõusoleku, annab üle või muul viisil võimaldab või teeb võimalikuks või mistahes muul viisil "
+                + "loob oma aktiivse või passiivse tegevuse ja/või tegevusetusega otseselt või kaudselt, tahtlikult või hooletuse tõttu kolmandale isikule või kolmandate isikute rühmale võimaluse"
+                + " pääseda sõidukisse, juhtida ja/või kasutada muul viisil sõidukit, selle lisatarvikuid ja/või  ei takista seda:\n"
+                + "a.\t kannab Rentnik kõiki kolmandate isikute tegevusest või tegevusetusest tingitud tingimuste ja seaduste rikkumisest tulenevaid riske, vastutust ja kahju ja/või "
+                + "vastutab Rendileandjale ja/või kolmandatele isikutele põhjustatud kahju eest;\n"
+                + "b.\tkohaldatakse Rentniku suhtes tingimustes sätestatud trahve, kahjuhüvitisi ja muud vastutust ning nendest tulenevaid tagajärgi, lugedes sellised tegevused ja "
+                + "rikkumised Rentnik enda poolt toime panduks ja kahju Rentnik enda poolt põhjustatuks;\n"
+                + "c.\tLepingus nimetatud trahvid, parkimistrahvid, kiiruseületamise trahvid ja muud järelevalve organite poolt määratud trahvid Rentnik kohustatud tasuma 7 (seitsme) "
+                + "päeva jooksul pärast Rentnikule trahvi teatavaks tegemisest ning kättetoimetamisest. Kättetoimetamine võib olla elektronile, sms, e-kiri, füüsiliselt kätte andmine jne.\n"));
     contractPdfDoc.add(body6);
 
     final var body7 = new Table(2);
@@ -1162,143 +677,46 @@ public class ContractToPdfConversionStrategyOld implements ContractToPdfConversi
     body7cell2.setBorder(NO_BORDER);
     body7cell2.setHorizontalAlignment(LEFT);
     body7.addCell(body7cell2);
-
     body7.addCell(getSubChapterCell("7.1"));
-
-    final var body7cell4 =
-        new Cell(
-            new Paragraph(
-                "Tingimustes käsitletakse trahve ja nende määramise tingimusi, põhimõtteid ja korda, kuid konkreetsed trahviliigid ja nende konkreetsed summad on toodud lepingus ja või käesolevates tingimustes.",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell4.setBorder(NO_BORDER);
-    body7cell4.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell4);
-
+    body7.addCell(
+        getQTextCell(
+            "Tingimustes käsitletakse trahve ja nende määramise tingimusi, põhimõtteid ja korda, kuid konkreetsed trahviliigid ja nende konkreetsed summad on toodud lepingus ja või käesolevates tingimustes."));
     body7.addCell(getSubChapterCell("7.2"));
-
-    final var body7cell6 =
-        new Cell(
-            new Paragraph(
-                "Igal juhul Rentnik peab enne rendilepingu sõlmimist tutvuma kohaldatava ja hetkel kehtiva trahvinimekirjaga. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell6.setBorder(NO_BORDER);
-    body7cell6.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell6);
-
+    body7.addCell(
+        getQTextCell(
+            "Igal juhul Rentnik peab enne rendilepingu sõlmimist tutvuma kohaldatava ja hetkel kehtiva trahvinimekirjaga."));
     body7.addCell(getSubChapterCell("7.3"));
-
-    final var body7cell8 =
-        new Cell(
-            new Paragraph(
-                "Tingimustes käsitletavad ja lepingus loetletud trahvid loetakse Rendileandja poolt määravaks leppetrahviks.   ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell8.setBorder(NO_BORDER);
-    body7cell8.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell8);
-
+    body7.addCell(
+        getQTextCell(
+            "Tingimustes käsitletavad ja lepingus loetletud trahvid loetakse Rendileandja poolt määravaks leppetrahviks."));
     body7.addCell(getSubChapterCell("7.4"));
-
-    final var body7cell10 =
-        new Cell(
-            new Paragraph(
-                "Kõik tingimustes ja lepingus nimetatud trahvid, välja arvatud tingimustes konkreetselt sätestatud erandid, on kõikehõlmavad, "
-                    + "st need sisaldavad Rendileandjale tekitatud kahju. Lisaks sellele peab Rentnik trahvi maksmisel hüvitama Rendileandjale kõik täiendavad summad või täiendavad "
-                    + "kahjuliigid, mida tasutud trahv ei kata. Trahvi tasumine ei vabasta Rentnikku kohustusest hüvitada kõik muud Rendileandja poolt kantud kahjud, "
-                    + "mida tasutud trahv ei kata. Lisaks ei vabasta trahvi määramine Rentnikku kohustusest täita muid käesolevates tingimustes ja/või õigusaktides sätestatud "
-                    + "kohustusi ulatuses, milles Rentniku poolt tasutud trahv ei kata või asenda selliseid kohustusi vastavalt nende olemusele või sisule. Kõik erinevad "
-                    + "Rentniku individuaalsetest tegevustest põhjustatud kahjuliigid määratletakse ja neid hinnatakse eraldi, isegi kui need on põhjustatud samal ajal."
-                    + " Rentniku sellistest individuaalsetest tegevustest põhjustatud individuaalsete/erinevate kahjuliikide hüvitamine (trahvi tasumine ja/või kahju hüvitamine) "
-                    + "ei ole vastastiku kaasav ja seda kohaldatakse iga kahjuliigi ja seda kahjuliiki põhjustanud Rentniku vastavate tegevuste suhtes eraldi. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell10.setBorder(NO_BORDER);
-    body7cell10.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell10);
-
+    body7.addCell(
+        getQTextCell(
+            "Kõik tingimustes ja lepingus nimetatud trahvid, välja arvatud tingimustes konkreetselt sätestatud erandid, on kõikehõlmavad, st need sisaldavad Rendileandjale tekitatud kahju. Lisaks sellele peab Rentnik trahvi maksmisel hüvitama Rendileandjale kõik täiendavad summad või täiendavad kahjuliigid, mida tasutud trahv ei kata. Trahvi tasumine ei vabasta Rentnikku kohustusest hüvitada kõik muud Rendileandja poolt kantud kahjud, mida tasutud trahv ei kata. Lisaks ei vabasta trahvi määramine Rentnikku kohustusest täita muid käesolevates tingimustes ja/või õigusaktides sätestatud kohustusi ulatuses, milles Rentniku poolt tasutud trahv ei kata või asenda selliseid kohustusi vastavalt nende olemusele või sisule. Kõik erinevad Rentniku individuaalsetest tegevustest põhjustatud kahjuliigid määratletakse ja neid hinnatakse eraldi, isegi kui need on põhjustatud samal ajal. Rentniku sellistest individuaalsetest tegevustest põhjustatud individuaalsete/erinevate kahjuliikide hüvitamine (trahvi tasumine ja/või kahju hüvitamine) ei ole vastastiku kaasav ja seda kohaldatakse iga kahjuliigi ja seda kahjuliiki põhjustanud Rentniku vastavate tegevuste suhtes eraldi."));
     body7.addCell(getSubChapterCell("7.5"));
-
-    final var body7cell12 =
-        new Cell(
-            new Paragraph(
-                "Rentnik peab maksma Rendileandjale hinnakirjas toodud summas trahvi muu hulgas järgmistel juhtudel (allpool toodud juhtude loetelu on toodud üksnes illustreerimiseks ja trahvide ammendav loetelu on toodud hinnakirjas): ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell12.setBorder(NO_BORDER);
-    body7cell12.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell12);
+    body7.addCell(
+        getQTextCell(
+            "Rentnik peab maksma Rendileandjale hinnakirjas toodud summas trahvi muu hulgas järgmistel juhtudel (allpool toodud juhtude loetelu on toodud üksnes illustreerimiseks ja trahvide ammendav loetelu on toodud hinnakirjas):"));
     body7.addCell(getSubChapterCell("7.5.1"));
-
-    final var body7cell14 =
-        new Cell(
-            new Paragraph(
-                "sõiduki, selle osade, lisatarvikute, lisaseadmete (sealhulgas sõiduki võtme) või seadmete kahjustamise või kaotsimineku korral;  ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell14.setBorder(NO_BORDER);
-    body7cell14.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell14);
+    body7.addCell(
+        getQTextCell(
+            "sõiduki, selle osade, lisatarvikute, lisaseadmete (sealhulgas sõiduki võtme) või seadmete kahjustamise või kaotsimineku korral;"));
     body7.addCell(getSubChapterCell("7.5.2"));
-
-    final var body7cell16 =
-        new Cell(new Paragraph("sõidukis suitsetamise korral; ", new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell16.setBorder(NO_BORDER);
-    body7cell16.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell16);
+    body7.addCell(getQTextCell("sõidukis suitsetamise korral;"));
     body7.addCell(getSubChapterCell("7.5.3"));
-
-    final var body7cell18 =
-        new Cell(
-            new Paragraph(
-                "ohtliku, hoolimatu või hooletu sõitmise korral; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell18.setBorder(NO_BORDER);
-    body7cell18.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell18);
+    body7.addCell(getQTextCell("ohtliku, hoolimatu või hooletu sõitmise korral;"));
     body7.addCell(getSubChapterCell("7.5.4"));
-
-    final var body7cell20 =
-        new Cell(
-            new Paragraph(
-                "määrdunud, musta sõiduki korral, kui sõiduk on määrdunum kui sõidukite tavapärase kasutamise korral "
-                    + "(näiteks maastikul, metsas, veekogudes, madalsoodes, mägedel, ainult eritranspordi või spetsiaalselt ettevalmistatud sõidukitega "
-                    + "ligipääsetavates kohtades sõitmisel või liikluseeskirjade rikkumisel); ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell20.setBorder(NO_BORDER);
-    body7cell20.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell20);
+    body7.addCell(
+        getQTextCell(
+            "määrdunud, musta sõiduki korral, kui sõiduk on määrdunum kui sõidukite tavapärase kasutamise korral (näiteks maastikul, metsas, veekogudes, madalsoodes, mägedel, ainult eritranspordi või spetsiaalselt ettevalmistatud sõidukitega ligipääsetavates kohtades sõitmisel või liikluseeskirjade rikkumisel);"));
     body7.addCell(getSubChapterCell("7.5.5"));
-
-    final var body7cell22 =
-        new Cell(
-            new Paragraph(
-                "alkoholijoobes (üle 0,00 promilli) või narkootiliste ainete ja muude vaimset seisundit mõjutavate ainete mõju all "
-                    + "sõitmise korral (või kui Rentnik tarvitas alkoholi või muid joovastavaid aineid pärast liiklusõnnetust enne liiklusõnnetuse asjaolude tuvastamist või "
-                    + "vältis vere alkoholisisalduse testi või joobetesti tegemist (käesolevate tingimuste tähenduses tähendab vere alkoholisisaldus või joove õigusaktides sätestatut)."
-                    + " Rentnik peab maksma Rendileandjale alkoholijoobes (üle 0,00 promilli) või narkootiliste ainete või muude vaimset seisundit mõjutavate ainete mõju all sõitmise eest"
-                    + " hinnakirjas nimetatud summas trahvi ka juhul, kui Rentnik andis sõiduki üle või tegi sõiduki juhtimise muul viisil võimalikuks teisele isikule, kui isik oli "
-                    + "alkoholijoobes (üle 0,00 promilli) või narkootiliste ainete või muude vaimset seisundit mõjutavate ainete mõju all või kui isik vältis vere alkoholisisalduse testi või joobetesti tegemist; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell22.setBorder(NO_BORDER);
-    body7cell22.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell22);
+    body7.addCell(
+        getQTextCell(
+            "alkoholijoobes (üle 0,00 promilli) või narkootiliste ainete ja muude vaimset seisundit mõjutavate ainete mõju all sõitmise korral (või kui Rentnik tarvitas alkoholi või muid joovastavaid aineid pärast liiklusõnnetust enne liiklusõnnetuse asjaolude tuvastamist või vältis vere alkoholisisalduse testi või joobetesti tegemist (käesolevate tingimuste tähenduses tähendab vere alkoholisisaldus või joove õigusaktides sätestatut). Rentnik peab maksma Rendileandjale alkoholijoobes (üle 0,00 promilli) või narkootiliste ainete või muude vaimset seisundit mõjutavate ainete mõju all sõitmise eest hinnakirjas nimetatud summas trahvi ka juhul, kui Rentnik andis sõiduki üle või tegi sõiduki juhtimise muul viisil võimalikuks teisele isikule, kui isik oli alkoholijoobes (üle 0,00 promilli) või narkootiliste ainete või muude vaimset seisundit mõjutavate ainete mõju all või kui isik vältis vere alkoholisisalduse testi või joobetesti tegemist;"));
     body7.addCell(getSubChapterCell("7.5.6"));
-
-    final var body7cell24 =
-        new Cell(
-            new Paragraph(
-                "sõiduki või selle juurde kuuluva vara seadusevastase omastamise või kaotsimineku korral; ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell24.setBorder(NO_BORDER);
-    body7cell24.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell24);
+    body7.addCell(getQTextCell("sõiduki või selle juurde kuuluva vara seadusevastase omastamise või kaotsimineku korral;"));
     body7.addCell(getSubChapterCell("7.5.7"));
-
-    final var body7cell26 =
-        new Cell(
-            new Paragraph(
-                "käesolevate tingimuste või õigusaktide muude sätete rikkumise korral. ",
-                new Font(TIMES_ROMAN, 8, NORMAL)));
-    body7cell26.setBorder(NO_BORDER);
-    body7cell26.setHorizontalAlignment(JUSTIFIED);
-    body7.addCell(body7cell26);
-
+    body7.addCell(getQTextCell("käesolevate tingimuste või õigusaktide muude sätete rikkumise korral."));
     contractPdfDoc.add(body7);
 
     final var body8 = new Table(2);
