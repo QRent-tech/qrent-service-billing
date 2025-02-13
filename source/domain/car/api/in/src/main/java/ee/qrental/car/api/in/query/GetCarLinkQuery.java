@@ -12,11 +12,13 @@ public interface GetCarLinkQuery extends BaseGetQuery<CarLinkUpdateRequest, CarL
 
   CarLinkResponse getFirstLinkByDriverId(final Long driverId);
 
-  List<CarLinkResponse> getActive();
+  List<CarLinkResponse> getAllActiveForCurrentDate();
+
+  List<CarLinkResponse> getAllActiveByQWeekId(final Long weekId);
 
   List<CarLinkResponse> getClosedByDate(final LocalDate date);
 
-  Long getCountActive();
+  Long getCountActiveForCurrentDate();
 
-  Long getCountClosed();
+  Long getCountClosedForCurrentDate();
 }

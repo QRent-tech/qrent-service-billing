@@ -62,7 +62,7 @@ public class ObligationCalculationService implements ObligationCalculationAddUse
     final var previousWeek = qWeekQuery.getOneBeforeById(qWeekId);
     final var previousWeekId = previousWeek.getId();
 
-    carLinkQuery.getActive().stream()
+    carLinkQuery.getAllActiveByQWeekId(qWeekId).stream()
         .map(CarLinkResponse::getDriverId)
         .forEach(
             driverId -> {

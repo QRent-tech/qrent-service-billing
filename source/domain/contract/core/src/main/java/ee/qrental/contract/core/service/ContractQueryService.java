@@ -90,7 +90,7 @@ public class ContractQueryService implements GetContractQuery {
   }
 
   @Override
-  public List<ContractResponse> getAllActive() {
+  public List<ContractResponse> getAllActiveForCurrentDate() {
     return loadPort.loadActiveByDate(qDateTime.getToday()).stream()
         .peek(endDateCalculator::setEndDate)
         .map(mapper::toResponse)

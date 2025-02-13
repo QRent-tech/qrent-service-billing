@@ -57,18 +57,15 @@ public class BonusCalculationService implements BonusCalculationAddUseCase {
     final var qWeek = qWeekQuery.getById(addRequest.getQWeekId());
     final var qWeekId = qWeek.getId();
     final var bonusPrograms = bonusProgramLoadPort.loadAll();
-    carLinkQuery.getActive().stream()
+    carLinkQuery.getAllActiveByQWeekId(qWeekId).stream()
         .map(CarLinkResponse::getDriverId)
         .forEach(
             driverId -> {
               final var obligation =
                   obligationLoadPort.loadByDriverIdAndByQWeekId(driverId, qWeekId);
               if (obligation == null) {
-         //       throw new RuntimeException(
-         //           format(
-         //               "Obligation was not calculated for %d - %d week, for driver.id = %d",
-         //               qWeek.getYear(), qWeek.getNumber(), driverId));
-         return;
+
+                return;
               }
 
               final var weekPositiveAmount =

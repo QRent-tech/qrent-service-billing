@@ -4,6 +4,7 @@ import static java.lang.String.format;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrental.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.car.api.in.request.CarLinkUpdateRequest;
 import ee.qrental.car.api.in.response.CarLinkResponse;
@@ -13,6 +14,8 @@ import ee.qrental.car.core.mapper.CarLinkUpdateRequestMapper;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -47,6 +50,8 @@ public class CarLinkQueryService implements GetCarLinkQuery {
   private final CarLinkLoadPort loadPort;
   private final CarLinkResponseMapper mapper;
   private final CarLinkUpdateRequestMapper updateRequestMapper;
+  private final QDateTime qDateTime;
+  private final GetQWeekQuery qWeekQuery;
 
   @Override
   public List<CarLinkResponse> getAll() {
@@ -67,7 +72,7 @@ public class CarLinkQueryService implements GetCarLinkQuery {
   }
 
   @Override
-  public String getObjectInfo(Long id) {
+  public String getObjectInfo(final Long id) {
     final var domain = loadPort.loadById(id);
     if (domain == null) {
       System.out.println(format("Link with id = %d was not found", id));
@@ -97,7 +102,7 @@ public class CarLinkQueryService implements GetCarLinkQuery {
   }
 
   @Override
-  public CarLinkResponse getFirstLinkByDriverId(Long driverId) {
+  public CarLinkResponse getFirstLinkByDriverId(final Long driverId) {
     final var domain = loadPort.loadActiveByDriverId(driverId);
     if (domain == null) {
       System.out.println(format("Driver with id = %d does not have Cal Link", driverId));
@@ -107,17 +112,27 @@ public class CarLinkQueryService implements GetCarLinkQuery {
   }
 
   @Override
-  public List<CarLinkResponse> getActive() {
+  public List<CarLinkResponse> getAllActiveForCurrentDate() {
 
-    return loadPort.loadActiveByDate(LocalDate.now()).stream()
+    return loadPort.loadActiveByDate(qDateTime.getToday()).stream()
         .map(mapper::toResponse)
         .sorted(DEFAULT_COMPARATOR)
         .collect(toList());
   }
 
   @Override
-  public Long getCountActive() {
-    return loadPort.loadCountActiveByDate(LocalDate.now());
+  public List<CarLinkResponse> getAllActiveByQWeekId(final Long weekId) {
+    final var qWeek = qWeekQuery.getById(weekId);
+
+    return loadPort.loadActiveByDate(qWeek.getStart()).stream()
+        .map(mapper::toResponse)
+        .sorted(DEFAULT_COMPARATOR)
+        .collect(toList());
+  }
+
+  @Override
+  public Long getCountActiveForCurrentDate() {
+    return loadPort.loadCountActiveByDate(qDateTime.getToday());
   }
 
   @Override
@@ -131,7 +146,7 @@ public class CarLinkQueryService implements GetCarLinkQuery {
   }
 
   @Override
-  public Long getCountClosed() {
-    return loadPort.loadCountClosedByDate(LocalDate.now());
+  public Long getCountClosedForCurrentDate() {
+    return loadPort.loadCountClosedByDate(qDateTime.getToday());
   }
 }

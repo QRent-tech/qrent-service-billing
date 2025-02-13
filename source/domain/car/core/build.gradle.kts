@@ -1,5 +1,6 @@
 dependencies {
     implementation(project(":source:domain:common:api"))
+    implementation(project(":source:domain:constant:api:in"))
     implementation(project(":source:domain:car:api:in"))
     implementation(project(":source:domain:car:api:out"))
     implementation(project(":source:domain:car:domain"))

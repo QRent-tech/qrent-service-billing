@@ -37,7 +37,7 @@ public class ContractQueryController extends AbstractDriverQueryController {
 
   @GetMapping(value = "/active")
   public String getActiveContractView(final Model model) {
-    model.addAttribute("contractsActive", contractQuery.getAllActive());
+    model.addAttribute("contractsActive", contractQuery.getAllActiveForCurrentDate());
     addDriverCounts(model);
     addDateFormatter(model);
 

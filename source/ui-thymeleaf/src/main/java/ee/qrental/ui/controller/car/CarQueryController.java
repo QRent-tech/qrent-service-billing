@@ -47,9 +47,9 @@ public class CarQueryController {
   }
 
   private void populatedLinksCounts(final Model model) {
-    final var activeLinksCount = carLinkQuery.getCountActive();
+    final var activeLinksCount = carLinkQuery.getCountActiveForCurrentDate();
     model.addAttribute("carLinksActiveCount", activeLinksCount);
-    final var closedLinksCount = carLinkQuery.getCountClosed();
+    final var closedLinksCount = carLinkQuery.getCountClosedForCurrentDate();
     model.addAttribute("carLinksClosedCount", closedLinksCount);
   }
 }
