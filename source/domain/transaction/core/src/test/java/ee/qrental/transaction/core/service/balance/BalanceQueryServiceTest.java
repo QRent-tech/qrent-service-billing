@@ -1,5 +1,6 @@
 package ee.qrental.transaction.core.service.balance;
 
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
@@ -23,9 +24,7 @@ class BalanceQueryServiceTest {
   private GetDriverQuery driverQuery;
   private GetQWeekQuery qWeekQuery;
   private GetTransactionQuery transactionQuery;
-  private GetTransactionKindQuery transactionKindQuery;
   private BalanceLoadPort balanceLoadPort;
-  private TransactionLoadPort transactionLoadPort;
   private BalanceResponseMapper balanceResponseMapper;
   private BalanceCalculatorStrategy calculatorStrategies;
 
@@ -34,9 +33,7 @@ class BalanceQueryServiceTest {
     qWeekQuery = mock(GetQWeekQuery.class);
     driverQuery = mock(GetDriverQuery.class);
     transactionQuery = mock(GetTransactionQuery.class);
-    transactionKindQuery = mock(GetTransactionKindQuery.class);
     balanceLoadPort = mock(BalanceLoadPort.class);
-    transactionLoadPort = mock(TransactionLoadPort.class);
     balanceResponseMapper = mock(BalanceResponseMapper.class);
     calculatorStrategies = mock(BalanceCalculatorStrategy.class);
 
@@ -45,10 +42,8 @@ class BalanceQueryServiceTest {
             driverQuery,
             qWeekQuery,
             transactionQuery,
-            transactionKindQuery,
             balanceLoadPort,
-            transactionLoadPort,
             balanceResponseMapper,
-            Arrays.asList(calculatorStrategies));
+            asList(calculatorStrategies));
   }
 }

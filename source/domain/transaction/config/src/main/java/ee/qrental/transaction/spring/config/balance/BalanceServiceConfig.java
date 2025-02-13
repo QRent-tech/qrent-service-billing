@@ -58,18 +58,14 @@ public class BalanceServiceConfig {
       final GetDriverQuery driverQuery,
       final GetQWeekQuery qWeekQuery,
       final GetTransactionQuery transactionQuery,
-      final GetTransactionKindQuery transactionKindQuery,
       final BalanceLoadPort balanceLoadPort,
-      final TransactionLoadPort transactionLoadPort,
       final BalanceResponseMapper balanceResponseMapper,
       final List<BalanceCalculatorStrategy> calculatorStrategies) {
     return new BalanceQueryService(
         driverQuery,
         qWeekQuery,
         transactionQuery,
-        transactionKindQuery,
         balanceLoadPort,
-        transactionLoadPort,
         balanceResponseMapper,
         calculatorStrategies);
   }

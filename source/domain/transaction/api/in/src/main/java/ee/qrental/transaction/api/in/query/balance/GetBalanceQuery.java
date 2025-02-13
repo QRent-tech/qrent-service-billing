@@ -18,7 +18,5 @@ public interface GetBalanceQuery {
 
   BalanceResponse getByDriverIdAndQWeekId(final Long driverId, final Long qWeekId);
 
-  BigDecimal getRawBalanceTotalByDriverIdAndQWeekId(final Long driverId, final Long qWeekId);
-
   Long getCountByDriver(final Long driverId);
 }
