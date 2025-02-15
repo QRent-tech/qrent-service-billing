@@ -1,14 +1,5 @@
 package ee.qrental.contract.core.service.pdf;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfWriter;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
 import static com.lowagie.text.Font.*;
 import static com.lowagie.text.PageSize.A4;
 import static com.lowagie.text.Rectangle.NO_BORDER;
@@ -16,8 +7,16 @@ import static com.lowagie.text.alignment.HorizontalAlignment.*;
 import static com.lowagie.text.alignment.HorizontalAlignment.LEFT;
 import static java.awt.Color.white;
 
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+
 @RequiredArgsConstructor
-public class ContractToPdfConversionStrategyNew implements ContractToPdfConversionStrategy {
+public class ContractToPdfConversionStrategyNewDriver implements ContractToPdfConversionStrategy {
   @Override
   public boolean canApply(final ContractPdfModel contract) {
     // TODO add condition
