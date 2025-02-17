@@ -5,6 +5,8 @@ import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.Driver;
 import java.math.BigDecimal;
+
+import ee.qrental.driver.domain.LegalEntityType;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -22,6 +24,8 @@ public class DriverUpdateRequestMapper implements UpdateRequestMapper<DriverUpda
         .taxNumber(request.getTaxNumber())
         .phone(request.getPhone())
         .email(request.getEmail())
+        .legalEntityType(LegalEntityType.valueOf(request.getLegalEntityType()))
+        .lhvAccount(request.getLhvAccount())
         .companyName(request.getCompanyName())
         .companyCeoFirstName(request.getCompanyCeoFirstName())
         .companyCeoLastName(request.getCompanyCeoLastName())
@@ -73,6 +77,8 @@ public class DriverUpdateRequestMapper implements UpdateRequestMapper<DriverUpda
         .taxNumber(domain.getTaxNumber())
         .phone(domain.getPhone())
         .email(domain.getEmail())
+        .legalEntityType(domain.getLegalEntityType().name())
+        .lhvAccount(domain.getLhvAccount())
         .companyName(domain.getCompanyName())
         .companyCeoFirstName(domain.getCompanyCeoFirstName())
         .companyCeoLastName(domain.getCompanyCeoLastName())

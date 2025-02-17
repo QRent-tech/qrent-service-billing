@@ -1,6 +1,5 @@
 package ee.qrental.driver.api.in.request;
 
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -25,6 +24,8 @@ public class DriverUpdateRequest extends AbstractUpdateRequest {
   private String phone;
   private String email;
   private Long qFirmId;
+  private String legalEntityType;
+  private String lhvAccount;
   private String companyName;
   private String companyCeoFirstName;
   private String companyCeoLastName;

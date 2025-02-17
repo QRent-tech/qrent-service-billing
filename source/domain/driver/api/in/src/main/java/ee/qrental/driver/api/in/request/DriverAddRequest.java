@@ -19,6 +19,8 @@ public class DriverAddRequest extends AbstractAddRequest {
   private Long taxNumber;
   private String phone;
   private String email;
+  private String legalEntityType;
+  private String lhvAccount;
   private String companyName;
   private String companyCeoFirstName;
   private String companyCeoLastName;

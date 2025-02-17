@@ -6,6 +6,7 @@ import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
+import ee.qrental.driver.domain.LegalEntityType;
 
 public class DriverAddRequestValidator extends AbstractDriverRequestValidator
     implements AddRequestValidator<DriverAddRequest> {
@@ -31,19 +32,25 @@ public class DriverAddRequestValidator extends AbstractDriverRequestValidator
     checkTaxiLicense(request.getTaxiLicense(), violationsCollector);
     checkPhoneNumber(request.getPhone(), violationsCollector);
     checkEmail(request.getEmail(), violationsCollector);
-    checkCompanyName(request.getCompanyName(), violationsCollector);
-    checkRegistrationNumber(request.getRegNumber(), violationsCollector);
-    checkCompanyVat(request.getCompanyVat(), violationsCollector);
-    checkCeoFirstName(request.getCompanyCeoFirstName(), violationsCollector);
-    checkCeoLastName(request.getCompanyCeoLastName(), violationsCollector);
-    checkCeoTaxNumber(request.getCompanyCeoTaxNumber(), violationsCollector);
-    checkCompanyAddress(request.getCompanyAddress(), violationsCollector);
+    if (request.getLegalEntityType().equals(LegalEntityType.COMPANY.name())) {
+      checkCompanyName(request.getCompanyName(), violationsCollector);
+      checkRegistrationNumber(request.getRegNumber(), violationsCollector);
+      checkCompanyVat(request.getCompanyVat(), violationsCollector);
+      checkCeoFirstName(request.getCompanyCeoFirstName(), violationsCollector);
+      checkCeoLastName(request.getCompanyCeoLastName(), violationsCollector);
+      checkCeoTaxNumber(request.getCompanyCeoTaxNumber(), violationsCollector);
+      checkCompanyAddress(request.getCompanyAddress(), violationsCollector);
+    }
+    if (request.getLegalEntityType().equals(LegalEntityType.LHV_ACCOUNT.name())) {
+      checkLhvAccount(request.getLhvAccount(), violationsCollector);
+    }
     checkComment(request.getComment(), violationsCollector);
 
     return violationsCollector;
   }
 
-  private void validateTaxNumber(final Long taxNumber, final ViolationsCollector violationsCollector){
+  private void validateTaxNumber(
+      final Long taxNumber, final ViolationsCollector violationsCollector) {
     checkTaxNumber(taxNumber, violationsCollector);
     checkTaxNumberUniqueness(taxNumber, violationsCollector);
   }

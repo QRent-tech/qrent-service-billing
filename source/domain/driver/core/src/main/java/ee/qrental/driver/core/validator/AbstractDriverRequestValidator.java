@@ -21,6 +21,7 @@ public abstract class AbstractDriverRequestValidator {
   private static final int LENGTH_MAX_FIRST_NAME = 50;
   private static final int LENGTH_MAX_LAST_NAME = 50;
   private static final int LENGTH_FIXED_TAX_NUMBER = 11;
+  private static final int LENGTH_FIXED_LHV_ACCOUNT = 20;
   private static final int LENGTH_MAX_ADDRESS = 100;
   private static final int LENGTH_MAX_DRIVER_LICENSE_NUMBER = 20;
   private static final int LENGTH_MAX_TAXI_LICENSE_NUMBER = 15;
@@ -256,5 +257,13 @@ public abstract class AbstractDriverRequestValidator {
       final String attributeValue, final ViolationsCollector violationsCollector) {
     attributeChecker.checkStringLengthMax(
         "Comment", attributeValue, LENGTH_MAX_COMMENT, violationsCollector);
+  }
+
+  protected void checkLhvAccount(
+          final String attributeValue, final ViolationsCollector violationsCollector) {
+    final var attributeName = "LHV Account";
+    attributeChecker.checkRequired(attributeName, attributeValue, violationsCollector);
+    attributeChecker.checkStringLengthFixed(
+            attributeName, attributeValue, LENGTH_FIXED_LHV_ACCOUNT, violationsCollector);
   }
 }

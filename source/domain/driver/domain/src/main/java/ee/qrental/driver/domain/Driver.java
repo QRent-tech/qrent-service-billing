@@ -20,6 +20,10 @@ public class Driver {
   private String address;
   private String driverLicenseNumber;
   private LocalDate driverLicenseExp;
+  private String driverLicensePrice;
+  private LegalEntityType legalEntityType;
+  private String lhvAccount;
+  private BigDecimal lhvBalance;
   private String companyName;
   private String companyCeoFirstName;
   private String companyCeoLastName;

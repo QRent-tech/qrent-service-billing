@@ -5,6 +5,7 @@ import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.Driver;
 import ee.qrental.driver.domain.Friendship;
+import ee.qrental.driver.domain.LegalEntityType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,6 +23,8 @@ public class DriverAddRequestMapper implements AddRequestMapper<DriverAddRequest
         .taxNumber(request.getTaxNumber())
         .phone(request.getPhone())
         .email(request.getEmail())
+        .legalEntityType(LegalEntityType.valueOf(request.getLegalEntityType()))
+        .lhvAccount(request.getLhvAccount())
         .companyName(request.getCompanyName())
         .companyCeoFirstName(request.getCompanyCeoFirstName())
         .companyCeoLastName(request.getCompanyCeoLastName())

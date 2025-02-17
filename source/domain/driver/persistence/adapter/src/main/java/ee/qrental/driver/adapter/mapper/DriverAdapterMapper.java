@@ -5,6 +5,7 @@ import ee.qrental.driver.adapter.repository.FriendshipRepository;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.Driver;
 import ee.qrental.driver.domain.Friendship;
+import ee.qrental.driver.domain.LegalEntityType;
 import ee.qrental.driver.entity.jakarta.DriverJakartaEntity;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,8 @@ public class DriverAdapterMapper {
         .taxNumber(entity.getTaxNumber())
         .phone(entity.getPhone())
         .email(entity.getEmail())
+        .legalEntityType(LegalEntityType.valueOf(entity.getLegalEntityType()))
+        .lhvAccount(entity.getLhvAccount())
         .companyName(entity.getCompanyName())
         .companyCeoFirstName(entity.getCompanyCeoFirstName())
         .companyCeoLastName(entity.getCompanyCeoLastName())
@@ -71,6 +74,8 @@ public class DriverAdapterMapper {
         .taxNumber(domain.getTaxNumber())
         .phone(domain.getPhone())
         .email(domain.getEmail())
+        .legalEntityType(domain.getLegalEntityType().name())
+        .lhvAccount(domain.getLhvAccount())
         .companyVat(domain.getCompanyVat())
         .companyName(domain.getCompanyName())
         .companyCeoFirstName(domain.getCompanyCeoFirstName())

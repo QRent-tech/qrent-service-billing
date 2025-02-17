@@ -1,0 +1,32 @@
+<div th:fragment="onClickRequiredObligationScript">
+    <script>
+        function onClickRequiredObligation() {
+            const hasRequiredObligation = document.getElementById("hasRequiredObligationId");
+            const requiredObligation = document.getElementById("requiredObligationId");
+            if (hasRequiredObligation.checked == true) {
+                requiredObligation.disabled = false;
+                requiredObligation.value = 0
+            } else {
+                requiredObligation.disabled = true;
+                requiredObligation.value = 0
+            }
+        }
+    </script>
+</div>
+<div th:fragment="onClickLegalEntityTypeScript">
+    <script>
+        function onClickLegalEntityType(legalEntityTypeOptions) {
+            const selectedLegalEntityValue = legalEntityTypeOptions.value;
+            const lhvAccountForm = document.getElementById("lhv_account_form_id");
+            const companyForm = document.getElementById("company_form_id");
+            lhvAccountForm.style.display = "none";
+            companyForm.style.display = "none";
+            if (selectedLegalEntityValue === 'LHV_ACCOUNT') {
+                lhvAccountForm.style.display = "block";
+            }
+            if (selectedLegalEntityValue === 'COMPANY') {
+                companyForm.style.display = "block";
+            }
+        }
+    </script>
+</div>

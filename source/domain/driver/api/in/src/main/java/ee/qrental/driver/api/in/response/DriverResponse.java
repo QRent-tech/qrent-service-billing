@@ -20,6 +20,8 @@ public class DriverResponse {
   private String companyName;
   private String driverLicenseNumber;
   private LocalDate driverLicenseExp;
+  private String legalEntityType;
+  private String lhvAccount;
   private String companyRegistrationNumber;
   private String companyCeoName;
   private Long companyCeoTaxNumber;

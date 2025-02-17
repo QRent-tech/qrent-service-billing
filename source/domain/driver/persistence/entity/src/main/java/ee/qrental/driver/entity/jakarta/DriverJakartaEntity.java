@@ -45,6 +45,12 @@ public class DriverJakartaEntity {
   @Column(name = "address")
   private String address;
 
+  @Column(name = "legal_entity_type")
+  private String legalEntityType;
+
+  @Column(name = "lhv_account")
+  private String lhvAccount;
+
   @Column(name = "company_name")
   private String companyName;
 
