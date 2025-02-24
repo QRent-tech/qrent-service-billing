@@ -1,6 +1,6 @@
-<div th:fragment="onClickRequiredObligationScript">
+<div th:fragment="onChangeRequiredObligationScript">
     <script>
-        function onClickRequiredObligation() {
+        function onChangeRequiredObligation() {
             const hasRequiredObligation = document.getElementById("hasRequiredObligationId");
             const requiredObligation = document.getElementById("requiredObligationId");
             if (hasRequiredObligation.checked == true) {
@@ -17,15 +17,65 @@
     <script>
         function onClickLegalEntityType(legalEntityTypeOptions) {
             const selectedLegalEntityValue = legalEntityTypeOptions.value;
-            const lhvAccountForm = document.getElementById("lhv_account_form_id");
-            const companyForm = document.getElementById("company_form_id");
-            lhvAccountForm.style.display = "none";
-            companyForm.style.display = "none";
+            const lhvAccount = document.getElementById("lhvAccountId");
+
+            const companyName = document.getElementById("companyNameId");
+            const companyRegNumber = document.getElementById("companyRegNumberId");
+            const companyVat = document.getElementById("companyVatId");
+            const companyCeoFirstName = document.getElementById("companyCeoFirstNameId");
+            const companyCeoLastName = document.getElementById("companyCeoLastNameId");
+            const companyCeoTaxNumber = document.getElementById("companyCeoTaxNumberId");
+            const companyAddress = document.getElementById("companyAddressId");
+
+            if (selectedLegalEntityValue === 'SELF_EMPLOYED') {
+                lhvAccount.disabled = true;
+                lhvAccount.value = "";
+
+                companyName.disabled = true;
+                companyName.value = "";
+                companyRegNumber.disabled = true;
+                companyRegNumber.value = "";
+                companyVat.disabled = true;
+                companyVat.value = "";
+                companyCeoFirstName.disabled = true;
+                companyCeoFirstName.value = "";
+                companyCeoLastName.disabled = true;
+                companyCeoLastName.value = "";
+                companyCeoTaxNumber.disabled = true;
+                companyCeoTaxNumber.value = "";
+                companyAddress.disabled = true;
+                companyAddress.value = "";
+            }
+
             if (selectedLegalEntityValue === 'LHV_ACCOUNT') {
-                lhvAccountForm.style.display = "block";
+                lhvAccount.disabled = false;
+
+                companyName.disabled = true;
+                companyName.value = "";
+                companyRegNumber.disabled = true;
+                companyRegNumber.value = "";
+                companyVat.disabled = true;
+                companyVat.value = "";
+                companyCeoFirstName.disabled = true;
+                companyCeoFirstName.value = "";
+                companyCeoLastName.disabled = true;
+                companyCeoLastName.value = "";
+                companyCeoTaxNumber.disabled = true;
+                companyCeoTaxNumber.value = "";
+                companyAddress.disabled = true;
+                companyAddress.value = "";
             }
             if (selectedLegalEntityValue === 'COMPANY') {
-                companyForm.style.display = "block";
+                companyName.disabled = false;
+                companyRegNumber.disabled = false;
+                companyVat.disabled = false;
+                companyCeoFirstName.disabled = false;
+                companyCeoLastName.disabled = false;
+                companyCeoTaxNumber.disabled = false;
+                companyAddress.disabled = false;
+
+                lhvAccount.disabled = true;
+                lhvAccount.value = "";
             }
         }
     </script>
