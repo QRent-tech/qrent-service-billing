@@ -90,8 +90,12 @@ public class ContractServiceConfig {
   }
 
   @Bean
-  List<ContractToPdfConversionStrategy> getContractToPdfConversionStrategies() {
-    return asList(new ContractToPdfConversionStrategyOld(), new ContractToPdfConversionStrategyNew());
+  List<ContractToPdfConversionStrategy> getContractToPdfConversionStrategies(
+      final ContractLoadPort loadPort) {
+    return asList(
+        new ContractToPdfConversionStrategyBefore2025(),
+        new ContractToPdfConversionStrategyAfter2024(),
+        new ContractToPdfConversionStrategyNewDriver(loadPort));
   }
 
   @Bean

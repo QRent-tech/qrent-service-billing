@@ -89,7 +89,6 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
             nextAfterLatestCalculated.getId(),
             requestedQWeek.getId(),
             GetQWeekQuery.DEFAULT_COMPARATOR);
-    getQWeeksForCalculationOrdered(latestCalculatedWeek, requestedQWeek);
 
     final var drivers = driverQuery.getAll();
     qWeeksForCalculation.forEach(
@@ -287,14 +286,12 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
           weekYear,
           weekNumber);
       final var qFirmId = driver.getQFirmId();
-      final var qFirm = firmQuery.getById(qFirmId);
 
-      return qFirm;
+        return firmQuery.getById(qFirmId);
     }
     final var qFirmId = firmLink.getFirmId();
-    final var qFirm = firmQuery.getById(qFirmId);
 
-    return qFirm;
+      return firmQuery.getById(qFirmId);
   }
 
   private void sendEmails(InvoiceCalculation invoiceCalculation) {
@@ -341,34 +338,19 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
 
               progressTracking(handledInvoices, invoicesCount);
               final var handledInvoicesInt = handledInvoices.getAndIncrement();
-              System.out.println(
-                  format("Handled %d from %d invoices", handledInvoicesInt, invoicesCount));
+              System.out.printf("Handled %d from %d invoices%n", handledInvoicesInt, invoicesCount);
             });
   }
 
   private void progressTracking(final AtomicInteger handledInvoices, final int invoicesCount) {
     final var handledInvoicesInt = handledInvoices.getAndIncrement();
-    System.out.println(format("Handled %d from %d invoices", handledInvoicesInt, invoicesCount));
+    System.out.printf("Handled %d from %d invoices%n", handledInvoicesInt, invoicesCount);
   }
 
   private InputStream getAttachment(final Invoice invoice) {
     final var invoicePdfModel = invoiceToPdfModelMapper.getPdfModel(invoice);
 
     return invoiceToPdfConverter.getPdfInputStream(invoicePdfModel);
-  }
-
-  // TODO move to the Qweek Service
-  private List<QWeekResponse> getQWeeksForCalculationOrdered(
-      final QWeekResponse lastCalculationWeek, final QWeekResponse latestRequestedWeek) {
-    final var qWeeksForCalculation =
-        lastCalculationWeek == null
-            ? qWeekQuery.getAllBeforeById(latestRequestedWeek.getId())
-            : qWeekQuery.getAllBetweenByIdsReversedOrder(
-                lastCalculationWeek.getId(), latestRequestedWeek.getId());
-    qWeeksForCalculation.sort(
-        comparing(QWeekResponse::getYear).thenComparing(QWeekResponse::getNumber));
-
-    return qWeeksForCalculation;
   }
 
   private String getInvoiceNumber(

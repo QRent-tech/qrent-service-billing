@@ -12,6 +12,8 @@ public class ContractToPdfModelMapper {
     final var duration1 = getStringDuration1(contract.getContractDuration());
 
     return ContractPdfModel.builder()
+        .driverId(contract.getDriverId())
+        .durationWeeksCount(contract.getContractDuration().getWeeksCount())
         .number(contract.getNumber())
         .duration(duration)
         .duration1(duration1)
@@ -53,7 +55,4 @@ public class ContractToPdfModelMapper {
       case TWELVE_WEEKS -> "neliteist";
     };
   }
-
-
-
 }

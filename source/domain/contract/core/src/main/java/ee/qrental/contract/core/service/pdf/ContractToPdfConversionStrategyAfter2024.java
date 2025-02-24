@@ -1,5 +1,14 @@
 package ee.qrental.contract.core.service.pdf;
 
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfWriter;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
 import static com.lowagie.text.Font.*;
 import static com.lowagie.text.PageSize.A4;
 import static com.lowagie.text.Rectangle.NO_BORDER;
@@ -7,43 +16,14 @@ import static com.lowagie.text.alignment.HorizontalAlignment.*;
 import static com.lowagie.text.alignment.HorizontalAlignment.LEFT;
 import static java.awt.Color.white;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
-import ee.qrental.contract.api.out.ContractLoadPort;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-
 @RequiredArgsConstructor
-public class ContractToPdfConversionStrategyNewDriver
+public class ContractToPdfConversionStrategyAfter2024
     extends AbstractContractToPdfConversionStrategy {
-
-  private static final Integer MIN_REQUIRED_WEEKS_IN_CONTRACT = 12;
-
-  private final ContractLoadPort loadPort;
-
   @Override
   public boolean canApply(final ContractPdfModel contract) {
-    final var driverId = contract.getDriverId();
-    final var latestContract = loadPort.loadLatestByDriverId(driverId);
-    if (latestContract != null) {
-      System.out.println("Driver already has a contract, and can't be considered as a new");
+    final var contractYear = contract.getCreated().getYear();
 
-      return false;
-    }
-
-    final var durationWeeksCount = contract.getDurationWeeksCount();
-    if (durationWeeksCount != MIN_REQUIRED_WEEKS_IN_CONTRACT) {
-      System.out.println(
-          "Current Strategy applicable only for the new Drivers with 12 Weeks Contract");
-
-      return false;
-    }
-
-    return true;
+    return contractYear >= YEAR_FOR_NEW_CONTRACT;
   }
 
   @SneakyThrows
