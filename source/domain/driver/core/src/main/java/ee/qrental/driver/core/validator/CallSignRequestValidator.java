@@ -24,7 +24,7 @@ public class CallSignRequestValidator
 
   private static final int LENGTH_MAX_COMMENT = 200;
   private static final BigDecimal DECIMAL_MIN_CALL_SIGN = BigDecimal.ONE;
-  private static final BigDecimal DECIMAL_MAX_CALL_SIGN = BigDecimal.valueOf(999);
+  private static final BigDecimal DECIMAL_MAX_CALL_SIGN = BigDecimal.valueOf(3000);
 
   @Override
   public ViolationsCollector validate(final CallSignAddRequest request) {
