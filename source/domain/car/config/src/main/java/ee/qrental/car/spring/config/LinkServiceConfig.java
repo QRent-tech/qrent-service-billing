@@ -17,6 +17,7 @@ import ee.qrental.car.core.mapper.CarLinkResponseMapper;
 import ee.qrental.car.core.mapper.CarLinkUpdateRequestMapper;
 import ee.qrental.car.core.service.CarLinkQueryService;
 import ee.qrental.car.core.service.CarLinkUseCaseService;
+import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,8 +28,11 @@ public class LinkServiceConfig {
   public GetCarLinkQuery getLinkQueryService(
       final CarLinkLoadPort loadPort,
       final CarLinkResponseMapper mapper,
-      final CarLinkUpdateRequestMapper updateRequestMapper) {
-    return new CarLinkQueryService(loadPort, mapper, updateRequestMapper);
+      final CarLinkUpdateRequestMapper updateRequestMapper,
+      final QDateTime qDateTime,
+      final GetQWeekQuery qWeekQuery) {
+
+    return new CarLinkQueryService(loadPort, mapper, updateRequestMapper, qDateTime, qWeekQuery);
   }
 
   @Bean
@@ -41,6 +45,7 @@ public class LinkServiceConfig {
       final AddRequestValidator<CarLinkAddRequest> addRequestValidator,
       final UpdateRequestValidator<CarLinkUpdateRequest> updateRequestValidator,
       final QDateTime qDateTime) {
+
     return new CarLinkUseCaseService(
         addPort,
         updatePort,

@@ -9,10 +9,8 @@ import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.response.TransactionResponse;
-
 import java.math.BigDecimal;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -33,7 +31,7 @@ public class ObligationCalculator {
         final var rentObligation = getRentObligation(driverId, qWeekId);
         final var rentObligationAbs = rentObligation.abs();
         final var previousWeekBalance =
-                balanceQuery.getRawBalanceTotalByDriverIdAndQWeekId(driverId, previousQWeekId);
+                balanceQuery.getRawContextByDriverIdAndQWeekId(driverId, previousQWeekId).getRequestedWeekBalance().getAmount();
         if (previousWeekBalance.compareTo(ZERO) < 0) {
             final var debt = getDebt(previousWeekBalance, rentObligationAbs);
             rentObligationResult = rentObligationAbs.add(debt);

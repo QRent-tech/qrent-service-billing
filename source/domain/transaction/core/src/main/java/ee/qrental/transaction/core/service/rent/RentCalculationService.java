@@ -54,9 +54,10 @@ public class RentCalculationService implements RentCalculationAddUseCase {
 
       return null;
     }
+    final var requestedQWeekId = addRequest.getQWeekId();
     final var domain = addRequestMapper.toDomain(addRequest);
-    final var qWeek = qWeekQuery.getById(addRequest.getQWeekId());
-    final var activeCarLinks = carLinkQuery.getActive();
+    final var qWeek = qWeekQuery.getById(requestedQWeekId);
+    final var activeCarLinks = carLinkQuery.getAllActiveByQWeekId(requestedQWeekId);
     for (final var activeCarLink : activeCarLinks) {
       processRent(domain, activeCarLink, qWeek);
       processNoLabelFine(domain, activeCarLink, qWeek);

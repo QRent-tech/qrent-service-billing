@@ -8,6 +8,7 @@ dependencies {
 
     implementation(project(":source:domain:common:api"))
     implementation(project(":source:domain:driver:api:in"))
+    implementation(project(":source:domain:constant:api:in"))
 
     implementation("org.springframework:spring-context-support")
     compileOnly(libs.q.lombok)

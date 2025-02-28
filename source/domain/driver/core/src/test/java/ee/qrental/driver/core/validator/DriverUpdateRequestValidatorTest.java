@@ -75,7 +75,12 @@ class DriverUpdateRequestValidatorTest {
     final var driverIdToUpdate = updateRequest.getId();
     updateRequest.setRecommendedByDriverId(null);
     when(loadPort.loadById(driverIdToUpdate))
-        .thenReturn(Driver.builder().id(driverIdToUpdate).friendship(null).build());
+        .thenReturn(
+            Driver.builder()
+                .id(driverIdToUpdate)
+                .friendship(null)
+                .taxNumber(updateRequest.getTaxNumber())
+                .build());
 
     // when
     final var violationCollector = instanceUnderTest.validate(updateRequest);
@@ -94,6 +99,7 @@ class DriverUpdateRequestValidatorTest {
         .thenReturn(
             Driver.builder()
                 .id(driverIdToUpdate)
+                .taxNumber(updateRequest.getTaxNumber())
                 .friendship(Friendship.builder().driverId(44L).friendId(5L).build())
                 .build());
 
@@ -116,6 +122,7 @@ class DriverUpdateRequestValidatorTest {
             Driver.builder()
                 .id(driverIdToUpdate)
                 .createdDate(LocalDate.of(2024, Month.JANUARY, 1)) // MONDAY
+                .taxNumber(updateRequest.getTaxNumber())
                 .friendship(
                     Friendship.builder()
                         .driverId(dbRecommendedByDriverId)
@@ -152,6 +159,7 @@ class DriverUpdateRequestValidatorTest {
             Driver.builder()
                 .id(driverIdToUpdate)
                 .createdDate(LocalDate.of(2024, Month.JANUARY, 1)) // MONDAY
+                .taxNumber(updateRequest.getTaxNumber())
                 .friendship(
                     Friendship.builder()
                         .driverId(dbRecommendedByDriverId)
