@@ -38,6 +38,14 @@ public class ContractToPdfConversionStrategyAfter2024
     pdfDocument.add(getRenterTable(model));
     pdfDocument.add(getTenantTable(model));
 
+    //TODO  LHV case
+  /*
+Lepingu allkirjastamisega kinnitab rentnik, et kavatseb rendileandja rendiautot kasutades teostada oma äritegevust ning on ta
+selleks loonud LHV ettevõtluskonto järgmise numbriga: EE 3895 5874 9856 6354
+Eeltooduga kinnitab rentnik, et käesoleva rendilepingu vormistamise ja sellealuse auto rentimese eesmärgiks, on tema äritegevuse
+ teostamine LHV ettevõtluskonto kaudu lihtsustatud eraettevõtluse registreerimise viisil.
+     */
+
     final var chapter1 = getChapterTable();
     chapter1.addCell(getChapterNumber("I"));
     chapter1.addCell(getChapterSummary("Üldsätted"));
@@ -274,7 +282,7 @@ public class ContractToPdfConversionStrategyAfter2024
     rendileandja2.addCell(rendileandja2cell2);
 
     final var rendileandja2cell3 =
-        new Cell(new Paragraph("Kehtivad alates 03.12.2024", new Font(TIMES_ROMAN, 7, BOLD)));
+        new Cell(new Paragraph("Kehtivad alates 01.01.2025", new Font(TIMES_ROMAN, 7, BOLD)));
     rendileandja2cell3.setBorder(NO_BORDER);
     rendileandja2cell3.setHorizontalAlignment(LEFT);
     rendileandja2.addCell(rendileandja2cell3);
@@ -1109,11 +1117,12 @@ public class ContractToPdfConversionStrategyAfter2024
         getSubChapterText(
             "Rentnik võib käesolevaid tingimusi puudutavate küsimustega pöörduda Rendileandja poole, kasutades lepingus märgitud andmeid."));
     pdfDocument.add(chapter14);
+
     final var chapter15 = getChapterTable();
     chapter15.addCell(getChapterSummary("Lisa"));
     final var body15acell2 =
         new Cell(
-            new Paragraph("nr 1 p. IIX Trahvid ja kahjutasud", new Font(TIMES_ROMAN, 9, BOLD)));
+            new Paragraph("nr 1.  Trahvid ja kahjutasud", new Font(TIMES_ROMAN, 9, BOLD)));
     body15acell2.setBorder(NO_BORDER);
     body15acell2.setHorizontalAlignment(LEFT);
     chapter15.addCell(body15acell2);
@@ -1153,7 +1162,7 @@ public class ContractToPdfConversionStrategyAfter2024
     chapter15.addCell(body15acell9);
     chapter15.addCell(
         getSubChapterText(
-            "D.\tsõiduki juhtimise eest alkoholijoobes (üle 0,00 promilli), narkootiliste ja muude psühhotroopsete ainete mõju"
+            "sõiduki juhtimise eest alkoholijoobes (üle 0,00 promilli), narkootiliste ja muude psühhotroopsete ainete mõju"
                 + " all (või kui tarvitasite alkoholi või muid joovastavaid aineid pärast liiklusõnnetust, enne kui õnnetuse "
                 + "asjaolud välja selgitati, või vältisite vere alkoholisisalduse mõõtmist või joobetesti tegemist "
                 + "(vere alkoholisisaldust ja joovet mõistetakse nii, nagu on määratletud õigusaktides). "

@@ -9,11 +9,10 @@ import static java.awt.Color.white;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
+import ee.qrental.contract.api.out.ContractLoadPort;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-
-import ee.qrental.contract.api.out.ContractLoadPort;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 
@@ -57,6 +56,15 @@ public class ContractToPdfConversionStrategyNewDriver
     pdfDocument.add(new Paragraph("\n"));
     pdfDocument.add(getRenterTable(model));
     pdfDocument.add(getTenantTable(model));
+
+    //TODO LHV case
+
+    /*
+Lepingu allkirjastamisega kinnitab rentnik, et kavatseb rendileandja rendiautot kasutades teostada oma äritegevust ning on ta
+selleks loonud LHV ettevõtluskonto järgmise numbriga: EE 3895 5874 9856 6354
+Eeltooduga kinnitab rentnik, et käesoleva rendilepingu vormistamise ja sellealuse auto rentimese eesmärgiks, on tema äritegevuse
+ teostamine LHV ettevõtluskonto kaudu lihtsustatud eraettevõtluse registreerimise viisil.
+     */
 
     final var chapter1 = getChapterTable();
     chapter1.addCell(getChapterNumber("I"));
@@ -1129,6 +1137,7 @@ public class ContractToPdfConversionStrategyNewDriver
         getSubChapterText(
             "Rentnik võib käesolevaid tingimusi puudutavate küsimustega pöörduda Rendileandja poole, kasutades lepingus märgitud andmeid."));
     pdfDocument.add(chapter14);
+    
     final var chapter15 = getChapterTable();
     chapter15.addCell(getChapterSummary("Lisa"));
     final var body15acell2 =
@@ -1229,6 +1238,118 @@ public class ContractToPdfConversionStrategyNewDriver
                 + " kokkulepitud rendipäeva hinnale lisaks ka remondikulud vastavalt üleandmise-vastuvõtmise "
                 + "aktis märgitud nädala hinnale ning remondiarvele."));
     pdfDocument.add(chapter15);
+
+
+    //////////// New Driver
+
+
+    final var chapter16 = getChapterTable();
+    chapter16.addCell(getChapterSummary("Lisa"));
+    final var body16acell2 =
+            new Cell(
+                    //TODO Nr
+                    new Paragraph("nr 2. Lepingule nr 111111111111", new Font(TIMES_ROMAN, 9, BOLD)));
+    body16acell2.setBorder(NO_BORDER);
+    body16acell2.setHorizontalAlignment(LEFT);
+    chapter16.addCell(body16acell2);
+
+    final var body16acell3 = new Cell(new Paragraph("", new Font(TIMES_ROMAN, 9, NORMAL)));
+    body16acell3.setBorder(NO_BORDER);
+    body16acell3.setHorizontalAlignment(LEFT);
+    chapter16.addCell(body15acell3);
+    chapter16.addCell(
+        getSubChapterText(
+            "Käesoleva lepingulisaga reguleerivad pooled Rentniku kasutuses oleva Rendileandja rendiauto rendihinda esimeste järgnevate " +
+                    "12 (kaksteist) täiskalendrinädalate jooksul rendilepingu nr 111111111111111 ja  \"Uus Juht\" sooduskampaania alusel."));
+//TODO nr
+
+    final var campania = new Table(1);
+    campania.setPadding(0f);
+    campania.setSpacing(0f);
+    campania.setWidth(100f);
+    campania.setBorderColor(white);
+    campania.setHorizontalAlignment(LEFT);
+    campania.setBorder(NO_BORDER);
+    campania.setBorder(NO_BORDER);
+
+    final var campaniacell2 =
+            new Cell(
+                    new Paragraph(
+                             " Kampaania üldtingimused",
+                            new Font(TIMES_ROMAN, 9, BOLD)));
+    campaniacell2.setBorder(NO_BORDER);
+    campaniacell2.setHorizontalAlignment(LEFT);
+    campania.addCell(campaniacell2);
+
+    final var campaniachapter = getChapterTable();
+    campaniachapter.addCell(getChapterNumber("1"));
+    campaniachapter.addCell(getChapterSummary("Kampaania kestus on 12 (kaksteist) järgnevat täiskalendrinädalat alates " +
+            "rendilepingu allkirjastamise ja auto kättesaamise kuupäevast."));
+
+    campaniachapter.addCell(getChapterNumber("2"));
+    campaniachapter.addCell(getChapterSummary("Soodustus kehtib ainult uuele juhile, kes on sõlminud rendilepingu " +
+            "Q Rental Group OÜ'ga esimest korda. Samas, ei ole rentnik varem rendiautot Rendileandja poolt renti võtnud."));
+
+    campaniachapter.addCell(getChapterNumber("3"));
+    campaniachapter.addCell(getChapterSummary("Allahindluse arvutamine"));
+
+    campaniachapter.addCell(getSubChapterNumber("3.1"));
+    campaniachapter.addCell(
+            getSubChapterText(
+                    "Nädala auto rendiallahindluse arveldamiseks võtavad pooled aluseks rendiauto üleandmise-vastuvõtmise " +
+                            "aktis määratud täiskalendrinädala rendihinda."));
+    campaniachapter.addCell(getSubChapterNumber("3.2"));
+    campaniachapter.addCell(getSubChapterText("Käesolevas lepingulisas sätestatud kampaania alusel, saab Rentnik üleandmise-vastuvõtmise aktis " +
+            "määratud kehtivast rendihinnast 25% allahindlust esimese, neljanda, seitsmenda ja üheksanda nädalate renditasu eest (graafik lisatud)."));
+    campaniachapter.addCell(getSubChapterNumber("3.3"));
+    campaniachapter.addCell(getSubChapterText("Käesolevas lepingulisas kirjeldatud kampaania alusel, saab Rentnik üleandmise-vastuvõtmise aktis " +
+            "määratud kehtivast rendihinnast 10% allahindlust teise, kolmanda, viienda, kuuenda, kaheksanda, kümnenda, üheteistkümnenda ja kaheteistkümnenda" +
+            " nädalate renditasu eest lähtuvalt (graafik lisatud)."));
+    campaniachapter.addCell(getSubChapterNumber("3.4"));
+    campaniachapter.addCell(getSubChapterText("Pooled leppisid kokku, et käesolevas lepingulisas sätestatud allahindluskanne lisatakse juhi saldole " +
+            "ainult siis, kui Rentiku eelmise rendinädala tasu ja tema eelmise nädala võla hüvitamiskohustused on õigeaegselt ja korrektselt tasutud (tasumise " +
+            "kord kirjeldatud p. 3.4.1 ja p 3.4.2)."));
+    campaniachapter.addCell(getSubChapterNumber("3.4.1"));
+    campaniachapter.addCell(getSubChapterText("Rentnik kohustub tasuma rendileandjale ettemaksu iga nädala rendi eest sularahas Rendileandja kontoris," +
+            " mis asub aadressil Lasnamäe 30a, Tallinn, või ülekandega Rendileandja pangakontole (või muule Rendileandja esindajaga maaratud pangakontole) " +
+            "asjakohase selgitusega – ”autorent + auto number”, mitte hiljem, kui iga jooksva nädala teisipäeva kella 16:00’ni."));
+    campaniachapter.addCell(getSubChapterNumber("3.4.2"));
+    campaniachapter.addCell(getSubChapterText("Rentnik kohustub oma eelmise perioodi võlakohustuste katteks tasuma täiendavalt 25% kehtivast " +
+            "nädalarendi hinnast, kui sellised võlakohustused on tal olemas."));
+    campaniachapter.addCell(getSubChapterNumber("3.5"));
+    campaniachapter.addCell(getSubChapterText(
+                    "Kui on Rentnikul olemas eelmise nädala eest tasumata kohustused (kirjeldatud p. 3.4.1 ja p 3.4.2), ei lisandu käesoleva lepingulisa" +
+                            " punktides 3.2 ja 3.3 sätestatud allahindluskanne Rentniku vastava nädala saldole."));
+    campaniachapter.addCell(getSubChapterNumber("4"));
+    campaniachapter.addCell(
+            getSubChapterText(
+                    "Rentnikupoolse käesolevas lisas sätestatud kokkulepe rikkumisel ja rendilepingu ennetähtaegsel lõpetamisel ehk rendilepingus nr 1234 " +
+                            "p 14  määratud Renditeenuse osutamise miinimumperioodi tähtaja rikkumisel, on rentnik kohustatud tasuma kampaania rikkumise eest " +
+                            "ühekordse leppetrahvi, mis on võrdne käesoleva lepingulisa sätestatud 12-nädalase üldallahindlusega summas 432 eurot. " +
+                            "Käesolevas punktis nimetatud leppetrahv on sõltumatu ning puudutab vaid käesolevas kokkulepes määratud kampaaniat. " +
+                            "Nimetatud leppetrahvile liisanduvad veel lepingu tüüptingimustes sätestatud kohustused."));
+    pdfDocument.add(campaniachapter);
+
+
+
+
+
+
+
+
+    ////////////  End New driver
+
+
+
+
+
+
+
+
+
+
+
+
 
     final var signature = getChapterTable();
     final var signaturecell1 =
