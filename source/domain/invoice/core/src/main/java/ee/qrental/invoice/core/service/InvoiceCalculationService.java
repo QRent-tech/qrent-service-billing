@@ -3,6 +3,7 @@ package ee.qrental.invoice.core.service;
 import static java.lang.String.format;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.ZERO;
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
@@ -25,7 +26,6 @@ import ee.qrental.invoice.api.out.InvoiceCalculationLoadPort;
 import ee.qrental.invoice.core.mapper.InvoiceCalculationAddRequestMapper;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfConverter;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfModelMapper;
-import ee.qrental.invoice.core.validator.InvoiceCalculationAddRequestValidator;
 import ee.qrental.invoice.domain.Invoice;
 import ee.qrental.invoice.domain.InvoiceCalculation;
 import ee.qrental.invoice.domain.InvoiceCalculationResult;
@@ -33,9 +33,11 @@ import ee.qrental.invoice.domain.InvoiceItem;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrental.transaction.api.in.query.filter.PeriodAndKindAndDriverTransactionFilter;
+import ee.qrental.transaction.api.in.query.kind.GetTransactionKindQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrental.transaction.api.in.response.TransactionResponse;
 import ee.qrental.transaction.api.in.response.balance.BalanceResponse;
+import ee.qrental.transaction.api.in.response.kind.TransactionKindResponse;
 import jakarta.transaction.Transactional;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -59,6 +61,7 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
   private final GetBalanceQuery balanceQuery;
   private final GetTransactionQuery transactionQuery;
   private final GetTransactionTypeQuery transactionTypeQuery;
+  private final GetTransactionKindQuery transactionKindQuery;
   private final GetFirmLinkQuery firmLinkQuery;
   private final EmailSendUseCase emailSendUseCase;
   private final InvoiceCalculationLoadPort loadPort;
@@ -89,7 +92,7 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
             nextAfterLatestCalculated.getId(),
             requestedQWeek.getId(),
             GetQWeekQuery.DEFAULT_COMPARATOR);
-    getQWeeksForCalculationOrdered(latestCalculatedWeek, requestedQWeek);
+    // getQWeeksForCalculationOrdered(latestCalculatedWeek, requestedQWeek);
 
     final var drivers = driverQuery.getAll();
     qWeeksForCalculation.forEach(
@@ -123,6 +126,10 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
                         .driverId(driverId)
                         .dateStart(weekStartDay)
                         .dateEnd(weekEndDay)
+                        .transactionKindIds(
+                            transactionKindQuery.getAllByCodes(asList("F", "NFA", "FA", "P", "R")).stream()
+                                .map(TransactionKindResponse::getId)
+                                .toList())
                         .build();
                 final var driversTransactions =
                     transactionQuery.getAllByFilter(filter).stream().toList();
@@ -292,9 +299,8 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
       return qFirm;
     }
     final var qFirmId = firmLink.getFirmId();
-    final var qFirm = firmQuery.getById(qFirmId);
 
-    return qFirm;
+      return firmQuery.getById(qFirmId);
   }
 
   private void sendEmails(InvoiceCalculation invoiceCalculation) {
@@ -348,27 +354,13 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
 
   private void progressTracking(final AtomicInteger handledInvoices, final int invoicesCount) {
     final var handledInvoicesInt = handledInvoices.getAndIncrement();
-    System.out.println(format("Handled %d from %d invoices", handledInvoicesInt, invoicesCount));
+    System.out.printf("Handled %d from %d invoices%n", handledInvoicesInt, invoicesCount);
   }
 
   private InputStream getAttachment(final Invoice invoice) {
     final var invoicePdfModel = invoiceToPdfModelMapper.getPdfModel(invoice);
 
     return invoiceToPdfConverter.getPdfInputStream(invoicePdfModel);
-  }
-
-  // TODO move to the Qweek Service
-  private List<QWeekResponse> getQWeeksForCalculationOrdered(
-      final QWeekResponse lastCalculationWeek, final QWeekResponse latestRequestedWeek) {
-    final var qWeeksForCalculation =
-        lastCalculationWeek == null
-            ? qWeekQuery.getAllBeforeById(latestRequestedWeek.getId())
-            : qWeekQuery.getAllBetweenByIdsReversedOrder(
-                lastCalculationWeek.getId(), latestRequestedWeek.getId());
-    qWeeksForCalculation.sort(
-        comparing(QWeekResponse::getYear).thenComparing(QWeekResponse::getNumber));
-
-    return qWeeksForCalculation;
   }
 
   private String getInvoiceNumber(

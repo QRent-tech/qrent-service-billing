@@ -18,6 +18,7 @@ import ee.qrental.invoice.core.service.pdf.InvoiceToPdfConverter;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfModelMapper;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
+import ee.qrental.transaction.api.in.query.kind.GetTransactionKindQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -88,7 +89,8 @@ public class InvoiceServiceConfig {
       final AddRequestValidator<InvoiceCalculationAddRequest> addRequestValidator,
       final InvoiceCalculationAddPort invoiceCalculationAddPort,
       final InvoiceToPdfConverter invoiceToPdfConverter,
-      final InvoiceToPdfModelMapper invoiceToPdfModelMapper) {
+      final InvoiceToPdfModelMapper invoiceToPdfModelMapper,
+      final GetTransactionKindQuery transactionKindQuery) {
     return new InvoiceCalculationService(
         qWeekQuery,
         driverQuery,
@@ -96,6 +98,7 @@ public class InvoiceServiceConfig {
         balanceQuery,
         transactionQuery,
         transactionTypeQuery,
+        transactionKindQuery,
         firmLinkQuery,
         emailSendUseCase,
         loadPort,
