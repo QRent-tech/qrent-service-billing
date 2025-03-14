@@ -14,11 +14,14 @@
     </script>
 </div>
 <div th:fragment="legalEntityFragment">
-    <script>
+    <script th:inline="javascript">
         function onClickLegalEntityType(legalEntityTypeOptions) {
-            const selectedLegalEntityValue = legalEntityTypeOptions.value;
-            const lhvAccount = document.getElementById("lhvAccountId");
+            const selectedLegalEntityType = legalEntityTypeOptions.value;
+            updateLegalEntityInputs(selectedLegalEntityType);
+        }
 
+        function updateLegalEntityInputs(selectedLegalEntityType) {
+            const lhvAccount = document.getElementById("lhvAccountId");
             const companyName = document.getElementById("companyNameId");
             const companyRegNumber = document.getElementById("companyRegNumberId");
             const companyVat = document.getElementById("companyVatId");
@@ -27,10 +30,9 @@
             const companyCeoTaxNumber = document.getElementById("companyCeoTaxNumberId");
             const companyAddress = document.getElementById("companyAddressId");
 
-            if (selectedLegalEntityValue === 'SELF_EMPLOYED') {
+            if (selectedLegalEntityType === 'SELF_EMPLOYED') {
                 lhvAccount.disabled = true;
                 lhvAccount.value = "";
-
                 companyName.disabled = true;
                 companyName.value = "";
                 companyRegNumber.disabled = true;
@@ -47,7 +49,7 @@
                 companyAddress.value = "";
             }
 
-            if (selectedLegalEntityValue === 'LHV_ACCOUNT') {
+            if (selectedLegalEntityType === 'LHV_ACCOUNT') {
                 lhvAccount.disabled = false;
 
                 companyName.disabled = true;
@@ -65,7 +67,7 @@
                 companyAddress.disabled = true;
                 companyAddress.value = "";
             }
-            if (selectedLegalEntityValue === 'COMPANY') {
+            if (selectedLegalEntityType === 'COMPANY') {
                 companyName.disabled = false;
                 companyRegNumber.disabled = false;
                 companyVat.disabled = false;
@@ -79,6 +81,7 @@
             }
         }
     </script>
+
     <p class="fs-5">Drivers Legal entity:</p>
     <div class="row mb-3">
         <div class="col">
@@ -172,4 +175,12 @@
                th:field="*{companyAddress}"
                type="text"/>
     </div>
+    <script th:inline="javascript">
+        setLegalEntityInputs();
+
+        function setLegalEntityInputs() {
+            var selectedLegalEntityType = [[${updateRequest.legalEntityType}]];
+            updateLegalEntityInputs(selectedLegalEntityType);
+        }
+    </script>
 </div>
