@@ -19,6 +19,7 @@ public class Contract {
   private String renterRegistrationNumber;
   private String renterAddress;
   private String renterCeoName;
+  private String renterLhvAccount;
   private Long renterCeoIsikukood;
   private String renterPhone;
   private String renterEmail;

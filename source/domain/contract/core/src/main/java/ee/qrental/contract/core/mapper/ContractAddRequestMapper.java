@@ -42,6 +42,7 @@ public class ContractAddRequestMapper implements AddRequestMapper<ContractAddReq
         .id(null)
         .number(contractNumber)
         .renterName(renterName)
+        .renterLhvAccount(driver.getLhvAccount())
         .renterRegistrationNumber(renterRegistrationNumber)
         .renterCeoName(renterCeoName)
         .renterCeoIsikukood(companyCeoTaxNumber)

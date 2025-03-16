@@ -35,6 +35,9 @@ public class ContractJakartaEntity {
   @Column(name = "renter_name")
   private String renterName;
 
+  @Column(name = "renter_lhv_account")
+  private String renterLhvAccount;
+
   @Column(name = "renter_registration_number")
   private String renterRegistrationNumber;
 

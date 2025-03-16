@@ -14,6 +14,7 @@ public class ContractPdfModel {
   private String duration;
   private String duration1;
   private String renterName;
+  private String renterLhvAccount;
   private String renterRegistrationNumber;
   private String renterAddress;
   private String renterCeoName;
