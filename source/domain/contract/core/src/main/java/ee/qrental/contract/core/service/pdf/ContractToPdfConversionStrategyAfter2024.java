@@ -21,9 +21,10 @@ public class ContractToPdfConversionStrategyAfter2024
     extends AbstractContractToPdfConversionStrategy {
   @Override
   public boolean canApply(final ContractPdfModel contract) {
-    final var contractYear = contract.getCreated().getYear();
+    final var contractCreatedDate = contract.getCreated();
 
-    return contractYear >= YEAR_FOR_NEW_CONTRACT;
+    return contractCreatedDate.isAfter(NEW_CONTRACTS_START_DATE)
+        || contractCreatedDate.isEqual(NEW_CONTRACTS_START_DATE);
   }
 
   @SneakyThrows
@@ -37,14 +38,7 @@ public class ContractToPdfConversionStrategyAfter2024
     pdfDocument.add(new Paragraph("\n"));
     pdfDocument.add(getRenterTable(model));
     pdfDocument.add(getTenantTable(model));
-
-    //TODO  LHV case
-  /*
-Lepingu allkirjastamisega kinnitab rentnik, et kavatseb rendileandja rendiautot kasutades teostada oma äritegevust ning on ta
-selleks loonud LHV ettevõtluskonto järgmise numbriga: EE 3895 5874 9856 6354
-Eeltooduga kinnitab rentnik, et käesoleva rendilepingu vormistamise ja sellealuse auto rentimese eesmärgiks, on tema äritegevuse
- teostamine LHV ettevõtluskonto kaudu lihtsustatud eraettevõtluse registreerimise viisil.
-     */
+    addLhvChapterIfNecessary(model, pdfDocument);
 
     final var chapter1 = getChapterTable();
     chapter1.addCell(getChapterNumber("I"));
@@ -1121,8 +1115,7 @@ Eeltooduga kinnitab rentnik, et käesoleva rendilepingu vormistamise ja sellealu
     final var chapter15 = getChapterTable();
     chapter15.addCell(getChapterSummary("Lisa"));
     final var body15acell2 =
-        new Cell(
-            new Paragraph("nr 1.  Trahvid ja kahjutasud", new Font(TIMES_ROMAN, 9, BOLD)));
+        new Cell(new Paragraph("nr 1.  Trahvid ja kahjutasud", new Font(TIMES_ROMAN, 9, BOLD)));
     body15acell2.setBorder(NO_BORDER);
     body15acell2.setHorizontalAlignment(LEFT);
     chapter15.addCell(body15acell2);

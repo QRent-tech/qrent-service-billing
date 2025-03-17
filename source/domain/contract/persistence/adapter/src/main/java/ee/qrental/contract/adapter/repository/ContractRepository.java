@@ -20,12 +20,13 @@ public interface ContractRepository {
 
   List<ContractJakartaEntity> findActiveByDate(final LocalDate date);
 
-  ContractJakartaEntity findActiveByDateAndDriverId(
-          LocalDate date, Long driverId);
+  ContractJakartaEntity findActiveByDateAndDriverId(final LocalDate date, final Long driverId);
 
   Long findCountActiveByDate(final LocalDate date);
 
   List<ContractJakartaEntity> findClosedByDate(final LocalDate date);
 
   Long findCountClosedByDate(final LocalDate date);
+
+  List<ContractJakartaEntity> findAllByDriverId(final Long driverId);
 }

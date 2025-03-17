@@ -3,6 +3,9 @@ package ee.qrental.contract.core.service.pdf;
 import com.lowagie.text.*;
 import lombok.SneakyThrows;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import static com.lowagie.text.Font.BOLD;
 import static com.lowagie.text.Font.NORMAL;
 import static com.lowagie.text.Font.TIMES_ROMAN;
@@ -13,7 +16,21 @@ import static java.awt.Color.white;
 
 public abstract class AbstractContractToPdfConversionStrategy
     implements ContractToPdfConversionStrategy {
-  protected final Integer YEAR_FOR_NEW_CONTRACT = 2025;
+  protected static final LocalDate NEW_CONTRACTS_START_DATE = LocalDate.of(2025, Month.JANUARY, 1);
+
+  protected void addLhvChapterIfNecessary(
+      final ContractPdfModel model, final Document pdfDocument) {
+    if (model.getRenterLhvAccount() != null) {
+      final var chapterLhv = getChapterTable();
+      final var lhvAccount = model.getRenterLhvAccount();
+      chapterLhv.addCell(
+          getSubChapterText(
+              "Lepingu allkirjastamisega kinnitab rentnik, et kavatseb rendileandja rendiautot kasutades teostada oma äritegevust ning on ta selleks loonud LHV ettevõtluskonto järgmise numbriga: "
+                  + lhvAccount
+                  + ". Eeltooduga kinnitab rentnik, et käesoleva rendilepingu vormistamise ja sellealuse auto rentimese eesmärgiks, on tema äritegevuse teostamine LHV ettevõtluskonto kaudu lihtsustatud eraettevõtluse registreerimise viisil."));
+      pdfDocument.add(chapterLhv);
+    }
+  }
 
   protected static Cell getChapterNumber(final String chapterNumber) {
     final var chapterCell =

@@ -22,9 +22,8 @@ public class ContractToPdfConversionStrategyBefore2025
 
   @Override
   public boolean canApply(final ContractPdfModel contract) {
-    final var contractYear = contract.getCreated().getYear();
 
-    return contractYear < YEAR_FOR_NEW_CONTRACT;
+    return contract.getCreated().isBefore(NEW_CONTRACTS_START_DATE);
   }
 
   @SneakyThrows

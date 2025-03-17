@@ -35,7 +35,7 @@ public interface ContractSpringDataRepository extends JpaRepository<ContractJaka
               + "and (ct.date_end is null or ct.date_end > :date) "
               + "and ct.driver_id = :driverId",
       nativeQuery = true)
- ContractJakartaEntity findActiveByDateAndDriverId(
+  ContractJakartaEntity findActiveByDateAndDriverId(
       @Param("date") final LocalDate date, @Param("driverId") final Long driverId);
 
   @Query(
@@ -59,4 +59,7 @@ public interface ContractSpringDataRepository extends JpaRepository<ContractJaka
               + "where ct.date_end is not null and ct.date_end <= :date",
       nativeQuery = true)
   Long findCountClosedByDate(@Param("date") final LocalDate date);
+
+  @Query(value = "SELECT ct.* FROM contract ct where ct.driver_id = :driverId", nativeQuery = true)
+  List<ContractJakartaEntity> findAllByDriverId(@Param("driverId") final Long driverId);
 }

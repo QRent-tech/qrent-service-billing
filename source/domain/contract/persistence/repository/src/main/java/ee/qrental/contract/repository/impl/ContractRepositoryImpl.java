@@ -68,4 +68,9 @@ public class ContractRepositoryImpl implements ContractRepository {
   public Long findCountClosedByDate(final LocalDate date) {
     return springDataRepository.findCountClosedByDate(date);
   }
+
+  @Override
+  public List<ContractJakartaEntity> findAllByDriverId(final Long driverId) {
+    return springDataRepository.findAllByDriverId(driverId);
+  }
 }
