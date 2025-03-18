@@ -14,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "driver")
+
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
