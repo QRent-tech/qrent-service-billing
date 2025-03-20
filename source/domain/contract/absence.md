@@ -37,8 +37,9 @@ Existing Absence can be deleted.
 - check if requested absence's time interval overlaps with Balance calculated period;
 
 ## Involvement into Rent Calculation:
-Absences counted-in during Weekly Rent calculation. The System select a count of Absence days that occur during calculated week.
-In case of calculated week has 1 absence day, no Rent amount adjustment required.
-In case of calculated week has 2..5 absence days, new transaction with type "absence adjustment" will be created. The amount for this transaction is calculated by next formula: 
+Absences counted-in during Weekly Rent Calculation. The System selects a count of Absence-days that occur during calculated week.
+In case of calculated week has 1 absence day, no Rent Amount adjustment required.
+In case of calculated week has [2...6] absence days, new transaction with type "absence adjustment" will be created, to adjust the Financial Balance. 
+The amount for this transaction is calculated by next formula: 
 
-> **amount = (defaulRentAmount /  6) * absence-days-count;**
+> **amount = (default-rent-mount /  6) * absence-days-count;**
