@@ -1,7 +1,7 @@
 package ee.qrent.billing.constant.core.mapper;
 
 
-import static ee.qrental.common.utils.QTimeUtils.*;
+import static ee.qrent.common.utils.QTimeUtils.*;
 import static java.lang.String.format;
 import static java.time.format.DateTimeFormatter.ofPattern;
 

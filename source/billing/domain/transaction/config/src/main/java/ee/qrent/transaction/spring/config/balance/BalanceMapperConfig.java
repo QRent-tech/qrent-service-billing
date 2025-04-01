@@ -1,0 +1,38 @@
+package ee.qrent.transaction.spring.config.balance;
+
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.transaction.adapter.mapper.balance.BalanceAdapterMapper;
+import ee.qrent.transaction.adapter.mapper.balance.BalanceCalculationAdapterMapper;
+import ee.qrent.transaction.core.mapper.balance.BalanceCalculationAddRequestMapper;
+import ee.qrent.transaction.core.mapper.balance.BalanceCalculationResponseMapper;
+import ee.qrent.transaction.core.mapper.balance.BalanceResponseMapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class BalanceMapperConfig {
+
+  @Bean
+  BalanceResponseMapper getBalanceResponseMapper(
+      final GetQWeekQuery qWeekQuery, final GetDriverQuery driverQuery) {
+    return new BalanceResponseMapper(qWeekQuery, driverQuery);
+  }
+
+  @Bean
+  BalanceCalculationAddRequestMapper getBalanceCalculationAddRequestMapper() {
+    return new BalanceCalculationAddRequestMapper();
+  }
+
+  @Bean
+  BalanceCalculationResponseMapper getBalanceCalculationResponseMapper(
+      final BalanceResponseMapper balanceResponseMapper) {
+    return new BalanceCalculationResponseMapper(balanceResponseMapper);
+  }
+
+  @Bean
+  BalanceCalculationAdapterMapper getBalanceCalculationAdapterMapper(
+      final BalanceAdapterMapper balanceAdapterMapper) {
+    return new BalanceCalculationAdapterMapper(balanceAdapterMapper);
+  }
+}

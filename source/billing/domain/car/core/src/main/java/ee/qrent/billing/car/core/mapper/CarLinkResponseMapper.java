@@ -6,8 +6,8 @@ import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
 import ee.qrent.billing.car.domain.CarLink;
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
-import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrent.driver.api.in.query.GetCallSignLinkQuery;
+import ee.qrent.driver.api.in.query.GetDriverQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

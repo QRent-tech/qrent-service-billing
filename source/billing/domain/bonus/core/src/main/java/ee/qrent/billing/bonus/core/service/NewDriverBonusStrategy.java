@@ -1,6 +1,6 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
+import static ee.qrent.common.utils.QTimeUtils.getWeekNumber;
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -10,10 +10,10 @@ import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.contract.api.in.query.GetContractQuery;
-import ee.qrental.transaction.api.in.query.GetTransactionQuery;
-import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrental.transaction.api.in.request.TransactionAddRequest;
+import ee.qrent.contract.api.in.query.GetContractQuery;
+import ee.qrent.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.transaction.api.in.request.TransactionAddRequest;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;

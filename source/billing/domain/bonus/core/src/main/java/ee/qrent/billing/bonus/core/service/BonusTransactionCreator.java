@@ -2,7 +2,7 @@ package ee.qrent.billing.bonus.core.service;
 
 import ee.qrent.billing.bonus.api.out.BonusProgramLoadPort;
 import ee.qrent.billing.bonus.domain.Obligation;
-import ee.qrental.transaction.api.in.request.TransactionAddRequest;
+import ee.qrent.transaction.api.in.request.TransactionAddRequest;
 import java.util.Collections;
 import java.util.List;
 import lombok.AllArgsConstructor;

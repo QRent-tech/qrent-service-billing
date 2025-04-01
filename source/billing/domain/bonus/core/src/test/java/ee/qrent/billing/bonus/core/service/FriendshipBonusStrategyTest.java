@@ -1,6 +1,6 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
 import static java.time.temporal.ChronoUnit.WEEKS;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -13,13 +13,13 @@ import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrental.driver.api.in.query.GetDriverQuery;
-import ee.qrental.driver.api.in.response.DriverResponse;
-import ee.qrental.driver.api.in.response.FriendshipResponse;
-import ee.qrental.transaction.api.in.query.GetTransactionQuery;
-import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrental.transaction.api.in.response.TransactionResponse;
-import ee.qrental.transaction.api.in.response.type.TransactionTypeResponse;
+import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.driver.api.in.response.DriverResponse;
+import ee.qrent.driver.api.in.response.FriendshipResponse;
+import ee.qrent.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.transaction.api.in.response.TransactionResponse;
+import ee.qrent.transaction.api.in.response.type.TransactionTypeResponse;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

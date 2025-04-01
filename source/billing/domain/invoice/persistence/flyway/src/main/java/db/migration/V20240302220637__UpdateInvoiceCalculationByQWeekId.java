@@ -1,6 +1,6 @@
 package db.migration;
 
-import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
+import static ee.qrent.common.utils.QTimeUtils.getWeekNumber;
 import static java.lang.String.format;
 
 import java.sql.Date;

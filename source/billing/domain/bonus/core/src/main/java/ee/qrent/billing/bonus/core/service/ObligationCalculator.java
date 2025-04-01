@@ -1,14 +1,14 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NO_LABEL_FINE;
+import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NO_LABEL_FINE;
 import static java.math.BigDecimal.ZERO;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.driver.api.in.query.GetDriverQuery;
-import ee.qrental.transaction.api.in.query.GetTransactionQuery;
-import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
-import ee.qrental.transaction.api.in.response.TransactionResponse;
+import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
+import ee.qrent.transaction.api.in.response.TransactionResponse;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.AllArgsConstructor;

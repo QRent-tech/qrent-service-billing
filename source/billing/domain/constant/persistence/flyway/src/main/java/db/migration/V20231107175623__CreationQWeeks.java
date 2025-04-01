@@ -1,8 +1,8 @@
 package db.migration;
 
-import ee.qrental.common.utils.QTimeUtils;
-import ee.qrental.common.utils.QWeekIterator;
-import ee.qrental.common.utils.Week;
+import ee.qrent.common.utils.QTimeUtils;
+import ee.qrent.common.utils.QWeekIterator;
+import ee.qrent.common.utils.Week;
 import org.flywaydb.core.api.migration.BaseJavaMigration;
 import org.flywaydb.core.api.migration.Context;
 

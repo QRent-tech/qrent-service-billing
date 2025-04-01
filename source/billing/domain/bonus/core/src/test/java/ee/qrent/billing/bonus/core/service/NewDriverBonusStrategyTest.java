@@ -7,12 +7,12 @@ import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrental.contract.api.in.query.GetContractQuery;
-import ee.qrental.contract.api.in.response.ContractResponse;
-import ee.qrental.transaction.api.in.query.GetTransactionQuery;
-import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrental.transaction.api.in.response.TransactionResponse;
-import ee.qrental.transaction.api.in.response.type.TransactionTypeResponse;
+import ee.qrent.contract.api.in.query.GetContractQuery;
+import ee.qrent.contract.api.in.response.ContractResponse;
+import ee.qrent.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.transaction.api.in.response.TransactionResponse;
+import ee.qrent.transaction.api.in.response.type.TransactionTypeResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

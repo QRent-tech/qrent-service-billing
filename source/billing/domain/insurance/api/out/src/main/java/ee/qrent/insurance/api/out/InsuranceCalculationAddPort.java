@@ -1,0 +1,6 @@
+package ee.qrent.insurance.api.out;
+
+import ee.qrent.common.out.port.AddPort;
+import ee.qrent.insurance.domain.InsuranceCalculation;
+
+public interface InsuranceCalculationAddPort extends AddPort<InsuranceCalculation> {}

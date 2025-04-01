@@ -1,7 +1,7 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NO_LABEL_FINE;
+import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NO_LABEL_FINE;
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.toList;
 
@@ -17,13 +17,13 @@ import ee.qrent.billing.bonus.domain.ObligationCalculationResult;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.email.api.in.request.EmailSendRequest;
-import ee.qrental.email.api.in.request.EmailType;
-import ee.qrental.email.api.in.usecase.EmailSendUseCase;
-import ee.qrental.transaction.api.in.query.GetTransactionQuery;
-import ee.qrental.transaction.api.in.response.TransactionResponse;
-import ee.qrental.user.api.in.query.GetUserAccountQuery;
-import ee.qrental.user.api.in.response.UserAccountResponse;
+import ee.qrent.email.api.in.request.EmailSendRequest;
+import ee.qrent.email.api.in.request.EmailType;
+import ee.qrent.email.api.in.usecase.EmailSendUseCase;
+import ee.qrent.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.transaction.api.in.response.TransactionResponse;
+import ee.qrent.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.user.api.in.response.UserAccountResponse;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;

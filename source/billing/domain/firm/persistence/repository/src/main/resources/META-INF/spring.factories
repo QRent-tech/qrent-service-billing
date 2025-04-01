@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrental.firm.repository.FirmSpringDataConfig
+ee.qrent.firm.repository.FirmSpringDataConfig

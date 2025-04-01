@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrental.security.spring.config.SecurityConfig
+ee.qrent.security.spring.config.SecurityConfig

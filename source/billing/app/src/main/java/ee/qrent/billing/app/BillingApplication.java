@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"ee.qrent", "ee.qrental"})
+@ComponentScan(basePackages = {"ee.qrent", "ee.qrent"})
 public class BillingApplication {
 
   public static void main(String[] args) {

@@ -4,8 +4,8 @@ import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrent.billing.car.core.mapper.CarLinkAddRequestMapper;
 import ee.qrent.billing.car.core.mapper.CarLinkResponseMapper;
 import ee.qrent.billing.car.core.mapper.CarLinkUpdateRequestMapper;
-import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
-import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrent.driver.api.in.query.GetCallSignLinkQuery;
+import ee.qrent.driver.api.in.query.GetDriverQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

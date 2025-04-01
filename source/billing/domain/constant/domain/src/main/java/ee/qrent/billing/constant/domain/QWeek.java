@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
-import static ee.qrental.common.utils.QTimeUtils.getFirstDayOfWeekInYear;
-import static ee.qrental.common.utils.QTimeUtils.getLastDayOfWeekInYear;
+import static ee.qrent.common.utils.QTimeUtils.getFirstDayOfWeekInYear;
+import static ee.qrent.common.utils.QTimeUtils.getLastDayOfWeekInYear;
 
 @SuperBuilder
 @Getter

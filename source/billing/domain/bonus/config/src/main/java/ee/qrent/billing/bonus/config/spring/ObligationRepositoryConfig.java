@@ -3,12 +3,12 @@ package ee.qrent.billing.bonus.config.spring;
 import ee.qrent.billing.bonus.persistence.repository.ObligationCalculationRepository;
 import ee.qrent.billing.bonus.persistence.repository.ObligationCalculationResultRepository;
 import ee.qrent.billing.bonus.persistence.repository.ObligationRepository;
-import ee.qrental.billing.bonus.persistence.repository.impl.ObligationCalculationRepositoryImpl;
-import ee.qrental.billing.bonus.persistence.repository.impl.ObligationCalculationResultRepositoryImpl;
-import ee.qrental.billing.bonus.persistence.repository.impl.ObligationRepositoryImpl;
-import ee.qrental.billing.bonus.persistence.repository.spring.ObligationCalculationResultSpringDataRepository;
-import ee.qrental.billing.bonus.persistence.repository.spring.ObligationCalculationSpringDataRepository;
-import ee.qrental.billing.bonus.persistence.repository.spring.ObligationSpringDataRepository;
+import ee.qrent.billing.bonus.persistence.repository.impl.ObligationCalculationRepositoryImpl;
+import ee.qrent.billing.bonus.persistence.repository.impl.ObligationCalculationResultRepositoryImpl;
+import ee.qrent.billing.bonus.persistence.repository.impl.ObligationRepositoryImpl;
+import ee.qrent.billing.bonus.persistence.repository.spring.ObligationCalculationResultSpringDataRepository;
+import ee.qrent.billing.bonus.persistence.repository.spring.ObligationCalculationSpringDataRepository;
+import ee.qrent.billing.bonus.persistence.repository.spring.ObligationSpringDataRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

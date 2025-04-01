@@ -1,6 +1,6 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrental.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
 import static java.lang.String.format;
 import static java.math.BigDecimal.ZERO;
 import static java.util.Collections.singletonList;
@@ -10,15 +10,15 @@ import static org.mockito.Mockito.when;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrental.driver.api.in.query.GetDriverQuery;
-import ee.qrental.driver.api.in.response.DriverResponse;
-import ee.qrental.transaction.api.in.query.GetTransactionQuery;
-import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
-import ee.qrental.transaction.api.in.response.TransactionResponse;
+import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.driver.api.in.response.DriverResponse;
+import ee.qrent.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
+import ee.qrent.transaction.api.in.response.TransactionResponse;
 import java.math.BigDecimal;
 
-import ee.qrental.transaction.api.in.response.balance.BalanceRawContextResponse;
-import ee.qrental.transaction.api.in.response.balance.BalanceResponse;
+import ee.qrent.transaction.api.in.response.balance.BalanceRawContextResponse;
+import ee.qrent.transaction.api.in.response.balance.BalanceResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

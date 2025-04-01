@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrental.billing.bonus.persistence.repository.BonusSpringDataConfig
+ee.qrent.billing.bonus.persistence.repository.BonusSpringDataConfig

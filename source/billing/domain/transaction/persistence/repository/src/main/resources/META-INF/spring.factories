@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrental.transaction.TransactionSpringDataConfig
+ee.qrent.transaction.TransactionSpringDataConfig
