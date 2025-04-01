@@ -8,7 +8,7 @@ import static java.util.Collections.singletonList;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
+import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;

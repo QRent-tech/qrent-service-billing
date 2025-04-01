@@ -1,9 +1,9 @@
 package ee.qrental.transaction.core.service.rent;
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrental.car.api.in.query.GetCarQuery;
-import ee.qrental.car.api.in.response.CarLinkResponse;
-import ee.qrental.car.api.in.response.CarResponse;
+import ee.qrent.billing.car.api.in.query.GetCarQuery;
+import ee.qrent.billing.car.api.in.response.CarLinkResponse;
+import ee.qrent.billing.car.api.in.response.CarResponse;
 import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 import ee.qrental.transaction.api.out.type.TransactionTypeLoadPort;

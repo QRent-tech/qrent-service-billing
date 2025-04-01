@@ -1,12 +1,12 @@
 package ee.qrental.ui.controller.car;
 
-import ee.qrental.car.api.in.query.GetCarQuery;
-import ee.qrental.car.api.in.request.CarAddRequest;
-import ee.qrental.car.api.in.request.CarDeleteRequest;
-import ee.qrental.car.api.in.request.CarUpdateRequest;
-import ee.qrental.car.api.in.usecase.CarAddUseCase;
-import ee.qrental.car.api.in.usecase.CarDeleteUseCase;
-import ee.qrental.car.api.in.usecase.CarUpdateUseCase;
+import ee.qrent.billing.car.api.in.query.GetCarQuery;
+import ee.qrent.billing.car.api.in.request.CarAddRequest;
+import ee.qrent.billing.car.api.in.request.CarDeleteRequest;
+import ee.qrent.billing.car.api.in.request.CarUpdateRequest;
+import ee.qrent.billing.car.api.in.usecase.CarAddUseCase;
+import ee.qrent.billing.car.api.in.usecase.CarDeleteUseCase;
+import ee.qrent.billing.car.api.in.usecase.CarUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

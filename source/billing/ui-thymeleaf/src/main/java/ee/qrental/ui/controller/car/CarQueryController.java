@@ -1,9 +1,9 @@
 package ee.qrental.ui.controller.car;
 
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.car.api.in.query.GetCarQuery;
-import ee.qrental.car.api.in.query.filter.Availability;
-import ee.qrental.car.api.in.query.filter.CarFilter;
+import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
+import ee.qrent.billing.car.api.in.query.GetCarQuery;
+import ee.qrent.billing.car.api.in.query.filter.Availability;
+import ee.qrent.billing.car.api.in.query.filter.CarFilter;
 import ee.qrental.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

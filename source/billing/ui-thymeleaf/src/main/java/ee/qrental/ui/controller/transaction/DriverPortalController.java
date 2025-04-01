@@ -4,7 +4,7 @@ import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMAT
 import static ee.qrental.ui.controller.ControllerUtils.BALANCE_ROOT_PATH;
 
 import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
+import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.contract.api.in.query.GetAuthorizationQuery;

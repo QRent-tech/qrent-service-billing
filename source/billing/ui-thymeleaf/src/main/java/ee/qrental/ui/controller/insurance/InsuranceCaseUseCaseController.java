@@ -1,6 +1,6 @@
 package ee.qrental.ui.controller.insurance;
 
-import ee.qrental.car.api.in.query.GetCarQuery;
+import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrental.insurance.api.in.request.*;

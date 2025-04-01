@@ -4,7 +4,7 @@ import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMAT
 import static ee.qrental.ui.controller.ControllerUtils.CAR_LINK_ROOT_PATH;
 import static java.time.LocalDate.now;
 
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
+import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

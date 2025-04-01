@@ -1,6 +1,6 @@
 package ee.qrental.insurance.spring.config;
 
-import ee.qrental.car.api.in.query.GetCarQuery;
+import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.insurance.adapter.adapter.InsuranceCaseBalancePersistenceAdapter;

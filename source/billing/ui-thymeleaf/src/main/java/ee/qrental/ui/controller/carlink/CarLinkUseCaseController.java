@@ -2,16 +2,16 @@ package ee.qrental.ui.controller.carlink;
 
 import static ee.qrental.ui.controller.ControllerUtils.*;
 
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.car.api.in.query.GetCarQuery;
-import ee.qrental.car.api.in.request.CarLinkAddRequest;
-import ee.qrental.car.api.in.request.CarLinkCloseRequest;
-import ee.qrental.car.api.in.request.CarLinkDeleteRequest;
-import ee.qrental.car.api.in.request.CarLinkUpdateRequest;
-import ee.qrental.car.api.in.usecase.CarLinkAddUseCase;
-import ee.qrental.car.api.in.usecase.CarLinkCloseUseCase;
-import ee.qrental.car.api.in.usecase.CarLinkDeleteUseCase;
-import ee.qrental.car.api.in.usecase.CarLinkUpdateUseCase;
+import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
+import ee.qrent.billing.car.api.in.query.GetCarQuery;
+import ee.qrent.billing.car.api.in.request.CarLinkAddRequest;
+import ee.qrent.billing.car.api.in.request.CarLinkCloseRequest;
+import ee.qrent.billing.car.api.in.request.CarLinkDeleteRequest;
+import ee.qrent.billing.car.api.in.request.CarLinkUpdateRequest;
+import ee.qrent.billing.car.api.in.usecase.CarLinkAddUseCase;
+import ee.qrent.billing.car.api.in.usecase.CarLinkCloseUseCase;
+import ee.qrent.billing.car.api.in.usecase.CarLinkDeleteUseCase;
+import ee.qrent.billing.car.api.in.usecase.CarLinkUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

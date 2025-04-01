@@ -5,7 +5,7 @@ import static java.lang.String.format;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
 
-import ee.qrental.car.api.in.query.GetCarQuery;
+import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.insurance.api.in.response.InsuranceCaseResponse;

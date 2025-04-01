@@ -16,7 +16,7 @@ import ee.qrent.billing.bonus.core.service.ObligationCalculationQueryService;
 import ee.qrent.billing.bonus.core.service.ObligationCalculationService;
 import ee.qrent.billing.bonus.core.service.ObligationCalculator;
 import ee.qrent.billing.bonus.core.service.ObligationQueryService;
-import ee.qrental.car.api.in.query.GetCarLinkQuery;
+import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
