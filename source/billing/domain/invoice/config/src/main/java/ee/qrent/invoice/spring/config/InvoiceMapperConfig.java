@@ -2,7 +2,7 @@ package ee.qrent.invoice.spring.config;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.firm.api.in.query.GetFirmQuery;
+import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import ee.qrent.invoice.adapter.mapper.InvoiceCalculationAdapterMapper;
 import ee.qrent.invoice.api.out.InvoiceLoadPort;
 import ee.qrent.invoice.core.mapper.*;

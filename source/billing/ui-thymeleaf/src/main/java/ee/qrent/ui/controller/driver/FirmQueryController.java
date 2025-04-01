@@ -1,6 +1,6 @@
 package ee.qrent.ui.controller.driver;
 
-import ee.qrent.firm.api.in.query.GetFirmQuery;
+import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

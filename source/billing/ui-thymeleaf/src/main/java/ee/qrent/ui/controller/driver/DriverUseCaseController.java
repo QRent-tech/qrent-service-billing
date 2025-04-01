@@ -12,7 +12,7 @@ import ee.qrent.billing.driver.api.in.response.CallSignResponse;
 import ee.qrent.billing.driver.api.in.usecase.DriverAddUseCase;
 import ee.qrent.billing.driver.api.in.usecase.DriverDeleteUseCase;
 import ee.qrent.billing.driver.api.in.usecase.DriverUpdateUseCase;
-import ee.qrent.firm.api.in.query.GetFirmQuery;
+import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

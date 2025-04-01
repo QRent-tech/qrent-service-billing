@@ -7,7 +7,7 @@ import ee.qrent.billing.contract.domain.Contract;
 import ee.qrent.billing.contract.domain.ContractDuration;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.billing.driver.api.in.response.DriverResponse;
-import ee.qrent.firm.api.in.query.GetFirmQuery;
+import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;

@@ -6,7 +6,7 @@ import ee.qrent.common.in.mapper.ResponseMapper;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.billing.driver.api.in.request.FirmLinkResponse;
 import ee.qrent.billing.driver.domain.FirmLink;
-import ee.qrent.firm.api.in.query.GetFirmQuery;
+import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

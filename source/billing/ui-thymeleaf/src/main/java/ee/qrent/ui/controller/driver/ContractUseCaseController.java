@@ -10,7 +10,7 @@ import ee.qrent.billing.contract.api.in.response.ContractPreCloseResponse;
 import ee.qrent.billing.contract.api.in.usecase.ContractAddUseCase;
 import ee.qrent.billing.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.firm.api.in.query.GetFirmQuery;
+import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

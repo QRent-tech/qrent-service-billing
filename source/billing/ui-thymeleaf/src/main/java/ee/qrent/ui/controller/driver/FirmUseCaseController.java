@@ -2,13 +2,13 @@ package ee.qrent.ui.controller.driver;
 
 import static ee.qrent.ui.controller.ControllerUtils.FIRM_ROOT_PATH;
 
-import ee.qrent.firm.api.in.query.GetFirmQuery;
-import ee.qrent.firm.api.in.request.FirmAddRequest;
-import ee.qrent.firm.api.in.request.FirmDeleteRequest;
-import ee.qrent.firm.api.in.request.FirmUpdateRequest;
-import ee.qrent.firm.api.in.usecase.FirmAddUseCase;
-import ee.qrent.firm.api.in.usecase.FirmDeleteUseCase;
-import ee.qrent.firm.api.in.usecase.FirmUpdateUseCase;
+import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
+import ee.qrent.billing.firm.api.in.request.FirmAddRequest;
+import ee.qrent.billing.firm.api.in.request.FirmDeleteRequest;
+import ee.qrent.billing.firm.api.in.request.FirmUpdateRequest;
+import ee.qrent.billing.firm.api.in.usecase.FirmAddUseCase;
+import ee.qrent.billing.firm.api.in.usecase.FirmDeleteUseCase;
+import ee.qrent.billing.firm.api.in.usecase.FirmUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
