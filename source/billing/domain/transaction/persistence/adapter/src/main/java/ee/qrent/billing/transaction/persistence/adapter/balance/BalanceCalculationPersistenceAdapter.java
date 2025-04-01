@@ -8,10 +8,10 @@ import ee.qrent.billing.transaction.api.out.balance.BalanceCalculationAddPort;
 import ee.qrent.billing.transaction.domain.balance.BalanceCalculation;
 import ee.qrent.billing.transaction.domain.balance.BalanceCalculationResult;
 
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceCalculationJakartaEntity;
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceCalculationResultJakartaEntity;
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceJakartaEntity;
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceTransactionJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceCalculationResultJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceTransactionJakartaEntity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

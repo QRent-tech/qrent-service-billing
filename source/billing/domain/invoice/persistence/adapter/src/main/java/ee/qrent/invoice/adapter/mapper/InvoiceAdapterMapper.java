@@ -4,8 +4,8 @@ import static java.util.stream.Collectors.toList;
 
 import ee.qrent.invoice.domain.Invoice;
 import ee.qrent.invoice.domain.InvoiceItem;
-import ee.qrent.invoice.entity.jakarta.InvoiceItemJakartaEntity;
-import ee.qrent.invoice.entity.jakarta.InvoiceJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceItemJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceJakartaEntity;
 
 public class InvoiceAdapterMapper {
 

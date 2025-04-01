@@ -1,7 +1,7 @@
 package ee.qrent.billing.transaction.persistence.repository.impl.type;
 
 import ee.qrent.billing.transaction.persistence.repository.TransactionTypeRepository;
-import ee.qrent.billing.transaction.entity.jakarta.type.TransactionTypeJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.type.TransactionTypeJakartaEntity;
 import ee.qrent.billing.transaction.persistence.repository.spring.type.TransactionTypeSpringDataRepository;
 import java.util.List;
 import lombok.AllArgsConstructor;

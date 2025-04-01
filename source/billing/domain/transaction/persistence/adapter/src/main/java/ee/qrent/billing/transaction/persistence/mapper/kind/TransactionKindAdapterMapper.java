@@ -1,7 +1,7 @@
 package ee.qrent.billing.transaction.persistence.mapper.kind;
 
 import ee.qrent.billing.transaction.domain.kind.TransactionKind;
-import ee.qrent.billing.transaction.entity.jakarta.kind.TransactionKindJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.kind.TransactionKindJakartaEntity;
 
 public class TransactionKindAdapterMapper {
   public TransactionKind mapToDomain(final TransactionKindJakartaEntity entity) {

@@ -5,9 +5,9 @@ import ee.qrent.invoice.adapter.repository.*;
 import ee.qrent.invoice.api.out.*;
 import ee.qrent.invoice.domain.InvoiceCalculation;
 import ee.qrent.invoice.domain.InvoiceCalculationResult;
-import ee.qrent.invoice.entity.jakarta.InvoiceCalculationJakartaEntity;
-import ee.qrent.invoice.entity.jakarta.InvoiceCalculationResultJakartaEntity;
-import ee.qrent.invoice.entity.jakarta.InvoiceTransactionJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceCalculationJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceCalculationResultJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceTransactionJakartaEntity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

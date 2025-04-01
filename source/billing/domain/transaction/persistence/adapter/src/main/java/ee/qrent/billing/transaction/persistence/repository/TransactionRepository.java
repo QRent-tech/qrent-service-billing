@@ -1,6 +1,6 @@
 package ee.qrent.billing.transaction.persistence.repository;
 
-import ee.qrent.billing.transaction.entity.jakarta.TransactionJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.TransactionJakartaEntity;
 import java.time.LocalDate;
 import java.util.List;
 

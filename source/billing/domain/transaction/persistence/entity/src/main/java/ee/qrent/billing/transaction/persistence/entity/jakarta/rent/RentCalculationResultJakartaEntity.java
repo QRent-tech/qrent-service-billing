@@ -1,4 +1,4 @@
-package ee.qrent.billing.transaction.entity.jakarta.rent;
+package ee.qrent.billing.transaction.persistence.entity.jakarta.rent;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

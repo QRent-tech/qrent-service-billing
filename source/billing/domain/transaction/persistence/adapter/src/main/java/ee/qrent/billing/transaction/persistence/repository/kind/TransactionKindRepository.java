@@ -1,6 +1,6 @@
 package ee.qrent.billing.transaction.persistence.repository.kind;
 
-import ee.qrent.billing.transaction.entity.jakarta.kind.TransactionKindJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.kind.TransactionKindJakartaEntity;
 import java.util.List;
 
 public interface TransactionKindRepository {

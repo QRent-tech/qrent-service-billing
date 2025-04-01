@@ -1,7 +1,7 @@
 package ee.qrent.billing.transaction.persistence.repository.impl.balance;
 
 import ee.qrent.billing.transaction.persistence.repository.balance.BalanceCalculationResultRepository;
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceCalculationResultJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceCalculationResultJakartaEntity;
 import ee.qrent.billing.transaction.persistence.repository.spring.balance.BalanceCalculationResultSpringDataRepository;
 import lombok.AllArgsConstructor;
 

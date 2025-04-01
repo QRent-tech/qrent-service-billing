@@ -1,8 +1,8 @@
-package ee.qrent.billing.transaction.entity.jakarta.type;
+package ee.qrent.billing.transaction.persistence.entity.jakarta.type;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-import ee.qrent.billing.transaction.entity.jakarta.kind.TransactionKindJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.kind.TransactionKindJakartaEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

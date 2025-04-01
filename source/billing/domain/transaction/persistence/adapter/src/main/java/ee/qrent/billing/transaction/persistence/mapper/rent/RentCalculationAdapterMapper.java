@@ -5,8 +5,8 @@ import static java.util.stream.Collectors.toList;
 
 import ee.qrent.billing.transaction.domain.rent.RentCalculation;
 import ee.qrent.billing.transaction.domain.rent.RentCalculationResult;
-import ee.qrent.billing.transaction.entity.jakarta.rent.RentCalculationJakartaEntity;
-import ee.qrent.billing.transaction.entity.jakarta.rent.RentCalculationResultJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.rent.RentCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.rent.RentCalculationResultJakartaEntity;
 import java.util.List;
 import lombok.AllArgsConstructor;
 

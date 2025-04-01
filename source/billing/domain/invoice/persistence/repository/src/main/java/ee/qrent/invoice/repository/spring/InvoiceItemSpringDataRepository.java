@@ -1,6 +1,6 @@
 package ee.qrent.invoice.repository.spring;
 
-import ee.qrent.invoice.entity.jakarta.InvoiceItemJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceItemJakartaEntity;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

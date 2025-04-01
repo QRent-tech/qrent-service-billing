@@ -2,8 +2,8 @@ package ee.qrent.billing.transaction.persistence.mapper.balance;
 
 import ee.qrent.billing.transaction.domain.balance.BalanceCalculation;
 import ee.qrent.billing.transaction.domain.balance.BalanceCalculationResult;
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceCalculationJakartaEntity;
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceCalculationResultJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceCalculationResultJakartaEntity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

@@ -3,7 +3,7 @@ package ee.qrent.billing.transaction.persistence.mapper;
 import ee.qrent.billing.transaction.persistence.mapper.type.TransactionTypeAdapterMapper;
 import ee.qrent.billing.transaction.persistence.repository.balance.BalanceTransactionRepository;
 import ee.qrent.billing.transaction.domain.Transaction;
-import ee.qrent.billing.transaction.entity.jakarta.TransactionJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.TransactionJakartaEntity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

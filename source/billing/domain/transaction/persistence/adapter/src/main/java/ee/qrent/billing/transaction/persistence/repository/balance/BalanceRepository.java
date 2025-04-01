@@ -1,6 +1,6 @@
 package ee.qrent.billing.transaction.persistence.repository.balance;
 
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceJakartaEntity;
 
 import java.util.List;
 

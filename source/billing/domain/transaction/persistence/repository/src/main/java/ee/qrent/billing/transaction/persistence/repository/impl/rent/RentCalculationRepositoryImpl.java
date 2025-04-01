@@ -1,7 +1,7 @@
 package ee.qrent.billing.transaction.persistence.repository.impl.rent;
 
 import ee.qrent.billing.transaction.persistence.repository.rent.RentCalculationRepository;
-import ee.qrent.billing.transaction.entity.jakarta.rent.RentCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.rent.RentCalculationJakartaEntity;
 import ee.qrent.billing.transaction.persistence.repository.spring.rent.RentCalculationSpringDataRepository;
 import java.util.List;
 import lombok.AllArgsConstructor;

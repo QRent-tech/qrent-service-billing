@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories
-@EntityScan("ee.qrental.firm.entity.jakarta")
+@EntityScan("ee.qrent.billing.firm.persistence.entity.jakarta")
 public class FirmSpringDataConfig {
 }

@@ -5,8 +5,8 @@ import ee.qrent.billing.transaction.persistence.repository.rent.RentCalculationR
 import ee.qrent.billing.transaction.api.out.rent.RentCalculationAddPort;
 import ee.qrent.billing.transaction.domain.rent.RentCalculation;
 import ee.qrent.billing.transaction.domain.rent.RentCalculationResult;
-import ee.qrent.billing.transaction.entity.jakarta.rent.RentCalculationJakartaEntity;
-import ee.qrent.billing.transaction.entity.jakarta.rent.RentCalculationResultJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.rent.RentCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.rent.RentCalculationResultJakartaEntity;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

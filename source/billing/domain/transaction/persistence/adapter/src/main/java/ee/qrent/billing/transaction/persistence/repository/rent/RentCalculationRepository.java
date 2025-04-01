@@ -1,7 +1,7 @@
 package ee.qrent.billing.transaction.persistence.repository.rent;
 
 
-import ee.qrent.billing.transaction.entity.jakarta.rent.RentCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.rent.RentCalculationJakartaEntity;
 
 import java.util.List;
 

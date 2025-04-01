@@ -1,8 +1,8 @@
-package ee.qrent.billing.transaction.entity.jakarta;
+package ee.qrent.billing.transaction.persistence.entity.jakarta;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-import ee.qrent.billing.transaction.entity.jakarta.type.TransactionTypeJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.type.TransactionTypeJakartaEntity;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;

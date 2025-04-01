@@ -1,7 +1,7 @@
 package ee.qrent.invoice.repository.impl;
 
 import ee.qrent.invoice.adapter.repository.InvoiceCalculationRepository;
-import ee.qrent.invoice.entity.jakarta.InvoiceCalculationJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceCalculationJakartaEntity;
 import ee.qrent.invoice.repository.spring.InvoiceCalculationSpringDataRepository;
 
 import java.util.List;

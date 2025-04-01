@@ -1,4 +1,4 @@
-package ee.qrent.billing.transaction.entity.jakarta.balance;
+package ee.qrent.billing.transaction.persistence.entity.jakarta.rent;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -12,13 +12,13 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "balance_calculation")
-@SuperBuilder
+@Table(name = "rent_calculation")
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Getter
 @Setter
-public class BalanceCalculationJakartaEntity {
+public class RentCalculationJakartaEntity {
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
@@ -26,16 +26,12 @@ public class BalanceCalculationJakartaEntity {
   @Column(name = "action_date")
   private LocalDate actionDate;
 
-  //TODO change to qWeekId
-  @Column(name = "start_date")
-  private LocalDate startDate;
-
-  @Column(name = "end_date")
-  private LocalDate endDate;
+  @Column(name = "q_week_id")
+  private Long qWeekId;
 
   @Column(name = "comment")
   private String comment;
 
-  @OneToMany(mappedBy = "calculation")
-  private List<BalanceCalculationResultJakartaEntity> results;
+  @OneToMany(mappedBy = "rentCalculation")
+  private List<RentCalculationResultJakartaEntity> results;
 }

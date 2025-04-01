@@ -1,4 +1,4 @@
-package ee.qrent.billing.transaction.entity.jakarta.balance;
+package ee.qrent.billing.transaction.persistence.entity.jakarta.balance;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 

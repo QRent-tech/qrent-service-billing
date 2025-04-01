@@ -1,7 +1,7 @@
 package ee.qrent.invoice.repository.impl;
 
 import ee.qrent.invoice.adapter.repository.InvoiceItemRepository;
-import ee.qrent.invoice.entity.jakarta.InvoiceItemJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceItemJakartaEntity;
 import ee.qrent.invoice.repository.spring.InvoiceItemSpringDataRepository;
 import lombok.AllArgsConstructor;
 

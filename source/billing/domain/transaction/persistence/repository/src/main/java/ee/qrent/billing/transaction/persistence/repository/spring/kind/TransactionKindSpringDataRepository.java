@@ -1,6 +1,6 @@
 package ee.qrent.billing.transaction.persistence.repository.spring.kind;
 
-import ee.qrent.billing.transaction.entity.jakarta.kind.TransactionKindJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.kind.TransactionKindJakartaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;

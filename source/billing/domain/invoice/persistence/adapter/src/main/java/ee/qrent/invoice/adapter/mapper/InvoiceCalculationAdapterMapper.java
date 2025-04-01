@@ -2,8 +2,8 @@ package ee.qrent.invoice.adapter.mapper;
 
 import ee.qrent.invoice.domain.InvoiceCalculation;
 import ee.qrent.invoice.domain.InvoiceCalculationResult;
-import ee.qrent.invoice.entity.jakarta.InvoiceCalculationJakartaEntity;
-import ee.qrent.invoice.entity.jakarta.InvoiceCalculationResultJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceCalculationJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceCalculationResultJakartaEntity;
 
 public class InvoiceCalculationAdapterMapper {
 

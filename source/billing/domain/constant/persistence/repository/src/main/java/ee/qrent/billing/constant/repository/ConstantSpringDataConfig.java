@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaRepositories
-@EntityScan("ee.qrental.constant.entity.jakarta")
+@EntityScan("ee.qrent.billing.constant.persistence.entity.jakarta")
 public class ConstantSpringDataConfig {
 }

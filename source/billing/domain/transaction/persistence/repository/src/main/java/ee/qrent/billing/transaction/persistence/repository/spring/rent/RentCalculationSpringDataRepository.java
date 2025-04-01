@@ -1,6 +1,6 @@
 package ee.qrent.billing.transaction.persistence.repository.spring.rent;
 
-import ee.qrent.billing.transaction.entity.jakarta.rent.RentCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.rent.RentCalculationJakartaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

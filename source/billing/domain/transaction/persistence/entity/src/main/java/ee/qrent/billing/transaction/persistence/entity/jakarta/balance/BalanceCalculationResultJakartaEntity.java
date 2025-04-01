@@ -1,4 +1,4 @@
-package ee.qrent.billing.transaction.entity.jakarta.balance;
+package ee.qrent.billing.transaction.persistence.entity.jakarta.balance;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -10,19 +10,20 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "balance_transaction")
+@Table(name = "balance_calculation_result")
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class BalanceTransactionJakartaEntity {
+public class BalanceCalculationResultJakartaEntity {
   @Id
   @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
-  @Column(name = "transaction_id")
-  private Long transactionId;
+  @ManyToOne
+  @JoinColumn(name = "calculation_id")
+  private BalanceCalculationJakartaEntity calculation;
 
   @ManyToOne
   @JoinColumn(name = "balance_id")

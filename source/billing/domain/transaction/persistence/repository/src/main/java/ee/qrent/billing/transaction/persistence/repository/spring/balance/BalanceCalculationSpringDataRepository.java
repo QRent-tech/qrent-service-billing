@@ -1,6 +1,6 @@
 package ee.qrent.billing.transaction.persistence.repository.spring.balance;
 
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceCalculationJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceCalculationJakartaEntity;
 import java.time.LocalDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

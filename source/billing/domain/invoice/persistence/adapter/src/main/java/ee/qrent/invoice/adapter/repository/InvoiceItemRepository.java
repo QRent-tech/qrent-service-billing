@@ -1,6 +1,6 @@
 package ee.qrent.invoice.adapter.repository;
 
-import ee.qrent.invoice.entity.jakarta.InvoiceItemJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceItemJakartaEntity;
 
 public interface InvoiceItemRepository {
   InvoiceItemJakartaEntity save(final InvoiceItemJakartaEntity entity);

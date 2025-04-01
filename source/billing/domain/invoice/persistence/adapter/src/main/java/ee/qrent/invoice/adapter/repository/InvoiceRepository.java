@@ -1,6 +1,6 @@
 package ee.qrent.invoice.adapter.repository;
 
-import ee.qrent.invoice.entity.jakarta.InvoiceJakartaEntity;
+import ee.qrent.billing.invoice.persistence.entity.jakarta.InvoiceJakartaEntity;
 import java.util.List;
 
 public interface InvoiceRepository {

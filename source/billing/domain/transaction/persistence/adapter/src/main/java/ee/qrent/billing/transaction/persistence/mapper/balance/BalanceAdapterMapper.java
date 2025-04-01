@@ -1,7 +1,7 @@
 package ee.qrent.billing.transaction.persistence.mapper.balance;
 
 import ee.qrent.billing.transaction.domain.balance.Balance;
-import ee.qrent.billing.transaction.entity.jakarta.balance.BalanceJakartaEntity;
+import ee.qrent.billing.transaction.persistence.entity.jakarta.balance.BalanceJakartaEntity;
 
 public class BalanceAdapterMapper {
 
