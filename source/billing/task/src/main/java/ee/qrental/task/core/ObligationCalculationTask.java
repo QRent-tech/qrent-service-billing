@@ -1,7 +1,7 @@
 package ee.qrental.task.core;
 
-import ee.qrental.bonus.api.in.request.ObligationCalculationAddRequest;
-import ee.qrental.bonus.api.in.usecase.ObligationCalculationAddUseCase;
+import ee.qrent.billing.bonus.api.in.request.ObligationCalculationAddRequest;
+import ee.qrent.billing.bonus.api.in.usecase.ObligationCalculationAddUseCase;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 
 import lombok.AllArgsConstructor;

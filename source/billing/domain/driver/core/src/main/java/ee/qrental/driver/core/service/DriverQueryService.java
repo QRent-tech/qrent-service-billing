@@ -2,7 +2,7 @@ package ee.qrental.driver.core.service;
 
 import static java.util.stream.Collectors.toList;
 
-import ee.qrental.bonus.api.in.query.GetObligationCalculationQuery;
+import ee.qrent.billing.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.api.in.response.DriverResponse;

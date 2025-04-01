@@ -1,6 +1,6 @@
 package ee.qrental.ui;
 
-import ee.qrental.bonus.api.in.query.GetObligationQuery;
+import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;

@@ -2,13 +2,13 @@ package ee.qrental.ui.controller.bonus;
 
 import static ee.qrental.ui.controller.ControllerUtils.BONUS_PROGRAM_PATH;
 
-import ee.qrental.bonus.api.in.query.GetBonusProgramQuery;
-import ee.qrental.bonus.api.in.request.BonusProgramAddRequest;
-import ee.qrental.bonus.api.in.request.BonusProgramDeleteRequest;
-import ee.qrental.bonus.api.in.request.BonusProgramUpdateRequest;
-import ee.qrental.bonus.api.in.usecase.BonusProgramAddUseCase;
-import ee.qrental.bonus.api.in.usecase.BonusProgramDeleteUseCase;
-import ee.qrental.bonus.api.in.usecase.BonusProgramUpdateUseCase;
+import ee.qrent.billing.bonus.api.in.query.GetBonusProgramQuery;
+import ee.qrent.billing.bonus.api.in.request.BonusProgramAddRequest;
+import ee.qrent.billing.bonus.api.in.request.BonusProgramDeleteRequest;
+import ee.qrent.billing.bonus.api.in.request.BonusProgramUpdateRequest;
+import ee.qrent.billing.bonus.api.in.usecase.BonusProgramAddUseCase;
+import ee.qrent.billing.bonus.api.in.usecase.BonusProgramDeleteUseCase;
+import ee.qrent.billing.bonus.api.in.usecase.BonusProgramUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,7 +1,7 @@
 package ee.qrental.ui.controller.bonus;
 
 
-import ee.qrental.bonus.api.in.query.GetBonusProgramQuery;
+import ee.qrent.billing.bonus.api.in.query.GetBonusProgramQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -3,7 +3,7 @@ package ee.qrental.driver.spring.config;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
-import ee.qrental.bonus.api.in.query.GetObligationCalculationQuery;
+import ee.qrent.billing.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.usecase.ContractUpdateUseCase;
 import ee.qrental.driver.api.in.query.GetDriverQuery;

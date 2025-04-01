@@ -3,7 +3,7 @@ package ee.qrental.ui.controller.bonus;
 import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrental.ui.controller.ControllerUtils.*;
 
-import ee.qrental.bonus.api.in.query.GetBonusCalculationQuery;
+import ee.qrent.billing.bonus.api.in.query.GetBonusCalculationQuery;
 import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
