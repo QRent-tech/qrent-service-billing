@@ -1,21 +1,15 @@
 package ee.qrental.transaction.core.service.balance;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-import ee.qrental.constant.api.in.query.GetConstantQuery;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
-import ee.qrental.transaction.api.in.query.kind.GetTransactionKindQuery;
-import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.core.mapper.balance.BalanceResponseMapper;
 import ee.qrental.transaction.core.service.balance.calculator.BalanceCalculatorStrategy;
-import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 
 class BalanceQueryServiceTest {

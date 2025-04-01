@@ -8,7 +8,7 @@ import ee.qrent.billing.bonus.api.out.ObligationLoadPort;
 import ee.qrent.billing.bonus.core.mapper.ObligationCalculationAddRequestMapper;
 import ee.qrent.billing.bonus.core.validator.ObligationCalculationAddRequestValidator;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;

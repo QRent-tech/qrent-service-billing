@@ -1,7 +1,7 @@
 package ee.qrental.transaction.core.mapper.rent;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.response.rent.RentCalculationResponse;
 import ee.qrental.transaction.domain.rent.RentCalculation;
 import lombok.AllArgsConstructor;

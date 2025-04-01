@@ -5,7 +5,7 @@ import static ee.qrental.ui.controller.ControllerUtils.*;
 
 import ee.qrent.billing.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrental.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;

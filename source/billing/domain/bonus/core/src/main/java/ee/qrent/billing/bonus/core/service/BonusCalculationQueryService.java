@@ -6,7 +6,7 @@ import ee.qrent.billing.bonus.api.in.query.GetBonusCalculationQuery;
 import ee.qrent.billing.bonus.api.in.response.BonusCalculationResponse;
 import ee.qrent.billing.bonus.api.out.BonusCalculationLoadPort;
 import ee.qrent.billing.bonus.core.mapper.BonusCalculationResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import java.util.List;
 import lombok.AllArgsConstructor;
 

@@ -7,9 +7,8 @@ import static org.mockito.Mockito.when;
 
 import ee.qrent.billing.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrent.billing.bonus.api.out.ObligationCalculationLoadPort;
-import ee.qrent.billing.bonus.core.validator.ObligationCalculationAddRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

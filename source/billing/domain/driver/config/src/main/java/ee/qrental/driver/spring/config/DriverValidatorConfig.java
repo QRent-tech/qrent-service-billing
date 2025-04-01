@@ -5,7 +5,7 @@ import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.api.in.request.DriverDeleteRequest;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;

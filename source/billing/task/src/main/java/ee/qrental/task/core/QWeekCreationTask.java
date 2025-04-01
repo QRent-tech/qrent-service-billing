@@ -1,7 +1,7 @@
 package ee.qrental.task.core;
 
-import ee.qrental.constant.api.in.request.QWeekAddRequest;
-import ee.qrental.constant.api.in.usecase.QWeekAddUseCase;
+import ee.qrent.billing.constant.api.in.request.QWeekAddRequest;
+import ee.qrent.billing.constant.api.in.usecase.QWeekAddUseCase;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

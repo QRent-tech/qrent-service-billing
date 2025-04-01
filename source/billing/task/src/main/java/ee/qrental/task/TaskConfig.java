@@ -1,8 +1,8 @@
 package ee.qrental.task;
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.usecase.QWeekAddUseCase;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.usecase.QWeekAddUseCase;
 import ee.qrental.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
 import ee.qrental.task.core.InsuranceCaseCalculationTask;
 import ee.qrental.task.core.QTaskExecutor;

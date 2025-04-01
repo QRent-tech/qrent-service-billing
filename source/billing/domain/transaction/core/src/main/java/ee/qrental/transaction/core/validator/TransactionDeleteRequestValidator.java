@@ -2,7 +2,7 @@ package ee.qrental.transaction.core.validator;
 
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.request.TransactionDeleteRequest;
 import ee.qrental.transaction.api.out.TransactionLoadPort;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;

@@ -9,7 +9,7 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;

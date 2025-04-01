@@ -3,7 +3,7 @@ package ee.qrental.ui.controller.constant;
 import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrental.ui.controller.ControllerUtils.WEEK_ROOT_PATH;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

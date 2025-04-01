@@ -3,8 +3,8 @@ package ee.qrental.ui.controller.insurance;
 import static ee.qrental.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrental.ui.controller.ControllerUtils.INSURANCE_ROOT_PATH;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.insurance.api.in.usecase.InsuranceCalculationAddUseCase;

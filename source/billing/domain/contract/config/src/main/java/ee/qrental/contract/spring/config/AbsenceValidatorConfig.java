@@ -1,6 +1,6 @@
 package ee.qrental.contract.spring.config;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.out.AbsenceLoadPort;
 import ee.qrental.contract.core.validator.AbsenceUpdateRequestValidator;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;

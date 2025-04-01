@@ -3,12 +3,9 @@ package ee.qrental.driver.core.validator;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrental.common.core.validation.AttributeCheckerImpl;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverAddRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
-import ee.qrental.driver.domain.Driver;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

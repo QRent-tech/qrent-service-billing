@@ -8,8 +8,8 @@ import static org.mockito.Mockito.when;
 
 import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrental.transaction.api.in.response.TransactionResponse;

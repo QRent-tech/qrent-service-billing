@@ -4,7 +4,7 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.query.GetCarQuery;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;

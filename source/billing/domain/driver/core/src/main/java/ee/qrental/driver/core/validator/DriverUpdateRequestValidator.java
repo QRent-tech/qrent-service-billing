@@ -6,7 +6,7 @@ import static java.lang.String.format;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverUpdateRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
 import ee.qrental.driver.domain.Driver;

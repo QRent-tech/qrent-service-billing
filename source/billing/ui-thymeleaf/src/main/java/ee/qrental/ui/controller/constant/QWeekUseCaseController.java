@@ -2,13 +2,13 @@ package ee.qrental.ui.controller.constant;
 
 import static ee.qrental.ui.controller.ControllerUtils.WEEK_ROOT_PATH;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.request.QWeekAddRequest;
-import ee.qrental.constant.api.in.request.QWeekDeleteRequest;
-import ee.qrental.constant.api.in.request.QWeekUpdateRequest;
-import ee.qrental.constant.api.in.usecase.QWeekAddUseCase;
-import ee.qrental.constant.api.in.usecase.QWeekDeleteUseCase;
-import ee.qrental.constant.api.in.usecase.QWeekUpdateUseCase;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.request.QWeekAddRequest;
+import ee.qrent.billing.constant.api.in.request.QWeekDeleteRequest;
+import ee.qrent.billing.constant.api.in.request.QWeekUpdateRequest;
+import ee.qrent.billing.constant.api.in.usecase.QWeekAddUseCase;
+import ee.qrent.billing.constant.api.in.usecase.QWeekDeleteUseCase;
+import ee.qrent.billing.constant.api.in.usecase.QWeekUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

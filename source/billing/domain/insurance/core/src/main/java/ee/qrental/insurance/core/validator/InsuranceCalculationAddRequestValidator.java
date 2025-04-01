@@ -2,7 +2,7 @@ package ee.qrental.insurance.core.validator;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
 import lombok.AllArgsConstructor;

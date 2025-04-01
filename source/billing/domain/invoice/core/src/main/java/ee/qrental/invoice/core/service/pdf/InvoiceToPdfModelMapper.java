@@ -5,8 +5,8 @@ import static java.time.format.DateTimeFormatter.ofLocalizedDate;
 import static java.time.format.FormatStyle.SHORT;
 import static java.util.stream.Collectors.toMap;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.invoice.api.out.InvoiceLoadPort;
 import ee.qrental.invoice.domain.Invoice;
 import ee.qrental.invoice.domain.InvoiceItem;

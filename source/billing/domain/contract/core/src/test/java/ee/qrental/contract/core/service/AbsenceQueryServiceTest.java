@@ -1,8 +1,8 @@
 package ee.qrental.contract.core.service;
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.out.AbsenceLoadPort;
 import ee.qrental.contract.core.mapper.AbsenceResponseMapper;

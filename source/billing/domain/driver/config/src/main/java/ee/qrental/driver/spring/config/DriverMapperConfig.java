@@ -1,7 +1,6 @@
 package ee.qrental.driver.spring.config;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.contract.api.in.query.GetContractQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.core.mapper.DriverAddRequestMapper;
 import ee.qrental.driver.core.mapper.DriverResponseMapper;
 import ee.qrental.driver.core.mapper.DriverUpdateRequestMapper;

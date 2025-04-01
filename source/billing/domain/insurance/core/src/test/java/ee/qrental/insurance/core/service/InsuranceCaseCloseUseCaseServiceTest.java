@@ -1,8 +1,8 @@
 package ee.qrental.insurance.core.service;
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.out.InsuranceCaseLoadPort;

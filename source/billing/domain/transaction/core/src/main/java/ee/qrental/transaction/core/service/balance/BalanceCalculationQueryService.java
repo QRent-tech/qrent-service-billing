@@ -4,7 +4,7 @@ import static ee.qrental.common.utils.QTimeUtils.getWeekNumber;
 import static java.util.stream.Collectors.toList;
 
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrental.transaction.api.in.response.balance.BalanceCalculationResponse;
 import ee.qrental.transaction.api.out.balance.BalanceCalculationLoadPort;

@@ -1,8 +1,7 @@
 package ee.qrental.insurance.core.mapper;
 
 import ee.qrent.common.in.mapper.AddRequestMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCaseAddRequest;
 import ee.qrental.insurance.domain.InsuranceCase;
 import lombok.AllArgsConstructor;

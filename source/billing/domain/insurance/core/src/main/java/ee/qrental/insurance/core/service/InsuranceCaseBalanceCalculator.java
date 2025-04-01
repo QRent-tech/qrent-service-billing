@@ -1,6 +1,6 @@
 package ee.qrental.insurance.core.service;
 
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.insurance.domain.InsuranceCase;
 import ee.qrental.insurance.domain.InsuranceCaseBalance;
 

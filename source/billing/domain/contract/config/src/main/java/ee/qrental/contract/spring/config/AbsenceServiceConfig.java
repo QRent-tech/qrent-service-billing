@@ -4,7 +4,7 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.AbsenceAddRequest;

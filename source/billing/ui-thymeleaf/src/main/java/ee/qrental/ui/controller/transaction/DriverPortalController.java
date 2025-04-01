@@ -5,7 +5,7 @@ import static ee.qrental.ui.controller.ControllerUtils.BALANCE_ROOT_PATH;
 
 import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetAbsenceQuery;
 import ee.qrental.contract.api.in.query.GetAuthorizationQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;

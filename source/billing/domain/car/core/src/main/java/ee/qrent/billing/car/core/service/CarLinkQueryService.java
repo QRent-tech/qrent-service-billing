@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

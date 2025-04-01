@@ -2,7 +2,7 @@ package ee.qrental.invoice.core.service;
 
 import static java.util.stream.Collectors.toList;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.invoice.api.in.query.GetInvoiceCalculationQuery;
 import ee.qrental.invoice.api.in.request.InvoiceCalculationUpdateRequest;
 import ee.qrental.invoice.api.in.response.InvoiceCalculationResponse;

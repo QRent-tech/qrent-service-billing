@@ -1,7 +1,7 @@
 package ee.qrental.transaction.core.service.balance.calculator;
 
-import ee.qrental.constant.api.in.query.GetConstantQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetConstantQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 import ee.qrental.transaction.api.in.response.TransactionResponse;

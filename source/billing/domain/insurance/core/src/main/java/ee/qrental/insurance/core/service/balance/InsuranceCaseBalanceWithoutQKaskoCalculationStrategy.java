@@ -1,7 +1,7 @@
 package ee.qrental.insurance.core.service.balance;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrental.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrental.insurance.api.out.InsuranceCaseBalanceLoadPort;

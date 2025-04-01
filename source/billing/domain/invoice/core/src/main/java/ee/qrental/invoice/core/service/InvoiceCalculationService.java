@@ -8,8 +8,8 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrental.driver.api.in.response.DriverResponse;
@@ -25,7 +25,6 @@ import ee.qrental.invoice.api.out.InvoiceCalculationLoadPort;
 import ee.qrental.invoice.core.mapper.InvoiceCalculationAddRequestMapper;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfConverter;
 import ee.qrental.invoice.core.service.pdf.InvoiceToPdfModelMapper;
-import ee.qrental.invoice.core.validator.InvoiceCalculationAddRequestValidator;
 import ee.qrental.invoice.domain.Invoice;
 import ee.qrental.invoice.domain.InvoiceCalculation;
 import ee.qrental.invoice.domain.InvoiceCalculationResult;

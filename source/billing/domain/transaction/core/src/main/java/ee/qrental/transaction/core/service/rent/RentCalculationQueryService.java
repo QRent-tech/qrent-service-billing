@@ -2,7 +2,7 @@ package ee.qrental.transaction.core.service.rent;
 
 import static java.util.stream.Collectors.toList;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrental.transaction.api.in.query.rent.GetRentCalculationQuery;
 import ee.qrental.transaction.api.in.response.rent.RentCalculationResponse;

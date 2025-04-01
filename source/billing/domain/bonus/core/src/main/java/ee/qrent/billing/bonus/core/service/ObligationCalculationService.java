@@ -16,7 +16,7 @@ import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.billing.bonus.domain.ObligationCalculationResult;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.email.api.in.request.EmailSendRequest;
 import ee.qrental.email.api.in.request.EmailType;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;

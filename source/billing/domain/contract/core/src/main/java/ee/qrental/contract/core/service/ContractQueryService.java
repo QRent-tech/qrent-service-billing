@@ -5,7 +5,7 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractUpdateRequest;
 import ee.qrental.contract.api.in.response.ContractResponse;

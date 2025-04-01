@@ -2,8 +2,8 @@ package ee.qrental.ui.controller.invoice;
 
 import static ee.qrental.ui.controller.ControllerUtils.INVOICE_ROOT_PATH;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.invoice.api.in.query.GetInvoiceCalculationQuery;
 import ee.qrental.invoice.api.in.request.InvoiceCalculationAddRequest;
 import ee.qrental.invoice.api.in.usecase.InvoiceCalculationAddUseCase;

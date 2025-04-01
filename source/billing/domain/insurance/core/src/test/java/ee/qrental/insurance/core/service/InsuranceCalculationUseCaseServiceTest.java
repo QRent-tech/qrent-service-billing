@@ -2,7 +2,7 @@ package ee.qrental.insurance.core.service;
 
 import static org.mockito.Mockito.mock;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.out.*;
 import ee.qrental.insurance.core.mapper.InsuranceCalculationAddRequestMapper;
 import ee.qrental.insurance.core.validator.InsuranceCalculationAddRequestValidator;

@@ -3,7 +3,7 @@ package ee.qrental.insurance.spring.config;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.CloseRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.insurance.api.in.request.InsuranceCaseCloseRequest;
 import ee.qrental.insurance.api.in.request.InsuranceCaseUpdateRequest;

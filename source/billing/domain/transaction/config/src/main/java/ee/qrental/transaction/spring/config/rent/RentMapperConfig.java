@@ -1,6 +1,6 @@
 package ee.qrental.transaction.spring.config.rent;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.adapter.mapper.rent.RentCalculationAdapterMapper;
 import ee.qrental.transaction.core.mapper.rent.RentCalculationAddRequestMapper;
 import ee.qrental.transaction.core.mapper.rent.RentCalculationResponseMapper;

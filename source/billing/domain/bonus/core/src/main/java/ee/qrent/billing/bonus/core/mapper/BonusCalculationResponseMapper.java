@@ -3,7 +3,7 @@ package ee.qrent.billing.bonus.core.mapper;
 import ee.qrent.billing.bonus.api.in.response.BonusCalculationResponse;
 import ee.qrent.billing.bonus.domain.BonusCalculation;
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

@@ -1,7 +1,7 @@
 package ee.qrental.transaction.spring.config.rent;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.request.rent.RentCalculationAddRequest;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.api.out.rent.RentCalculationLoadPort;

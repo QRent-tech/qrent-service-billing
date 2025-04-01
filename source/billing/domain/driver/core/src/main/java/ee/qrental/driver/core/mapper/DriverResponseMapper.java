@@ -3,8 +3,7 @@ package ee.qrental.driver.core.mapper;
 import static java.lang.String.format;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.contract.api.in.query.GetContractQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.response.DriverResponse;
 import ee.qrental.driver.domain.CallSign;
 import ee.qrental.driver.domain.Driver;

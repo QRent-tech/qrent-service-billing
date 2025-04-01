@@ -1,6 +1,6 @@
 package ee.qrental.transaction.spring.config.balance;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.transaction.adapter.mapper.balance.BalanceAdapterMapper;
 import ee.qrental.transaction.adapter.mapper.balance.BalanceCalculationAdapterMapper;

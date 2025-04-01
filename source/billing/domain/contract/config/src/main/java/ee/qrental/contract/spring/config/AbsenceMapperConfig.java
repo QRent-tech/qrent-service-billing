@@ -1,6 +1,5 @@
 package ee.qrental.contract.spring.config;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.out.AbsenceLoadPort;
 import ee.qrental.contract.core.mapper.AbsenceAddRequestMapper;
 import ee.qrental.contract.core.mapper.AbsenceResponseMapper;

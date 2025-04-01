@@ -5,7 +5,7 @@ import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.groupingBy;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
 import ee.qrental.insurance.api.out.*;

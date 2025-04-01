@@ -15,7 +15,7 @@ import ee.qrent.billing.car.core.mapper.CarLinkResponseMapper;
 import ee.qrent.billing.car.core.mapper.CarLinkUpdateRequestMapper;
 import ee.qrent.billing.car.core.service.CarLinkQueryService;
 import ee.qrent.billing.car.core.service.CarLinkUseCaseService;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

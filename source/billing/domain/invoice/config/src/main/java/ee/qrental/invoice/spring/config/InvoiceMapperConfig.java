@@ -1,6 +1,6 @@
 package ee.qrental.invoice.spring.config;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.firm.api.in.query.GetFirmQuery;
 import ee.qrental.invoice.adapter.mapper.InvoiceCalculationAdapterMapper;

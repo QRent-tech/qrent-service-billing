@@ -3,7 +3,7 @@ package ee.qrental.transaction.spring.config;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.transaction.api.in.request.TransactionAddRequest;
 import ee.qrental.transaction.api.in.request.TransactionDeleteRequest;
 import ee.qrental.transaction.api.in.request.TransactionUpdateRequest;

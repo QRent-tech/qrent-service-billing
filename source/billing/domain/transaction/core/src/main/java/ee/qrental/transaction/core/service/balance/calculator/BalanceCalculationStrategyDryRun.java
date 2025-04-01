@@ -1,10 +1,9 @@
 package ee.qrental.transaction.core.service.balance.calculator;
 
-import ee.qrental.constant.api.in.query.GetConstantQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetConstantQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.response.TransactionResponse;
 import ee.qrental.transaction.domain.balance.Balance;
-import ee.qrental.transaction.domain.kind.TransactionKindsCode;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

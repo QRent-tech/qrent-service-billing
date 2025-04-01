@@ -4,7 +4,7 @@ import ee.qrent.billing.bonus.persistence.mapper.ObligationCalculationAdapterMap
 import ee.qrent.billing.bonus.core.mapper.ObligationCalculationAddRequestMapper;
 import ee.qrent.billing.bonus.core.mapper.ObligationCalculationResponseMapper;
 import ee.qrent.billing.bonus.core.mapper.ObligationResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

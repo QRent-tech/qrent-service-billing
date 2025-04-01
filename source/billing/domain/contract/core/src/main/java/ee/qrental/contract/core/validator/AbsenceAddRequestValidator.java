@@ -4,10 +4,8 @@ import static java.lang.String.format;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.request.AbsenceAddRequest;
-import ee.qrental.contract.api.in.request.AbsenceDeleteRequest;
-import ee.qrental.contract.api.in.request.AbsenceUpdateRequest;
 import ee.qrental.contract.api.out.AbsenceLoadPort;
 import ee.qrental.contract.domain.Absence;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;

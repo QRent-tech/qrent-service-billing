@@ -1,6 +1,6 @@
 package ee.qrental.task.core;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.request.InsuranceCalculationAddRequest;
 import ee.qrental.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
 import lombok.AllArgsConstructor;

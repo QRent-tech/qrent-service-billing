@@ -5,7 +5,7 @@ import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.CloseRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrent.queue.api.in.QueueEntryPushUseCase;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.contract.api.in.request.ContractAddRequest;
 import ee.qrental.contract.api.in.request.ContractCloseRequest;

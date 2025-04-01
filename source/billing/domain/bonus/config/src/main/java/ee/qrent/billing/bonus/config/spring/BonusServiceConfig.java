@@ -13,7 +13,7 @@ import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
 import ee.qrent.billing.bonus.api.in.request.BonusCalculationAddRequest;
 import ee.qrent.billing.bonus.api.in.usecase.BonusCalculationAddUseCase;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.query.GetContractQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;

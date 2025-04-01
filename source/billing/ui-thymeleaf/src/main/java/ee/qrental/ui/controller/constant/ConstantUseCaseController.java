@@ -2,13 +2,13 @@ package ee.qrental.ui.controller.constant;
 
 import static ee.qrental.ui.controller.ControllerUtils.CONSTANT_ROOT_PATH;
 
-import ee.qrental.constant.api.in.query.GetConstantQuery;
-import ee.qrental.constant.api.in.request.ConstantAddRequest;
-import ee.qrental.constant.api.in.request.ConstantDeleteRequest;
-import ee.qrental.constant.api.in.request.ConstantUpdateRequest;
-import ee.qrental.constant.api.in.usecase.ConstantAddUseCase;
-import ee.qrental.constant.api.in.usecase.ConstantDeleteUseCase;
-import ee.qrental.constant.api.in.usecase.ConstantUpdateUseCase;
+import ee.qrent.billing.constant.api.in.query.GetConstantQuery;
+import ee.qrent.billing.constant.api.in.request.ConstantAddRequest;
+import ee.qrent.billing.constant.api.in.request.ConstantDeleteRequest;
+import ee.qrent.billing.constant.api.in.request.ConstantUpdateRequest;
+import ee.qrent.billing.constant.api.in.usecase.ConstantAddUseCase;
+import ee.qrent.billing.constant.api.in.usecase.ConstantDeleteUseCase;
+import ee.qrent.billing.constant.api.in.usecase.ConstantUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

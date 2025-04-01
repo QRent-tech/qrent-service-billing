@@ -2,13 +2,12 @@ package ee.qrental.contract.core.validator;
 
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.contract.api.in.request.AbsenceDeleteRequest;
 import ee.qrental.contract.api.out.AbsenceLoadPort;
-import ee.qrental.contract.domain.Absence;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceQuery;
 import java.time.LocalDate;
-import java.util.List;
+
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

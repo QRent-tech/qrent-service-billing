@@ -6,7 +6,7 @@ import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrent.billing.bonus.api.out.ObligationCalculationLoadPort;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 

@@ -2,7 +2,7 @@ package ee.qrental.task.core;
 
 import ee.qrent.billing.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrent.billing.bonus.api.in.usecase.ObligationCalculationAddUseCase;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

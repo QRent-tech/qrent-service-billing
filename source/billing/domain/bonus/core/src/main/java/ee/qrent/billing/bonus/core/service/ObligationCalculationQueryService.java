@@ -4,7 +4,7 @@ import ee.qrent.billing.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrent.billing.bonus.api.in.response.ObligationCalculationResponse;
 import ee.qrent.billing.bonus.api.out.ObligationCalculationLoadPort;
 import ee.qrent.billing.bonus.core.mapper.ObligationCalculationResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import lombok.AllArgsConstructor;
 
 import java.util.List;

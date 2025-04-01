@@ -1,7 +1,7 @@
 package ee.qrental.invoice.spring.config;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrental.email.api.in.usecase.EmailSendUseCase;

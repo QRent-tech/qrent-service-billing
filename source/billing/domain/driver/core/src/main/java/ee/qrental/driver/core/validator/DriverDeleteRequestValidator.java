@@ -2,11 +2,9 @@ package ee.qrental.driver.core.validator;
 
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.DeleteRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.driver.api.in.request.DriverAddRequest;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.request.DriverDeleteRequest;
 import ee.qrental.driver.api.out.DriverLoadPort;
 import lombok.AllArgsConstructor;

@@ -3,7 +3,7 @@ package ee.qrental.invoice.core.validator;
 import ee.qrent.common.in.validation.AddRequestValidator;
 
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.invoice.api.in.request.InvoiceCalculationAddRequest;
 import ee.qrental.invoice.api.out.InvoiceCalculationLoadPort;
 import java.time.DayOfWeek;

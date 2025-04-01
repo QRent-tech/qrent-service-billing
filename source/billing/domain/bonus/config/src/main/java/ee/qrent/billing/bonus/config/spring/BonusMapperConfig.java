@@ -2,7 +2,7 @@ package ee.qrent.billing.bonus.config.spring;
 
 import ee.qrent.billing.bonus.core.mapper.*;
 import ee.qrent.billing.bonus.persistence.mapper.BonusCalculationAdapterMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

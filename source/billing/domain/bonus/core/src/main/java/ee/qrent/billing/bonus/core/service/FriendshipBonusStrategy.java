@@ -6,7 +6,7 @@ import static java.util.Collections.emptyList;
 import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
 import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.driver.api.in.query.GetDriverQuery;
 import ee.qrental.transaction.api.in.query.GetTransactionQuery;
 import ee.qrental.transaction.api.in.query.type.GetTransactionTypeQuery;

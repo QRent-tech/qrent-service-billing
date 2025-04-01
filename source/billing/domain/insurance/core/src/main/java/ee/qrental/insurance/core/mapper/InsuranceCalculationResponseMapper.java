@@ -3,7 +3,7 @@ package ee.qrental.insurance.core.mapper;
 import static java.lang.String.format;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.response.InsuranceCalculationResponse;
 import ee.qrental.insurance.domain.InsuranceCalculation;
 import lombok.AllArgsConstructor;

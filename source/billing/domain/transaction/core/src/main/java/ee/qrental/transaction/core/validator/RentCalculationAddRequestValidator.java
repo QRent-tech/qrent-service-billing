@@ -4,8 +4,8 @@ import static java.lang.String.format;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.request.rent.RentCalculationAddRequest;
 import ee.qrental.transaction.api.out.balance.BalanceLoadPort;
 import ee.qrental.transaction.api.out.rent.RentCalculationLoadPort;

@@ -2,8 +2,8 @@ package ee.qrental.ui.controller.transaction.calculation.balance;
 
 import static ee.qrental.ui.controller.ControllerUtils.BALANCE_ROOT_PATH;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrental.transaction.api.in.request.balance.BalanceCalculationAddRequest;
 import ee.qrental.transaction.api.in.usecase.balance.BalanceCalculationAddUseCase;

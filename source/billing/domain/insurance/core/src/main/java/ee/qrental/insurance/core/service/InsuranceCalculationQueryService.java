@@ -2,9 +2,9 @@ package ee.qrental.insurance.core.service;
 
 import static java.util.stream.Collectors.toList;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 
-import ee.qrental.constant.api.in.response.qweek.QWeekResponse;
+import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrental.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrental.insurance.api.in.response.InsuranceCalculationResponse;
 import ee.qrental.insurance.api.out.InsuranceCalculationLoadPort;

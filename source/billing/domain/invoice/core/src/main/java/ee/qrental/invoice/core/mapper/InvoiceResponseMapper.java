@@ -4,7 +4,7 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.toMap;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.invoice.api.in.response.InvoiceImmutableResponse;
 import ee.qrental.invoice.api.in.response.InvoiceResponse;
 import ee.qrental.invoice.domain.Invoice;

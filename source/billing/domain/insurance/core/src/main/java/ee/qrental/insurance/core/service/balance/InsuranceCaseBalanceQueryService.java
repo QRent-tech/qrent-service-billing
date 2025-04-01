@@ -3,7 +3,7 @@ package ee.qrental.insurance.core.service.balance;
 import static ee.qrental.common.utils.QNumberUtils.qRound;
 import static java.math.BigDecimal.ZERO;
 
-import ee.qrental.constant.api.in.query.GetQWeekQuery;
+import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrental.insurance.api.in.query.GetInsuranceCaseBalanceQuery;
 import ee.qrental.insurance.api.in.response.InsuranceBalanceTotalResponse;
