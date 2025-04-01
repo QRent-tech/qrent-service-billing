@@ -11,7 +11,7 @@ import ee.qrent.billing.contract.api.in.query.GetAuthorizationQuery;
 import ee.qrent.billing.contract.api.in.query.GetContractQuery;
 import ee.qrent.billing.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.insurance.api.in.query.GetInsuranceCaseBalanceQuery;
+import ee.qrent.billing.insurance.api.in.query.GetInsuranceCaseBalanceQuery;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;

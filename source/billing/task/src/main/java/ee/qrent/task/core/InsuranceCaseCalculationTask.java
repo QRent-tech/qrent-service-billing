@@ -1,8 +1,8 @@
 package ee.qrent.task.core;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.insurance.api.in.request.InsuranceCalculationAddRequest;
-import ee.qrent.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
+import ee.qrent.billing.insurance.api.in.request.InsuranceCalculationAddRequest;
+import ee.qrent.billing.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 

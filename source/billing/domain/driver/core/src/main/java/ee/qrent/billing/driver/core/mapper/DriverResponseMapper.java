@@ -8,7 +8,7 @@ import ee.qrent.billing.driver.api.in.response.DriverResponse;
 import ee.qrent.billing.driver.domain.CallSign;
 import ee.qrent.billing.driver.domain.Driver;
 import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
-import ee.qrent.insurance.api.in.query.GetQKaskoQuery;
+import ee.qrent.billing.insurance.api.in.query.GetQKaskoQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

@@ -3,7 +3,7 @@ package ee.qrent.task;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.usecase.QWeekAddUseCase;
-import ee.qrent.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
+import ee.qrent.billing.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
 import ee.qrent.task.core.InsuranceCaseCalculationTask;
 import ee.qrent.task.core.QTaskExecutor;
 import ee.qrent.task.core.QWeekCreationTask;

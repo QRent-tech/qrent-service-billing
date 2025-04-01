@@ -9,11 +9,11 @@ import ee.qrent.billing.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrent.billing.contract.api.out.ContractLoadPort;
 import ee.qrent.billing.contract.api.out.ContractUpdatePort;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;
-import ee.qrent.insurance.api.in.request.InsuranceCaseCloseRequest;
-import ee.qrent.insurance.api.in.request.InsuranceCasePreCloseResponse;
-import ee.qrent.insurance.api.in.response.InsuranceCaseResponse;
-import ee.qrent.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
+import ee.qrent.billing.insurance.api.in.query.GetInsuranceCaseQuery;
+import ee.qrent.billing.insurance.api.in.request.InsuranceCaseCloseRequest;
+import ee.qrent.billing.insurance.api.in.request.InsuranceCasePreCloseResponse;
+import ee.qrent.billing.insurance.api.in.response.InsuranceCaseResponse;
+import ee.qrent.billing.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 

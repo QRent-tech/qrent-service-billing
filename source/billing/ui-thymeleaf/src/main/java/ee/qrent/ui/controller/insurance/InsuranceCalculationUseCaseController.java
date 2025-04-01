@@ -5,9 +5,9 @@ import static ee.qrent.ui.controller.ControllerUtils.INSURANCE_ROOT_PATH;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.insurance.api.in.query.GetInsuranceCalculationQuery;
-import ee.qrent.insurance.api.in.request.InsuranceCalculationAddRequest;
-import ee.qrent.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
+import ee.qrent.billing.insurance.api.in.query.GetInsuranceCalculationQuery;
+import ee.qrent.billing.insurance.api.in.request.InsuranceCalculationAddRequest;
+import ee.qrent.billing.insurance.api.in.usecase.InsuranceCalculationAddUseCase;
 
 import ee.qrent.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;

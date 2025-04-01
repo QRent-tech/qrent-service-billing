@@ -6,7 +6,7 @@ import ee.qrent.billing.driver.core.mapper.DriverResponseMapper;
 import ee.qrent.billing.driver.core.mapper.DriverUpdateRequestMapper;
 import ee.qrent.billing.driver.core.mapper.FriendshipDomainMapper;
 import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
-import ee.qrent.insurance.api.in.query.GetQKaskoQuery;
+import ee.qrent.billing.insurance.api.in.query.GetQKaskoQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

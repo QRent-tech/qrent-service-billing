@@ -3,7 +3,7 @@ package ee.qrent.ui.controller.insurance;
 import static ee.qrent.ui.controller.ControllerUtils.INSURANCE_ROOT_PATH;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.insurance.api.in.query.GetInsuranceCalculationQuery;
+import ee.qrent.billing.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrent.transaction.api.in.query.rent.GetRentCalculationQuery;

@@ -23,8 +23,8 @@ import ee.qrent.billing.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrent.billing.contract.api.in.usecase.ContractSendByEmailUseCase;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
-import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;
-import ee.qrent.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
+import ee.qrent.billing.insurance.api.in.query.GetInsuranceCaseQuery;
+import ee.qrent.billing.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

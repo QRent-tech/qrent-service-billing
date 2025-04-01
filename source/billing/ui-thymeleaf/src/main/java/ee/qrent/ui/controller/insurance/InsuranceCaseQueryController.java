@@ -1,6 +1,6 @@
 package ee.qrent.ui.controller.insurance;
 
-import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;
+import ee.qrent.billing.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrent.ui.formatter.QDateFormatter;
 import ee.qrent.ui.service.insurance.InsuranceCounterService;
 import org.springframework.stereotype.Controller;
