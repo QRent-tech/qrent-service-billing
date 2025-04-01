@@ -1,5 +1,5 @@
 package ee.qrent.common.out.port;
 
 public interface AddPort<D> {
-  D add(D domain);
+  D add(final D domain);
 }
