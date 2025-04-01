@@ -2,7 +2,7 @@ package ee.qrent.ui.controller.transaction.transaction;
 
 import static ee.qrent.ui.controller.ControllerUtils.TRANSACTION_KIND_ROOT_PATH;
 
-import ee.qrent.transaction.api.in.query.kind.GetTransactionKindQuery;
+import ee.qrent.billing.transaction.api.in.query.kind.GetTransactionKindQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

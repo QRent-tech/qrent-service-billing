@@ -2,7 +2,7 @@ package db.migration;
 
 import static java.lang.String.format;
 
-import ee.qrent.transaction.domain.kind.TransactionKindsCode;
+import ee.qrent.billing.transaction.domain.kind.TransactionKindsCode;
 import org.flywaydb.core.api.migration.BaseJavaMigration;
 import org.flywaydb.core.api.migration.Context;
 

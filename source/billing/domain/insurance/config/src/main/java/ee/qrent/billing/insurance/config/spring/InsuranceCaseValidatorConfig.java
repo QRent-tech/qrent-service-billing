@@ -12,7 +12,7 @@ import ee.qrent.billing.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrent.billing.insurance.core.validator.InsuranceCalculationAddRequestValidator;
 import ee.qrent.billing.insurance.core.validator.InsuranceCaseCloseRequestValidator;
 import ee.qrent.billing.insurance.core.validator.InsuranceCaseUpdateRequestValidator;
-import ee.qrent.transaction.api.in.query.rent.GetRentCalculationQuery;
+import ee.qrent.billing.transaction.api.in.query.rent.GetRentCalculationQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

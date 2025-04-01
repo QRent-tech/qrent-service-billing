@@ -1,6 +1,6 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.billing.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -10,10 +10,10 @@ import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrent.transaction.api.in.response.TransactionResponse;
-import ee.qrent.transaction.api.in.response.type.TransactionTypeResponse;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
+import ee.qrent.billing.transaction.api.in.response.type.TransactionTypeResponse;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

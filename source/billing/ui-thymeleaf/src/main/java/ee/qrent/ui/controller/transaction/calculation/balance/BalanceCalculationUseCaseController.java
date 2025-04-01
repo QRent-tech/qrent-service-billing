@@ -4,9 +4,9 @@ import static ee.qrent.ui.controller.ControllerUtils.BALANCE_ROOT_PATH;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.transaction.api.in.query.balance.GetBalanceCalculationQuery;
-import ee.qrent.transaction.api.in.request.balance.BalanceCalculationAddRequest;
-import ee.qrent.transaction.api.in.usecase.balance.BalanceCalculationAddUseCase;
+import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceCalculationQuery;
+import ee.qrent.billing.transaction.api.in.request.balance.BalanceCalculationAddRequest;
+import ee.qrent.billing.transaction.api.in.usecase.balance.BalanceCalculationAddUseCase;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

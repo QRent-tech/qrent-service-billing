@@ -2,7 +2,7 @@ package ee.qrent.billing.insurance.core.service.balance;
 
 import static java.math.BigDecimal.ZERO;
 import ee.qrent.billing.insurance.domain.InsuranceCaseBalance;
-import ee.qrent.transaction.api.in.request.TransactionAddRequest;
+import ee.qrent.billing.transaction.api.in.request.TransactionAddRequest;
 
 import java.math.BigDecimal;
 

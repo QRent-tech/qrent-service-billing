@@ -6,9 +6,9 @@ import static java.util.Collections.emptyList;
 import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrent.transaction.api.in.request.TransactionAddRequest;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.billing.transaction.api.in.request.TransactionAddRequest;
 import java.math.BigDecimal;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
-import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NO_LABEL_FINE;
+import static ee.qrent.billing.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.billing.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NO_LABEL_FINE;
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.toList;
 
@@ -20,8 +20,8 @@ import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.email.api.in.request.EmailSendRequest;
 import ee.qrent.email.api.in.request.EmailType;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.response.TransactionResponse;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
 import ee.qrent.user.api.in.query.GetUserAccountQuery;
 import ee.qrent.user.api.in.response.UserAccountResponse;
 import jakarta.transaction.Transactional;

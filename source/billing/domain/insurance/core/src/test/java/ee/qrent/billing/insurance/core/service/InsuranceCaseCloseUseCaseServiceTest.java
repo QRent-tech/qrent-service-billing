@@ -9,10 +9,10 @@ import ee.qrent.billing.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrent.billing.insurance.api.out.InsuranceCaseUpdatePort;
 import ee.qrent.billing.insurance.core.validator.InsuranceCaseCloseRequestValidator;
 import ee.qrent.billing.insurance.domain.InsuranceCase;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrent.transaction.api.in.response.TransactionResponse;
-import ee.qrent.transaction.api.in.usecase.TransactionAddUseCase;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
+import ee.qrent.billing.transaction.api.in.usecase.TransactionAddUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

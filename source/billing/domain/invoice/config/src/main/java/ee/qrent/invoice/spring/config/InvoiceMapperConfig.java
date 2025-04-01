@@ -6,7 +6,7 @@ import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import ee.qrent.invoice.adapter.mapper.InvoiceCalculationAdapterMapper;
 import ee.qrent.invoice.api.out.InvoiceLoadPort;
 import ee.qrent.invoice.core.mapper.*;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

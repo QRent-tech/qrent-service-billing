@@ -4,10 +4,10 @@ import static ee.qrent.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTE
 import static ee.qrent.ui.controller.ControllerUtils.TRANSACTION_ROOT_PATH;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.query.balance.GetBalanceCalculationQuery;
-import ee.qrent.transaction.api.in.query.filter.WeekFilter;
-import ee.qrent.transaction.api.in.response.TransactionResponse;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceCalculationQuery;
+import ee.qrent.billing.transaction.api.in.query.filter.WeekFilter;
+import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
 import ee.qrent.ui.formatter.QDateFormatter;
 import java.util.List;
 import lombok.AllArgsConstructor;

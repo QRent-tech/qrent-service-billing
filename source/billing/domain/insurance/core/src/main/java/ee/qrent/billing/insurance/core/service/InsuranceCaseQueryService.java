@@ -15,8 +15,8 @@ import ee.qrent.billing.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrent.billing.insurance.core.mapper.InsuranceCaseBalanceResponseMapper;
 import ee.qrent.billing.insurance.core.mapper.InsuranceCaseResponseMapper;
 import ee.qrent.billing.insurance.core.mapper.InsuranceCaseUpdateRequestMapper;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.response.TransactionResponse;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

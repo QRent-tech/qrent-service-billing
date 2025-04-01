@@ -12,7 +12,7 @@ import ee.qrent.billing.contract.api.in.request.AbsenceDeleteRequest;
 import ee.qrent.billing.contract.api.in.request.AbsenceUpdateRequest;
 import ee.qrent.billing.contract.api.out.AbsenceLoadPort;
 import ee.qrent.billing.contract.domain.Absence;
-import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
+import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;

@@ -4,9 +4,9 @@ import static ee.qrent.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTE
 import static ee.qrent.ui.controller.ControllerUtils.*;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.query.balance.GetBalanceCalculationQuery;
-import ee.qrent.transaction.api.in.query.rent.GetRentCalculationQuery;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceCalculationQuery;
+import ee.qrent.billing.transaction.api.in.query.rent.GetRentCalculationQuery;
 import ee.qrent.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
 package ee.qrent.billing.bonus.core.service;
 
-import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
+import static ee.qrent.billing.transaction.api.in.utils.TransactionTypeConstant.TRANSACTION_TYPE_NAME_WEEKLY_RENT;
 import static java.time.temporal.ChronoUnit.WEEKS;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -16,10 +16,10 @@ import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.billing.driver.api.in.response.DriverResponse;
 import ee.qrent.billing.driver.api.in.response.FriendshipResponse;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrent.transaction.api.in.response.TransactionResponse;
-import ee.qrent.transaction.api.in.response.type.TransactionTypeResponse;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
+import ee.qrent.billing.transaction.api.in.response.type.TransactionTypeResponse;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

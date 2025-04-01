@@ -8,7 +8,7 @@ import ee.qrent.task.core.InsuranceCaseCalculationTask;
 import ee.qrent.task.core.QTaskExecutor;
 import ee.qrent.task.core.QWeekCreationTask;
 import ee.qrent.task.core.RentCalculationTask;
-import ee.qrent.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
+import ee.qrent.billing.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;

@@ -4,7 +4,7 @@ import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.insurance.api.in.request.InsuranceCalculationAddRequest;
-import ee.qrent.transaction.api.in.query.rent.GetRentCalculationQuery;
+import ee.qrent.billing.transaction.api.in.query.rent.GetRentCalculationQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

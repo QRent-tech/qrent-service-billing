@@ -2,14 +2,14 @@ package ee.qrent.ui.controller.transaction.transaction;
 
 import static ee.qrent.ui.controller.ControllerUtils.TRANSACTION_TYPE_ROOT_PATH;
 
-import ee.qrent.transaction.api.in.query.kind.GetTransactionKindQuery;
-import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrent.transaction.api.in.request.type.TransactionTypeAddRequest;
-import ee.qrent.transaction.api.in.request.type.TransactionTypeDeleteRequest;
-import ee.qrent.transaction.api.in.request.type.TransactionTypeUpdateRequest;
-import ee.qrent.transaction.api.in.usecase.type.TransactionTypeAddUseCase;
-import ee.qrent.transaction.api.in.usecase.type.TransactionTypeDeleteUseCase;
-import ee.qrent.transaction.api.in.usecase.type.TransactionTypeUpdateUseCase;
+import ee.qrent.billing.transaction.api.in.query.kind.GetTransactionKindQuery;
+import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.billing.transaction.api.in.request.type.TransactionTypeAddRequest;
+import ee.qrent.billing.transaction.api.in.request.type.TransactionTypeDeleteRequest;
+import ee.qrent.billing.transaction.api.in.request.type.TransactionTypeUpdateRequest;
+import ee.qrent.billing.transaction.api.in.usecase.type.TransactionTypeAddUseCase;
+import ee.qrent.billing.transaction.api.in.usecase.type.TransactionTypeDeleteUseCase;
+import ee.qrent.billing.transaction.api.in.usecase.type.TransactionTypeUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

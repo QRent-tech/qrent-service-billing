@@ -1,8 +1,8 @@
 package ee.qrent.task.core;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.transaction.api.in.request.rent.RentCalculationAddRequest;
-import ee.qrent.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
+import ee.qrent.billing.transaction.api.in.request.rent.RentCalculationAddRequest;
+import ee.qrent.billing.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 

@@ -5,7 +5,7 @@ import ee.qrent.common.in.validation.ViolationsCollector;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.contract.api.in.request.AbsenceDeleteRequest;
 import ee.qrent.billing.contract.api.out.AbsenceLoadPort;
-import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
+import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;

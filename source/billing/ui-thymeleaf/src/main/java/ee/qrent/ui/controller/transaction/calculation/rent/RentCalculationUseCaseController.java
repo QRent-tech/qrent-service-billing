@@ -6,8 +6,8 @@ import static ee.qrent.ui.controller.ControllerUtils.RENTS_ROOT_PATH;
 
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.transaction.api.in.request.rent.RentCalculationAddRequest;
-import ee.qrent.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
+import ee.qrent.billing.transaction.api.in.request.rent.RentCalculationAddRequest;
+import ee.qrent.billing.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
 import ee.qrent.ui.formatter.QDateFormatter;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

@@ -2,13 +2,13 @@ package ee.qrent.ui.controller.transaction.transaction;
 
 import static ee.qrent.ui.controller.ControllerUtils.TRANSACTION_KIND_ROOT_PATH;
 
-import ee.qrent.transaction.api.in.query.kind.GetTransactionKindQuery;
-import ee.qrent.transaction.api.in.request.kind.TransactionKindAddRequest;
-import ee.qrent.transaction.api.in.request.kind.TransactionKindDeleteRequest;
-import ee.qrent.transaction.api.in.request.kind.TransactionKindUpdateRequest;
-import ee.qrent.transaction.api.in.usecase.kind.TransactionKindAddUseCase;
-import ee.qrent.transaction.api.in.usecase.kind.TransactionKindDeleteUseCase;
-import ee.qrent.transaction.api.in.usecase.kind.TransactionKindUpdateUseCase;
+import ee.qrent.billing.transaction.api.in.query.kind.GetTransactionKindQuery;
+import ee.qrent.billing.transaction.api.in.request.kind.TransactionKindAddRequest;
+import ee.qrent.billing.transaction.api.in.request.kind.TransactionKindDeleteRequest;
+import ee.qrent.billing.transaction.api.in.request.kind.TransactionKindUpdateRequest;
+import ee.qrent.billing.transaction.api.in.usecase.kind.TransactionKindAddUseCase;
+import ee.qrent.billing.transaction.api.in.usecase.kind.TransactionKindDeleteUseCase;
+import ee.qrent.billing.transaction.api.in.usecase.kind.TransactionKindUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

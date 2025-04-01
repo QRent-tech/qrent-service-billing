@@ -7,9 +7,9 @@ import ee.qrent.billing.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrent.billing.insurance.api.out.InsuranceCaseBalanceLoadPort;
 import ee.qrent.billing.insurance.domain.InsuranceCase;
 import ee.qrent.billing.insurance.domain.InsuranceCaseBalance;
-import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrent.transaction.api.in.request.TransactionAddRequest;
-import ee.qrent.transaction.api.in.usecase.TransactionAddUseCase;
+import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.billing.transaction.api.in.request.TransactionAddRequest;
+import ee.qrent.billing.transaction.api.in.usecase.TransactionAddUseCase;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

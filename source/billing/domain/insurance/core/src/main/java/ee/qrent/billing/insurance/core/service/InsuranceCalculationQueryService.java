@@ -11,7 +11,7 @@ import ee.qrent.billing.insurance.api.out.InsuranceCalculationLoadPort;
 import ee.qrent.billing.insurance.core.mapper.InsuranceCalculationResponseMapper;
 import java.util.List;
 
-import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
+import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

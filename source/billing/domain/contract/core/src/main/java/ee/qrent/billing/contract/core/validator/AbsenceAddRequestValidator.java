@@ -8,7 +8,7 @@ import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.contract.api.in.request.AbsenceAddRequest;
 import ee.qrent.billing.contract.api.out.AbsenceLoadPort;
 import ee.qrent.billing.contract.domain.Absence;
-import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
+import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;

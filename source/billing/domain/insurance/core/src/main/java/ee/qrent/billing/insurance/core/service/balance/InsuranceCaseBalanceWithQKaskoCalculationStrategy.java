@@ -6,18 +6,18 @@ import ee.qrent.billing.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrent.billing.insurance.api.out.InsuranceCaseBalanceLoadPort;
 import ee.qrent.billing.insurance.domain.InsuranceCase;
 import ee.qrent.billing.insurance.domain.InsuranceCaseBalance;
-import ee.qrent.transaction.api.in.query.GetTransactionQuery;
-import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
-import ee.qrent.transaction.api.in.request.TransactionAddRequest;
-import ee.qrent.transaction.api.in.response.TransactionResponse;
-import ee.qrent.transaction.api.in.usecase.TransactionAddUseCase;
+import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
+import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.billing.transaction.api.in.request.TransactionAddRequest;
+import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
+import ee.qrent.billing.transaction.api.in.usecase.TransactionAddUseCase;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import static ee.qrent.billing.insurance.core.service.balance.InsuranceCaseBalanceDeriveUtils.derive;
-import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.*;
+import static ee.qrent.billing.transaction.api.in.utils.TransactionTypeConstant.*;
 import static java.lang.Boolean.TRUE;
 import static java.math.BigDecimal.ZERO;
 
@@ -45,6 +45,7 @@ public class InsuranceCaseBalanceWithQKaskoCalculationStrategy
         insuranceCaseBalanceLoadPort);
     this.transactionQuery = transactionQuery;
   }
+
   @Override
   public boolean canApply(final Long driverId, final Long qWeekId) {
 
@@ -82,7 +83,8 @@ public class InsuranceCaseBalanceWithQKaskoCalculationStrategy
 
   private TransactionAddRequest getSelfResponsibilityTransaction(
       final Long driverId, final QWeekResponse qWeek) {
-    var selfResponsibilityRequestedAmount = getRequestedSelfResponsibilityAmountAbs(driverId, qWeek.getId());
+    var selfResponsibilityRequestedAmount =
+        getRequestedSelfResponsibilityAmountAbs(driverId, qWeek.getId());
     final var selfResponsibilityTransaction = new TransactionAddRequest();
     selfResponsibilityTransaction.setComment(
         "Self Responsibility Requested Payment. Automatically created transaction.");
