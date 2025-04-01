@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrent.security.spring.config.SecurityConfig
+ee.qrent.billing.security.config.spring.SecurityConfig

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrent.ui.QUIConfig
+ee.qrent.billing.ui.config.spring.QUIConfig

@@ -1,7 +1,7 @@
 package ee.qrent.user.config.spring;
 
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
-import ee.qrent.security.api.in.usecase.PasswordUseCase;
+import ee.qrent.billing.security.api.in.usecase.PasswordUseCase;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import ee.qrent.billing.user.api.out.UserAccountAddPort;
 import ee.qrent.billing.user.api.out.UserAccountDeletePort;

@@ -6,7 +6,7 @@ import static java.util.Collections.singletonList;
 import ee.qrent.billing.user.domain.UserAccount;
 import ee.qrent.email.api.in.request.EmailSendRequest;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
-import ee.qrent.security.api.in.usecase.PasswordUseCase;
+import ee.qrent.billing.security.api.in.usecase.PasswordUseCase;
 import ee.qrent.billing.user.api.in.request.UserAccountAddRequest;
 import ee.qrent.billing.user.api.in.request.UserAccountDeleteRequest;
 import ee.qrent.billing.user.api.in.request.UserAccountUpdateRequest;
