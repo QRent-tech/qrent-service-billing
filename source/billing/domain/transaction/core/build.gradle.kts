@@ -1,6 +1,6 @@
 dependencies {
-    implementation(project(":source:billing:domain:common:api"))
-    implementation(project(":source:billing:domain:common:utils"))
+    implementation(project(":source:common:api"))
+    implementation(project(":source:common:utils"))
     implementation(project(":source:billing:domain:transaction:api:in"))
     implementation(project(":source:billing:domain:transaction:api:out"))
     implementation(project(":source:billing:domain:transaction:domain"))

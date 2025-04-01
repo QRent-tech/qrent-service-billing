@@ -3,7 +3,7 @@ dependencies {
     implementation(project(":source:billing:domain:bonus:api:in"))
     implementation(project(":source:billing:domain:insurance:api:in"))
     implementation(project(":source:billing:domain:constant:api:in"))
-    implementation(project(":source:billing:domain:common:api"))
+    implementation(project(":source:common:api"))
     implementation("org.springframework:spring-context-support")
     compileOnly(libs.q.lombok)
     annotationProcessor(libs.q.lombok)

@@ -8,6 +8,11 @@ dependencyResolutionManagement {
     repositories.mavenCentral()
 }
 
+include("source:common:api")
+include("source:common:core")
+include("source:common:utils")
+include("source:common:config")
+
 include("source:queue:api:in")
 include("source:queue:api:out")
 include("source:queue:core")
@@ -35,11 +40,6 @@ include("source:cross:email:config")
 include("source:billing:security:api:in")
 include("source:billing:security:core")
 include("source:billing:security:config")
-
-include("source:billing:domain:common:api")
-include("source:billing:domain:common:core")
-include("source:billing:domain:common:utils")
-include("source:billing:domain:common:config")
 
 include("source:billing:domain:driver:api:in")
 include("source:billing:domain:driver:api:out")

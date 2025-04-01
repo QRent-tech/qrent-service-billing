@@ -6,7 +6,7 @@ dependencies {
     implementation(project(":source:billing:domain:contract:persistence:adapter"))
     implementation(project(":source:billing:domain:contract:persistence:repository"))
 
-    implementation(project(":source:billing:domain:common:api"))
+    implementation(project(":source:common:api"))
     implementation(project(":source:queue:api:in"))
     implementation(project(":source:billing:domain:transaction:api:in"))
     implementation(project(":source:billing:domain:constant:api:in"))

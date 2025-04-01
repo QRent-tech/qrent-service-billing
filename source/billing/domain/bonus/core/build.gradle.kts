@@ -1,7 +1,7 @@
 dependencies {
-    implementation(project(":source:billing:domain:common:api"))
-    implementation(project(":source:billing:domain:common:core"))
-    implementation(project(":source:billing:domain:common:utils"))
+    implementation(project(":source:common:api"))
+    implementation(project(":source:common:core"))
+    implementation(project(":source:common:utils"))
 
     implementation(project(":source:billing:domain:bonus:api:in"))
     implementation(project(":source:billing:domain:bonus:api:out"))

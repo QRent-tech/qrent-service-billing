@@ -5,7 +5,7 @@ dependencies {
     implementation(project(":source:queue:config"))
     implementation(project(":source:queue:persistence:flyway"))
     implementation(project(":source:billing:ui-thymeleaf"))
-    implementation(project(":source:billing:domain:common:config"))
+    implementation(project(":source:common:config"))
     implementation(project(":source:billing:domain:driver:config"))
     implementation(project(":source:billing:domain:driver:persistence:flyway"))
     implementation(project(":source:billing:domain:car:config"))

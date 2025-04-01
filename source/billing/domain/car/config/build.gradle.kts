@@ -6,7 +6,7 @@ dependencies {
     implementation(project(":source:billing:domain:car:persistence:adapter"))
     implementation(project(":source:billing:domain:car:persistence:repository"))
 
-    implementation(project(":source:billing:domain:common:api"))
+    implementation(project(":source:common:api"))
     implementation(project(":source:billing:domain:driver:api:in"))
     implementation(project(":source:billing:domain:constant:api:in"))
 

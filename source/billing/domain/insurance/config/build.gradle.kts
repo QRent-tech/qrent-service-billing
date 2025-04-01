@@ -6,7 +6,7 @@ dependencies {
     implementation(project(":source:billing:domain:insurance:persistence:adapter"))
     implementation(project(":source:billing:domain:insurance:persistence:repository"))
 
-    implementation(project(":source:billing:domain:common:api"))
+    implementation(project(":source:common:api"))
     implementation(project(":source:billing:domain:constant:api:in"))
     implementation(project(":source:billing:domain:transaction:api:in"))
     implementation(project(":source:billing:domain:driver:api:in"))

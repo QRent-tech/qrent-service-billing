@@ -3,7 +3,7 @@ plugins {
 }
 dependencies {
 
-    implementation(project(":source:billing:domain:common:config"))
+    implementation(project(":source:common:config"))
 
 
     implementation("org.springframework.boot:spring-boot-starter")
