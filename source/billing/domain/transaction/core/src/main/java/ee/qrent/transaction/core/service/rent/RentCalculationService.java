@@ -7,7 +7,7 @@ import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.contract.api.in.query.GetAbsenceQuery;
+import ee.qrent.billing.contract.api.in.query.GetAbsenceQuery;
 import ee.qrent.email.api.in.request.EmailSendRequest;
 import ee.qrent.email.api.in.request.EmailType;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;

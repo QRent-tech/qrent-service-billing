@@ -1,6 +1,6 @@
 package ee.qrent.ui.service.driver.impl;
 
-import ee.qrent.contract.api.in.query.GetContractQuery;
+import ee.qrent.billing.contract.api.in.query.GetContractQuery;
 import ee.qrent.driver.api.in.query.GetCallSignLinkQuery;
 import ee.qrent.ui.service.driver.DriverCounterService;
 import ee.qrent.ui.service.driver.DriverCountsResponse;

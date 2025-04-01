@@ -2,10 +2,10 @@ package ee.qrent.ui.controller.driver;
 
 import static ee.qrent.ui.controller.ControllerUtils.CONTRACT_ROOT_PATH;
 
-import ee.qrent.contract.api.in.query.GetContractQuery;
-import ee.qrent.contract.api.in.request.ContractSendByEmailRequest;
-import ee.qrent.contract.api.in.usecase.ContractPdfUseCase;
-import ee.qrent.contract.api.in.usecase.ContractSendByEmailUseCase;
+import ee.qrent.billing.contract.api.in.query.GetContractQuery;
+import ee.qrent.billing.contract.api.in.request.ContractSendByEmailRequest;
+import ee.qrent.billing.contract.api.in.usecase.ContractPdfUseCase;
+import ee.qrent.billing.contract.api.in.usecase.ContractSendByEmailUseCase;
 import ee.qrent.ui.formatter.QDateFormatter;
 import ee.qrent.ui.service.driver.DriverCounterService;
 import org.springframework.core.io.InputStreamResource;

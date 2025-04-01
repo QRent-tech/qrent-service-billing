@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import ee.qrent.contract.api.in.query.GetContractQuery;
-import ee.qrent.contract.api.in.response.ContractResponse;
+import ee.qrent.billing.contract.api.in.query.GetContractQuery;
+import ee.qrent.billing.contract.api.in.response.ContractResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

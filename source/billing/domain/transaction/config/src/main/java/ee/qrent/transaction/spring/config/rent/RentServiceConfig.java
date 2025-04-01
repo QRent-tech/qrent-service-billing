@@ -5,7 +5,7 @@ import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.contract.api.in.query.GetAbsenceQuery;
+import ee.qrent.billing.contract.api.in.query.GetAbsenceQuery;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceCalculationQuery;

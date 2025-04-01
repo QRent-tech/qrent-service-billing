@@ -2,7 +2,7 @@ package ee.qrent.ui.controller.driver;
 
 import static ee.qrent.ui.controller.ControllerUtils.*;
 
-import ee.qrent.contract.api.in.query.GetAbsenceQuery;
+import ee.qrent.billing.contract.api.in.query.GetAbsenceQuery;
 
 import ee.qrent.ui.formatter.QDateFormatter;
 import ee.qrent.ui.service.driver.DriverCounterService;

@@ -2,10 +2,10 @@ package ee.qrent.ui.controller.driver;
 
 import static ee.qrent.ui.controller.ControllerUtils.AUTHORIZATION_ROOT_PATH;
 
-import ee.qrent.contract.api.in.query.GetAuthorizationQuery;
-import ee.qrent.contract.api.in.request.AuthorizationSendByEmailRequest;
-import ee.qrent.contract.api.in.usecase.AuthorizationPdfUseCase;
-import ee.qrent.contract.api.in.usecase.AuthorizationSendByEmailUseCase;
+import ee.qrent.billing.contract.api.in.query.GetAuthorizationQuery;
+import ee.qrent.billing.contract.api.in.request.AuthorizationSendByEmailRequest;
+import ee.qrent.billing.contract.api.in.usecase.AuthorizationPdfUseCase;
+import ee.qrent.billing.contract.api.in.usecase.AuthorizationSendByEmailUseCase;
 import ee.qrent.ui.formatter.QDateFormatter;
 import ee.qrent.ui.service.driver.DriverCounterService;
 import org.springframework.core.io.InputStreamResource;

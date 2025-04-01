@@ -1,6 +1,6 @@
 package ee.qrent.insurance.core.service.kasko;
 
-import ee.qrent.contract.api.in.query.GetContractQuery;
+import ee.qrent.billing.contract.api.in.query.GetContractQuery;
 import ee.qrent.insurance.api.in.query.GetQKaskoQuery;
 import lombok.AllArgsConstructor;
 

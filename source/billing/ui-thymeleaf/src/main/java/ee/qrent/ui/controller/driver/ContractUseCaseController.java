@@ -3,12 +3,12 @@ package ee.qrent.ui.controller.driver;
 import static ee.qrent.ui.controller.ControllerUtils.CONTRACT_ROOT_PATH;
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrent.contract.api.in.query.GetContractQuery;
-import ee.qrent.contract.api.in.request.ContractAddRequest;
-import ee.qrent.contract.api.in.request.ContractCloseRequest;
-import ee.qrent.contract.api.in.response.ContractPreCloseResponse;
-import ee.qrent.contract.api.in.usecase.ContractAddUseCase;
-import ee.qrent.contract.api.in.usecase.ContractCloseUseCase;
+import ee.qrent.billing.contract.api.in.query.GetContractQuery;
+import ee.qrent.billing.contract.api.in.request.ContractAddRequest;
+import ee.qrent.billing.contract.api.in.request.ContractCloseRequest;
+import ee.qrent.billing.contract.api.in.response.ContractPreCloseResponse;
+import ee.qrent.billing.contract.api.in.usecase.ContractAddUseCase;
+import ee.qrent.billing.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrent.driver.api.in.query.GetDriverQuery;
 import ee.qrent.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
