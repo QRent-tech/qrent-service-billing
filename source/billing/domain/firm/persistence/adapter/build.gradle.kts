@@ -1,0 +1,13 @@
+dependencies {
+    implementation(project(":source:billing:domain:common:api"))
+    implementation(project(":source:billing:domain:firm:api:out"))
+    implementation(project(":source:billing:domain:firm:domain"))
+    implementation(project(":source:billing:domain:firm:persistence:entity"))
+
+    compileOnly(libs.q.lombok)
+    annotationProcessor(libs.q.lombok)
+}
+
+tasks.jar {
+    archiveFileName.set("firm-persistence-adapter.jar")
+}
