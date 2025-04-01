@@ -2,7 +2,7 @@ package ee.qrent.ui.controller.user;
 
 import static ee.qrent.ui.controller.ControllerUtils.USER_ROOT_PATH;
 
-import ee.qrent.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

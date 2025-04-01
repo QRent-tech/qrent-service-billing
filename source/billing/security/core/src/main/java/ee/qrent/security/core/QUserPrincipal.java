@@ -1,6 +1,6 @@
 package ee.qrent.security.core;
 
-import ee.qrent.user.api.in.response.UserAccountResponse;
+import ee.qrent.billing.user.api.in.response.UserAccountResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

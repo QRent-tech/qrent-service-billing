@@ -20,7 +20,7 @@ import ee.qrent.billing.transaction.core.service.TransactionUseCaseService;
 import ee.qrent.billing.transaction.core.service.rent.RentCalculationQueryService;
 import ee.qrent.billing.transaction.core.service.rent.RentCalculationService;
 import ee.qrent.billing.transaction.core.service.rent.RentTransactionGenerator;
-import ee.qrent.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

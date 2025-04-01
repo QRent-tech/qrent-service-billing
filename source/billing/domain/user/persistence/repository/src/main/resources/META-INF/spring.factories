@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrent.user.repository.UserAccountSpringDataConfig
+ee.qrent.billing.persistence.user.repository.UserAccountSpringDataConfig

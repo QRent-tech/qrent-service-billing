@@ -2,9 +2,13 @@ package ee.qrent.ui.controller.user;
 
 import static ee.qrent.ui.controller.ControllerUtils.*;
 
-import ee.qrent.user.api.in.query.GetRoleQuery;
-import ee.qrent.user.api.in.request.*;
-import ee.qrent.user.api.in.usecase.*;
+import ee.qrent.billing.user.api.in.query.GetRoleQuery;
+import ee.qrent.billing.user.api.in.request.RoleAddRequest;
+import ee.qrent.billing.user.api.in.request.RoleDeleteRequest;
+import ee.qrent.billing.user.api.in.request.RoleUpdateRequest;
+import ee.qrent.billing.user.api.in.usecase.RoleAddUseCase;
+import ee.qrent.billing.user.api.in.usecase.RoleDeleteUseCase;
+import ee.qrent.billing.user.api.in.usecase.RoleUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

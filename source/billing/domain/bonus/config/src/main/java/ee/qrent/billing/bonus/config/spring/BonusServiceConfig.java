@@ -20,7 +20,7 @@ import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrent.billing.transaction.api.in.usecase.TransactionAddUseCase;
-import ee.qrent.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

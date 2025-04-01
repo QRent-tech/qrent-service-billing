@@ -22,7 +22,7 @@ import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
-import ee.qrent.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

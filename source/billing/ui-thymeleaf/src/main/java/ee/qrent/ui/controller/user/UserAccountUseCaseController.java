@@ -2,14 +2,14 @@ package ee.qrent.ui.controller.user;
 
 import static ee.qrent.ui.controller.ControllerUtils.USER_ROOT_PATH;
 
-import ee.qrent.user.api.in.query.GetRoleQuery;
-import ee.qrent.user.api.in.query.GetUserAccountQuery;
-import ee.qrent.user.api.in.request.UserAccountAddRequest;
-import ee.qrent.user.api.in.request.UserAccountDeleteRequest;
-import ee.qrent.user.api.in.request.UserAccountUpdateRequest;
-import ee.qrent.user.api.in.usecase.UserAccountAddUseCase;
-import ee.qrent.user.api.in.usecase.UserAccountDeleteUseCase;
-import ee.qrent.user.api.in.usecase.UserAccountUpdateUseCase;
+import ee.qrent.billing.user.api.in.query.GetRoleQuery;
+import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.billing.user.api.in.request.UserAccountAddRequest;
+import ee.qrent.billing.user.api.in.request.UserAccountDeleteRequest;
+import ee.qrent.billing.user.api.in.request.UserAccountUpdateRequest;
+import ee.qrent.billing.user.api.in.usecase.UserAccountAddUseCase;
+import ee.qrent.billing.user.api.in.usecase.UserAccountDeleteUseCase;
+import ee.qrent.billing.user.api.in.usecase.UserAccountUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

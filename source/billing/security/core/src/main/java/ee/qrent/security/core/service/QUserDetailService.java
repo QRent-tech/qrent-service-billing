@@ -1,7 +1,7 @@
 package ee.qrent.security.core.service;
 
 import ee.qrent.security.core.QUserPrincipal;
-import ee.qrent.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

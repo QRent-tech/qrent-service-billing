@@ -20,8 +20,8 @@ import ee.qrent.billing.transaction.core.mapper.rent.RentCalculationAddRequestMa
 import ee.qrent.billing.transaction.core.service.TransactionUseCaseService;
 import ee.qrent.billing.transaction.domain.rent.RentCalculation;
 import ee.qrent.billing.transaction.domain.rent.RentCalculationResult;
-import ee.qrent.user.api.in.query.GetUserAccountQuery;
-import ee.qrent.user.api.in.response.UserAccountResponse;
+import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.billing.user.api.in.response.UserAccountResponse;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.HashMap;

@@ -2,7 +2,7 @@ package ee.qrent.ui.controller.user;
 
 import static ee.qrent.ui.controller.ControllerUtils.ROLE_ROOT_PATH;
 
-import ee.qrent.user.api.in.query.GetRoleQuery;
+import ee.qrent.billing.user.api.in.query.GetRoleQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
