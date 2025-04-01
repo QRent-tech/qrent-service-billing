@@ -5,7 +5,7 @@ import ee.qrent.billing.contract.api.out.ContractLoadPort;
 import ee.qrent.billing.contract.core.mapper.ContractAddRequestMapper;
 import ee.qrent.billing.contract.core.mapper.ContractResponseMapper;
 import ee.qrent.billing.contract.core.mapper.ContractUpdateRequestMapper;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.firm.api.in.query.GetFirmQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

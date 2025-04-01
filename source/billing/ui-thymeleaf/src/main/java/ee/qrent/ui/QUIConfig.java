@@ -2,8 +2,8 @@ package ee.qrent.ui;
 
 import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
 import ee.qrent.billing.contract.api.in.query.GetContractQuery;
-import ee.qrent.driver.api.in.query.GetCallSignLinkQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetCallSignLinkQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrent.ui.formatter.QDateFormatter;

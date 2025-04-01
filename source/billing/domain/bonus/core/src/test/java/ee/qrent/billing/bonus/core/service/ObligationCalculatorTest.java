@@ -10,8 +10,8 @@ import static org.mockito.Mockito.when;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
-import ee.qrent.driver.api.in.response.DriverResponse;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.response.DriverResponse;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrent.transaction.api.in.response.TransactionResponse;

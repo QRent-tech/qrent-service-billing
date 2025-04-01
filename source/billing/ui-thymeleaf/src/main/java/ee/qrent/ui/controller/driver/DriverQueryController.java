@@ -2,7 +2,7 @@ package ee.qrent.ui.controller.driver;
 
 import static ee.qrent.ui.controller.ControllerUtils.DRIVER_ROOT_PATH;
 
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.ui.formatter.QDateFormatter;
 import ee.qrent.ui.service.driver.DriverCounterService;
 

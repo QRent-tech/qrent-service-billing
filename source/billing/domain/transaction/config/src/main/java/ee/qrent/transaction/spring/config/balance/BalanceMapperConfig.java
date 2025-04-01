@@ -1,7 +1,7 @@
 package ee.qrent.transaction.spring.config.balance;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.adapter.mapper.balance.BalanceAdapterMapper;
 import ee.qrent.transaction.adapter.mapper.balance.BalanceCalculationAdapterMapper;
 import ee.qrent.transaction.core.mapper.balance.BalanceCalculationAddRequestMapper;

@@ -11,7 +11,7 @@ import ee.qrent.billing.contract.api.in.request.AbsenceUpdateRequest;
 import ee.qrent.billing.contract.api.in.usecase.AbsenceAddUseCase;
 import ee.qrent.billing.contract.api.in.usecase.AbsenceDeleteUseCase;
 import ee.qrent.billing.contract.api.in.usecase.AbsenceUpdateUseCase;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

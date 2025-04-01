@@ -13,7 +13,7 @@ import static org.mockito.Mockito.times;
 
 import ee.qrent.billing.constant.api.in.query.GetConstantQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.driver.api.in.response.DriverResponse;
+import ee.qrent.billing.driver.api.in.response.DriverResponse;
 import ee.qrent.transaction.api.in.response.TransactionResponse;
 import ee.qrent.transaction.domain.balance.Balance;
 import java.math.BigDecimal;

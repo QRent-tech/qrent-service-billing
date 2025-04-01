@@ -5,7 +5,7 @@ import static java.lang.String.format;
 import ee.qrent.common.in.mapper.ResponseMapper;
 import ee.qrent.billing.contract.api.in.response.AbsenceResponse;
 import ee.qrent.billing.contract.domain.Absence;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

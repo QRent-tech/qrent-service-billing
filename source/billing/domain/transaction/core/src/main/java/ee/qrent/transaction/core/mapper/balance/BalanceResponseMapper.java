@@ -4,7 +4,7 @@ import static java.lang.String.format;
 
 import ee.qrent.common.in.mapper.ResponseMapper;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.api.in.response.balance.BalanceResponse;
 import ee.qrent.transaction.domain.balance.Balance;
 import lombok.AllArgsConstructor;

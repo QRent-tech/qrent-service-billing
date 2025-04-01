@@ -4,7 +4,7 @@ import ee.qrent.billing.contract.api.out.AuthorizationLoadPort;
 import ee.qrent.billing.contract.core.mapper.AuthorizationAddRequestMapper;
 import ee.qrent.billing.contract.core.mapper.AuthorizationResponseMapper;
 import ee.qrent.billing.contract.core.mapper.AuthorizationUpdateRequestMapper;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -3,7 +3,7 @@ package ee.qrent.insurance.core.service;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrent.insurance.api.out.InsuranceCaseLoadPort;
 import ee.qrent.insurance.api.out.InsuranceCaseUpdatePort;

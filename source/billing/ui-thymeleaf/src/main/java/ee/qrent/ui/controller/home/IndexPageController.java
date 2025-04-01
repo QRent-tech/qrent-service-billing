@@ -1,7 +1,7 @@
 package ee.qrent.ui.controller.home;
 
 import ee.qrent.billing.car.api.in.query.GetCarQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

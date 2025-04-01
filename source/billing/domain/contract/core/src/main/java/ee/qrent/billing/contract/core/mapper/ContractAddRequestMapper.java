@@ -5,8 +5,8 @@ import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.billing.contract.api.in.request.ContractAddRequest;
 import ee.qrent.billing.contract.domain.Contract;
 import ee.qrent.billing.contract.domain.ContractDuration;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
-import ee.qrent.driver.api.in.response.DriverResponse;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.response.DriverResponse;
 import ee.qrent.firm.api.in.query.GetFirmQuery;
 import lombok.AllArgsConstructor;
 

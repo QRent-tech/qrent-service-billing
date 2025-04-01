@@ -2,8 +2,8 @@ package ee.qrent.invoice.spring.config;
 
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
-import ee.qrent.driver.api.in.query.GetFirmLinkQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.firm.api.in.query.GetFirmQuery;
 import ee.qrent.invoice.api.in.query.GetInvoiceQuery;

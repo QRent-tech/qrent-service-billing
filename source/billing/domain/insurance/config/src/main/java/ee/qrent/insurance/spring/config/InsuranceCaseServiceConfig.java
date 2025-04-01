@@ -6,7 +6,7 @@ import ee.qrent.common.in.validation.CloseRequestValidator;
 import ee.qrent.common.in.validation.UpdateRequestValidator;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.contract.api.in.query.GetContractQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.api.in.query.GetInsuranceCalculationQuery;
 import ee.qrent.insurance.api.in.query.GetInsuranceCaseBalanceQuery;
 import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;

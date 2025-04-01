@@ -2,7 +2,7 @@ package ee.qrent.insurance.spring.config;
 
 import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.adapter.adapter.InsuranceCaseBalancePersistenceAdapter;
 import ee.qrent.insurance.adapter.mapper.InsuranceCalculationAdapterMapper;
 import ee.qrent.insurance.adapter.mapper.InsuranceCaseAdapterMapper;

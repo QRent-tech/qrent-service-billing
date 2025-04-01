@@ -7,7 +7,7 @@ import ee.qrent.billing.contract.api.in.request.AuthorizationAddRequest;
 import ee.qrent.billing.contract.api.in.request.AuthorizationDeleteRequest;
 import ee.qrent.billing.contract.api.in.usecase.AuthorizationAddUseCase;
 import ee.qrent.billing.contract.api.in.usecase.AuthorizationDeleteUseCase;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

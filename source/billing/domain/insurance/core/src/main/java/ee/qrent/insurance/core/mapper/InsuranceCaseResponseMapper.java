@@ -7,7 +7,7 @@ import ee.qrent.common.in.mapper.ResponseMapper;
 
 import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.api.in.response.InsuranceCaseResponse;
 import ee.qrent.insurance.domain.InsuranceCase;
 import lombok.AllArgsConstructor;

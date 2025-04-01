@@ -3,7 +3,7 @@ package ee.qrent.billing.contract.core.mapper;
 import ee.qrent.common.in.mapper.AddRequestMapper;
 import ee.qrent.billing.contract.api.in.request.AuthorizationAddRequest;
 import ee.qrent.billing.contract.domain.Authorization;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 

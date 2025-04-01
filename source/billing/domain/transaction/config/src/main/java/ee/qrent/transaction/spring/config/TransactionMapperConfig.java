@@ -1,6 +1,6 @@
 package ee.qrent.transaction.spring.config;
 
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.api.out.type.TransactionTypeLoadPort;
 import ee.qrent.transaction.core.mapper.TransactionAddRequestMapper;
 import ee.qrent.transaction.core.mapper.TransactionResponseMapper;

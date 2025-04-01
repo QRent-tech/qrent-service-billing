@@ -21,7 +21,7 @@ import ee.qrent.billing.contract.api.in.request.ContractUpdateRequest;
 import ee.qrent.billing.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrent.billing.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrent.billing.contract.api.in.usecase.ContractSendByEmailUseCase;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrent.insurance.api.in.usecase.InsuranceCaseCloseUseCase;

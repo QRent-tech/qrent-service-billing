@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.*;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.request.balance.BalanceCalculationAddRequest;
 import ee.qrent.transaction.api.in.usecase.balance.BalanceCalculationAddUseCase;

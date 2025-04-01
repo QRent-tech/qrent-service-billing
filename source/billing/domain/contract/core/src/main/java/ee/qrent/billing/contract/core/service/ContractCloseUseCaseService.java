@@ -8,7 +8,7 @@ import ee.qrent.billing.contract.api.in.response.InsuranceCaseForContractCloseRe
 import ee.qrent.billing.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrent.billing.contract.api.out.ContractLoadPort;
 import ee.qrent.billing.contract.api.out.ContractUpdatePort;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrent.insurance.api.in.request.InsuranceCaseCloseRequest;
 import ee.qrent.insurance.api.in.request.InsuranceCasePreCloseResponse;

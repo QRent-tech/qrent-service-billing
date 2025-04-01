@@ -12,7 +12,7 @@ import ee.qrent.billing.car.api.in.usecase.CarLinkAddUseCase;
 import ee.qrent.billing.car.api.in.usecase.CarLinkCloseUseCase;
 import ee.qrent.billing.car.api.in.usecase.CarLinkDeleteUseCase;
 import ee.qrent.billing.car.api.in.usecase.CarLinkUpdateUseCase;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

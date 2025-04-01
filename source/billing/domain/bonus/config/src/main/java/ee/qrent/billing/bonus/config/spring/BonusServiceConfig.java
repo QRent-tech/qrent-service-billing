@@ -15,7 +15,7 @@ import ee.qrent.billing.bonus.api.in.usecase.BonusCalculationAddUseCase;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.contract.api.in.query.GetContractQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;

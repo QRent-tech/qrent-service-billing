@@ -5,7 +5,7 @@ import static java.util.stream.Collectors.toList;
 
 import ee.qrent.common.in.mapper.AddRequestMapper;
 import ee.qrent.common.utils.QWeek;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.firm.api.in.query.GetFirmQuery;
 import ee.qrent.invoice.api.in.request.InvoiceAddRequest;
 import ee.qrent.invoice.domain.Invoice;

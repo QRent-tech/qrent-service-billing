@@ -7,7 +7,7 @@ import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
 import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrent.transaction.api.in.request.TransactionAddRequest;

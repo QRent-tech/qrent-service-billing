@@ -5,7 +5,7 @@ import static java.lang.String.format;
 import ee.qrent.billing.bonus.api.in.response.ObligationResponse;
 import ee.qrent.billing.bonus.domain.Obligation;
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

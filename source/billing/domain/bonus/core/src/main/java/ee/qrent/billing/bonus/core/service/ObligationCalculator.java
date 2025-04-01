@@ -5,7 +5,7 @@ import static ee.qrent.transaction.api.in.utils.TransactionTypeConstant.TRANSACT
 import static java.math.BigDecimal.ZERO;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrent.transaction.api.in.response.TransactionResponse;

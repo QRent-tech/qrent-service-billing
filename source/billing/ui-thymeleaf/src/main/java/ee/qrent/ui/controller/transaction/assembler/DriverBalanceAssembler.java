@@ -3,8 +3,8 @@ package ee.qrent.ui.controller.transaction.assembler;
 import static java.util.stream.Collectors.toList;
 
 import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
-import ee.qrent.driver.api.in.response.DriverResponse;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.response.DriverResponse;
 import ee.qrent.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrent.ui.controller.transaction.model.DriversBalanceModel;
 

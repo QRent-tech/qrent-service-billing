@@ -7,7 +7,7 @@ import static java.math.BigDecimal.ROUND_HALF_UP;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.CloseRequestValidator;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.api.in.query.GetQKaskoQuery;
 import ee.qrent.insurance.api.in.request.*;
 import ee.qrent.insurance.api.in.usecase.InsuranceCaseCloseUseCase;

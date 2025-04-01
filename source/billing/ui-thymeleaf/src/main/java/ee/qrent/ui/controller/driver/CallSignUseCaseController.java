@@ -2,13 +2,13 @@ package ee.qrent.ui.controller.driver;
 
 import static ee.qrent.ui.controller.ControllerUtils.CALL_SIGN_ROOT_PATH;
 
-import ee.qrent.driver.api.in.query.GetCallSignQuery;
-import ee.qrent.driver.api.in.request.CallSignAddRequest;
-import ee.qrent.driver.api.in.request.CallSignDeleteRequest;
-import ee.qrent.driver.api.in.request.CallSignUpdateRequest;
-import ee.qrent.driver.api.in.usecase.CallSignAddUseCase;
-import ee.qrent.driver.api.in.usecase.CallSignDeleteUseCase;
-import ee.qrent.driver.api.in.usecase.CallSignUpdateUseCase;
+import ee.qrent.billing.driver.api.in.query.GetCallSignQuery;
+import ee.qrent.billing.driver.api.in.request.CallSignAddRequest;
+import ee.qrent.billing.driver.api.in.request.CallSignDeleteRequest;
+import ee.qrent.billing.driver.api.in.request.CallSignUpdateRequest;
+import ee.qrent.billing.driver.api.in.usecase.CallSignAddUseCase;
+import ee.qrent.billing.driver.api.in.usecase.CallSignDeleteUseCase;
+import ee.qrent.billing.driver.api.in.usecase.CallSignUpdateUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

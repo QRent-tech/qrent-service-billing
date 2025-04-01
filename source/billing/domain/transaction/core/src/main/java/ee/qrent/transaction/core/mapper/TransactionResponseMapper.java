@@ -5,7 +5,7 @@ import static java.lang.String.format;
 
 
 import ee.qrent.common.in.mapper.ResponseMapper;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.api.in.response.TransactionResponse;
 import ee.qrent.transaction.domain.Transaction;
 import lombok.AllArgsConstructor;

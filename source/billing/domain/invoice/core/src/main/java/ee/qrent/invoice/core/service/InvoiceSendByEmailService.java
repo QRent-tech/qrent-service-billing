@@ -2,7 +2,7 @@ package ee.qrent.invoice.core.service;
 
 import static java.util.Collections.singletonList;
 
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.email.api.in.request.EmailSendRequest;
 import ee.qrent.email.api.in.request.EmailType;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;

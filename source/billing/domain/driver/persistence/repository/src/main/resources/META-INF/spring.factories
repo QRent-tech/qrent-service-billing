@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrent.driver.repository.DriverSpringDataConfig
+ee.qrent.billing.driver.persistence.repository.DriverSpringDataConfig

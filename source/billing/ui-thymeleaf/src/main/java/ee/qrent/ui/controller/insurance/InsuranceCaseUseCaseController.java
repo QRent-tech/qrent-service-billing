@@ -1,7 +1,7 @@
 package ee.qrent.ui.controller.insurance;
 
 import ee.qrent.billing.car.api.in.query.GetCarQuery;
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrent.insurance.api.in.request.*;
 import ee.qrent.insurance.api.in.usecase.InsuranceCaseAddUseCase;

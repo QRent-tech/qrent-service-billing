@@ -2,7 +2,7 @@ package ee.qrent.ui.controller.transaction.transaction;
 
 import static ee.qrent.ui.controller.ControllerUtils.TRANSACTION_ROOT_PATH;
 
-import ee.qrent.driver.api.in.query.GetDriverQuery;
+import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrent.transaction.api.in.request.TransactionAddRequest;
