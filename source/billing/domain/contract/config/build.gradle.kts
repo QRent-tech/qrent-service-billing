@@ -13,7 +13,6 @@ dependencies {
     implementation(project(":source:billing:domain:driver:api:in"))
     implementation(project(":source:billing:domain:insurance:api:in"))
     implementation(project(":source:billing:domain:firm:api:in"))
-    implementation(project(":source:cross:email:api:in"))
 
     implementation("org.springframework:spring-context-support")
     compileOnly(libs.q.lombok)

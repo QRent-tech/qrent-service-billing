@@ -4,7 +4,6 @@ dependencies {
     implementation(project(":source:billing:domain:transaction:core"))
     implementation(project(":source:billing:domain:transaction:api:in"))
     implementation(project(":source:billing:domain:transaction:api:out"))
-    implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:billing:domain:user:api:in"))
     implementation(project(":source:billing:domain:transaction:persistence:flyway"))
     implementation(project(":source:billing:domain:transaction:persistence:adapter"))

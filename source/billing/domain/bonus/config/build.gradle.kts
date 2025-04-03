@@ -12,7 +12,6 @@ dependencies {
 
     implementation(project(":source:billing:domain:constant:api:in"))
     implementation(project(":source:billing:domain:transaction:api:in"))
-    implementation(project(":source:cross:email:api:in"))
     implementation(project(":source:billing:domain:car:api:in"))
     implementation(project(":source:billing:domain:driver:api:in"))
     implementation(project(":source:billing:domain:user:api:in"))

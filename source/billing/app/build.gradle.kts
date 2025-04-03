@@ -25,7 +25,6 @@ dependencies {
     implementation(project(":source:billing:domain:insurance:persistence:flyway"))
     implementation(project(":source:billing:domain:user:config"))
     implementation(project(":source:billing:domain:user:persistence:flyway"))
-    implementation(project(":source:cross:email:config"))
     implementation(project(":source:billing:task"))
     implementation(project(":source:billing:security:config"))
 

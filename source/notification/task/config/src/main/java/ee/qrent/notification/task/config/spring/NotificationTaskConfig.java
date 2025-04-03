@@ -1,7 +1,7 @@
 package ee.qrent.notification.task.config.spring;
 
 import ee.qrent.common.in.usecase.RunTaskUseCase;
-import ee.qrent.notification.task.core.EmailNotificationScheduler;
+import ee.qrent.notification.task.core.NotificationTaskScheduler;
 import ee.qrent.notification.task.core.EmailNotificationTask;
 import ee.qrent.notification.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.queue.api.in.QueueEntryPullUseCase;
@@ -41,9 +41,9 @@ public class NotificationTaskConfig {
   }
 
   @Bean
-  EmailNotificationScheduler getEmailNotificationScheduler(
+  NotificationTaskScheduler getEmailNotificationScheduler(
       final RunTaskUseCase runTaskUseCase, final EmailNotificationTask task) {
 
-    return new EmailNotificationScheduler(runTaskUseCase, task);
+    return new NotificationTaskScheduler(runTaskUseCase, task);
   }
 }
