@@ -1,29 +1,29 @@
 package ee.qrent.invoice.core.service;
 
+import static ee.qrent.queue.api.in.EntryType.INVOICE_EMAIL;
 import static java.util.Collections.singletonList;
 
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.invoice.api.in.request.InvoiceSendByEmailRequest;
 import ee.qrent.invoice.api.in.usecase.InvoicePdfUseCase;
 import ee.qrent.invoice.api.in.usecase.InvoiceSendByEmailUseCase;
 import ee.qrent.invoice.api.out.InvoiceLoadPort;
 import java.util.HashMap;
+
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 @AllArgsConstructor
 public class InvoiceSendByEmailService implements InvoiceSendByEmailUseCase {
 
-  private final EmailSendUseCase emailSendUseCase;
-
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final InvoiceLoadPort invoiceLoadPort;
-
   private final InvoicePdfUseCase invoicePdfUseCase;
-
   private final GetDriverQuery driverQuery;
+  private final QDateTime qDateTime;
 
   @SneakyThrows
   @Override
@@ -36,15 +36,15 @@ public class InvoiceSendByEmailService implements InvoiceSendByEmailUseCase {
     final var attachment = invoicePdfUseCase.getPdfInputStreamById(invoiceId);
     final var properties = new HashMap<String, Object>();
     properties.put("invoiceNumber", invoice.getNumber());
-
-    final var emailSendRequest =
-        EmailSendRequest.builder()
-            .type(EmailType.INVOICE)
-            .recipients(singletonList(recipient))
-            .attachment(attachment)
-            .properties(properties)
+    final var notificationQueuePushRequest =
+        QueueEntryPushRequest.builder()
+            .occurredAt(qDateTime.getNow())
+            .type(INVOICE_EMAIL)
+            .payloadRecipients(singletonList(recipient))
+            .payloadAttachment(attachment)
+            .payloadProperties(properties)
             .build();
 
-    emailSendUseCase.sendEmail(emailSendRequest);
+    notificationQueuePushUseCase.push(notificationQueuePushRequest);
   }
 }

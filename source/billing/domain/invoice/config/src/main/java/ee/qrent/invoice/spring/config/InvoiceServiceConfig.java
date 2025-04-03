@@ -1,10 +1,10 @@
 package ee.qrent.invoice.spring.config;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.billing.driver.api.in.query.GetFirmLinkQuery;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import ee.qrent.invoice.api.in.query.GetInvoiceQuery;
 import ee.qrent.invoice.api.in.request.InvoiceAddRequest;
@@ -19,6 +19,7 @@ import ee.qrent.invoice.core.service.pdf.InvoiceToPdfModelMapper;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -82,13 +83,14 @@ public class InvoiceServiceConfig {
       final GetTransactionQuery transactionQuery,
       final GetTransactionTypeQuery transactionTypeQuery,
       final GetFirmLinkQuery firmLinkQuery,
-      final EmailSendUseCase emailSendUseCase,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
       final InvoiceCalculationLoadPort loadPort,
       final InvoiceCalculationAddRequestMapper addRequestMapper,
       final AddRequestValidator<InvoiceCalculationAddRequest> addRequestValidator,
       final InvoiceCalculationAddPort invoiceCalculationAddPort,
       final InvoiceToPdfConverter invoiceToPdfConverter,
-      final InvoiceToPdfModelMapper invoiceToPdfModelMapper) {
+      final InvoiceToPdfModelMapper invoiceToPdfModelMapper,
+      final QDateTime qDateTime) {
     return new InvoiceCalculationService(
         qWeekQuery,
         driverQuery,
@@ -97,23 +99,25 @@ public class InvoiceServiceConfig {
         transactionQuery,
         transactionTypeQuery,
         firmLinkQuery,
-        emailSendUseCase,
+        notificationQueuePushUseCase,
         loadPort,
         addRequestMapper,
         addRequestValidator,
         invoiceCalculationAddPort,
         invoiceToPdfConverter,
-        invoiceToPdfModelMapper);
+        invoiceToPdfModelMapper,
+        qDateTime);
   }
 
   @Bean
   InvoiceSendByEmailUseCase getInvoiceSendByEmailUseCase(
-      final EmailSendUseCase emailSendUseCase,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
       final InvoiceLoadPort invoiceLoadPort,
       final GetDriverQuery driverQuery,
-      InvoicePdfUseCase invoicePdfUseCase) {
+      final InvoicePdfUseCase invoicePdfUseCase,
+      final QDateTime qDateTime) {
     return new InvoiceSendByEmailService(
-        emailSendUseCase, invoiceLoadPort, invoicePdfUseCase, driverQuery);
+        notificationQueuePushUseCase, invoiceLoadPort, invoicePdfUseCase, driverQuery, qDateTime);
   }
 
   @Bean

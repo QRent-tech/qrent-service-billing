@@ -1,5 +1,6 @@
 package ee.qrent.invoice.core.service;
 
+import static ee.qrent.queue.api.in.EntryType.INVOICE_EMAIL;
 import static java.lang.String.format;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.ZERO;
@@ -7,15 +8,13 @@ import static java.util.Collections.singletonList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
 import ee.qrent.billing.driver.api.in.query.GetFirmLinkQuery;
 import ee.qrent.billing.driver.api.in.response.DriverResponse;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.firm.api.in.query.GetFirmQuery;
 import ee.qrent.billing.firm.api.in.response.FirmResponse;
 import ee.qrent.invoice.api.in.request.InvoiceCalculationAddRequest;
@@ -35,6 +34,8 @@ import ee.qrent.billing.transaction.api.in.query.filter.PeriodAndKindAndDriverTr
 import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
 import ee.qrent.billing.transaction.api.in.response.balance.BalanceResponse;
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import jakarta.transaction.Transactional;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -50,7 +51,6 @@ import lombok.AllArgsConstructor;
 public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
 
   private static final BigDecimal VAT_RATE = BigDecimal.valueOf(0.819672d);
-  private static final LocalDate DEFAULT_START_DATE = LocalDate.of(2023, Month.JANUARY, 2);
 
   private final GetQWeekQuery qWeekQuery;
   private final GetDriverQuery driverQuery;
@@ -59,13 +59,14 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
   private final GetTransactionQuery transactionQuery;
   private final GetTransactionTypeQuery transactionTypeQuery;
   private final GetFirmLinkQuery firmLinkQuery;
-  private final EmailSendUseCase emailSendUseCase;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final InvoiceCalculationLoadPort loadPort;
   private final InvoiceCalculationAddRequestMapper addRequestMapper;
   private final AddRequestValidator<InvoiceCalculationAddRequest> addRequestValidator;
   private final InvoiceCalculationAddPort invoiceCalculationAddPort;
   private final InvoiceToPdfConverter invoiceToPdfConverter;
   private final InvoiceToPdfModelMapper invoiceToPdfModelMapper;
+  private final QDateTime qDateTime;
 
   @Transactional
   @Override
@@ -286,11 +287,11 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
           weekNumber);
       final var qFirmId = driver.getQFirmId();
 
-        return firmQuery.getById(qFirmId);
+      return firmQuery.getById(qFirmId);
     }
     final var qFirmId = firmLink.getFirmId();
 
-      return firmQuery.getById(qFirmId);
+    return firmQuery.getById(qFirmId);
   }
 
   private void sendEmails(InvoiceCalculation invoiceCalculation) {
@@ -324,16 +325,16 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
               final var attachment = getAttachment(invoice);
               final var properties = new HashMap<String, Object>();
               properties.put("invoiceNumber", invoice.getNumber());
-
-              final var emailSendRequest =
-                  EmailSendRequest.builder()
-                      .type(EmailType.INVOICE)
-                      .recipients(singletonList(recipient))
-                      .attachment(attachment)
-                      .properties(properties)
+              final var notificationQueuePushRequest =
+                  QueueEntryPushRequest.builder()
+                      .occurredAt(qDateTime.getNow())
+                      .type(INVOICE_EMAIL)
+                      .payloadRecipients(singletonList(recipient))
+                      .payloadAttachment(attachment)
+                      .payloadProperties(properties)
                       .build();
-              emailSendUseCase.sendEmail(emailSendRequest);
-              System.out.println("Email was sent: " + emailSendRequest);
+
+              notificationQueuePushUseCase.push(notificationQueuePushRequest);
 
               progressTracking(handledInvoices, invoicesCount);
               final var handledInvoicesInt = handledInvoices.getAndIncrement();
