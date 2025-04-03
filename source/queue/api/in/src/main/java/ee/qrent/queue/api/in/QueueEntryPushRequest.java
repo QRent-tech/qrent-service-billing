@@ -15,7 +15,7 @@ import java.util.Map;
 public class QueueEntryPushRequest {
   private final LocalDateTime occurredAt;
   private final List<String> payloadRecipients;
-  private final String payloadType;
+  private final EntryType type;
   private final InputStream payloadAttachment;
   private final Map<String, Object> payloadProperties;
 }

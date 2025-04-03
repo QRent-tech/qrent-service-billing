@@ -28,7 +28,7 @@ public class QueueEntryPushRequestMapper {
 
     return NotificationPayload.builder()
         .recipients(pushRequest.getPayloadRecipients())
-        .type(pushRequest.getPayloadType())
+        .type(pushRequest.getType().name())
         .attachment(pushRequest.getPayloadAttachment())
         .properties(pushRequest.getPayloadProperties())
         .build();

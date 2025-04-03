@@ -5,6 +5,7 @@ import static ee.qrent.billing.transaction.api.in.utils.TransactionTypeConstant.
 import static java.math.BigDecimal.ZERO;
 import static java.util.stream.Collectors.toList;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrent.billing.bonus.api.in.usecase.ObligationCalculationAddUseCase;
@@ -17,13 +18,13 @@ import ee.qrent.billing.bonus.domain.ObligationCalculationResult;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import ee.qrent.billing.user.api.in.response.UserAccountResponse;
+import ee.qrent.queue.api.in.EntryType;
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -38,13 +39,14 @@ public class ObligationCalculationService implements ObligationCalculationAddUse
   private final GetTransactionQuery transactionQuery;
   private final GetCarLinkQuery carLinkQuery;
   private final GetUserAccountQuery userAccountQuery;
-  private final EmailSendUseCase emailSendUseCase;
+  private final QueueEntryPushUseCase queueEntryPushUseCase;
   private final ObligationCalculationAddPort calculationAddPort;
   private final ObligationAddPort obligationAddPort;
   private final ObligationLoadPort loadPort;
   private final ObligationCalculationAddRequestMapper addRequestMapper;
   private final AddRequestValidator<ObligationCalculationAddRequest> addRequestValidator;
   private final ObligationCalculator obligationCalculator;
+  private final QDateTime qDateTime;
 
   @Transactional
   @Override
@@ -158,13 +160,14 @@ public class ObligationCalculationService implements ObligationCalculationAddUse
         loadPort.loadAllByIds(
             results.stream().map(ObligationCalculationResult::getObligationId).collect(toList())));
 
-    final var emailSendRequest =
-        EmailSendRequest.builder()
-            .type(EmailType.OBLIGATION_CALCULATION)
-            .recipients(recipients)
-            .properties(emailProperties)
+    final var queueEntryPushRequest =
+        QueueEntryPushRequest.builder()
+            .occurredAt(qDateTime.getNow())
+            .payloadRecipients(recipients)
+            .type(EntryType.OBLIGATION_CALCULATION_EMAIL)
+            .payloadProperties(emailProperties)
             .build();
 
-    emailSendUseCase.sendEmail(emailSendRequest);
+    queueEntryPushUseCase.push(queueEntryPushRequest);
   }
 }

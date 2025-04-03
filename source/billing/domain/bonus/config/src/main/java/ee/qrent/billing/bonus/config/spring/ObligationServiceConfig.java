@@ -1,5 +1,6 @@
 package ee.qrent.billing.bonus.config.spring;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.bonus.api.in.query.GetObligationCalculationQuery;
 import ee.qrent.billing.bonus.api.in.query.GetObligationQuery;
@@ -19,10 +20,10 @@ import ee.qrent.billing.bonus.core.service.ObligationQueryService;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,6 +35,7 @@ public class ObligationServiceConfig {
       final GetQWeekQuery qWeekQuery,
       final ObligationCalculationLoadPort loadPort,
       final ObligationCalculationResponseMapper responseMapper) {
+
     return new ObligationCalculationQueryService(qWeekQuery, loadPort, responseMapper);
   }
 
@@ -43,6 +45,7 @@ public class ObligationServiceConfig {
       final ObligationLoadPort loadPort,
       final ObligationCalculator obligationCalculator,
       final ObligationResponseMapper responseMapper) {
+
     return new ObligationQueryService(qWeekQuery, loadPort, obligationCalculator, responseMapper);
   }
 
@@ -52,6 +55,7 @@ public class ObligationServiceConfig {
       final GetBalanceQuery balanceQuery,
       final GetDriverQuery driverQuery,
       final GetTransactionQuery transactionQuery) {
+
     return new ObligationCalculator(qWeekQuery, balanceQuery, driverQuery, transactionQuery);
   }
 
@@ -61,24 +65,27 @@ public class ObligationServiceConfig {
       final GetTransactionQuery transactionQuery,
       final GetCarLinkQuery carLinkQuery,
       final GetUserAccountQuery userAccountQuery,
-      final EmailSendUseCase emailSendUseCase,
+      final QueueEntryPushUseCase queueEntryPushUseCase,
       final ObligationCalculationAddPort calculationAddPort,
       final ObligationAddPort obligationAddPort,
       final ObligationLoadPort loadPort,
       final ObligationCalculationAddRequestMapper addRequestMapper,
       final AddRequestValidator<ObligationCalculationAddRequest> addRequestValidator,
-      final ObligationCalculator obligationCalculator) {
+      final ObligationCalculator obligationCalculator,
+      final QDateTime qDateTime) {
+
     return new ObligationCalculationService(
         qWeekQuery,
         transactionQuery,
         carLinkQuery,
         userAccountQuery,
-        emailSendUseCase,
+        queueEntryPushUseCase,
         calculationAddPort,
         obligationAddPort,
         loadPort,
         addRequestMapper,
         addRequestValidator,
-        obligationCalculator);
+        obligationCalculator,
+        qDateTime);
   }
 }
