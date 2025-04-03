@@ -14,6 +14,7 @@ dependencies {
     implementation(project(":source:common:core"))
     implementation(project(":source:common:utils"))
     implementation(project(":source:notification:domain:email:api:in"))
+    //TODO change to API:IN or Remove
     implementation(project(":source:notification:task:core"))
 
     implementation("org.springframework.boot:spring-boot-starter-web")

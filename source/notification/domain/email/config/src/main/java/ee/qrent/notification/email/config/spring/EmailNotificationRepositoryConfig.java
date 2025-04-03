@@ -12,6 +12,7 @@ public class EmailNotificationRepositoryConfig {
   @Bean
   EmailNotificationRepository getEmailNotificationRepository(
       final EmailNotificationSpringDataRepository springDataRepository) {
+
     return new EmailNotificationRepositoryImpl(springDataRepository);
   }
 }

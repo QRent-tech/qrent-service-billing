@@ -6,7 +6,7 @@ import jakarta.mail.internet.MimeMessage;
 import java.io.IOException;
 
 public interface LetterBuildStrategy {
-    boolean canApply(final EmailSendRequest emailSendRequest);
+  boolean canApply(final EmailSendRequest emailSendRequest);
 
   MimeMessage process(final EmailSendRequest emailSendRequest, final MimeMessage message)
       throws MessagingException, IOException;

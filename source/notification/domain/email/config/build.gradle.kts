@@ -5,9 +5,9 @@ dependencies {
     implementation(project(":source:notification:domain:email:domain"))
     implementation(project(":source:notification:domain:email:persistence:adapter"))
     implementation(project(":source:notification:domain:email:persistence:repository"))
+
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-mail")
-
     implementation("org.springframework:spring-context-support")
 
     compileOnly(libs.q.lombok)

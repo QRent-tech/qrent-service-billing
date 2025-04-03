@@ -11,6 +11,7 @@ public class EmailNotificationAdapterConfig {
 
   @Bean
   EmailNotificationAdapterMapper getEmailNotificationAdapterMapper() {
+
     return new EmailNotificationAdapterMapper();
   }
 

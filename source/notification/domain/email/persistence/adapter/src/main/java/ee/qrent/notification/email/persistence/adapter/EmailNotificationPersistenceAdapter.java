@@ -21,7 +21,7 @@ public class EmailNotificationPersistenceAdapter
   }
 
   @Override
-  public void delete(Long id) {
+  public void delete(final Long id) {
     repository.deleteById(id);
   }
 }

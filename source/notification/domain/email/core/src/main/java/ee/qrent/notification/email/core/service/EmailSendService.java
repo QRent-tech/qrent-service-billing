@@ -9,6 +9,7 @@ import java.util.List;
 
 import ee.qrent.notification.email.domain.EmailNotification;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.mail.javamail.JavaMailSender;
 
 @AllArgsConstructor
@@ -19,25 +20,20 @@ public class EmailSendService implements EmailSendUseCase {
   private final AddPort<EmailNotification> addPort;
   private final AddRequestMapper<EmailSendRequest, EmailNotification> addRequestMapper;
 
+  @SneakyThrows
   @Override
   public void sendEmail(final EmailSendRequest request) {
-    try {
-      final var message =
-          letterBuildStrategies.stream()
-              .filter(letterBuildStrategy -> letterBuildStrategy.canApply(request))
-              .findFirst()
-              .orElseThrow(
-                  () ->
-                      new RuntimeException(
-                          "No Email Letter build Strategy were found for " + request.getType()))
-              .process(request, mailSender.createMimeMessage());
-      mailSender.send(message);
-      final var domain = addRequestMapper.toDomain(request);
-      addPort.add(domain);
-      
-    } catch (final Exception e) {
-      System.out.println("Email sending failed! Check the reason below: ");
-      System.out.println(e.getMessage());
-    }
+    final var message =
+        letterBuildStrategies.stream()
+            .filter(letterBuildStrategy -> letterBuildStrategy.canApply(request))
+            .findFirst()
+            .orElseThrow(
+                () ->
+                    new RuntimeException(
+                        "No Email Letter build Strategy were found for " + request.getType()))
+            .process(request, mailSender.createMimeMessage());
+    mailSender.send(message);
+    final var domain = addRequestMapper.toDomain(request);
+    addPort.add(domain);
   }
 }

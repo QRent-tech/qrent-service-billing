@@ -9,11 +9,12 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
-import org.hibernate.type.SqlTypes;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
+import static org.hibernate.type.SqlTypes.JSON;
 
 @Entity
 @Table(name = "q_email_notification")
@@ -28,13 +29,13 @@ public class EmailNotificationJakartaEntity {
   private Long id;
 
   @Column(name = "type")
-  private Boolean type;
+  private String type;
 
   @Column(name = "sent_at")
-  private LocalDate sentAt;
+  private LocalDateTime sentAt;
 
   @Type(JsonBinaryType.class)
-  @JdbcTypeCode(SqlTypes.JSON)
+  @JdbcTypeCode(JSON)
   @Column(name = "payload", columnDefinition = "jsonb")
   private EmailNotificationPayloadJson payload;
 }
