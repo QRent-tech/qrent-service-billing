@@ -6,19 +6,22 @@ import ee.qrent.billing.contract.api.in.request.AuthorizationSendByEmailRequest;
 import ee.qrent.billing.contract.api.in.usecase.AuthorizationPdfUseCase;
 import ee.qrent.billing.contract.api.in.usecase.AuthorizationSendByEmailUseCase;
 import ee.qrent.billing.contract.api.out.AuthorizationLoadPort;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import java.util.HashMap;
+
+import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.queue.api.in.EntryType;
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 @AllArgsConstructor
 public class AuthorizationSendByEmailService implements AuthorizationSendByEmailUseCase {
 
-  private final EmailSendUseCase emailSendUseCase;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final AuthorizationLoadPort loadPort;
   private final AuthorizationPdfUseCase pdfUseCase;
+  private final QDateTime qDateTime;
 
   @SneakyThrows
   @Override
@@ -31,14 +34,15 @@ public class AuthorizationSendByEmailService implements AuthorizationSendByEmail
     final var properties = new HashMap<String, Object>();
     properties.put("isikukood", authorization.getDriverIsikukood());
 
-    final var emailSendRequest =
-        EmailSendRequest.builder()
-            .type(EmailType.AUTHORIZATION)
-            .recipients(singletonList(recipient))
-            .attachment(attachment)
-            .properties(properties)
+    final var notificationQueuePushRequest =
+        QueueEntryPushRequest.builder()
+            .occurredAt(qDateTime.getNow())
+            .type(EntryType.AUTHORIZATION_EMAIL)
+            .payloadRecipients(singletonList(recipient))
+            .payloadAttachment(attachment)
+            .payloadProperties(properties)
             .build();
 
-    emailSendUseCase.sendEmail(emailSendRequest);
+    notificationQueuePushUseCase.push(notificationQueuePushRequest);
   }
 }

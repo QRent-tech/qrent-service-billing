@@ -17,7 +17,9 @@ import ee.qrent.billing.contract.core.service.AuthorizationUseCaseService;
 import ee.qrent.billing.contract.core.service.pdf.AuthorizationToPdfConverter;
 import ee.qrent.billing.contract.core.service.pdf.AuthorizationToPdfModelMapper;
 import ee.qrent.billing.contract.core.validator.AuthorizationAddRequestValidator;
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.email.api.in.usecase.EmailSendUseCase;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,6 +31,7 @@ public class AuthorizationServiceConfig {
       final AuthorizationLoadPort loadPort,
       final AuthorizationResponseMapper mapper,
       final AuthorizationUpdateRequestMapper updateRequestMapper) {
+
     return new AuthorizationQueryService(loadPort, mapper, updateRequestMapper);
   }
 
@@ -41,6 +44,7 @@ public class AuthorizationServiceConfig {
       final AuthorizationAddRequestMapper addRequestMapper,
       final AuthorizationUpdateRequestMapper updateRequestMapper,
       final AuthorizationAddRequestValidator addRequestValidator) {
+
     return new AuthorizationUseCaseService(
         addPort,
         updatePort,
@@ -53,20 +57,25 @@ public class AuthorizationServiceConfig {
 
   @Bean
   AuthorizationToPdfConverter getAuthorizationBoltToPdfConverter() {
+
     return new AuthorizationToPdfConverter();
   }
 
   @Bean
   AuthorizationToPdfModelMapper getAuthorizationBoltToPdfModelMapper() {
+
     return new AuthorizationToPdfModelMapper();
   }
 
   @Bean
   AuthorizationSendByEmailUseCase getAuthorizationBoltSendByEmailUseCase(
-      final EmailSendUseCase emailSendUseCase,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
       final AuthorizationLoadPort loadPort,
-      final AuthorizationPdfUseCase pdfUseCase) {
-    return new AuthorizationSendByEmailService(emailSendUseCase, loadPort, pdfUseCase);
+      final AuthorizationPdfUseCase pdfUseCase,
+      final QDateTime qDateTime) {
+
+    return new AuthorizationSendByEmailService(
+        notificationQueuePushUseCase, loadPort, pdfUseCase, qDateTime);
   }
 
   @Bean
@@ -74,6 +83,7 @@ public class AuthorizationServiceConfig {
       final AuthorizationLoadPort loadPort,
       final AuthorizationToPdfConverter converter,
       final AuthorizationToPdfModelMapper mapper) {
+
     return new AuthorizationPdfUseCaseImpl(loadPort, converter, mapper);
   }
 }
