@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-ee.qrent.notification.config.spring.NotificationTaskConfig
+ee.qrent.notification.task.config.spring.NotificationTaskConfig

@@ -35,7 +35,7 @@ public class EmailNotificationServiceConfig {
   }
 
   @Bean
-  EmailSendUseCase getEmailSendUseCase(
+  EmailSendUseCase getEmailSendService(
       final JavaMailSender mailSender,
       final List<LetterBuildStrategy> strategies,
       final AddPort<EmailNotification> addPort,

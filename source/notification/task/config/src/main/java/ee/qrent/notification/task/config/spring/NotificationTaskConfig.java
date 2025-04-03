@@ -1,5 +1,10 @@
-package ee.qrent.notification.config.spring;
+package ee.qrent.notification.task.config.spring;
 
+import ee.qrent.common.in.usecase.RunTaskUseCase;
+import ee.qrent.notification.task.core.EmailNotificationScheduler;
+import ee.qrent.notification.task.core.EmailNotificationTask;
+import ee.qrent.notification.email.api.in.usecase.EmailSendUseCase;
+import ee.qrent.queue.api.in.QueueEntryPullUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -12,7 +17,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 public class NotificationTaskConfig {
 
   @Bean
-  public TaskScheduler getNotificationTaskScheduler() {
+  TaskScheduler getNotificationTaskScheduler() {
     final var threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
     final var NOTIFICATION_EXECUTOR_POOL_SIZE = 10;
     threadPoolTaskScheduler.setPoolSize(NOTIFICATION_EXECUTOR_POOL_SIZE);
@@ -23,8 +28,22 @@ public class NotificationTaskConfig {
   }
 
   @Bean
-  public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+  PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 
     return new PropertySourcesPlaceholderConfigurer();
+  }
+
+  @Bean
+  EmailNotificationTask getEmailNotificationTask(
+      final EmailSendUseCase emailSendUseCase, final QueueEntryPullUseCase queuePullUseCase) {
+
+    return new EmailNotificationTask(emailSendUseCase, queuePullUseCase);
+  }
+
+  @Bean
+  EmailNotificationScheduler getEmailNotificationScheduler(
+      final RunTaskUseCase runTaskUseCase, final EmailNotificationTask task) {
+
+    return new EmailNotificationScheduler(runTaskUseCase, task);
   }
 }

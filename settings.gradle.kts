@@ -27,6 +27,7 @@ include("source:queue:persistence:entity")
 include("source:queue:persistence:repository")
 
 include("source:notification:app")
+include("source:notification:rest")
 include("source:notification:domain:email:api:in")
 include("source:notification:domain:email:api:out")
 include("source:notification:domain:email:domain")
