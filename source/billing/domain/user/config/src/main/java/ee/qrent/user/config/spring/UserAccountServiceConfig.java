@@ -1,6 +1,5 @@
 package ee.qrent.user.config.spring;
 
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.security.api.in.usecase.PasswordUseCase;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import ee.qrent.billing.user.api.out.UserAccountAddPort;
@@ -13,6 +12,8 @@ import ee.qrent.billing.user.core.mapper.UserAccountUpdateRequestMapper;
 import ee.qrent.billing.user.core.service.UserAccountQueryService;
 import ee.qrent.billing.user.core.service.UserAccountUseCaseService;
 import ee.qrent.billing.user.core.validator.UserAccountRequestValidator;
+import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -36,15 +37,19 @@ public class UserAccountServiceConfig {
       final UserAccountAddRequestMapper addRequestMapper,
       final UserAccountUpdateRequestMapper updateRequestMapper,
       final UserAccountRequestValidator requestValidator,
-      final EmailSendUseCase emailSendUseCase, final PasswordUseCase passwordUseCase) {
+      final PasswordUseCase passwordUseCase,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
+      final QDateTime qDateTime) {
     return new UserAccountUseCaseService(
-        addPort, 
-            updatePort, 
-            deletePort, 
-            loadPort, 
-            addRequestMapper, 
-            updateRequestMapper,
-            requestValidator,
-            emailSendUseCase, passwordUseCase);
+        addPort,
+        updatePort,
+        deletePort,
+        loadPort,
+        addRequestMapper,
+        updateRequestMapper,
+        requestValidator,
+        passwordUseCase,
+        notificationQueuePushUseCase,
+        qDateTime);
   }
 }

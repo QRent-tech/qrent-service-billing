@@ -6,7 +6,6 @@ import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.query.GetCarQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.contract.api.in.query.GetAbsenceQuery;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceCalculationQuery;
 import ee.qrent.billing.transaction.api.in.query.rent.GetRentCalculationQuery;
@@ -21,6 +20,7 @@ import ee.qrent.billing.transaction.core.service.rent.RentCalculationQueryServic
 import ee.qrent.billing.transaction.core.service.rent.RentCalculationService;
 import ee.qrent.billing.transaction.core.service.rent.RentTransactionGenerator;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,6 +33,7 @@ public class RentServiceConfig {
       final GetBalanceCalculationQuery balanceCalculationQuery,
       final RentCalculationLoadPort loadPort,
       final RentCalculationResponseMapper responseMapper) {
+
     return new RentCalculationQueryService(
         qWeekQuery, balanceCalculationQuery, loadPort, responseMapper);
   }
@@ -46,10 +47,11 @@ public class RentServiceConfig {
       final RentCalculationAddPort rentCalculationAddPort,
       final RentCalculationAddRequestMapper addRequestMapper,
       final AddRequestValidator<RentCalculationAddRequest> addRequestValidator,
-      final EmailSendUseCase emailSendUseCase,
       final GetUserAccountQuery userAccountQuery,
       final GetQWeekQuery weekQuery,
-      final GetAbsenceQuery absenceQuery) {
+      final GetAbsenceQuery absenceQuery,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
+      final QDateTime qDateTime) {
 
     return new RentCalculationService(
         rentTransactionGenerator,
@@ -59,10 +61,11 @@ public class RentServiceConfig {
         rentCalculationAddPort,
         addRequestMapper,
         addRequestValidator,
-        emailSendUseCase,
         userAccountQuery,
         weekQuery,
-        absenceQuery);
+        absenceQuery,
+        notificationQueuePushUseCase,
+        qDateTime);
   }
 
   @Bean
@@ -70,6 +73,7 @@ public class RentServiceConfig {
       final TransactionTypeLoadPort transactionTypeLoadPort,
       final GetCarQuery carQuery,
       final QDateTime qDateTime) {
+
     return new RentTransactionGenerator(transactionTypeLoadPort, carQuery, qDateTime);
   }
 }

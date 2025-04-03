@@ -1,16 +1,16 @@
 package ee.qrent.billing.transaction.core.service.rent;
 
+import static ee.qrent.queue.api.in.EntryType.RENT_CALCULATION_EMAIL;
+
 import static java.util.stream.Collectors.toList;
 
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
 import ee.qrent.billing.contract.api.in.query.GetAbsenceQuery;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.request.TransactionAddRequest;
 import ee.qrent.billing.transaction.api.in.request.rent.RentCalculationAddRequest;
@@ -22,6 +22,8 @@ import ee.qrent.billing.transaction.domain.rent.RentCalculation;
 import ee.qrent.billing.transaction.domain.rent.RentCalculationResult;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import ee.qrent.billing.user.api.in.response.UserAccountResponse;
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -39,10 +41,11 @@ public class RentCalculationService implements RentCalculationAddUseCase {
   private final RentCalculationAddPort rentCalculationAddPort;
   private final RentCalculationAddRequestMapper addRequestMapper;
   private final AddRequestValidator<RentCalculationAddRequest> addRequestValidator;
-  private final EmailSendUseCase emailSendUseCase;
   private final GetUserAccountQuery userAccountQuery;
   private final GetQWeekQuery qWeekQuery;
   private final GetAbsenceQuery absenceQuery;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
+  private final QDateTime qDateTime;
 
   @Transactional
   @Override
@@ -135,14 +138,14 @@ public class RentCalculationService implements RentCalculationAddUseCase {
         "transactions",
         transactionQuery.getAllByIds(
             results.stream().map(RentCalculationResult::getTransactionId).collect(toList())));
-
-    final var emailSendRequest =
-        EmailSendRequest.builder()
-            .type(EmailType.RENT_CALCULATION)
-            .recipients(recipients)
-            .properties(emailProperties)
+    final var notificationQueuePushRequest =
+        QueueEntryPushRequest.builder()
+            .occurredAt(qDateTime.getNow())
+            .type(RENT_CALCULATION_EMAIL)
+            .payloadRecipients(recipients)
+            .payloadProperties(emailProperties)
             .build();
 
-    emailSendUseCase.sendEmail(emailSendRequest);
+    notificationQueuePushUseCase.push(notificationQueuePushRequest);
   }
 }

@@ -1,11 +1,10 @@
 package ee.qrent.billing.user.core.service;
 
-import static ee.qrent.email.api.in.request.EmailType.USER_REGISTRATION;
+import static ee.qrent.queue.api.in.EntryType.USER_REGISTRATION_EMAIL;
 import static java.util.Collections.singletonList;
 
 import ee.qrent.billing.user.domain.UserAccount;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.billing.security.api.in.usecase.PasswordUseCase;
 import ee.qrent.billing.user.api.in.request.UserAccountAddRequest;
 import ee.qrent.billing.user.api.in.request.UserAccountDeleteRequest;
@@ -20,6 +19,8 @@ import ee.qrent.billing.user.api.out.UserAccountUpdatePort;
 import ee.qrent.billing.user.core.mapper.UserAccountAddRequestMapper;
 import ee.qrent.billing.user.core.mapper.UserAccountUpdateRequestMapper;
 import ee.qrent.billing.user.core.validator.UserAccountRequestValidator;
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import jakarta.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Random;
@@ -36,8 +37,9 @@ public class UserAccountUseCaseService
   private final UserAccountAddRequestMapper addRequestMapper;
   private final UserAccountUpdateRequestMapper updateRequestMapper;
   private final UserAccountRequestValidator requestValidator;
-  private final EmailSendUseCase emailSendUseCase;
   private final PasswordUseCase passwordUseCase;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
+  private final QDateTime qDateTime;
 
   @Transactional
   @Override
@@ -63,14 +65,15 @@ public class UserAccountUseCaseService
     properties.put("username", domain.getUsername());
     properties.put("firstName", domain.getFirstName());
     properties.put("lastName", domain.getLastName());
-
-    final var registrationNewUserEmailRequest =
-        EmailSendRequest.builder()
-            .type(USER_REGISTRATION)
-            .recipients(singletonList(domain.getEmail()))
-            .properties(properties)
+    final var notificationQueuePushRequest =
+        QueueEntryPushRequest.builder()
+            .occurredAt(qDateTime.getNow())
+            .type(USER_REGISTRATION_EMAIL)
+            .payloadRecipients(singletonList(domain.getEmail()))
+            .payloadProperties(properties)
             .build();
-    emailSendUseCase.sendEmail(registrationNewUserEmailRequest);
+
+    notificationQueuePushUseCase.push(notificationQueuePushRequest);
   }
 
   @Override
@@ -91,12 +94,6 @@ public class UserAccountUseCaseService
       return;
     }
     deletePort.delete(request.getId());
-  }
-
-  private void checkExistence(final Long id) {
-    if (loadPort.loadById(id) == null) {
-      throw new RuntimeException("Update of Driver failed. No Record with id = " + id);
-    }
   }
 
   private String generatePassword() {

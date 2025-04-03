@@ -118,13 +118,14 @@ public class ContractServiceConfig {
 
   @Bean
   ContractSendByEmailUseCase getContractSendByEmailUseCase(
-      final QueueEntryPushUseCase notificationQueuePushUseCase,
+
       final ContractLoadPort invoiceLoadPort,
       final ContractPdfUseCase invoicePdfUseCase,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
       final QDateTime qDateTime) {
 
     return new ContractSendByEmailService(
-        notificationQueuePushUseCase, invoiceLoadPort, invoicePdfUseCase, qDateTime);
+        invoiceLoadPort, invoicePdfUseCase, notificationQueuePushUseCase, qDateTime);
   }
 
   @Bean

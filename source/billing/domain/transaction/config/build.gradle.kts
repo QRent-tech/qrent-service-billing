@@ -1,5 +1,6 @@
 dependencies {
     implementation(project(":source:common:api"))
+    implementation(project(":source:queue:api:in"))
 
     implementation(project(":source:billing:domain:transaction:core"))
     implementation(project(":source:billing:domain:transaction:api:in"))

@@ -4,7 +4,6 @@ import static ee.qrent.queue.api.in.EntryType.CONTRACT_EMAIL;
 import static java.util.Collections.singletonList;
 
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrent.queue.api.in.EntryType;
 import ee.qrent.queue.api.in.QueueEntryPushRequest;
 import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import ee.qrent.billing.contract.api.in.request.ContractSendByEmailRequest;
@@ -21,9 +20,9 @@ import lombok.SneakyThrows;
 @AllArgsConstructor
 public class ContractSendByEmailService implements ContractSendByEmailUseCase {
 
-  private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final ContractLoadPort contractLoadPort;
   private final ContractPdfUseCase contractPdfUseCase;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final QDateTime qDateTime;
 
   @Transactional
