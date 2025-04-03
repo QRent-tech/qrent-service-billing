@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import ee.qrent.billing.bonus.api.out.BonusCalculationAddPort;
 import ee.qrent.billing.bonus.api.out.BonusProgramLoadPort;
 import ee.qrent.billing.bonus.api.out.ObligationLoadPort;
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.bonus.api.in.request.BonusCalculationAddRequest;
 import ee.qrent.billing.bonus.api.in.usecase.BonusCalculationAddUseCase;
@@ -15,14 +16,14 @@ import ee.qrent.billing.bonus.domain.BonusProgram;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.car.api.in.response.CarLinkResponse;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.response.TransactionResponse;
 import ee.qrent.billing.transaction.api.in.usecase.TransactionAddUseCase;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import ee.qrent.billing.user.api.in.response.UserAccountResponse;
+import ee.qrent.queue.api.in.EntryType;
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -39,12 +40,13 @@ public class BonusCalculationService implements BonusCalculationAddUseCase {
   private final TransactionAddUseCase transactionAddUseCase;
   private final BonusProgramLoadPort bonusProgramLoadPort;
   private final GetUserAccountQuery userAccountQuery;
-  private final EmailSendUseCase emailSendUseCase;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final BonusCalculationAddPort calculationAddPort;
   private final ObligationLoadPort obligationLoadPort;
   private final BonusCalculationAddRequestMapper addRequestMapper;
   private final AddRequestValidator<BonusCalculationAddRequest> addRequestValidator;
   private final List<BonusStrategy> bonusStrategies;
+  private final QDateTime qDateTime;
 
   @Transactional
   @Override
@@ -134,13 +136,14 @@ public class BonusCalculationService implements BonusCalculationAddUseCase {
         transactionQuery.getAllByIds(
             results.stream().map(BonusCalculationResult::getTransactionId).collect(toList())));
 
-    final var emailSendRequest =
-        EmailSendRequest.builder()
-            .type(EmailType.BONUS_CALCULATION)
-            .recipients(recipients)
-            .properties(emailProperties)
+    final var notificationQueuePushRequest =
+        QueueEntryPushRequest.builder()
+            .occurredAt(qDateTime.getNow())
+            .type(EntryType.BONUS_CALCULATION_EMAIL)
+            .payloadRecipients(recipients)
+            .payloadProperties(emailProperties)
             .build();
 
-    emailSendUseCase.sendEmail(emailSendRequest);
+    notificationQueuePushUseCase.push(notificationQueuePushRequest);
   }
 }

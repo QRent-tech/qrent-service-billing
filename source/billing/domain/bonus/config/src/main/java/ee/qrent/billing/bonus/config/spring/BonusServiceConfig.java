@@ -16,12 +16,13 @@ import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.contract.api.in.query.GetContractQuery;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
 import ee.qrent.billing.transaction.api.in.usecase.TransactionAddUseCase;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import java.util.List;
+
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -88,12 +89,13 @@ public class BonusServiceConfig {
       final TransactionAddUseCase transactionAddUseCase,
       final BonusProgramLoadPort bonusProgramLoadPort,
       final GetUserAccountQuery userAccountQuery,
-      final EmailSendUseCase emailSendUseCase,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
       final BonusCalculationAddPort calculationAddPort,
       final ObligationLoadPort obligationLoadPort,
       final BonusCalculationAddRequestMapper addRequestMapper,
       final AddRequestValidator<BonusCalculationAddRequest> addRequestValidator,
-      final List<BonusStrategy> bonusStrategies) {
+      final List<BonusStrategy> bonusStrategies,
+      final QDateTime qDateTime) {
     return new BonusCalculationService(
         qWeekQuery,
         transactionQuery,
@@ -101,11 +103,12 @@ public class BonusServiceConfig {
         transactionAddUseCase,
         bonusProgramLoadPort,
         userAccountQuery,
-        emailSendUseCase,
+        notificationQueuePushUseCase,
         calculationAddPort,
         obligationLoadPort,
         addRequestMapper,
         addRequestValidator,
-        bonusStrategies);
+        bonusStrategies,
+        qDateTime);
   }
 }
