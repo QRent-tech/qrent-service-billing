@@ -4,6 +4,7 @@ import static ee.qrent.queue.api.in.EntryType.CONTRACT_EMAIL;
 import static java.util.Collections.singletonList;
 
 import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.queue.api.in.EntryType;
 import ee.qrent.queue.api.in.QueueEntryPushRequest;
 import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import ee.qrent.billing.contract.api.in.request.ContractSendByEmailRequest;
@@ -20,8 +21,7 @@ import lombok.SneakyThrows;
 @AllArgsConstructor
 public class ContractSendByEmailService implements ContractSendByEmailUseCase {
 
-  private final EmailSendUseCase emailSendUseCase;
-  private final QueueEntryPushUseCase queuePushUseCase;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final ContractLoadPort contractLoadPort;
   private final ContractPdfUseCase contractPdfUseCase;
   private final QDateTime qDateTime;
@@ -36,26 +36,15 @@ public class ContractSendByEmailService implements ContractSendByEmailUseCase {
     final var attachment = contractPdfUseCase.getPdfInputStreamById(contractId);
     final var properties = new HashMap<String, Object>();
     properties.put("contractNumber", contract.getNumber());
-
-    final var emailSendRequest =
-        EmailSendRequest.builder()
-            .type(EmailType.CONTRACT)
-            .recipients(singletonList(recipient))
-            .attachment(attachment)
-            .properties(properties)
-            .build();
-
-    // emailSendUseCase.sendEmail(emailSendRequest);
-
-    final var now = qDateTime.getNow();
-    final var queueEntry =
+    final var notificationQueuePushRequest =
         QueueEntryPushRequest.builder()
-            .occurredAt(now)
-            .payloadType(CONTRACT_EMAIL.name())
+            .occurredAt(qDateTime.getNow())
+            .type(CONTRACT_EMAIL)
             .payloadRecipients(singletonList(recipient))
+            .payloadAttachment(attachment)
             .payloadProperties(properties)
-            //.payloadAttachment(attachment)
             .build();
-    queuePushUseCase.push(queueEntry);
+
+    notificationQueuePushUseCase.push(notificationQueuePushRequest);
   }
 }

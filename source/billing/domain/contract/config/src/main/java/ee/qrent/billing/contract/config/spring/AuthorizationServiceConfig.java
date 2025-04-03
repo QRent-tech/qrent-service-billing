@@ -18,7 +18,6 @@ import ee.qrent.billing.contract.core.service.pdf.AuthorizationToPdfConverter;
 import ee.qrent.billing.contract.core.service.pdf.AuthorizationToPdfModelMapper;
 import ee.qrent.billing.contract.core.validator.AuthorizationAddRequestValidator;
 import ee.qrent.common.in.time.QDateTime;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

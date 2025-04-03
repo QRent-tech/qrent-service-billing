@@ -22,7 +22,6 @@ import ee.qrent.billing.contract.api.in.usecase.ContractCloseUseCase;
 import ee.qrent.billing.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrent.billing.contract.api.in.usecase.ContractSendByEmailUseCase;
 import ee.qrent.billing.driver.api.in.query.GetDriverQuery;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
 import ee.qrent.billing.insurance.api.in.query.GetInsuranceCaseQuery;
 import ee.qrent.billing.insurance.api.in.usecase.InsuranceCaseCloseUseCase;
 import org.springframework.context.annotation.Bean;
@@ -50,6 +49,7 @@ public class ContractServiceConfig {
 
   @Bean
   ContractEndDateCalculator getContractEndDateCalculator(final QDateTime qDateTime) {
+
     return new ContractEndDateCalculator(qDateTime);
   }
 
@@ -96,6 +96,7 @@ public class ContractServiceConfig {
   @Bean
   List<ContractToPdfConversionStrategy> getContractToPdfConversionStrategies(
       final ContractLoadPort loadPort) {
+
     return asList(
         new ContractToPdfConversionStrategyBefore2025(),
         new ContractToPdfConversionStrategyAfter2024(),
@@ -117,13 +118,13 @@ public class ContractServiceConfig {
 
   @Bean
   ContractSendByEmailUseCase getContractSendByEmailUseCase(
-      final EmailSendUseCase emailSendUseCase,
-      final QueueEntryPushUseCase queuePushUseCase,
+      final QueueEntryPushUseCase notificationQueuePushUseCase,
       final ContractLoadPort invoiceLoadPort,
       final ContractPdfUseCase invoicePdfUseCase,
       final QDateTime qDateTime) {
 
-    return new ContractSendByEmailService(emailSendUseCase, queuePushUseCase, invoiceLoadPort, invoicePdfUseCase, qDateTime);
+    return new ContractSendByEmailService(
+        notificationQueuePushUseCase, invoiceLoadPort, invoicePdfUseCase, qDateTime);
   }
 
   @Bean
