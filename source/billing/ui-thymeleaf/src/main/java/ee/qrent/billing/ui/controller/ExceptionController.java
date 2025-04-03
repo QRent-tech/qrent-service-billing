@@ -1,25 +1,29 @@
 package ee.qrent.billing.ui.controller;
 
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
+import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;
 import ee.qrent.billing.user.api.in.response.UserAccountResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.UUID;
+
+import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import static ee.qrent.queue.api.in.EntryType.ERROR_EMAIL;
 
 @ControllerAdvice
 @AllArgsConstructor
 public class ExceptionController {
 
   private final GetUserAccountQuery userAccountQuery;
-  private final EmailSendUseCase emailSendUseCase;
+  private final QueueEntryPushUseCase notificationQueuePushUseCase;
+  private final QDateTime qDateTime;
 
   @ExceptionHandler(Exception.class)
   public String handleException(final Exception exception, final Model model) {
@@ -46,13 +50,14 @@ public class ExceptionController {
     final var stackTrace = stringWriter.toString();
     emailProperties.put("stackTrace", stackTrace);
 
-    final var emailSendRequest =
-        EmailSendRequest.builder()
-            .type(EmailType.ERROR)
-            .recipients(recipients)
-            .properties(emailProperties)
+    final var notificationQueuePushRequest =
+        QueueEntryPushRequest.builder()
+            .occurredAt(qDateTime.getNow())
+            .type(ERROR_EMAIL)
+            .payloadRecipients(recipients)
+            .payloadProperties(emailProperties)
             .build();
 
-    emailSendUseCase.sendEmail(emailSendRequest);
+    notificationQueuePushUseCase.push(notificationQueuePushRequest);
   }
 }

@@ -1,4 +1,3 @@
-
 val isGitPropertyPluginEnabledVar = System.getenv("GIT_PROPERTIES_GENERATION")
 println("GIT_PROPERTIES_GENERATION: $isGitPropertyPluginEnabledVar")
 
@@ -10,6 +9,12 @@ if (isGitPropertyPluginEnabled) {
 }
 
 dependencies {
+    implementation(project(":source:common:api"))
+    implementation(project(":source:common:core"))
+    implementation(project(":source:common:utils"))
+
+    implementation(project(":source:queue:api:in"))
+
     implementation(project(":source:billing:domain:car:api:in"))
     implementation(project(":source:billing:domain:driver:api:in"))
     implementation(project(":source:billing:domain:user:api:in"))
@@ -20,9 +25,7 @@ dependencies {
     implementation(project(":source:billing:domain:constant:api:in"))
     implementation(project(":source:billing:domain:bonus:api:in"))
     implementation(project(":source:billing:domain:insurance:api:in"))
-    implementation(project(":source:common:api"))
-    implementation(project(":source:common:core"))
-    implementation(project(":source:common:utils"))
+
 
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
