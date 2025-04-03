@@ -1,4 +1,5 @@
 dependencies{
+    implementation(libs.q.hypersistence.utils.hibernate)
     implementation(libs.q.jakarta.persistence)
     implementation(libs.q.hibernate.envers)
     compileOnly(libs.q.lombok)

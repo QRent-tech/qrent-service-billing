@@ -15,9 +15,9 @@ public class QueueEntryLoadAdapter implements QueueEntryLoadPort {
   private final QueueEntryAdapterMapper mapper;
 
   @Override
-  public List<QueueEntry> loadByTypeAndProcessed(final String type, final boolean processed) {
+  public List<QueueEntry> loadByProcessed(final boolean processed) {
 
-    return repository.findByTypeAndProcessed(type, processed).stream()
+    return repository.findByProcessed(processed).stream()
         .map(queueEntry -> mapper.mapToDomain(queueEntry))
         .toList();
   }

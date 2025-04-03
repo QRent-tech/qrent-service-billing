@@ -13,7 +13,7 @@ public interface QueueEntryRepository {
 
   void deleteById(final Long id);
 
-  List<QueueEntryJakartaEntity> findByTypeAndProcessed(final String type, final Boolean processed);
+  List<QueueEntryJakartaEntity> findByProcessed(final Boolean processed);
 
   List<QueueEntryJakartaEntity> findByTypeAndProcessedAtBeforeTime(
       final boolean processed, final LocalDateTime time);

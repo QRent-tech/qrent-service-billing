@@ -4,6 +4,7 @@ import ee.qrent.billing.bonus.api.in.request.ObligationCalculationAddRequest;
 import ee.qrent.billing.bonus.api.in.usecase.ObligationCalculationAddUseCase;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 
+import ee.qrent.common.in.usecase.RunTaskUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -12,7 +13,7 @@ public class ObligationCalculationTask {
 
   private final ObligationCalculationAddUseCase addUseCase;
   private final GetQWeekQuery qWeekQuery;
-  private final QTaskExecutor qTaskExecutor;
+  private final RunTaskUseCase runTaskUseCase;
 
   // seconds minutes hours day-of-month month day-of-week
   //   0       0      8        *         *        ?
@@ -22,7 +23,7 @@ public class ObligationCalculationTask {
   @Scheduled(cron = "5 10 0 * * MON") // means that the task is executed at 00:05:10 every Monday.
   public void scheduleTask() {
     final var executorName = ObligationCalculationTask.class.getSimpleName();
-    qTaskExecutor.runTask(
+    runTaskUseCase.run(
         () -> {
           final var addRequest = new ObligationCalculationAddRequest();
           addRequest.setComment("Automatically triggered obligation calculation");

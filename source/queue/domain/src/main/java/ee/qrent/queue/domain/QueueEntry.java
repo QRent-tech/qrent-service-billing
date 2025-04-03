@@ -14,6 +14,5 @@ public class QueueEntry {
   private LocalDateTime publishedAt;
   private Boolean processed;
   private LocalDateTime processedAt;
-  private final String type;
-  private final String payload;
+  private final NotificationPayload payload;
 }

@@ -11,8 +11,10 @@ public class QueueEntryPullResponseMapper {
         .publishedAt(domain.getPublishedAt())
         .processed(domain.getProcessed())
         .processedAt(domain.getProcessedAt())
-        .type(domain.getType())
-        .payload(domain.getPayload())
+        .payloadRecipients(domain.getPayload().getRecipients())
+        .payloadType(domain.getPayload().getType())
+        .payloadAttachment(domain.getPayload().getAttachment())
+        .payloadProperties(domain.getPayload().getProperties())
         .build();
   }
 }

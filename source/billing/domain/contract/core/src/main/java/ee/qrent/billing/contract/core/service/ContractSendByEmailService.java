@@ -10,9 +10,7 @@ import ee.qrent.billing.contract.api.in.request.ContractSendByEmailRequest;
 import ee.qrent.billing.contract.api.in.usecase.ContractPdfUseCase;
 import ee.qrent.billing.contract.api.in.usecase.ContractSendByEmailUseCase;
 import ee.qrent.billing.contract.api.out.ContractLoadPort;
-import ee.qrent.email.api.in.request.EmailSendRequest;
-import ee.qrent.email.api.in.request.EmailType;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
+
 import java.util.HashMap;
 
 import jakarta.transaction.Transactional;
@@ -47,14 +45,16 @@ public class ContractSendByEmailService implements ContractSendByEmailUseCase {
             .properties(properties)
             .build();
 
-    //emailSendUseCase.sendEmail(emailSendRequest);
+    // emailSendUseCase.sendEmail(emailSendRequest);
 
     final var now = qDateTime.getNow();
     final var queueEntry =
         QueueEntryPushRequest.builder()
             .occurredAt(now)
-            .type(CONTRACT_EMAIL)
-            .payload(emailSendRequest.toString())
+            .payloadType(CONTRACT_EMAIL.name())
+            .payloadRecipients(singletonList(recipient))
+            .payloadProperties(properties)
+            //.payloadAttachment(attachment)
             .build();
     queuePushUseCase.push(queueEntry);
   }

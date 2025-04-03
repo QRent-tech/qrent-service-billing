@@ -2,7 +2,9 @@ package ee.qrent.billing.task.core;
 
 import ee.qrent.billing.constant.api.in.request.QWeekAddRequest;
 import ee.qrent.billing.constant.api.in.usecase.QWeekAddUseCase;
-import java.time.LocalDate;
+
+import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.common.in.usecase.RunTaskUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -10,7 +12,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class QWeekCreationTask {
 
   private final QWeekAddUseCase qWeekAddUseCase;
-
+  private final RunTaskUseCase runTaskUseCase;
+  private final QDateTime qDateTime;
 
   /**
    * +---------------- minute (0 - 59)
@@ -22,12 +25,16 @@ public class QWeekCreationTask {
    */
 
   // Scheduled task is executed at 00:02:00 AM on the MONDAY every week
-
   @Scheduled(cron = "0 2 * * * MON")
   public void scheduleTask() {
-    final var nowDate = LocalDate.now();
-    final var addRequest = new QWeekAddRequest();
-    addRequest.setWeekDate(nowDate);
-    qWeekAddUseCase.add(addRequest);
+    final var taskName = InsuranceCaseCalculationTask.class.getSimpleName();
+    runTaskUseCase.run(
+        () -> {
+          final var nowDate = qDateTime.getToday();
+          final var addRequest = new QWeekAddRequest();
+          addRequest.setWeekDate(nowDate);
+          qWeekAddUseCase.add(addRequest);
+        },
+        taskName);
   }
 }

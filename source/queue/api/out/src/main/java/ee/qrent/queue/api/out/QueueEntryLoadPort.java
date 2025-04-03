@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface QueueEntryLoadPort {
-  List<QueueEntry> loadByTypeAndProcessed(final String type, final boolean processed);
+  List<QueueEntry> loadByProcessed(final boolean processed);
 
   List<QueueEntry> loadByTypeAndProcessedAtBeforeTime(
       final boolean processed, final LocalDateTime time);

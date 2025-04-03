@@ -1,6 +1,8 @@
 package ee.qrent.queue.persistence.mapper;
 
+import ee.qrent.queue.domain.NotificationPayload;
 import ee.qrent.queue.domain.QueueEntry;
+import ee.qrent.queue.persistence.entity.jakarta.NotificationPayloadJson;
 import ee.qrent.queue.persistence.entity.jakarta.QueueEntryJakartaEntity;
 
 public class QueueEntryAdapterMapper {
@@ -13,8 +15,7 @@ public class QueueEntryAdapterMapper {
         .publishedAt(entity.getPublishedAt())
         .processed(entity.getProcessed())
         .processedAt(entity.getProcessedAt())
-        .type(entity.getType())
-        .payload(entity.getPayload())
+        .payload(mapToDomain(entity.getPayload()))
         .build();
   }
 
@@ -26,8 +27,27 @@ public class QueueEntryAdapterMapper {
         .publishedAt(domain.getPublishedAt())
         .processed(domain.getProcessed())
         .processedAt(domain.getProcessedAt())
+        .payload(mapToEntity(domain.getPayload()))
+        .build();
+  }
+
+  private NotificationPayload mapToDomain(final NotificationPayloadJson payloadJson) {
+
+    return NotificationPayload.builder()
+        .recipients(payloadJson.getRecipients())
+        .type(payloadJson.getType())
+        .attachment(payloadJson.getAttachment())
+        .properties(payloadJson.getProperties())
+        .build();
+  }
+
+  private NotificationPayloadJson mapToEntity(final NotificationPayload domain) {
+
+    return NotificationPayloadJson.builder()
+        .recipients(domain.getRecipients())
         .type(domain.getType())
-        .payload(domain.getPayload())
+        .attachment(domain.getAttachment())
+        .properties(domain.getProperties())
         .build();
   }
 }

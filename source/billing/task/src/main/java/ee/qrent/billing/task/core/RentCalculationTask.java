@@ -3,6 +3,7 @@ package ee.qrent.billing.task.core;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.transaction.api.in.request.rent.RentCalculationAddRequest;
 import ee.qrent.billing.transaction.api.in.usecase.rent.RentCalculationAddUseCase;
+import ee.qrent.common.in.usecase.RunTaskUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -11,7 +12,7 @@ public class RentCalculationTask {
 
   private final RentCalculationAddUseCase addUseCase;
   private final GetQWeekQuery qWeekQuery;
-  private final QTaskExecutor qTaskExecutor;
+  private final RunTaskUseCase runTaskUseCase;
 
   // seconds minutes hours day-of-month month day-of-week
   //   0       0      8        *         *        ?
@@ -21,7 +22,7 @@ public class RentCalculationTask {
   @Scheduled(cron = "5 5 0 * * MON") // means that the task is executed at 00:05:05 every Monday.
   public void scheduleTask() {
     final var executorName = RentCalculationTask.class.getSimpleName();
-    qTaskExecutor.runTask(
+      runTaskUseCase.run(
         () -> {
           final var addRequest = new RentCalculationAddRequest();
           addRequest.setComment("Automatically triggered Rent Calculation");

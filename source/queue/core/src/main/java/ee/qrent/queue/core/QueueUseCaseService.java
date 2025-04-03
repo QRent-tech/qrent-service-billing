@@ -37,10 +37,9 @@ public class QueueUseCaseService
 
   @Transactional(MANDATORY)
   @Override
-  public List<QueuePullResponse> pull(final EntryType type) {
-    final var typeString = type.name();
+  public List<QueuePullResponse> pull() {
     final var processed = false;
-    return loadPort.loadByTypeAndProcessed(typeString, processed).stream()
+    return loadPort.loadByProcessed(processed).stream()
         .peek(this::processPulledEntry)
         .map(pullResponseMapper::toResponse)
         .toList();

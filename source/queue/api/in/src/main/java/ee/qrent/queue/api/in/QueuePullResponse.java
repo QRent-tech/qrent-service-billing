@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
+import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @SuperBuilder
@@ -15,6 +18,8 @@ public class QueuePullResponse {
   private LocalDateTime publishedAt;
   private Boolean processed;
   private LocalDateTime processedAt;
-  private final String type;
-  private final String payload;
+  private final List<String> payloadRecipients;
+  private final String payloadType;
+  private final InputStream payloadAttachment;
+  private final Map<String, Object> payloadProperties;
 }

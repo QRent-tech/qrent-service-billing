@@ -1,5 +1,7 @@
 package ee.qrent.common.spring.config;
 
+import ee.qrent.common.core.task.RunTaskUseCaseImpl;
+import ee.qrent.common.in.usecase.RunTaskUseCase;
 import ee.qrent.common.in.validation.AttributeChecker;
 import ee.qrent.common.core.time.QDateTimeImpl;
 import ee.qrent.common.in.time.QDateTime;
@@ -20,5 +22,10 @@ public class CommonConfig {
   @Bean
   AttributeChecker getAttributeCheckerImpl() {
     return new AttributeCheckerImpl();
+  }
+
+  @Bean
+  RunTaskUseCase geRunTaskUseCaseImpl(final QDateTime qDateTime) {
+    return new RunTaskUseCaseImpl(qDateTime);
   }
 }

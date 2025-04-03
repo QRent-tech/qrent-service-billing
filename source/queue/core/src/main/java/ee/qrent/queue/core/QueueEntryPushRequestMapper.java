@@ -2,9 +2,9 @@ package ee.qrent.queue.core;
 
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.queue.api.in.QueueEntryPushRequest;
+import ee.qrent.queue.domain.NotificationPayload;
 import ee.qrent.queue.domain.QueueEntry;
 import lombok.AllArgsConstructor;
-
 
 @AllArgsConstructor
 public class QueueEntryPushRequestMapper {
@@ -20,8 +20,17 @@ public class QueueEntryPushRequestMapper {
         .processed(DEFAULT_PROCESSED)
         .processedAt(null)
         .publishedAt(qDateTime.getNow())
-        .type(pushRequest.getType().name())
-        .payload(pushRequest.getPayload())
+        .payload(mapPayload(pushRequest))
+        .build();
+  }
+
+  private NotificationPayload mapPayload(final QueueEntryPushRequest pushRequest) {
+
+    return NotificationPayload.builder()
+        .recipients(pushRequest.getPayloadRecipients())
+        .type(pushRequest.getPayloadType())
+        .attachment(pushRequest.getPayloadAttachment())
+        .properties(pushRequest.getPayloadProperties())
         .build();
   }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface QueueEntrySpringDataRepository
     extends JpaRepository<QueueEntryJakartaEntity, Long> {
 
-  List<QueueEntryJakartaEntity> findByTypeAndProcessed(final String type, final boolean processed);
+  List<QueueEntryJakartaEntity> findByProcessed(final Boolean processed);
 
   @Query(
       value =

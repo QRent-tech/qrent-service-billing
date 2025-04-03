@@ -30,10 +30,9 @@ public class QueueEntryRepositoryImpl implements QueueEntryRepository {
   }
 
   @Override
-  public List<QueueEntryJakartaEntity> findByTypeAndProcessed(
-      final String type, final Boolean processed) {
+  public List<QueueEntryJakartaEntity> findByProcessed(final Boolean processed) {
 
-    return springDataRepository.findByTypeAndProcessed(type, processed);
+    return springDataRepository.findByProcessed(processed);
   }
 
   @Override

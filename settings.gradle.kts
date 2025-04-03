@@ -1,4 +1,4 @@
-rootProject.name = "qrental"
+rootProject.name = "qrent"
 
 pluginManagement {
     repositories.gradlePluginPortal()
@@ -13,6 +13,10 @@ include("source:common:core")
 include("source:common:utils")
 include("source:common:config")
 
+include("source:cross:email:api:in")
+include("source:cross:email:core")
+include("source:cross:email:config")
+
 include("source:queue:api:in")
 include("source:queue:api:out")
 include("source:queue:core")
@@ -24,19 +28,21 @@ include("source:queue:persistence:flyway")
 include("source:queue:persistence:repository")
 
 include("source:notification:app")
-
-include("source:notification:email")
-include("source:notification:engine")
+include("source:notification:domain:email:api:in")
+include("source:notification:domain:email:api:out")
+include("source:notification:domain:email:domain")
+include("source:notification:domain:email:core")
+include("source:notification:domain:email:config")
+include("source:notification:domain:email:persistence:adapter")
+include("source:notification:domain:email:persistence:entity")
+include("source:notification:domain:email:persistence:repository")
+include("source:notification:domain:email:persistence:flyway")
+include("source:notification:task:core")
+include("source:notification:task:config")
 
 include("source:billing:app")
 include("source:billing:ui-thymeleaf")
-
 include("source:billing:task")
-
-include("source:cross:email:api:in")
-include("source:cross:email:core")
-include("source:cross:email:config")
-
 include("source:billing:security:api:in")
 include("source:billing:security:core")
 include("source:billing:security:config")
