@@ -24,7 +24,6 @@ include("source:queue:domain")
 include("source:queue:config")
 include("source:queue:persistence:adapter")
 include("source:queue:persistence:entity")
-include("source:queue:persistence:flyway")
 include("source:queue:persistence:repository")
 
 include("source:notification:app")

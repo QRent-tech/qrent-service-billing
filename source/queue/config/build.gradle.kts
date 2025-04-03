@@ -4,7 +4,6 @@ dependencies {
     implementation(project(":source:queue:core"))
     implementation(project(":source:queue:api:in"))
     implementation(project(":source:queue:api:out"))
-    implementation(project(":source:queue:persistence:flyway"))
     implementation(project(":source:queue:persistence:adapter"))
     implementation(project(":source:queue:persistence:repository"))
 

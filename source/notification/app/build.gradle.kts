@@ -6,7 +6,6 @@ dependencies {
     implementation(project(":source:common:config"))
 
     implementation(project(":source:queue:config"))
-    implementation(project(":source:queue:persistence:flyway"))
 
     implementation(project(":source:notification:domain:email:config"))
     implementation(project(":source:notification:task"))

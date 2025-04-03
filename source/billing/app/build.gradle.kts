@@ -3,7 +3,6 @@ plugins {
 }
 dependencies {
     implementation(project(":source:queue:config"))
-    implementation(project(":source:queue:persistence:flyway"))
     implementation(project(":source:billing:ui-thymeleaf"))
     implementation(project(":source:common:config"))
     implementation(project(":source:billing:domain:driver:config"))
