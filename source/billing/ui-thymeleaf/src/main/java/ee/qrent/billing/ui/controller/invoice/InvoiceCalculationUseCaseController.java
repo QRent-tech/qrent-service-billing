@@ -4,9 +4,9 @@ import static ee.qrent.billing.ui.controller.ControllerUtils.INVOICE_ROOT_PATH;
 
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
 import ee.qrent.billing.constant.api.in.response.qweek.QWeekResponse;
-import ee.qrent.invoice.api.in.query.GetInvoiceCalculationQuery;
-import ee.qrent.invoice.api.in.request.InvoiceCalculationAddRequest;
-import ee.qrent.invoice.api.in.usecase.InvoiceCalculationAddUseCase;
+import ee.qrent.billing.invoice.api.in.query.GetInvoiceCalculationQuery;
+import ee.qrent.billing.invoice.api.in.request.InvoiceCalculationAddRequest;
+import ee.qrent.billing.invoice.api.in.usecase.InvoiceCalculationAddUseCase;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

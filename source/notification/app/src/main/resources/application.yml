@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     hikari:
-      schema: notification
+      schema: billing
   jpa:
     #show-sql: true
     properties:
@@ -18,7 +18,9 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-
+  flyway:
+    locations: classpath:db/migration/notification
+    table: flyway_schema_history_notification
 management:
   endpoints:
     web:

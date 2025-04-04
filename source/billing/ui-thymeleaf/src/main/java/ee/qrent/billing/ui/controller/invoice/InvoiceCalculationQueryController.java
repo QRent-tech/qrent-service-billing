@@ -3,8 +3,8 @@ package ee.qrent.billing.ui.controller.invoice;
 import static ee.qrent.billing.ui.formatter.QDateFormatter.MODEL_ATTRIBUTE_DATE_FORMATTER;
 import static ee.qrent.billing.ui.controller.ControllerUtils.INVOICE_ROOT_PATH;
 
-import ee.qrent.invoice.api.in.query.GetInvoiceCalculationQuery;
-import ee.qrent.invoice.api.in.query.GetInvoiceQuery;
+import ee.qrent.billing.invoice.api.in.query.GetInvoiceCalculationQuery;
+import ee.qrent.billing.invoice.api.in.query.GetInvoiceQuery;
 import ee.qrent.billing.ui.formatter.QDateFormatter;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

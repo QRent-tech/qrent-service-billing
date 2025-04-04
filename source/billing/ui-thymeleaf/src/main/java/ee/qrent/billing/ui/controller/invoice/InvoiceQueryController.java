@@ -2,10 +2,10 @@ package ee.qrent.billing.ui.controller.invoice;
 
 import static ee.qrent.billing.ui.controller.ControllerUtils.INVOICE_ROOT_PATH;
 
-import ee.qrent.invoice.api.in.query.GetInvoiceQuery;
-import ee.qrent.invoice.api.in.request.InvoiceSendByEmailRequest;
-import ee.qrent.invoice.api.in.usecase.InvoicePdfUseCase;
-import ee.qrent.invoice.api.in.usecase.InvoiceSendByEmailUseCase;
+import ee.qrent.billing.invoice.api.in.query.GetInvoiceQuery;
+import ee.qrent.billing.invoice.api.in.request.InvoiceSendByEmailRequest;
+import ee.qrent.billing.invoice.api.in.usecase.InvoicePdfUseCase;
+import ee.qrent.billing.invoice.api.in.usecase.InvoiceSendByEmailUseCase;
 import java.io.IOException;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
