@@ -14,6 +14,6 @@ import java.util.Map;
 public class NotificationPayload {
   private final List<String> recipients;
   private final String type;
-  private final InputStream attachment;
+  private final byte[] attachmentBytes;
   private final Map<String, Object> properties;
 }

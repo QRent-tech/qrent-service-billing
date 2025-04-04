@@ -5,6 +5,7 @@ import ee.qrent.queue.api.in.QueueEntryPushRequest;
 import ee.qrent.queue.domain.NotificationPayload;
 import ee.qrent.queue.domain.QueueEntry;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 
 @AllArgsConstructor
 public class QueueEntryPushRequestMapper {
@@ -13,7 +14,9 @@ public class QueueEntryPushRequestMapper {
 
   private final QDateTime qDateTime;
 
+  @SneakyThrows
   public QueueEntry toDomain(final QueueEntryPushRequest pushRequest) {
+
     return QueueEntry.builder()
         .id(null)
         .occurredAt(pushRequest.getOccurredAt())
@@ -24,12 +27,16 @@ public class QueueEntryPushRequestMapper {
         .build();
   }
 
+  @SneakyThrows
   private NotificationPayload mapPayload(final QueueEntryPushRequest pushRequest) {
 
     return NotificationPayload.builder()
         .recipients(pushRequest.getPayloadRecipients())
         .type(pushRequest.getType().name())
-        .attachment(pushRequest.getPayloadAttachment())
+        .attachmentBytes(
+            pushRequest.getPayloadAttachment() == null
+                ? null
+                : pushRequest.getPayloadAttachment().readAllBytes())
         .properties(pushRequest.getPayloadProperties())
         .build();
   }

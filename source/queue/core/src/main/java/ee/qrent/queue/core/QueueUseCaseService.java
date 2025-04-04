@@ -28,14 +28,14 @@ public class QueueUseCaseService
   private final QueueEntryPullResponseMapper pullResponseMapper;
   private final QDateTime qDateTime;
 
-  @Transactional(MANDATORY)
+
   @Override
   public void push(final QueueEntryPushRequest pushRequest) {
     final var queueEntry = pushRequestMapper.toDomain(pushRequest);
     addPort.add(queueEntry);
   }
 
-  @Transactional(MANDATORY)
+
   @Override
   public List<QueuePullResponse> pull() {
     final var processed = false;
@@ -52,7 +52,7 @@ public class QueueUseCaseService
     return updatePort.update(domain);
   }
 
-  @Transactional(MANDATORY)
+
   @Override
   public int evict(final Duration expirationDuration) {
     final var expirationDurationInSeconds = expirationDuration.toSeconds();

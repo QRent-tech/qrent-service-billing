@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-public class InfoController {
+public class NotificationInfoController {
 
   private final RunTaskUseCase runTaskUseCase;
   private final EmailNotificationTask task;

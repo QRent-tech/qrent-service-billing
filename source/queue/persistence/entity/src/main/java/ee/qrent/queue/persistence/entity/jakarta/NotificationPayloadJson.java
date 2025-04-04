@@ -16,6 +16,6 @@ import java.util.Map;
 public class NotificationPayloadJson {
   private List<String> recipients;
   private String type;
-  private InputStream attachment;
+  private byte[] attachment;
   private Map<String, Object> properties;
 }

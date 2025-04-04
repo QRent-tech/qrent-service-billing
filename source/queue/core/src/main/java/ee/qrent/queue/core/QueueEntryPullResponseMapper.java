@@ -3,8 +3,13 @@ package ee.qrent.queue.core;
 import ee.qrent.queue.api.in.QueuePullResponse;
 import ee.qrent.queue.domain.QueueEntry;
 
+import java.io.ByteArrayInputStream;
+
 public class QueueEntryPullResponseMapper {
   QueuePullResponse toResponse(final QueueEntry domain) {
+    final var attachmentInputStream =
+        new ByteArrayInputStream(domain.getPayload().getAttachmentBytes());
+
     return QueuePullResponse.builder()
         .id(domain.getId())
         .occurredAt(domain.getOccurredAt())
@@ -13,7 +18,7 @@ public class QueueEntryPullResponseMapper {
         .processedAt(domain.getProcessedAt())
         .payloadRecipients(domain.getPayload().getRecipients())
         .payloadType(domain.getPayload().getType())
-        .payloadAttachment(domain.getPayload().getAttachment())
+        .payloadAttachment(attachmentInputStream)
         .payloadProperties(domain.getPayload().getProperties())
         .build();
   }

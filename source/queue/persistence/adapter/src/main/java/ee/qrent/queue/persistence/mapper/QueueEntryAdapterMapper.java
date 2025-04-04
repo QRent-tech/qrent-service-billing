@@ -36,7 +36,7 @@ public class QueueEntryAdapterMapper {
     return NotificationPayload.builder()
         .recipients(payloadJson.getRecipients())
         .type(payloadJson.getType())
-        .attachment(payloadJson.getAttachment())
+        .attachmentBytes(payloadJson.getAttachment())
         .properties(payloadJson.getProperties())
         .build();
   }
@@ -46,7 +46,7 @@ public class QueueEntryAdapterMapper {
     return NotificationPayloadJson.builder()
         .recipients(domain.getRecipients())
         .type(domain.getType())
-        .attachment(domain.getAttachment())
+        .attachment(domain.getAttachmentBytes())
         .properties(domain.getProperties())
         .build();
   }

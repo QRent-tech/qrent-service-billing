@@ -5,6 +5,5 @@ create table if not exists q_queue
     published_at timestamp not null,
     processed    boolean  not null,
     processed_at timestamp,
-    type         varchar  not null,
     payload      jsonb    not null
 );

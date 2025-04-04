@@ -9,7 +9,6 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
-import org.hibernate.envers.Audited;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
@@ -18,7 +17,6 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "q_queue")
-@Audited
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
