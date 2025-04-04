@@ -1,4 +1,4 @@
-package ee.qrent.user.config.spring;
+package ee.qrent.billing.user.config.spring;
 
 import ee.qrent.billing.security.api.in.usecase.PasswordUseCase;
 import ee.qrent.billing.user.api.in.query.GetUserAccountQuery;

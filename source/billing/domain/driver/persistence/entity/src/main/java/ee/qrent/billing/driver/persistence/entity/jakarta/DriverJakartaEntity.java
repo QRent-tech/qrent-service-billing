@@ -28,6 +28,7 @@ public class DriverJakartaEntity {
   @Column(name = "active")
   private Boolean active;
 
+
   @Column(name = "first_name")
   private String firstName;
 

@@ -1,4 +1,4 @@
-package ee.qrent.user.config.spring;
+package ee.qrent.billing.user.config.spring;
 
 import ee.qrent.billing.user.core.mapper.RoleAddRequestMapper;
 import ee.qrent.billing.user.core.mapper.RoleResponseMapper;
