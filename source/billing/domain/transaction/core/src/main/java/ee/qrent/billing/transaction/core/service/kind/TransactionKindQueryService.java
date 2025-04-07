@@ -86,6 +86,16 @@ public class TransactionKindQueryService implements GetTransactionKindQuery {
   }
 
   @Override
+  public List<TransactionKindResponse> getAllByCodes(final List<String> codes) {
+    return loadPort
+            .loadAllByCodeIn(
+                    codes)
+            .stream()
+            .map(mapper::toResponse)
+            .collect(toList());
+  }
+
+  @Override
   public List<TransactionKindResponse> getAllRepairment() {
     return loadPort.loadAllByCodeIn(singletonList(TransactionKindsCode.R.name())).stream()
         .map(mapper::toResponse)

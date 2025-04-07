@@ -4,6 +4,7 @@ import static ee.qrent.queue.api.in.EntryType.INVOICE_EMAIL;
 import static java.lang.String.format;
 import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.ZERO;
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
@@ -57,6 +58,7 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
   private final GetBalanceQuery balanceQuery;
   private final GetTransactionQuery transactionQuery;
   private final GetTransactionTypeQuery transactionTypeQuery;
+  private final GetTransactionKindQuery transactionKindQuery;
   private final GetFirmLinkQuery firmLinkQuery;
   private final QueueEntryPushUseCase notificationQueuePushUseCase;
   private final InvoiceCalculationLoadPort loadPort;
@@ -121,6 +123,10 @@ public class InvoiceCalculationService implements InvoiceCalculationAddUseCase {
                         .driverId(driverId)
                         .dateStart(weekStartDay)
                         .dateEnd(weekEndDay)
+                        .transactionKindIds(
+                            transactionKindQuery.getAllByCodes(asList("F", "NFA", "FA", "P", "R")).stream()
+                                .map(TransactionKindResponse::getId)
+                                .toList())
                         .build();
                 final var driversTransactions =
                     transactionQuery.getAllByFilter(filter).stream().toList();

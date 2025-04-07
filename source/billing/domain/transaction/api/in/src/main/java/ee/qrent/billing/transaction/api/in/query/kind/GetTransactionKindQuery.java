@@ -20,4 +20,6 @@ public interface GetTransactionKindQuery
   List<TransactionKindResponse> getAllRepairment();
 
   List<TransactionKindResponse> getAllSelfResponsibility();
+
+  List<TransactionKindResponse> getAllByCodes(final List<String> codes);
 }

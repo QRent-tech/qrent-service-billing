@@ -306,9 +306,9 @@ public class InvoiceToPdfConverter {
     table.setHorizontalAlignment(RIGHT);
     table.setBorder(NO_BORDER);
 
-    table.addCell(getTotalLabelCell("Jooksvate kohustuste summa + km"));
+    table.addCell(getTotalLabelCell("Jooksvate kohustuste summa"));
     table.addCell(getTotalValueCell(arveSum));
-    table.addCell(getTotalLabelCell("Arve summa (kohustuste üldsumma + km):"));
+    table.addCell(getTotalLabelCell("Arve summa + km(jooksvad kohustused kaasa arvatud võlgnevust/ettemaksu)"));
     table.addCell(getTotalValueCell(total));
 
     return table;
