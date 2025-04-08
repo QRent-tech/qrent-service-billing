@@ -3,6 +3,7 @@ package ee.qrent.billing.invoice.spring.config;
 import ee.qrent.billing.invoice.api.out.*;
 import ee.qrent.billing.invoice.core.mapper.*;
 import ee.qrent.billing.invoice.core.service.*;
+import ee.qrent.billing.transaction.api.in.query.kind.GetTransactionKindQuery;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
@@ -82,6 +83,7 @@ public class InvoiceServiceConfig {
       final GetBalanceQuery balanceQuery,
       final GetTransactionQuery transactionQuery,
       final GetTransactionTypeQuery transactionTypeQuery,
+      final GetTransactionKindQuery transactionKindQuery,
       final GetFirmLinkQuery firmLinkQuery,
       final QueueEntryPushUseCase notificationQueuePushUseCase,
       final InvoiceCalculationLoadPort loadPort,
@@ -91,6 +93,7 @@ public class InvoiceServiceConfig {
       final InvoiceToPdfConverter invoiceToPdfConverter,
       final InvoiceToPdfModelMapper invoiceToPdfModelMapper,
       final QDateTime qDateTime) {
+
     return new InvoiceCalculationService(
         qWeekQuery,
         driverQuery,
@@ -98,6 +101,7 @@ public class InvoiceServiceConfig {
         balanceQuery,
         transactionQuery,
         transactionTypeQuery,
+        transactionKindQuery,
         firmLinkQuery,
         notificationQueuePushUseCase,
         loadPort,
@@ -116,6 +120,7 @@ public class InvoiceServiceConfig {
       final GetDriverQuery driverQuery,
       final InvoicePdfUseCase invoicePdfUseCase,
       final QDateTime qDateTime) {
+
     return new InvoiceSendByEmailService(
         notificationQueuePushUseCase, invoiceLoadPort, invoicePdfUseCase, driverQuery, qDateTime);
   }
@@ -125,6 +130,7 @@ public class InvoiceServiceConfig {
       final InvoiceLoadPort loadPort,
       final InvoiceToPdfConverter converter,
       final InvoiceToPdfModelMapper mapper) {
+
     return new InvoicePdfUseCaseImpl(loadPort, converter, mapper);
   }
 }

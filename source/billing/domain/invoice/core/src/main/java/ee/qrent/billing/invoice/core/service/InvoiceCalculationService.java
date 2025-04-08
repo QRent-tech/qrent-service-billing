@@ -9,6 +9,8 @@ import static java.util.Collections.singletonList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
+import ee.qrent.billing.transaction.api.in.query.kind.GetTransactionKindQuery;
+import ee.qrent.billing.transaction.api.in.response.kind.TransactionKindResponse;
 import ee.qrent.common.in.time.QDateTime;
 import ee.qrent.common.in.validation.AddRequestValidator;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
