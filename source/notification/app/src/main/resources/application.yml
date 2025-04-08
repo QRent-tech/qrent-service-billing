@@ -13,14 +13,15 @@ spring:
         enable_lazy_load_no_trans: true
     #hibernate:
     #ddl-auto: update
+  flyway:
+    locations: classpath:db/migration/notification
+    table: flyway_schema_history_notification
   mail:
     protocol: smtp
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-  flyway:
-    locations: classpath:db/migration/notification
-    table: flyway_schema_history_notification
+
 management:
   endpoints:
     web:
