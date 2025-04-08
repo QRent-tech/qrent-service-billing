@@ -16,6 +16,7 @@ public class EmailSendRequestMapper
   public EmailNotification toDomain(final EmailSendRequest request) {
     return EmailNotification.builder()
         .id(null)
+        .type(request.getType().name())
         .recipients(request.getRecipients())
         .properties(request.getProperties())
         .sentAt(dateTime.getNow())
