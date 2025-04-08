@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import static ee.qrent.notification.email.api.in.request.EmailType.ERROR;
+import static ee.qrent.notification.email.api.in.request.EmailType.ERROR_EMAIL;
 
 @AllArgsConstructor
 public class ErrorLetterBuildStrategy implements LetterBuildStrategy {
@@ -19,7 +19,7 @@ public class ErrorLetterBuildStrategy implements LetterBuildStrategy {
 
   @Override
   public boolean canApply(final EmailSendRequest emailSendRequest) {
-    return ERROR == emailSendRequest.getType();
+    return ERROR_EMAIL == emailSendRequest.getType();
   }
 
   @Override

@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import static ee.qrent.notification.email.api.in.request.EmailType.CONTRACT;
+import static ee.qrent.notification.email.api.in.request.EmailType.CONTRACT_EMAIL;
 
 @AllArgsConstructor
 public class ContractLetterBuildStrategy implements LetterBuildStrategy {
@@ -20,7 +20,7 @@ public class ContractLetterBuildStrategy implements LetterBuildStrategy {
 
   @Override
   public boolean canApply(final EmailSendRequest emailSendRequest) {
-    return CONTRACT == emailSendRequest.getType();
+    return CONTRACT_EMAIL == emailSendRequest.getType();
   }
 
   @Override

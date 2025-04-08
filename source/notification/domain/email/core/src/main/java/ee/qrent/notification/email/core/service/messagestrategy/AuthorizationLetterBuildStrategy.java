@@ -12,6 +12,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import static ee.qrent.notification.email.api.in.request.EmailType.AUTHORIZATION_EMAIL;
+
 @AllArgsConstructor
 public class AuthorizationLetterBuildStrategy implements LetterBuildStrategy {
 
@@ -19,7 +21,7 @@ public class AuthorizationLetterBuildStrategy implements LetterBuildStrategy {
 
   @Override
   public boolean canApply(final EmailSendRequest emailSendRequest) {
-    return EmailType.AUTHORIZATION == emailSendRequest.getType();
+    return AUTHORIZATION_EMAIL == emailSendRequest.getType();
   }
 
   @Override

@@ -1,5 +1,6 @@
 package ee.qrent.queue.core;
 
+import ee.qrent.queue.api.in.EntryType;
 import ee.qrent.queue.api.in.QueuePullResponse;
 import ee.qrent.queue.domain.QueueEntry;
 
@@ -17,7 +18,7 @@ public class QueueEntryPullResponseMapper {
         .processed(domain.getProcessed())
         .processedAt(domain.getProcessedAt())
         .payloadRecipients(domain.getPayload().getRecipients())
-        .payloadType(domain.getPayload().getType())
+        .payloadType(EntryType.valueOf(domain.getPayload().getType()))
         .payloadAttachment(attachmentInputStream)
         .payloadProperties(domain.getPayload().getProperties())
         .build();

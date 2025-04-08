@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import static ee.qrent.notification.email.api.in.request.EmailType.RENT_CALCULATION;
+import static ee.qrent.notification.email.api.in.request.EmailType.RENT_CALCULATION_EMAIL;
 
 @AllArgsConstructor
 public class RentCalculationLetterBuildStrategy implements LetterBuildStrategy {
@@ -19,7 +19,7 @@ public class RentCalculationLetterBuildStrategy implements LetterBuildStrategy {
 
   @Override
   public boolean canApply(final EmailSendRequest emailSendRequest) {
-    return RENT_CALCULATION == emailSendRequest.getType();
+    return RENT_CALCULATION_EMAIL == emailSendRequest.getType();
   }
 
   @Override

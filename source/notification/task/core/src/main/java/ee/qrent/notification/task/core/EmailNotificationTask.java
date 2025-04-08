@@ -30,7 +30,7 @@ public class EmailNotificationTask implements QTask {
   private EmailSendRequest mapToEmailSendRequest(final QueuePullResponse queuePullResponse) {
 
     return EmailSendRequest.builder()
-        .type(EmailType.valueOf(queuePullResponse.getPayloadType()))
+        .type(EmailType.valueOf(queuePullResponse.getPayloadType().name()))
         .recipients(queuePullResponse.getPayloadRecipients())
         .attachment(queuePullResponse.getPayloadAttachment())
         .properties(queuePullResponse.getPayloadProperties())

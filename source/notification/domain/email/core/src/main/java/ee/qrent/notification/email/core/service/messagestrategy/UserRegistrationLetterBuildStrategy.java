@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import static ee.qrent.notification.email.api.in.request.EmailType.USER_REGISTRATION;
+import static ee.qrent.notification.email.api.in.request.EmailType.USER_REGISTRATION_EMAIL;
 
 @AllArgsConstructor
 public class UserRegistrationLetterBuildStrategy implements LetterBuildStrategy {
@@ -18,7 +18,7 @@ public class UserRegistrationLetterBuildStrategy implements LetterBuildStrategy 
 
   @Override
   public boolean canApply(final EmailSendRequest emailSendRequest) {
-    return USER_REGISTRATION == emailSendRequest.getType();
+    return USER_REGISTRATION_EMAIL == emailSendRequest.getType();
   }
 
   @Override

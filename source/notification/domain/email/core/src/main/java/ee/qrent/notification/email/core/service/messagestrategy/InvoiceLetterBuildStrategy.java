@@ -12,7 +12,7 @@ import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 
-import static ee.qrent.notification.email.api.in.request.EmailType.INVOICE;
+import static ee.qrent.notification.email.api.in.request.EmailType.INVOICE_EMAIL;
 
 @AllArgsConstructor
 public class InvoiceLetterBuildStrategy implements LetterBuildStrategy {
@@ -21,7 +21,7 @@ public class InvoiceLetterBuildStrategy implements LetterBuildStrategy {
 
   @Override
   public boolean canApply(final EmailSendRequest emailSendRequest) {
-    return INVOICE == emailSendRequest.getType();
+    return INVOICE_EMAIL == emailSendRequest.getType();
   }
 
   @Override

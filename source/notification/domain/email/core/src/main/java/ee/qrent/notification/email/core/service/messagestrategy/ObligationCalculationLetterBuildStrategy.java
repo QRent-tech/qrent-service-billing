@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import static ee.qrent.notification.email.api.in.request.EmailType.OBLIGATION_CALCULATION;
+import static ee.qrent.notification.email.api.in.request.EmailType.OBLIGATION_CALCULATION_EMAIL;
 
 @AllArgsConstructor
 public class ObligationCalculationLetterBuildStrategy implements LetterBuildStrategy {
@@ -19,7 +19,7 @@ public class ObligationCalculationLetterBuildStrategy implements LetterBuildStra
 
   @Override
   public boolean canApply(final EmailSendRequest emailSendRequest) {
-    return OBLIGATION_CALCULATION == emailSendRequest.getType();
+    return OBLIGATION_CALCULATION_EMAIL == emailSendRequest.getType();
   }
 
   @Override

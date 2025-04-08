@@ -19,7 +19,7 @@ public class QueuePullResponse {
   private Boolean processed;
   private LocalDateTime processedAt;
   private final List<String> payloadRecipients;
-  private final String payloadType;
+  private final EntryType payloadType;
   private final InputStream payloadAttachment;
   private final Map<String, Object> payloadProperties;
 }
