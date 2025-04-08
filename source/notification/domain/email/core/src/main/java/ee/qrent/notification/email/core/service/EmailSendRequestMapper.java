@@ -14,6 +14,7 @@ public class EmailSendRequestMapper
 
   @Override
   public EmailNotification toDomain(final EmailSendRequest request) {
+
     return EmailNotification.builder()
         .id(null)
         .type(request.getType().name())
