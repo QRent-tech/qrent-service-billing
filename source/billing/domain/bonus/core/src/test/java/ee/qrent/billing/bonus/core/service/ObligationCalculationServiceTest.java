@@ -9,7 +9,8 @@ import ee.qrent.billing.bonus.core.mapper.ObligationCalculationAddRequestMapper;
 import ee.qrent.billing.bonus.core.validator.ObligationCalculationAddRequestValidator;
 import ee.qrent.billing.car.api.in.query.GetCarLinkQuery;
 import ee.qrent.billing.constant.api.in.query.GetQWeekQuery;
-import ee.qrent.email.api.in.usecase.EmailSendUseCase;
+import ee.qrent.common.in.time.QDateTime;
+import ee.qrent.queue.api.in.QueueEntryPushUseCase;
 import ee.qrent.billing.transaction.api.in.query.GetTransactionQuery;
 import ee.qrent.billing.transaction.api.in.query.balance.GetBalanceQuery;
 import ee.qrent.billing.transaction.api.in.query.type.GetTransactionTypeQuery;
@@ -26,13 +27,14 @@ class ObligationCalculationServiceTest {
   private GetTransactionQuery transactionQuery;
   private GetCarLinkQuery carLinkQuery;
   private GetUserAccountQuery userAccountQuery;
-  private EmailSendUseCase emailSendUseCase;
+  private QueueEntryPushUseCase queueEntryPushUseCase;
   private ObligationCalculationAddPort calculationAddPort;
   private ObligationAddPort obligationAddPort;
   private ObligationLoadPort loadPort;
   private ObligationCalculationAddRequestMapper addRequestMapper;
   private ObligationCalculationAddRequestValidator addRequestValidator;
   private ObligationCalculator obligationCalculator;
+  private QDateTime qDateTime;
 
   @BeforeEach
   void init() {
@@ -42,13 +44,14 @@ class ObligationCalculationServiceTest {
     transactionQuery = mock(GetTransactionQuery.class);
     carLinkQuery = mock(GetCarLinkQuery.class);
     userAccountQuery = mock(GetUserAccountQuery.class);
-    emailSendUseCase = mock(EmailSendUseCase.class);
+    queueEntryPushUseCase = mock(QueueEntryPushUseCase.class);
     calculationAddPort = mock(ObligationCalculationAddPort.class);
     obligationAddPort = mock(ObligationAddPort.class);
     loadPort = mock(ObligationLoadPort.class);
     addRequestMapper = mock(ObligationCalculationAddRequestMapper.class);
     addRequestValidator = mock(ObligationCalculationAddRequestValidator.class);
     obligationCalculator = mock(ObligationCalculator.class);
+    qDateTime = mock(QDateTime.class);
 
     instanceUnderTest =
         new ObligationCalculationService(
@@ -56,13 +59,14 @@ class ObligationCalculationServiceTest {
             transactionQuery,
             carLinkQuery,
             userAccountQuery,
-            emailSendUseCase,
+            queueEntryPushUseCase,
             calculationAddPort,
             obligationAddPort,
             loadPort,
             addRequestMapper,
-                addRequestValidator,
-            obligationCalculator);
+            addRequestValidator,
+            obligationCalculator,
+            qDateTime);
   }
   // TODO ...
 }
