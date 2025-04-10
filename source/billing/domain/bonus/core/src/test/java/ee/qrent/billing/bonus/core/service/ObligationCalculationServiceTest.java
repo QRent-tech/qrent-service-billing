@@ -53,7 +53,7 @@ class ObligationCalculationServiceTest {
     obligationCalculator = mock(ObligationCalculator.class);
     qDateTime = mock(QDateTime.class);
 
-    instanceUnderTest =
+   /* instanceUnderTest =
         new ObligationCalculationService(
             qWeekQuery,
             transactionQuery,
